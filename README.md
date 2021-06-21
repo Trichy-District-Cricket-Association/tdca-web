@@ -1,6 +1,59 @@
-# Getting Started with Create React App
+# Conventions
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Naming conventions:
+
+Please refer [https://github.com/airbnb/javascript/tree/master/react#naming](AirBnb Guidelines for naming.)
+
+## Linting Configuration:
+
+Please refer [https://robertcooper.me/post/using-eslint-and-prettier-in-a-typescript-project](ESLint and Prettier for Typescript-Project)
+
+## Miscellaneous:
+
+-   Use TSDoc notation for comments for all `type`, `interface` and `class` used.
+-   Install and use Typescript Extension Pack, `loiane.ts-extension-pack` VSCode extension.
+-   Use commit messages like this: [https://dev.to/colewalker/conventional-commits-the-future-of-git-32gg](Conventional Commits)
+
+## Custom Snippets:
+
+Use this in a `.code-snippet` file for project-specific custom snippets(VSCode).
+
+```
+{
+  "Export Functional Component -TSReact": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "tfncmp",
+    "body": [
+      "type ${1:MyComp}Props={key:string};",
+      "",
+      "const ${1:MyComp} =({key}: ${1:MyComp}Props)=>",
+      "(",
+      "<div key={key}/>",
+      ");",
+      "",
+      "export default ${1:MyComp};"
+    ],
+    "description": "Create functional comp and export in TSReact"
+  },
+  "Create a new model": {
+    "scope": "typescript,typescriptreact",
+    "prefix": "tmdel",
+    "body": [
+      "export default class ${1:ModelName} {",
+      "id: number;",
+      "",
+      "constructor(id: number) {",
+      "this.id = id;",
+      "}",
+      "}"
+    ],
+    "description": "Create a new model"
+  }
+}
+
+```
+
+---
 
 ## Available Scripts
 
@@ -38,9 +91,3 @@ If you aren’t satisfied with the build tool and configuration choices, you can
 Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
