@@ -2,17 +2,17 @@
 
 ## Naming conventions:
 
-Please refer [https://github.com/airbnb/javascript/tree/master/react#naming](AirBnb Guidelines for naming.)
+Please refer [Airbnb Guidelines for naming.](https://github.com/airbnb/javascript/tree/master/react#naming)
 
 ## Linting Configuration:
 
-Please refer [https://robertcooper.me/post/using-eslint-and-prettier-in-a-typescript-project](ESLint and Prettier for Typescript-Project)
+Please refer [ESLint and Prettier for Typescript-Project](https://robertcooper.me/post/using-eslint-and-prettier-in-a-typescript-project)
 
 ## Miscellaneous:
 
 -   Use TSDoc notation for comments for all `type`, `interface` and `class` used.
 -   Install and use Typescript Extension Pack, `loiane.ts-extension-pack` VSCode extension.
--   Use commit messages like this: [https://dev.to/colewalker/conventional-commits-the-future-of-git-32gg](Conventional Commits)
+-   Use commit messages like this: [Conventional Commits](https://dev.to/colewalker/conventional-commits-the-future-of-git-32gg)
 
 ## Custom Snippets:
 
