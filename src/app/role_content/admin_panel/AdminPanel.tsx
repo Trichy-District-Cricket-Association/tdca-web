@@ -1,8 +1,7 @@
-type AdminPanelProps={key:string};
 
- const AdminPanel =({key}: AdminPanelProps)=>
+ const AdminPanel =()=>
    (
-    <div key={key}/>
+    <div><h1>Admin Panel</h1></div>
   );
   
 

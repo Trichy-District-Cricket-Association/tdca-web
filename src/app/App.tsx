@@ -1,22 +1,15 @@
-import './App.scss';
+import { AuthProvider } from '../contexts/AuthContext';
+import Routes from './Routes';
+import TopNavBar from './shared_components/top_nav_bar/TopNavBar';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          React here
-        </a>
-      </header>
+    <AuthProvider>
+    <div >
+      <TopNavBar />
+      <Routes/>
     </div>
+    </AuthProvider>
   );
 }
 

@@ -39,7 +39,12 @@
         "no-shadow": "off",
         "@typescript-eslint/no-shadow": ["error"],
         "max-len": ["warn", { "code": 80 }],
-        "import/prefer-default-export": "off"
+        "import/prefer-default-export": "off",
+        "lines-between-class-members": "warn",
+        "react/self-closing-comp": "warn",
+        "spaced-comment": "warn",
+        "react/require-default-props": "off",
+        "react/no-unused-prop-types": "warn"
     },
     "settings": {
         "import/resolver": {

@@ -3,6 +3,11 @@
 ## Naming conventions:
 
 Please refer [https://github.com/airbnb/javascript/tree/master/react#naming](AirBnb Guidelines for naming.)
+Example:
+
+-   PascalCase for Components.
+-   camelCase for Hooks.
+-   snake_case for folder/directories.
 
 ## Linting Configuration:
 
@@ -20,35 +25,26 @@ Use this in a `.code-snippet` file for project-specific custom snippets(VSCode).
 
 ```
 {
-  "Export Functional Component -TSReact": {
-    "scope": "typescript,typescriptreact",
-    "prefix": "tfncmp",
-    "body": [
-      "type ${1:MyComp}Props={key:string};",
-      "",
-      "const ${1:MyComp} =({key}: ${1:MyComp}Props)=>",
-      "(",
-      "<div key={key}/>",
-      ");",
-      "",
-      "export default ${1:MyComp};"
-    ],
-    "description": "Create functional comp and export in TSReact"
-  },
-  "Create a new model": {
-    "scope": "typescript,typescriptreact",
-    "prefix": "tmdel",
-    "body": [
-      "export default class ${1:ModelName} {",
-      "id: number;",
-      "",
-      "constructor(id: number) {",
-      "this.id = id;",
-      "}",
-      "}"
-    ],
-    "description": "Create a new model"
-  }
+    "Export Functional Component -TSReact": {
+        "scope": "typescript,typescriptreact",
+        "prefix": "tfncmp",
+        "body": ["const ${1:MyComp} =()=>", "(", "<div/>", ");", "", "export default ${1:MyComp};"],
+        "description": "Create functional comp and export in TSReact"
+    },
+    "Create a new model": {
+        "scope": "typescript,typescriptreact",
+        "prefix": "tmdel",
+        "body": [
+            "export default class ${1:ModelName} {",
+            "id: number;",
+            "",
+            "constructor(id: number) {",
+            "this.id = id;",
+            "}",
+            "}"
+        ],
+        "description": "Create a new model"
+    }
 }
 
 ```

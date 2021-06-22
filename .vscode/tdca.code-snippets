@@ -2,16 +2,7 @@
     "Export Functional Component -TSReact": {
         "scope": "typescript,typescriptreact",
         "prefix": "tfncmp",
-        "body": [
-            "type ${1:MyComp}Props={key:string};",
-            "",
-            "const ${1:MyComp} =({key}: ${1:MyComp}Props)=>",
-            "(",
-            "<div key={key}/>",
-            ");",
-            "",
-            "export default ${1:MyComp};"
-        ],
+        "body": ["const ${1:MyComp} =()=>", "(", "<div/>", ");", "", "export default ${1:MyComp};"],
         "description": "Create functional comp and export in TSReact"
     },
     "Create a new model": {
