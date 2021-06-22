@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { auth } from "../../../firebase";
 import useAuth from "../../../hooks/useAuth";
 
 const TopNavBar =()=>{
@@ -35,8 +36,8 @@ const TopNavBar =()=>{
             Contact
             </Link> 
             </div>
-            {/* <button type="button" onClick={async()=>{
-              if(authData.uid ===null){
+            <button type="button" onClick={async()=>{
+              if(authData.uid ===undefined){
                 console.log("gonna sign in")
                 await auth.signInAnonymously();
               }else{
@@ -44,11 +45,11 @@ const TopNavBar =()=>{
               }
             }}>
               Sign in
-            </button> */}
-            <div className = "navbar__btn">
+            </button>
+            {/* <div className = "navbar__btn">
               <Link to = "/">Sign In</Link>
-            </div>
-            <h2>{authData.uid??'null'}</h2>
+            </div> */}
+            <h2>{authData.uid}</h2>
         </div>  
       </div>
     </div>

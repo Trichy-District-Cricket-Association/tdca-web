@@ -3,7 +3,8 @@
 ## Naming conventions:
 
 Please refer [Airbnb Guidelines for naming.](https://github.com/airbnb/javascript/tree/master/react#naming)
-Example:
+
+### Example:
 
 -   PascalCase for Components.
 -   camelCase for Hooks.
