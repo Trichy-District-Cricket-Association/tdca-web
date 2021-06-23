@@ -3,20 +3,20 @@ import React, { useState, useEffect } from 'react';
 
 import { auth, firestore } from '../firebase';
 import User, { userFromFirestore } from '../models/User';
+import { Collections } from '../enums/collection';
 
-const AuthContext = React.createContext<User>(undefined!);
+const AuthContext = React.createContext<User | undefined>(undefined);
 
 const AuthProvider = (props: any) => {
-    const [authState, setAuthState] = useState<User>({});
+    const [authState, setAuthState] = useState<User | undefined>(undefined);
     useEffect(() => {
         const listener = auth.onAuthStateChanged((user: firebase.User | null) => {
             if (user == null) {
-                setAuthState({});
-                return null;
+                setAuthState(undefined);
+                return;
             }
-            console.log(user.uid);
             firestore
-                .collection('users')
+                .collection(Collections.users)
                 .doc(user.uid)
                 .get()
                 .then((doc: firebase.firestore.DocumentSnapshot) => {
@@ -25,7 +25,6 @@ const AuthProvider = (props: any) => {
                 .catch((e) => {
                     console.log(e);
                 });
-            return null;
         });
         return () => {
             listener();
