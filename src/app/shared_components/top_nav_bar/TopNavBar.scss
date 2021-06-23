@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+}
+.nav {
+    background: rgb(0, 0, 0);
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    font-family: Poppins;
+
+    &__header {
+        display: flex;
+        align-items: center;
+        &--logo {
+            width: 35px;
+            height: 35px;
+            margin-left: 1rem;
+        }
+        &--text,
+        &--textAbbr {
+            color: rgb(255, 255, 255);
+            margin-left: 1rem;
+            font-size: 20px;
+            font-weight: 00;
+        }
+        &--textAbbr {
+            display: none;
+        }
+    }
+    &__body {
+        display: flex;
+        margin-top: 1rem;
+        margin-right: 2rem;
+    }
+    &__link,
+    &__btn {
+        text-align: center;
+        color: #fff;
+        font-family: Poppins;
+        text-decoration: none;
+        margin: 0 1rem;
+        height: 100%;
+        cursor: pointer;
+        &:active {
+            color: #0e4194;
+        }
+    }
+    &__btn {
+        background-color: #0e4194;
+        padding: 0.3rem 1.2rem 0.3rem 1.2rem;
+        border-radius: 40px;
+        text-align: center;
+        margin-left: 1rem;
+        border: none;
+    }
+    .hamburger {
+        display: none;
+        color: #fff;
+        background: none;
+        border: none;
+    }
+}
+@media screen and (max-width: 768px) {
+    .nav {
+        .hamburger {
+            color: #fff;
+            display: block;
+            position: absolute;
+            padding-right: 20px;
+            top: -13px;
+            transform: translate(-100%, 75%);
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+        &__body {
+            display: none;
+        }
+        &__header {
+            &--text {
+                display: none;
+            }
+            &--textAbbr {
+                display: block;
+            }
+        }
+        &__responsive {
+            display: block;
+            background-color: #051d45;
+            width: 100%;
+            position: absolute;
+            top: 60px;
+            flex-direction: column;
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+            text-align: center;
+        }
+        .item {
+            margin: 1rem;
+        }
+    }
+}
