@@ -44,7 +44,8 @@
         "react/self-closing-comp": "warn",
         "spaced-comment": "warn",
         "react/require-default-props": "off",
-        "react/no-unused-prop-types": "warn"
+        "react/no-unused-prop-types": "warn",
+        "@typescript-eslint/no-var-requires": "off"
     },
     "settings": {
         "import/resolver": {

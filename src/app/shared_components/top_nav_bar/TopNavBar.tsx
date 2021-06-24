@@ -1,60 +1,87 @@
-import { Link } from "react-router-dom";
-import { auth } from "../../../firebase";
-import useAuth from "../../../hooks/useAuth";
+import { useState } from 'react';
+import { FaBars, FaTimes } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { auth } from '../../../firebase';
+import useAuth from '../../../hooks/useAuth';
+import './TopNavBar.scss';
 
-const TopNavBar =()=>{
-  const authData = useAuth();
-   return (
-    <div className = "navbar">
-      <div className = "navbar__container">
-        <div className = "navbar__title ">
-          <div className = "navbar__logo">
-            <img src = "hwer" alt = "logo"/>
-          </div>
-          <div className = "navbar__titletxt">
-            <h1>TDCA</h1>
-          </div>
-        </div>
-        <div className = "navbar__body">
-          <div className = "navbar__link"> 
-          <Link to = "/" className = "navbar__link--linktag">
-            Matches
-            </Link> 
+const logo = `${process.env.PUBLIC_URL}/assets/images/tdca_logo.jpg`;
+
+const TopNav = () => {
+    const authData = useAuth();
+    const [isMobileOpen, toggleMobileOpen] = useState(false);
+
+    return (
+        <div className="nav">
+            <div className="nav__header">
+                <div>
+                    <img src={logo} alt="Logo" className="nav__header--logo" />
+                </div>
+                <div>
+                    <h1 className="nav__header--text">Trichy District Cricket Association</h1>
+                    <h1 className="nav__header--textAbbr">TDCA</h1>
+                </div>
             </div>
-            <div className = "navbar__link"> 
-          <Link to = "/" className = "navbar__link--linktag">
-           Teams
-            </Link> 
-            </div>
-            <div className = "navbar__link"> 
-          <Link to = "/" className = "navbar__link--linktag">
-            Staffs
-            </Link> 
-            </div>
-            <div className = "navbar__link"> 
-          <Link to = "/" className = "navbar__link--linktag">
-            Contact
-            </Link> 
-            </div>
-            <button type="button" onClick={async()=>{
-              if(authData.uid ===undefined){
-                console.log("gonna sign in")
-                await auth.signInAnonymously();
-              }else{
-                await auth.signOut();
-              }
-            }}>
-              Sign in
+            <div> 
+            <button type="button" className="hamburger" 
+            onClick={() => toggleMobileOpen(!isMobileOpen)}>
+                    {isMobileOpen ? <FaTimes /> : <FaBars />}
             </button>
-            {/* <div className = "navbar__btn">
-              <Link to = "/">Sign In</Link>
-            </div> */}
-            <h2>{authData.uid}</h2>
-        </div>  
-      </div>
-    </div>
-    );};
-  
+            </div>
+            <div  className={isMobileOpen ? 'nav__responsive' : 'nav__body'}>
+               
+                    <div className = "item">
+                        <Link to="/" className="nav__link">
+                            Home
+                        </Link>
+                    </div>
+                    <div className = "item">
+                        <Link to="/" className="nav__link">
+                            Matches
+                        </Link>
+                    </div>
+                    <div className = "item">
+                        <Link to="/" className="nav__link">
+                            Teams
+                        </Link>
+                    </div>
+                    <div className = "item">
+                        <Link to="/" className="nav__link">
+                            Staffs
+                        </Link>
+                    </div>
+                    <div className = "item">
+                        <Link to="/" className="nav__link">
+                            Contact
+                        </Link>
+                    </div>
+                
+          
+                    {authData === undefined ? (
+                        <div>  
+                        <Link to="/" className="nav__btn"  onClick={async()=>{
+                           await auth.signInAnonymously();
+                        }}>
+                            Log In
+                        </Link>
+                        </div>
+         
+                    ) : (
+                        <div>
+                        <Link to="/" className="nav__btn" onClick={async()=>{
+                            await auth.signOut();}}>
+                            Log Out
+                        </Link>
+                        </div>
+            
+                    )}
+           
+             
+               
+            </div>
+          
+        </div>
+    );
+};
 
-export default TopNavBar;
-
+export default TopNav;
