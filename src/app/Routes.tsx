@@ -2,7 +2,7 @@ import { Route } from 'react-router-dom';
 import LandingPage from './features/landing_page/LandingPage';
 import AdminPanel from './role_content/admin_panel/AdminPanel';
 
-const MyComp = () => (
+const Routes = () => (
     <div>
         {/* Main Pages */}
         <Route exact path="/" component={LandingPage} />
@@ -40,4 +40,4 @@ const MyComp = () => (
     </div>
 );
 
-export default MyComp;
+export default Routes;
