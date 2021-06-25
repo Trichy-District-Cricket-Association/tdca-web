@@ -19,7 +19,7 @@ const TopNav = () => {
                     <img src={logo} alt="Logo" className="nav__header--logo" />
                 </div>
                 <div>
-                    <h1 className="nav__header--text">TDCA</h1>
+                    <h1 className="nav__header--text">Trichy District Cricket Association</h1>
                     <h1 className="nav__header--textAbbr">TDCA</h1>
                 </div>
             </div>
@@ -75,7 +75,7 @@ const TopNav = () => {
                     </div>
                 )}
             </div>
-            <Login isOpen={isModalOpen} />
+            <Login isOpen={isModalOpen} setModalOpen={setModalOpen} />
         </div>
     );
 };
