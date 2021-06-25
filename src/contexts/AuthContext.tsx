@@ -30,7 +30,6 @@ const AuthProvider = (props: any) => {
             listener();
         };
     }, []);
-    // eslint-disable-next-line react/jsx-props-no-spreading
     return <AuthContext.Provider value={authState} {...props} />;
 };
 
