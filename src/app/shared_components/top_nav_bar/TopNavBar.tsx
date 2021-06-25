@@ -3,12 +3,15 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { auth } from '../../../firebase';
 import useAuth from '../../../hooks/useAuth';
+import Login from '../../features/authentication/Login';
 import './TopNavBar.scss';
 
 const logo = `${process.env.PUBLIC_URL}/assets/images/tdca_logo.jpg`;
 const TopNav = () => {
     const authData = useAuth();
     const [isMobileOpen, toggleMobileOpen] = useState(false);
+    const [isModalOpen, setModalOpen] = useState(false);
+    const loginClick = () => setModalOpen(true);
     return (
         <div className="nav">
             <div className="nav__header">
@@ -54,11 +57,7 @@ const TopNav = () => {
 
                 {authData === undefined ? (
                     <div>
-                        <Link
-                            to="/"
-                            className="nav__btn"
-                            onClick={ () => null}
-                        >
+                        <Link to="/" className="nav__btn" onClick={loginClick}>
                             Log In
                         </Link>
                     </div>
@@ -76,6 +75,7 @@ const TopNav = () => {
                     </div>
                 )}
             </div>
+            <Login isOpen={isModalOpen} />
         </div>
     );
 };
