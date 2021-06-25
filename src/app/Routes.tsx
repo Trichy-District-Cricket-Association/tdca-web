@@ -1,42 +1,28 @@
 import { Route } from 'react-router-dom';
 import LandingPage from './features/landing_page/LandingPage';
 import AdminPanel from './role_content/admin_panel/AdminPanel';
+import {PageRoutes} from '../enums/pageRoutes';
+import ProtectedRoute from './ProtectedRoute';
+import { UserRoles } from '../enums/auth';
 
 const Routes = () => (
     <div>
-        {/* Main Pages */}
-        <Route exact path="/" component={LandingPage} />
-        <Route exact path="/matches" component={LandingPage} />
-        <Route exact path="/teams" component={LandingPage} />
-        <Route exact path="/staffs" component={LandingPage} />
-        <Route exact path="/contact" component={LandingPage} />
+        {/* Main Routes */}
+        <Route exact path={PageRoutes.home} component={LandingPage} />
+        <Route exact path={PageRoutes.teams} component={LandingPage} />
+        <Route exact path={PageRoutes.staffs}  component={LandingPage} />
+        <Route exact path={PageRoutes.contact}  component={LandingPage} />
 
-        {/* Admin Panel Pages */}
-        <Route exact path="/admin" component={AdminPanel} />
-
-        <Route exact path="/admin/scorers" component={AdminPanel} />
-        <Route exact path="/admin/scorers/add" component={AdminPanel} />
-
-        <Route exact path="/admin/umpires" component={AdminPanel} />
-        <Route exact path="/admin/umpires/add" component={AdminPanel} />
-
-        <Route exact path="/admin/grounds" component={AdminPanel} />
-        <Route exact path="/admin/grounds/add" component={AdminPanel} />
-
-        <Route exact path="/admin/groundsmen" component={AdminPanel} />
-        <Route exact path="/admin/groundsmen/add" component={AdminPanel} />
-
-        <Route exact path="/admin/teams" component={AdminPanel} />
-        <Route exact path="/admin/teams/add" component={AdminPanel} />
-
-        <Route exact path="/admin/players" component={AdminPanel} />
-        <Route exact path="/admin/players/add" component={AdminPanel} />
-
-        <Route exact path="/admin/matches" component={AdminPanel} />
-        <Route exact path="/admin/matches/add" component={AdminPanel} />
-
-        <Route exact path="/admin/scorecards" component={AdminPanel} />
-        <Route exact path="/admin/scorecards/add" component={AdminPanel} />
+        {/* Admin Panel Route */}
+        <ProtectedRoute exact path={PageRoutes.adminPanel} userRole={UserRoles.admin} component={AdminPanel} />
+        <ProtectedRoute exact path={PageRoutes.adminScorers} userRole={UserRoles.admin} component={AdminPanel} />
+        <ProtectedRoute exact path={PageRoutes.adminUmpires} userRole={UserRoles.admin} component={AdminPanel} />
+        <ProtectedRoute exact path={PageRoutes.adminGrounds} userRole={UserRoles.admin} component={AdminPanel} />
+        <ProtectedRoute exact path={PageRoutes.adminGroundsMen} userRole={UserRoles.admin} component={AdminPanel} />
+        <ProtectedRoute exact path={PageRoutes.adminTeams} userRole={UserRoles.admin} component={AdminPanel} />
+        <ProtectedRoute exact path={PageRoutes.adminTeams} userRole={UserRoles.admin} component={AdminPanel} />
+        <ProtectedRoute exact path={PageRoutes.adminMatches} userRole={UserRoles.admin} component={AdminPanel} />
+        <ProtectedRoute exact path={PageRoutes.adminScorecards} userRole={UserRoles.admin} component={AdminPanel} />
     </div>
 );
 

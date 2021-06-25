@@ -66,14 +66,14 @@
         border: none;
     }
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1122px) {
     .nav {
         .hamburger {
             color: #fff;
             display: block;
             position: absolute;
             padding-right: 20px;
-            top: -13px;
+            top: -5px;
             transform: translate(-100%, 75%);
             font-size: 1.8rem;
             cursor: pointer;

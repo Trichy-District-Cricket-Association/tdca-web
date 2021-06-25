@@ -3,12 +3,17 @@ import Input from '../../shared_components/input/Input';
 import Button from '../../shared_components/button/Button';
 import './Login.scss';
 import useInput from '../../../hooks/useInput';
+import { auth } from '../../../firebase';
 export default function Login(props: any) {
     const logo = `${process.env.PUBLIC_URL}/assets/images/c7.jpg`;
-    const { onChange: bindEmail } = useInput('');
-    const { onChange: bindPassword } = useInput('');
-    const login = () => {
-        props.setModalOpen(false);
+    const {text:email, onChange: bindEmail } = useInput('');
+    const {text: password, onChange: bindPassword } = useInput('');
+    const login = async () => {
+        console.log(email);
+        await auth.signInWithEmailAndPassword(email,password).then(()=>{
+            props.setModalOpen(false);
+        });
+        
     };
     return (
         <div className="Login">
@@ -17,14 +22,15 @@ export default function Login(props: any) {
                 onRequestClose={() => props.setModalOpen(false)}
                 className="Login__modal"
                 overlayClassName="Login__overlay"
+                ariaHideApp={false}
             >
                 <div className="Login__container">
                     <div className="Login__modal--imgDiv">
                         <img src={logo} alt="" />
                     </div>
                     <div className="Login__modal--form">
-                        <Input title="Email" icon="fa fa-envelope" placeholder="Email" name="email" {...bindEmail} />
-                        <Input title="Password" icon="fa fa-lock" name="password" type="password" {...bindPassword} />
+                        <Input title="Email" icon="fa fa-envelope" placeholder="Email" name="email" onChange={bindEmail} />
+                        <Input title="Password" icon="fa fa-lock" name="Password" type="password" onChange={bindPassword} />
                         <Button title="Login" onClick={login} />
                     </div>
                 </div>
