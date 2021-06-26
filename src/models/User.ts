@@ -20,12 +20,13 @@ export default class User {
         this.name = name;
         this.email = email;
     }
-}
 
-export const userFromFirestore = (doc: firebase.firestore.DocumentSnapshot): User =>
-    new User({
-        uid: doc.id,
-        role: <UserRoles>doc.data()?.role,
-        name: doc.data()?.name,
-        email: doc.data()?.email,
-    });
+    static fromFirestore(doc: firebase.firestore.DocumentSnapshot): User {
+        return new User({
+            uid: doc.id,
+            role: <UserRoles>doc.data()?.role,
+            name: doc.data()?.name,
+            email: doc.data()?.email,
+        });
+    }
+}

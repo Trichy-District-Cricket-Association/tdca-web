@@ -6,14 +6,13 @@ import useInput from '../../../hooks/useInput';
 import { auth } from '../../../firebase';
 export default function Login(props: any) {
     const logo = `${process.env.PUBLIC_URL}/assets/images/c7.jpg`;
-    const {text:email, onChange: bindEmail } = useInput('');
-    const {text: password, onChange: bindPassword } = useInput('');
+    const [email, bindEmail] = useInput('');
+    const [password, bindPassword] = useInput('');
     const login = async () => {
         console.log(email);
-        await auth.signInWithEmailAndPassword(email,password).then(()=>{
+        await auth.signInWithEmailAndPassword(email, password).then(() => {
             props.setModalOpen(false);
         });
-        
     };
     return (
         <div className="Login">
@@ -29,8 +28,20 @@ export default function Login(props: any) {
                         <img src={logo} alt="" />
                     </div>
                     <div className="Login__modal--form">
-                        <Input title="Email" icon="fa fa-envelope" placeholder="Email" name="email" onChange={bindEmail} />
-                        <Input title="Password" icon="fa fa-lock" name="Password" type="password" onChange={bindPassword} />
+                        <Input
+                            title="Email"
+                            icon="fa fa-envelope"
+                            placeholder="Email"
+                            name="email"
+                            onChange={bindEmail}
+                        />
+                        <Input
+                            title="Password"
+                            icon="fa fa-lock"
+                            name="Password"
+                            type="password"
+                            onChange={bindPassword}
+                        />
                         <Button title="Login" onClick={login} />
                     </div>
                 </div>

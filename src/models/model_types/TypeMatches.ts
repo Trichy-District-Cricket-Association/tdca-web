@@ -1,4 +1,5 @@
 export type TypeMatches = {
+    
     leagueMatch: number;
 
     institutionMatch: number;
