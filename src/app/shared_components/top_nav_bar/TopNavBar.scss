@@ -5,8 +5,9 @@
 }
 .nav {
     background: rgb(0, 0, 0);
-    height: 60px;
+    height: 80px;
     display: flex;
+    align-items: center;
     justify-content: space-between;
     font-family: Poppins;
 
@@ -14,8 +15,7 @@
         display: flex;
         align-items: center;
         &--logo {
-            width: 35px;
-            height: 35px;
+            width: 50px;
             margin-left: 1rem;
         }
         &--text,
@@ -31,7 +31,6 @@
     }
     &__body {
         display: flex;
-        margin-top: 1rem;
         margin-right: 2rem;
     }
     &__link,
@@ -43,17 +42,22 @@
         margin: 0 1rem;
         height: 100%;
         cursor: pointer;
-        &:active {
-            color: #0e4194;
-        }
+        transition-duration: 1s;
+    }
+
+    &__link:hover {
+        text-decoration: underline;
     }
     &__btn {
-        background-color: #0e4194;
-        padding: 0.3rem 1.2rem 0.3rem 1.2rem;
-        border-radius: 40px;
+        background-color: rgb(0, 0, 0);
+        padding: 0.4rem 1.2rem 0.4rem 1.2rem;
+        border: 1px solid white;
         text-align: center;
         margin-left: 1rem;
-        border: none;
+    }
+    &__btn:hover {
+        background-color: rgb(233, 233, 233);
+        color: black;
     }
     .hamburger {
         display: none;
@@ -62,14 +66,14 @@
         border: none;
     }
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1122px) {
     .nav {
         .hamburger {
             color: #fff;
             display: block;
             position: absolute;
             padding-right: 20px;
-            top: -13px;
+            top: -5px;
             transform: translate(-100%, 75%);
             font-size: 1.8rem;
             cursor: pointer;

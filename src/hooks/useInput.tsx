@@ -8,7 +8,7 @@ const useInput = (initialValue='') => {
     };
 
     return {
-        value,
+        text:value,
         onChange: handleChange
     };
 };
