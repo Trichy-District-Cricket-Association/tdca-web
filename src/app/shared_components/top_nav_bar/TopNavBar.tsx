@@ -33,27 +33,27 @@ const TopNav = () => {
                 </div>
                 <div className={isMobileOpen ? 'nav__responsive' : 'nav__body'}>
                     <div className="item">
-                        <Link to={PageRoutes.home}  className="nav__link">
+                        <Link to={PageRoutes.home} className="nav__link">
                             Home
                         </Link>
                     </div>
                     <div className="item">
-                        <Link to={PageRoutes.adminMatches}  className="nav__link">
+                        <Link to={PageRoutes.matches} className="nav__link">
                             Matches
                         </Link>
                     </div>
                     <div className="item">
-                        <Link to={PageRoutes.adminTeams}  className="nav__link">
+                        <Link to={PageRoutes.teams} className="nav__link">
                             Teams
                         </Link>
                     </div>
                     <div className="item">
-                        <Link to={PageRoutes.staffs}  className="nav__link">
+                        <Link to={PageRoutes.staffs} className="nav__link">
                             Staffs
                         </Link>
                     </div>
                     <div className="item">
-                        <Link to={PageRoutes.contact}  className="nav__link">
+                        <Link to={PageRoutes.contact} className="nav__link">
                             Contact
                         </Link>
                     </div>
@@ -75,7 +75,7 @@ const TopNav = () => {
                     ) : (
                         <div>
                             <Link
-                                to={PageRoutes.home} 
+                                to={PageRoutes.home}
                                 className="nav__btn"
                                 onClick={async () => {
                                     await auth.signOut();
