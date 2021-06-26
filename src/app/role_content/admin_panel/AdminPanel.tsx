@@ -1,7 +1,7 @@
-
+import SideNavBar from "./shared_components/side_navbar/SideNavBar";
  const AdminPanel =()=>
    (
-    <div><h1>Admin Panel</h1></div>
+    <div><SideNavBar /></div>
   );
   
 

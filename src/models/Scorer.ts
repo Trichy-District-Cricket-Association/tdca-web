@@ -1,3 +1,4 @@
+import firebase from 'firebase';
 import { DivisionMatches } from './model_types/DivisionMatches';
 import { TypeMatches } from './model_types/TypeMatches';
 
@@ -17,13 +18,15 @@ export default class Scorer {
 
     typeMatches: TypeMatches;
 
+    panel: string;
+
     totalMatches: number;
 
-    totalDue: number;
+    // totalDue: number;
 
-    totalPaid: number;
+    // totalPaid: number;
 
-    balanceAmount: number;
+    // balanceAmount: number;
 
     dateOfBirth: Date;
 
@@ -54,9 +57,10 @@ export default class Scorer {
         divisionMatches,
         typeMatches,
         totalMatches,
-        totalDue,
-        totalPaid,
-        balanceAmount,
+        panel,
+        // totalDue,
+        // totalPaid,
+        // balanceAmount,
         dateOfBirth,
         primaryContact,
         secondaryContact,
@@ -76,9 +80,13 @@ export default class Scorer {
         this.divisionMatches = divisionMatches;
         this.typeMatches = typeMatches;
         this.totalMatches = totalMatches;
+        this.panel = panel;
+        {
+            /**  
         this.totalDue = totalDue;
         this.totalPaid = totalPaid;
-        this.balanceAmount = balanceAmount;
+        this.balanceAmount = balanceAmount;*/
+        }
         this.dateOfBirth = dateOfBirth;
         this.primaryContact = primaryContact;
         this.secondaryContact = secondaryContact;
@@ -89,5 +97,32 @@ export default class Scorer {
         this.bankIFSC = bankIFSC;
         this.aadharNumber = aadharNumber;
         this.permanentAddress = permanentAddress;
+    }
+
+    static fromFirestore(doc:firebase.firestore.DocumentSnapshot):Scorer{
+        return new Scorer({
+            docId:doc.id,
+            scorerId:doc.data()?.scorerId,
+            scorerName:doc.data()?.scorerName,
+            avatarUrl:doc.data()?.avatarUrl,
+            emailId:doc.data()?.emailId,
+            divisionMatches:doc.data()?.divisionMatches,
+            typeMatches:doc.data()?.typeMatches,
+            panel:doc.data()?.panel,
+            totalMatches:doc.data()?.totalMatches,
+            // totalDue:doc.data()?.totalDue,
+            // totalPaid:doc.data()?.totalPaid,
+            // balanceAmount:doc.data()?.balanceAmount,
+            dateOfBirth:doc.data()?.dateOfBirth,
+            primaryContact:doc.data()?.primaryContact,
+            secondaryContact:doc.data()?.secondaryContact,
+            payPhoneNumber:doc.data()?.payPhoneNumber,
+            bankAccount:doc.data()?.bankAccount,
+            bankName:doc.data()?.bankName,
+            bankBranch:doc.data()?.bankBranch,
+            bankIFSC:doc.data()?.bankIFSC,
+            aadharNumber:doc.data()?.aadharNumber,
+            permanentAddress:doc.data()?.permanentAddress,
+        });
     }
 }

@@ -2,7 +2,7 @@ import firebase from 'firebase';
 import React, { useState, useEffect } from 'react';
 
 import { auth, firestore } from '../firebase';
-import User, { userFromFirestore } from '../models/User';
+import User from '../models/User';
 import { Collections } from '../enums/collection';
 
 const AuthContext = React.createContext<User | undefined>(undefined);
@@ -20,7 +20,7 @@ const AuthProvider = (props: any) => {
                 .doc(user.uid)
                 .get()
                 .then((doc: firebase.firestore.DocumentSnapshot) => {
-                    setAuthState(userFromFirestore(doc));
+                    setAuthState(User.fromFirestore(doc));
                 })
                 .catch((e) => {
                     console.log(e);

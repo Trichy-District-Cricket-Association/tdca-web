@@ -19,6 +19,7 @@ const Routes = () => (
         <ProtectedRoute exact path={PageRoutes.adminUmpires} userRole={UserRoles.admin} component={AdminPanel} />
         <ProtectedRoute exact path={PageRoutes.adminGrounds} userRole={UserRoles.admin} component={AdminPanel} />
         <ProtectedRoute exact path={PageRoutes.adminGroundsMen} userRole={UserRoles.admin} component={AdminPanel} />
+        <ProtectedRoute exact path={PageRoutes.adminPlayers} userRole={UserRoles.admin} component={AdminPanel} />
         <ProtectedRoute exact path={PageRoutes.adminTeams} userRole={UserRoles.admin} component={AdminPanel} />
         <ProtectedRoute exact path={PageRoutes.adminTeams} userRole={UserRoles.admin} component={AdminPanel} />
         <ProtectedRoute exact path={PageRoutes.adminMatches} userRole={UserRoles.admin} component={AdminPanel} />

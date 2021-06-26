@@ -7,6 +7,8 @@ import { auth } from '../../../firebase';
 import useAuth from '../../../hooks/useAuth';
 import Login from '../../features/authentication/Login';
 import './TopNavBar.scss';
+import useDeviceType from '../../../hooks/useDeviceType';
+import { Devices } from '../../../enums/devices';
 
 const logo = `${process.env.PUBLIC_URL}/assets/images/tdca_logo.jpg`;
 const TopNav = () => {
@@ -14,6 +16,8 @@ const TopNav = () => {
     const [isMobileOpen, toggleMobileOpen] = useState(false);
     const [isModalOpen, setModalOpen] = useState(false);
     const loginClick = () => setModalOpen(true);
+    const deviceType = useDeviceType();
+    
     return (
         <div>
             <div className="nav">
@@ -22,17 +26,18 @@ const TopNav = () => {
                         <img src={logo} alt="Logo" className="nav__header--logo" />
                     </div>
                     <div>
-                        <h1 className="nav__header--text">Trichy District Cricket Association</h1>
+                        <h1 className="nav__header--text"  >Trichy District Cricket Association</h1>
                         <h1 className="nav__header--textAbbr">TDCA</h1>
                     </div>
                 </div>
                 <div>
+                    
                     <button type="button" className="hamburger" onClick={() => toggleMobileOpen(!isMobileOpen)}>
                         {isMobileOpen ? <FaTimes /> : <FaBars />}
                     </button>
                 </div>
                 <div className={isMobileOpen ? 'nav__responsive' : 'nav__body'}>
-                    <div className="item">
+                    <div>
                         <Link to={PageRoutes.home} className="nav__link">
                             Home
                         </Link>
