@@ -1,0 +1,80 @@
+.input_box {
+    max-width: 400px;
+    margin: 50px auto;
+    background: #fff;
+    border-radius: 2px;
+    padding: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    li {
+        display: block;
+        padding: 9px;
+        border-style: solid;
+        border-color: #dddddd;
+        border-width: 1px 1px;
+        margin-bottom: 30px;
+        border-radius: 3px;
+        &:last-child {
+            margin-bottom: 0px;
+            text-align: center;
+        }
+        label {
+            display: block;
+            float: left;
+            margin-top: -19px;
+            background: #ffffff;
+            height: 14px;
+            padding: 2px 5px 2px 5px;
+            color: #929292;
+            font-size: 14px;
+            overflow: hidden;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        span {
+            background: #f3f3f3;
+            display: block;
+            padding: 3px;
+            margin: 0 -9px -9px -9px;
+            text-align: center;
+            color: #c0c0c0;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 11px;
+            height: 10px;
+        }
+    }
+}
+.input_box input[type='text'],
+.input_box input[type='date'],
+.input_box input[type='datetime'],
+.input_box input[type='email'],
+.input_box input[type='number'],
+.input_box input[type='search'],
+.input_box input[type='time'],
+.input_box input[type='url'],
+.input_box input[type='password'],
+.input_box textarea,
+.input_box select {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    width: 100%;
+    display: block;
+    outline: none;
+    border: none;
+    height: 25px;
+    line-height: 25px;
+    font-size: 16px;
+    padding: 0;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.input_box input[type='text']:focus,
+.input_box input[type='date']:focus,
+.input_box input[type='datetime']:focus,
+.input_box input[type='email']:focus,
+.input_box input[type='number']:focus,
+.input_box input[type='search']:focus,
+.input_box input[type='time']:focus,
+.input_box input[type='url']:focus,
+.input_box input[type='password']:focus,
+.input_box select:focus {
+    font-family: sans-serif;
+}

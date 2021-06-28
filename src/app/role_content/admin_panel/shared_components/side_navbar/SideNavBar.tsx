@@ -2,11 +2,11 @@ import { SidebarData } from './SideNavBarData';
 import { Link } from 'react-router-dom';
 import './SideNavBar.scss';
 
-const SideNavBar = () => (
+const SideNavBar = (props:any) => (
     <div>
-        <div className="nav-menu active">
+        <div className={props.sidebar ? 'nav-menu active' : 'nav-menu'}>
             <div className="container">
-                <div className="nav-menu-items">
+                <div onClick={props.showSidebar}>
                     {SidebarData.map((item, index) => {
                         return (
                             <div key={index} className={item.cName}>

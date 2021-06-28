@@ -7,7 +7,7 @@ export default class Ground {
     docId?: string;
 
     /** Ground Id of ground document. */
-    groundId: number;
+    groundId: string;
 
     /** Name of the ground. */
     groundName: string;
@@ -21,7 +21,36 @@ export default class Ground {
     /** Number of matches according to the match type. */
     typeMatches: Omit<TypeMatches, 'institutionMatch' | 'tncaMatch' | 'combinedDistrictMatch' | 'privateMatch'>;
 
-    constructor({ docId, groundId, groundName, totalMatches, divisionMatches, typeMatches }: Ground) {
+    handleGround({ field, value }: { field: string; value: any }): void {
+        if (field == 'groundId') this.groundId = value;
+        if (field == 'groundName') this.groundName = value;
+        if (field == 'totalMatches') this.totalMatches = value;
+        if (field == 'divisionMatches_one') this.divisionMatches.one = value;
+        if (field == 'divisionMatches_two') this.divisionMatches.two = value;
+        if (field == 'divisionMatches_three') this.divisionMatches.three = value;
+        if (field == 'divisionMatches_four') this.divisionMatches.four = value;
+        if (field == 'divisionMatches_five') this.divisionMatches.five = value;
+        if (field == 'typeMatches_interDistrictMatch') this.typeMatches.interDistrictMatch = value;
+        if (field == 'typeMatches_knockoutMatch') this.typeMatches.knockoutMatch = value;
+        if (field == 'typeMatches_leagueMatch') this.typeMatches.leagueMatch = value;
+        if (field == 'typeMatches_schoolMatch') this.typeMatches.schoolMatch = value;
+    }
+
+    constructor({
+        docId,
+        groundId,
+        groundName,
+        totalMatches,
+        divisionMatches,
+        typeMatches,
+    }: {
+        docId?: string;
+        groundId: string;
+        groundName: string;
+        totalMatches: number;
+        divisionMatches: DivisionMatches;
+        typeMatches: Omit<TypeMatches, 'institutionMatch' | 'tncaMatch' | 'combinedDistrictMatch' | 'privateMatch'>;
+    }) {
         if (docId) this.docId = docId;
         this.groundId = groundId;
         this.groundName = groundName;

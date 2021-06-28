@@ -1,16 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
-.sideNav {
-    top: 3rem;
-}
+
 .container {
     margin-top: 50px;
 }
-.menu-bars {
-    margin-left: 2rem;
-    font-size: 2rem;
-    background: none;
-}
-
 .nav-menu {
     background-color: #f8f8f8;
     width: 250px;
@@ -21,6 +13,9 @@
     top: 80px;
     left: -100%;
     transition: 850ms;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    position: fixed;
 }
 
 .nav-menu.active {

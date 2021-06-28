@@ -15,5 +15,10 @@ export enum PageRoutes{
     adminScorers='/admin/scorers',
     adminScorecards='/admin/scorecards',
     adminTeams='/admin/teams',
-    adminUmpires='/admin/umpires',    
+    adminUmpires='/admin/umpires',  
+    
+    // ADMIN PANEL GROUND ROUTES
+    adminGroundAdd = '/admin/grounds/add',
+    adminGroundUpdate = '/admin/grounds/update',
+
 };

@@ -9,6 +9,10 @@ import Login from '../../features/authentication/Login';
 import './TopNavBar.scss';
 import useDeviceType from '../../../hooks/useDeviceType';
 import { Devices } from '../../../enums/devices';
+import SideNavBar from '../../role_content/admin_panel/shared_components/side_navbar/SideNavBar';
+import InputBox from '../../role_content/admin_panel/shared_components/input_box/InputBox';
+import useInput from '../../../hooks/useInput';
+import {BsGear} from "react-icons/bs"
 
 const logo = `${process.env.PUBLIC_URL}/assets/images/tdca_logo.jpg`;
 const TopNav = () => {
@@ -17,11 +21,24 @@ const TopNav = () => {
     const [isModalOpen, setModalOpen] = useState(false);
     const loginClick = () => setModalOpen(true);
     const deviceType = useDeviceType();
-    
+    const [sidebar, setSidebar] = useState(false);
+
+    const showSidebar = () => setSidebar(!sidebar);
     return (
         <div>
             <div className="nav">
                 <div className="nav__header">
+                
+                {authData?.role == UserRoles.admin ? (
+                    <div>
+                    <Link to='#' className='nav__menu-bars' >
+                    <BsGear onClick={showSidebar} />
+                  </Link>
+                       <SideNavBar sidebar ={sidebar} showSidebar = {showSidebar} />
+                       </div>
+                    ) : (
+                        <div />
+                    )}
                     <div>
                         <img src={logo} alt="Logo" className="nav__header--logo" />
                     </div>
@@ -62,15 +79,7 @@ const TopNav = () => {
                             Contact
                         </Link>
                     </div>
-                    {authData?.role == UserRoles.admin ? (
-                        <div className="item">
-                            <Link to={PageRoutes.adminPanel} className="nav__link">
-                                Admin Panel
-                            </Link>
-                        </div>
-                    ) : (
-                        <div />
-                    )}
+                   
                     {authData === undefined ? (
                         <div>
                             <Link to={PageRoutes.home} className="nav__btn" onClick={loginClick}>
@@ -90,6 +99,7 @@ const TopNav = () => {
                             </Link>
                         </div>
                     )}
+                         
                 </div>
             </div>
             <Login isOpen={isModalOpen} setModalOpen={setModalOpen} />

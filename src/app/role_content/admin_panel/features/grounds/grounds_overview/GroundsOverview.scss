@@ -1,0 +1,20 @@
+.groundAddBtn {
+    background-color: transparent;
+    border: 2px solid #138cf5;
+    border-radius: 10px;
+    color: #138cf5;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 20px;
+    padding: 0.7rem 1em;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: sans-serif;
+    font-weight: 600;
+    transition: box-shadow 400ms ease-in-out, color 400ms ease-in-out;
+    &:hover {
+        box-shadow: 0 0 40px 40px #138cf5 inset;
+        color: #fff;
+        outline: 0;
+    }
+}

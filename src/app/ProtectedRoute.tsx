@@ -11,6 +11,7 @@ export default function ProtectedRoute({userRole, ...routeProps}:ProtectedRouteP
   if(authData?.role==userRole) {
     return <Route {...routeProps} />;
   } else {
+    console.log('redirecting to main');
     return <Redirect to={{ pathname: PageRoutes.home }} />;
   }
 };
