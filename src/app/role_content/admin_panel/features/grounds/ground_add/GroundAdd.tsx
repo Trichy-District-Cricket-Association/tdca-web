@@ -24,7 +24,7 @@ const GroundAdd: React.FC<void> = (): JSX.Element => {
     };
 
     const submitForm =async()=>{
-        await firestore.collection(Collections.grounds).add(JSON.parse(JSON.stringify(ground)));
+        await firestore.collection(Collections.grounds).add(JSON.parse(JSON.stringify(ground))); 
     };
 
     return (
