@@ -9,7 +9,6 @@ export default function Login(props: any) {
     const [email, bindEmail] = useInput('');
     const [password, bindPassword] = useInput('');
     const login = async () => {
-        console.log(email);
         await auth.signInWithEmailAndPassword(email, password).then(() => {
             props.setModalOpen(false);
         });

@@ -2,30 +2,76 @@ import firebase from 'firebase';
 import { MatchTeam } from './model_types/MatchTeam';
 import { MatchUmpire } from './model_types/MatchUmpire';
 import { MatchScorer } from './model_types/MatchScorer';
-import { TypeMatches } from './model_types/TypeMatches';
 export default class Match {
     /** Document id of the match document. */
     docId?: string;
 
-    matchId: string;
+    matchId?: string;
 
-    teamA: MatchTeam;
+    teamA?: MatchTeam;
 
-    teamB: MatchTeam;
+    teamB?: MatchTeam;
 
-    umpireA: MatchUmpire;
+    umpireA?: MatchUmpire;
 
-    umpireB: MatchUmpire;
+    umpireB?: MatchUmpire;
 
-    scorer: MatchScorer;
+    scorer?: MatchScorer;
 
-    type: TypeMatches;
+    type?:  string;
 
-    date: Date;
+    date?: Date;
 
-    venue: string;
+    venue?: string;
 
-    constructor({ docId, matchId, teamA, teamB, umpireA, umpireB, scorer, type, date, venue }: Match) {
+    handleMatch({ field, value }: { field: string; value: string; }): void {
+        if (field == 'matchId') this.matchId = value;
+
+        if (field == 'teamA_teamName') this.teamA!.teamName = value;
+        if (field == 'teamA_teamId') this.teamA!.teamId =value;
+        if (field == 'teamB_teamName') this.teamB!.teamName = value;
+        if (field == 'teamB_teamId') this.teamB!.teamId =value;
+
+        if (field == 'umpireA_umpireName') this.umpireA!.umpireName = value;
+        if (field == 'umpireA_umpireId') this.umpireA!.umpireId = value;
+        // if (field == 'umpireA_umpireFeeStatus') this.umpireA!.umpireFeeStatus= boolean;
+        if (field == 'umpireB_umpireName') this.umpireB!.umpireName = value;
+        if (field == 'umpireB_umpireId') this.umpireB!.umpireId = value;
+        // if (field == 'umpireB_umpireFeeStatus') this.umpireB!.umpireFeeStatus= boolean;
+
+        if (field == 'scorer_scorerName') this.scorer!.scorerName = value;
+        if (field == 'scorer_scorerId') this.scorer!.scorerId = value;
+        // if (field == 'scorer_scorerFeeStatus') this.scorer!.scorerFeeStatus= boolean;
+
+        if (field == 'type') this.type = value;
+        if(field == 'date') this.date= new Date(Date.parse(value));
+        if (field == 'venue') this.venue =value;
+        
+    }
+
+    constructor({
+        docId,
+        matchId,
+        teamA,
+        teamB,
+        umpireA,
+        umpireB,
+        scorer,
+        type,
+        date,
+        venue,
+    }: {
+        docId?: string;
+        matchId?: string;
+        teamA?: MatchTeam;
+        teamB?: MatchTeam;
+        umpireA?: MatchUmpire;
+        umpireB?: MatchUmpire;
+        scorer?: MatchScorer;
+        type?: string;
+        date?: Date;
+        venue?: string;
+    }) {
         if (docId) this.docId = docId;
         this.matchId = matchId;
         this.teamA = teamA;

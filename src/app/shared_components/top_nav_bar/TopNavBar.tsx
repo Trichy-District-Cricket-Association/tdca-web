@@ -31,9 +31,9 @@ const TopNav = () => {
                 
                 {authData?.role == UserRoles.admin ? (
                     <div>
-                    <Link to='#' className='nav__menu-bars' >
+                    <button className='nav__menu-bars' >
                     <BsGear onClick={showSidebar} />
-                  </Link>
+                  </button>
                        <SideNavBar sidebar ={sidebar} showSidebar = {showSidebar} />
                        </div>
                     ) : (
@@ -102,7 +102,8 @@ const TopNav = () => {
                          
                 </div>
             </div>
-            <Login isOpen={isModalOpen} setModalOpen={setModalOpen} />
+            {isModalOpen?<Login isOpen={true} setModalOpen={setModalOpen} />:null}
+            
         </div>
     );
 };

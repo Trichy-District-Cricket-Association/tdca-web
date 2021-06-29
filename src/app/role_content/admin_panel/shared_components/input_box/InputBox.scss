@@ -1,7 +1,6 @@
 .input_box {
-    max-width: 400px;
-    margin: 50px auto;
-    background: #fff;
+    max-width: 300px;
+    margin: 10px auto;
     border-radius: 2px;
     padding: 20px;
     font-family: Georgia, 'Times New Roman', Times, serif;
@@ -44,7 +43,7 @@
 }
 .input_box input[type='text'],
 .input_box input[type='date'],
-.input_box input[type='datetime'],
+.input_box input[type='datetime-local'],
 .input_box input[type='email'],
 .input_box input[type='number'],
 .input_box input[type='search'],
@@ -76,5 +75,6 @@
 .input_box input[type='url']:focus,
 .input_box input[type='password']:focus,
 .input_box select:focus {
-    font-family: sans-serif;
+    font-family: 'Poppins';
+    color: #3d26d6;
 }
