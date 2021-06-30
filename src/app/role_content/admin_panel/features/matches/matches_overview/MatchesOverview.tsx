@@ -7,6 +7,7 @@ import LoadingComp from '../../../../../shared_components/loading_comp/LoadingCo
 import { PageRoutes } from '../../../../../../enums/pageRoutes';
 import { Link } from 'react-router-dom';
 import MatchAdd from '../match_add/MatchAdd'
+import MatchCard from '../match_card/MatchCard';
 
 const MatchesOverview: React.FC<void> = (): JSX.Element => {
     const [isModalOpen, setModalOpen] = useState(false);
@@ -32,6 +33,7 @@ const MatchesOverview: React.FC<void> = (): JSX.Element => {
                     <Link to={PageRoutes.adminMatches} onClick={() => setModalOpen(true)}>
                         <button className="matchAddBtn">+ Add Match</button>
                     </Link>
+                    <MatchCard />
                     {isModalOpen ?<MatchAdd isOpen={true} setModalOpen={setModalOpen} />:null}
                     
                 </div>

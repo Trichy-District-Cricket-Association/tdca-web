@@ -229,7 +229,7 @@ const UmpireAdd = (props: any) => {
                     <button className="umpireAddForm__btn--cancel" onClick={() => props.setModalOpen(false)}>
                         Cancel
                     </button>
-                    <button className="umpireAddForm__btn--submit" type="submit" prevent-default>
+                    <button className="umpireAddForm__btn--submit" type="submit"  >
                         Save
                     </button>
                 </div>

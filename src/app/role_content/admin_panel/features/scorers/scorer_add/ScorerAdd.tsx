@@ -228,7 +228,7 @@ const ScorerAdd = (props: any) => {
                     <button className="scorerAddForm__btn--cancel" onClick={() => props.setModalOpen(false)}>
                         Cancel
                     </button>
-                    <button className="scorerAddForm__btn--submit" type="submit" prevent-default>
+                    <button className="scorerAddForm__btn--submit" type="submit"  >
                         Save
                     </button>
                 </div>

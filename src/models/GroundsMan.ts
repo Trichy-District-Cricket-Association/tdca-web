@@ -95,21 +95,21 @@ export default class GroundsMan {
         aadharNumber?: string;
         address?: string;
     }) {
-        if (docId) this.docId = docId;
-        this.groundsManId = groundsManId;
-        this.groundsManName = groundsManName;
-        if (avatarUrl) this.avatarUrl = avatarUrl;
-        this.emailId = emailId;
+        if (docId) this.docId = docId??'';
+        this.groundsManId = groundsManId??'';
+        this.groundsManName = groundsManName??'';
+        if (avatarUrl) this.avatarUrl = avatarUrl??"";
+        this.emailId = emailId??'';
         this.dateOfBirth = dateOfBirth;
-        this.primaryContact = primaryContact;
-        this.secondaryContact = secondaryContact;
-        this.payPhoneNumber = payPhoneNumber;
-        this.bankAccountNumber = bankAccountNumber;
-        this.bankName = bankName;
-        this.bankBranch = bankBranch;
-        this.bankIFSC = bankIFSC;
-        this.aadharNumber = aadharNumber;
-        this.address = address;
+        this.primaryContact = primaryContact??'';
+        this.secondaryContact = secondaryContact??'';
+        this.payPhoneNumber = payPhoneNumber??'';
+        this.bankAccountNumber = bankAccountNumber??'';
+        this.bankName = bankName??'';
+        this.bankBranch = bankBranch??'';
+        this.bankIFSC = bankIFSC??'';
+        this.aadharNumber = aadharNumber??'';
+        this.address = address??'';
     }
 
     static fromFirestore(doc: firebase.firestore.DocumentSnapshot): GroundsMan {

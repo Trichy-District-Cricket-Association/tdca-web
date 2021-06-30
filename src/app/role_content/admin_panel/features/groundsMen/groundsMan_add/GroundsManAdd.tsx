@@ -123,7 +123,7 @@ const GroundsManAdd = (props: any) => {
                     <button className="groundsManAddForm__btn--cancel" onClick={() => props.setModalOpen(false)}>
                         Cancel
                     </button>
-                    <button className="groundsManAddForm__btn--submit" type="submit" prevent-default>
+                    <button className="groundsManAddForm__btn--submit" type="submit"  >
                         Save
                     </button>
                 </div>

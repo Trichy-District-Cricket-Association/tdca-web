@@ -88,21 +88,21 @@ export default class Team {
         penalty?: number;
     }) {
         if (docId) this.docId = docId;
-        this.teamId = teamId;
-        this.teamName = teamName;
-        this.emailId = emailId;
-        this.division = division;
-        this.numberOfMatches = numberOfMatches;
-        this.won = won;
-        this.lost = lost;
-        this.draw = draw;
-        this.tie = tie;
-        this.noResult = noResult;
-        this.totalPoints = totalPoints;
-        this.walkover = walkover;
-        this.conceed = conceed;
-        this.refusal = refusal;
-        this.penalty = penalty;
+        this.teamId = teamId??'';
+        this.teamName = teamName??'';
+        this.emailId = emailId??'';
+        this.division = division??0;
+        this.numberOfMatches = numberOfMatches??0;
+        this.won = won??0;
+        this.lost = lost??0;
+        this.draw = draw??0;
+        this.tie = tie??0;
+        this.noResult = noResult??0;
+        this.totalPoints = totalPoints??0;
+        this.walkover = walkover??0;
+        this.conceed = conceed??0;
+        this.refusal = refusal??0;
+        this.penalty = penalty??0;
     }
     static fromFirestore(doc: firebase.firestore.DocumentSnapshot): Team {
         return new Team({

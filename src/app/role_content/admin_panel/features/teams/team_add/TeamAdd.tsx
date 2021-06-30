@@ -21,7 +21,7 @@ const TeamAdd = (props: any) => {
         e.preventDefault();
         await firestore
             .collection(Collections.teams)
-            .add(JSON.parse(JSON.stringify(Team)))
+            .add(JSON.parse(JSON.stringify(team)))
             .then((doc) => {
                 console.log(doc);
             })
@@ -150,7 +150,7 @@ const TeamAdd = (props: any) => {
                     <button className="teamAddForm__btn--cancel" onClick={() => props.setModalOpen(false)}>
                         Cancel
                     </button>
-                    <button className="teamAddForm__btn--submit" type="submit" prevent-default>
+                    <button className="teamAddForm__btn--submit" type="submit"  >
                         Save
                     </button>
                 </div>

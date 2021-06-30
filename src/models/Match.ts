@@ -2,6 +2,7 @@ import firebase from 'firebase';
 import { MatchTeam } from './model_types/MatchTeam';
 import { MatchUmpire } from './model_types/MatchUmpire';
 import { MatchScorer } from './model_types/MatchScorer';
+import TeamAdd from '../app/role_content/admin_panel/features/teams/team_add/TeamAdd';
 export default class Match {
     /** Document id of the match document. */
     docId?: string;
@@ -34,14 +35,14 @@ export default class Match {
 
         if (field == 'umpireA_umpireName') this.umpireA!.umpireName = value;
         if (field == 'umpireA_umpireId') this.umpireA!.umpireId = value;
-        // if (field == 'umpireA_umpireFeeStatus') this.umpireA!.umpireFeeStatus= boolean;
+        if (field == 'umpireA_umpireFeeStatus') this.umpireA!.umpireFeeStatus= value;
         if (field == 'umpireB_umpireName') this.umpireB!.umpireName = value;
         if (field == 'umpireB_umpireId') this.umpireB!.umpireId = value;
-        // if (field == 'umpireB_umpireFeeStatus') this.umpireB!.umpireFeeStatus= boolean;
+        if (field == 'umpireB_umpireFeeStatus') this.umpireB!.umpireFeeStatus= value;
 
         if (field == 'scorer_scorerName') this.scorer!.scorerName = value;
         if (field == 'scorer_scorerId') this.scorer!.scorerId = value;
-        // if (field == 'scorer_scorerFeeStatus') this.scorer!.scorerFeeStatus= boolean;
+        if (field == 'scorer_scorerFeeStatus') this.scorer!.scorerFeeStatus = value;
 
         if (field == 'type') this.type = value;
         if(field == 'date') this.date= new Date(Date.parse(value));
@@ -73,12 +74,12 @@ export default class Match {
         venue?: string;
     }) {
         if (docId) this.docId = docId;
-        this.matchId = matchId;
-        this.teamA = teamA;
-        this.teamB = teamB;
-        this.umpireA = umpireA;
-        this.umpireB = umpireB;
-        this.scorer = scorer;
+        this.matchId = matchId??'';
+        this.teamA = teamA??{teamId: '',teamName: ''};
+        this.teamB = teamB??{teamId: '',teamName: ''};;
+        this.umpireA = umpireA??{umpireId: '', umpireFeeStatus:'',umpireName:'',umpireAvatar: ''};
+        this.umpireB = umpireB??{umpireId: '', umpireFeeStatus:'',umpireName:'',umpireAvatar: ''};;
+        this.scorer = scorer??{scorerId: '', scorerFeeStatus:'',scorerName:'',scorerAvatar: ''};;
         this.type = type;
         this.date = date;
         this.venue = venue;

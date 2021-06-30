@@ -1,4 +1,4 @@
-.input_box {
+.selectInputBox {
     max-width: 300px;
     margin: 10px auto;
     border-radius: 2px;
@@ -40,42 +40,21 @@
             height: 10px;
         }
     }
-}
-.input_box input[type='text'],
-.input_box input[type='date'],
-.input_box input[type='datetime-local'],
-.input_box input[type='email'],
-.input_box input[type='number'],
-.input_box input[type='search'],
-.input_box input[type='time'],
-.input_box input[type='url'],
-.input_box input[type='password'],
-.input_box textarea,
-.input_box select {
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    width: 100%;
-    display: block;
-    outline: none;
-    border: none;
-    height: 35px;
-    line-height: 25px;
-    font-size: 17px;
-    padding: 0;
-    font-family: 'Poppins';
-    color: #131313;
-}
-.input_box input[type='text']:focus,
-.input_box input[type='date']:focus,
-.input_box input[type='datetime']:focus,
-.input_box input[type='email']:focus,
-.input_box input[type='number']:focus,
-.input_box input[type='search']:focus,
-.input_box input[type='time']:focus,
-.input_box input[type='url']:focus,
-.input_box input[type='password']:focus,
-.input_box select:focus {
-    font-family: 'Poppins';
-    color: #3d26d6;
+    &__select {
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        width: 100%;
+        display: block;
+        font-size: 17px;
+        height: 35px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-family: 'Poppins';
+        color: #131313;
+        &:focus {
+            color: #3d26d6;
+        }
+    }
 }

@@ -9,6 +9,7 @@
     bottom: 40px;
     background-color: #fff;
     overflow-y: scroll;
+    border: none;
     &__overlay {
         background-color: #131313;
     }
@@ -108,6 +109,25 @@
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.541);
+}
+/* scrollbar width */
+::-webkit-scrollbar {
+    width: 13px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #41596b;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 @media screen and (max-width: 799px) {
     .umpireAdd {

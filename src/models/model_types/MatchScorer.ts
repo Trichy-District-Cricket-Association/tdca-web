@@ -6,6 +6,6 @@ export type MatchScorer = {
 
     scorerAvatar: string;
 
-    scorerFeeStatus: boolean;
+    scorerFeeStatus: string;
 
 };

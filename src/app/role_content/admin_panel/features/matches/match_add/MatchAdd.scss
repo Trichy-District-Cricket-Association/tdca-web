@@ -13,7 +13,8 @@
         background-color: #131313;
     }
     .matchAddForm {
-        &__matchData {
+        &__matchData,
+        &__feeStatus {
             &--header {
                 margin-top: 2%;
                 margin-left: 3%;
@@ -25,6 +26,9 @@
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
                 margin-left: 0;
+            }
+            .select {
+                width: 100px;
             }
         }
         &__btn {
@@ -66,6 +70,25 @@
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.541);
+}
+/* scrollbar width */
+::-webkit-scrollbar {
+    width: 13px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #41596b;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 @media screen and (max-width: 799px) {
     .matchAdd {
