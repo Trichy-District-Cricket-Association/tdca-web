@@ -1,5 +1,5 @@
-.scorersOverview {
-    &__scorerAddBtn {
+.playersOverview {
+    &__playerAddBtn {
         background-color: transparent;
         border: 2px solid #3d26d6;
         border-radius: 4px;
@@ -19,29 +19,29 @@
             outline: 0;
         }
     }
-    &__scorerCard {
+    &__playerCard {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         grid-auto-rows: auto;
     }
 }
 @media screen and (max-width: 1400px) {
-    .scorersOverview {
-        &__scorerCard {
+    .playersOverview {
+        &__playerCard {
             grid-template-columns: repeat(3, 1fr);
         }
     }
 }
 @media screen and (max-width: 1050px) {
-    .scorersOverview {
-        &__scorerCard {
+    .playersOverview {
+        &__playerCard {
             grid-template-columns: repeat(2, 1fr);
         }
     }
 }
 @media screen and (max-width: 695px) {
-    .scorersOverview {
-        &__scorerCard {
+    .playersOverview {
+        &__playerCard {
             grid-template-columns: repeat(1, 1fr);
         }
     }

@@ -7,6 +7,7 @@ import LoadingComp from '../../../../../shared_components/loading_comp/LoadingCo
 import { PageRoutes } from '../../../../../../enums/pageRoutes';
 import { Link } from 'react-router-dom';
 import ScorerAdd from '../scorer_add/ScorerAdd'
+import ScorerCard from '../scorer_card/ScorerCard';
 
 const ScorersOverview: React.FC<void> = (): JSX.Element => {
     const [isModalOpen, setModalOpen] = useState(false);
@@ -28,10 +29,14 @@ const ScorersOverview: React.FC<void> = (): JSX.Element => {
             {scorerDocs == undefined ? (
                 <LoadingComp />
             ) : (
-                <div>
+                <div className = "scorersOverview">
                     <Link to={PageRoutes.adminScorers} onClick={() => setModalOpen(true)}>
-                        <button className="scorerAddBtn">+ Add Scorer</button>
+                        <button className="scorersOverview__scorerAddBtn">+ Add Scorer</button>
                     </Link>
+                    <div className= 'scorersOverview__scorerCard'>
+                    {scorerDocs?.map((scorerDoc)=><ScorerCard scorerDoc={scorerDoc} key={scorerDoc.docId??''}/>)}
+                   
+                    </div>
                     {isModalOpen ? <ScorerAdd isOpen={true} setModalOpen={setModalOpen} /> : null}
                     
                 </div>

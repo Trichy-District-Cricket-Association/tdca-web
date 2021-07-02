@@ -1,9 +1,30 @@
-import './MatchCard.scss'
-const MatchCard: React.FC = (): JSX.Element => {
+import Match from '../../../../../../models/Match';
+import './MatchCard.scss';
+
+const cricketBall = `${process.env.PUBLIC_URL}/assets/images/cricketBall.png`;
+type MatchCardProps = {
+    matchDoc: Match;
+    key: string;
+};
+const MatchCard: React.FC<MatchCardProps> = ({ matchDoc, key }): JSX.Element => {
     return (
-        <div className = 'MatchCard' >
-            hello
+        <div className="matchCard" key={key}>
+            <div className="matchCard__header">
+                <p className="matchCard__header--title">{matchDoc.teamA?.teamName}</p>
+                <img src={cricketBall} alt="vs" className="matchCard__header--img" />
+                <p className="matchCard__header--title">{matchDoc.teamB?.teamName}</p>
+            </div>
+            <div className="matchCard__container">
+                <label className="matchCard__container--label">Division</label>
+                <p className="matchCard__container--text">Division {matchDoc.division}</p>
+                <label className="matchCard__container--label">Match Type</label>
+                <p className="matchCard__container--text">{matchDoc.type}</p>
+                <label className="matchCard__container--label">Venue</label>
+                <p className="matchCard__container--text">{matchDoc.venue}</p>
+                <label className="matchCard__container--label">Time</label>
+                <p className="matchCard__container--text">{matchDoc.date}</p>
+            </div>
         </div>
-    )
-}
- export default MatchCard
+    );
+};
+export default MatchCard;

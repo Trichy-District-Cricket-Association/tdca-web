@@ -1,9 +1,9 @@
-.matchCard {
+.umpireCard {
     color: #fff;
     display: block;
     background-color: #3d26d6;
     width: 330px;
-    height: 350px;
+    height: 410px;
     margin-left: 20px;
     margin-top: 25px;
     cursor: pointer;
@@ -14,23 +14,23 @@
     &__header {
         text-align: center;
         margin-top: 10px;
-        &--title {
-            font-size: 18px;
-        }
         &--img {
+            width: 150px;
             margin-top: 4px;
-            margin-bottom: -4px;
+            margin-bottom: 4px;
+            border-radius: 50%;
         }
     }
     &__container {
-        margin-left: 10px;
+        text-align: center;
         &--label {
             text-transform: uppercase;
-            font-size: 12px;
+            font-size: 15px;
         }
         &--text {
-            font-size: 15px;
+            font-size: 20px;
             margin-bottom: 12px;
+            font-weight: 800;
         }
     }
 }

@@ -21,7 +21,7 @@ const SelectInputBox: React.FC<SelectInputBoxProps> = ({
                 <li>
                     <label htmlFor={name}>{title}</label>
                     <select name= {name} onChange={textHandler} className = "selectInputBox__select">
-                        <option disabled>No options</option>
+                        <option></option>
                         {options.map((option) => (
                             <option key={option} value={option}>
                                 {option}

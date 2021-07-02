@@ -3,11 +3,14 @@ import { MatchTeam } from './model_types/MatchTeam';
 import { MatchUmpire } from './model_types/MatchUmpire';
 import { MatchScorer } from './model_types/MatchScorer';
 import TeamAdd from '../app/role_content/admin_panel/features/teams/team_add/TeamAdd';
+import { DivisionMatches } from './model_types/DivisionMatches';
 export default class Match {
     /** Document id of the match document. */
     docId?: string;
 
     matchId?: string;
+
+    division?: number;
 
     teamA?: MatchTeam;
 
@@ -27,6 +30,8 @@ export default class Match {
 
     handleMatch({ field, value }: { field: string; value: string; }): void {
         if (field == 'matchId') this.matchId = value;
+
+        if (field == 'division') this.division = parseInt(value);
 
         if (field == 'teamA_teamName') this.teamA!.teamName = value;
         if (field == 'teamA_teamId') this.teamA!.teamId =value;
@@ -53,6 +58,7 @@ export default class Match {
     constructor({
         docId,
         matchId,
+        division,
         teamA,
         teamB,
         umpireA,
@@ -63,7 +69,8 @@ export default class Match {
         venue,
     }: {
         docId?: string;
-        matchId?: string;
+        matchId?: string;   
+        division?: number;
         teamA?: MatchTeam;
         teamB?: MatchTeam;
         umpireA?: MatchUmpire;
@@ -75,6 +82,7 @@ export default class Match {
     }) {
         if (docId) this.docId = docId;
         this.matchId = matchId??'';
+        this.division = division??1;
         this.teamA = teamA??{teamId: '',teamName: ''};
         this.teamB = teamB??{teamId: '',teamName: ''};;
         this.umpireA = umpireA??{umpireId: '', umpireFeeStatus:'',umpireName:'',umpireAvatar: ''};
@@ -89,6 +97,7 @@ export default class Match {
         return new Match({
             docId: doc.id,
             matchId: doc.data()?.matchId,
+            division:doc.data()?.division,
             teamA: doc.data()?.teamA,
             teamB: doc.data()?.teamB,
             umpireA: doc.data()?.umpireA,

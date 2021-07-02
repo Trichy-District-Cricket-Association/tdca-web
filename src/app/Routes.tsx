@@ -11,6 +11,7 @@ import UmpiresOverview from './role_content/admin_panel/features/umpires/umpires
 import ScorersOverview from './role_content/admin_panel/features/scorers/scorers_overview/ScorersOverview';
 import TeamsOverview from './role_content/admin_panel/features/teams/teams_overview/TeamsOverview';
 import MatchesOverview from './role_content/admin_panel/features/matches/matches_overview/MatchesOverview';
+import PlayersOverview from './role_content/admin_panel/features/players/players_overview/PlayersOverview';
 
 const Routes = () => (
     <div>
@@ -26,7 +27,7 @@ const Routes = () => (
         <ProtectedRoute exact path={PageRoutes.adminUmpires} userRole={UserRoles.admin} component={UmpiresOverview} />
         <ProtectedRoute exact path={PageRoutes.adminGrounds} userRole={UserRoles.admin}  component={GroundsOverview} />
         <ProtectedRoute exact path={PageRoutes.adminGroundsMen} userRole={UserRoles.admin} component={GroundsMenOverview} />
-        <ProtectedRoute exact path={PageRoutes.adminPlayers} userRole={UserRoles.admin} component={AdminPanel} />
+        <ProtectedRoute exact path={PageRoutes.adminPlayers} userRole={UserRoles.admin} component={PlayersOverview} />
         <ProtectedRoute exact path={PageRoutes.adminTeams} userRole={UserRoles.admin} component={TeamsOverview} />
         <ProtectedRoute exact path={PageRoutes.adminMatches} userRole={UserRoles.admin} component={MatchesOverview} />
         <ProtectedRoute exact path={PageRoutes.adminScorecards} userRole={UserRoles.admin} component={AdminPanel} />

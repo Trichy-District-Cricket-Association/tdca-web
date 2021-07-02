@@ -7,8 +7,9 @@ import LoadingComp from '../../../../../shared_components/loading_comp/LoadingCo
 import { PageRoutes } from '../../../../../../enums/pageRoutes';
 import { Link } from 'react-router-dom';
 import TeamAdd from '../team_add/TeamAdd';
+import TeamCard from '../team_card/TeamCard';
 
-const TeamsOverview: React.FC<void> = (): JSX.Element => {
+const TeamsOverview: React.FC<void> = () => {
     const [isModalOpen, setModalOpen] = useState(false);
     const [teamDocs, setTeamDocs] = useState<Team[] | undefined>();
 
@@ -28,10 +29,15 @@ const TeamsOverview: React.FC<void> = (): JSX.Element => {
             {teamDocs == undefined ? (
                 <LoadingComp />
             ) : (
-                <div>
+                <div className = 'teamsOverview'>
                     <Link to={PageRoutes.adminTeams} onClick={() => setModalOpen(true)}>
-                        <button className="teamAddBtn">+ Add Team</button>
+                        <button className="teamsOverview__teamAddBtn">+ Add Team</button>
                     </Link>
+                    <div className="teamsOverview__teamCard">
+                        {teamDocs?.map((teamDoc) => (
+                            <TeamCard teamDoc={teamDoc} key={teamDoc.docId ?? ''} />
+                        ))}
+                    </div>
                     {isModalOpen ?<TeamAdd isOpen={true} setModalOpen={setModalOpen} />:null}
                     
                 </div>

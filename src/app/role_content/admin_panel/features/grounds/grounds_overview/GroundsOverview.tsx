@@ -7,8 +7,9 @@ import LoadingComp from '../../../../../shared_components/loading_comp/LoadingCo
 import { PageRoutes } from '../../../../../../enums/pageRoutes';
 import { Link } from 'react-router-dom';
 import GroundAdd from '../ground_add/GroundAdd';
+import GroundCard from '../ground_card/GroundCard';
 
-const GroundsOverview: React.FC<void> = (): JSX.Element => {
+const GroundsOverview: React.FC<void> = () => {
     const [isModalOpen, setModalOpen] = useState(false);
     const [groundDocs, setGroundDocs] = useState<Ground[] | undefined>();
 
@@ -28,12 +29,16 @@ const GroundsOverview: React.FC<void> = (): JSX.Element => {
             {groundDocs == undefined ? (
                 <LoadingComp />
             ) : (
-                <div>
+                <div className="groundsOverview">
                     <Link to={PageRoutes.adminGrounds} onClick={() => setModalOpen(true)}>
-                        <button className="groundAddBtn">+ Add Ground</button>
+                        <button className="groundsOverview__groundAddBtn">+ Add Ground</button>
                     </Link>
-                    {isModalOpen ?<GroundAdd isOpen={true} setModalOpen={setModalOpen} />:null}
-                    
+                    <div className="groundsOverview__groundCard">
+                        {groundDocs?.map((groundDoc) => (
+                            <GroundCard groundDoc={groundDoc} key={groundDoc.docId ?? ''} />
+                        ))}
+                    </div>
+                    {isModalOpen ? <GroundAdd isOpen={true} setModalOpen={setModalOpen} /> : null}
                 </div>
             )}
         </div>

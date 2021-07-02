@@ -65,9 +65,8 @@ const MatchAdd = (props: any) => {
         setMatch(newMatch);
     };
     const handleSelectForm = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        
         const fieldName = `${e.target.name}` as const;
-        console.log(fieldName)
+        console.log(fieldName);
         const newMatch = new Match({ ...match });
         newMatch.handleMatch({ field: fieldName, value: e.target.value });
         setMatch(newMatch);
@@ -107,6 +106,12 @@ const MatchAdd = (props: any) => {
                                 textHandler={handleSelectForm}
                             />
                             <SelectInputBox
+                                title="Division"
+                                name="division"
+                                options={[1, 2, 3, 4, 5]}
+                                textHandler={handleSelectForm}
+                            />
+                            <SelectInputBox
                                 title="Team A"
                                 name="teamA_teamName"
                                 options={selectable.teams.map((team) => team.teamName)}
@@ -137,8 +142,8 @@ const MatchAdd = (props: any) => {
                                 textHandler={handleSelectForm}
                             />
                             <SelectInputBox
-                                title="Ground"
-                                name="ground"
+                                title="Venue"
+                                name="venue"
                                 options={selectable.grounds.map((ground) => ground.groundName)}
                                 textHandler={handleSelectForm}
                             />
@@ -150,28 +155,27 @@ const MatchAdd = (props: any) => {
                             />
                         </div>
                         <div className="matchAddForm__feeStatus">
-                        <h1 className="matchAddForm__feeStatus--header">Fee Status</h1>
-                        <div className="matchAddForm__feeStatus--input">
-                            <SelectInputBox
-                                title="Umpire I Fee Status"
-                                name="umpireFeeStatus"
-                                options={['Not Paid', 'Paid']}
-                                textHandler={handleSelectForm}
-                            />
-                            <SelectInputBox
-                                title="Umpire II Fee Status"
-                                name="umpireFeeStatus"
-                                options={['Not Paid', 'Paid']}
-                                textHandler={handleSelectForm}
-                            />
-                            <SelectInputBox
-                                title="Scorer Fee Status"
-                                name="scorerFeeStatus"
-                                options={['Not Paid', 'Paid']}
-                                textHandler={handleSelectForm}
-                            />
-                         
-                        </div>
+                            <h1 className="matchAddForm__feeStatus--header">Fee Status</h1>
+                            <div className="matchAddForm__feeStatus--input">
+                                <SelectInputBox
+                                    title="Umpire I Fee Status"
+                                    name="umpireFeeStatus"
+                                    options={['Not Paid', 'Paid']}
+                                    textHandler={handleSelectForm}
+                                />
+                                <SelectInputBox
+                                    title="Umpire II Fee Status"
+                                    name="umpireFeeStatus"
+                                    options={['Not Paid', 'Paid']}
+                                    textHandler={handleSelectForm}
+                                />
+                                <SelectInputBox
+                                    title="Scorer Fee Status"
+                                    name="scorerFeeStatus"
+                                    options={['Not Paid', 'Paid']}
+                                    textHandler={handleSelectForm}
+                                />
+                            </div>
                         </div>
                     </div>
                     <div className="matchAddForm__btn">

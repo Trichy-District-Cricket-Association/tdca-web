@@ -52,11 +52,11 @@ export default class Ground {
         typeMatches?: Omit<TypeMatches, 'institutionMatch' | 'tncaMatch' | 'combinedDistrictMatch' | 'privateMatch'>;
     }) {
         if (docId) this.docId = docId;
-        this.groundId = groundId??'';
-        this.groundName = groundName??'';
-        this.totalMatches = totalMatches??0;
-        this.divisionMatches = divisionMatches??{one:0,two:0,three:0,four:0,five:0};
-        this.typeMatches = typeMatches??{ interDistrictMatch: 0, knockoutMatch: 0, leagueMatch: 0, schoolMatch: 0 };
+        this.groundId = groundId ?? '';
+        this.groundName = groundName ?? '';
+        this.totalMatches = totalMatches ?? 0;
+        this.divisionMatches = divisionMatches ?? { one: 0, two: 0, three: 0, four: 0, five: 0 };
+        this.typeMatches = typeMatches ?? { interDistrictMatch: 0, knockoutMatch: 0, leagueMatch: 0, schoolMatch: 0 };
     }
 
     static fromFirestore(doc: firebase.firestore.DocumentSnapshot): Ground {

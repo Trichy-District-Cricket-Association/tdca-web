@@ -1,8 +1,8 @@
-.matchCard {
-    color: #fff;
+.groundCard {
+    color: rgb(255, 255, 255);
     display: block;
     background-color: #3d26d6;
-    width: 330px;
+    width: 320px;
     height: 350px;
     margin-left: 20px;
     margin-top: 25px;
@@ -14,23 +14,22 @@
     &__header {
         text-align: center;
         margin-top: 10px;
-        &--title {
-            font-size: 18px;
-        }
         &--img {
+            width: 130px;
             margin-top: 4px;
-            margin-bottom: -4px;
+            margin-bottom: 4px;
         }
     }
     &__container {
-        margin-left: 10px;
+        text-align: center;
         &--label {
             text-transform: uppercase;
-            font-size: 12px;
+            font-size: 15px;
         }
         &--text {
-            font-size: 15px;
-            margin-bottom: 12px;
+            font-size: 20px;
+            margin-bottom: 8px;
+            font-weight: 800;
         }
     }
 }

@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import MatchAdd from '../match_add/MatchAdd'
 import MatchCard from '../match_card/MatchCard';
 
-const MatchesOverview: React.FC<void> = (): JSX.Element => {
+const MatchesOverview: React.FC<void> = () => {
     const [isModalOpen, setModalOpen] = useState(false);
     const [matchDocs, setMatchDocs] = useState<Match[] | undefined>();
 
@@ -29,13 +29,15 @@ const MatchesOverview: React.FC<void> = (): JSX.Element => {
             {matchDocs == undefined ? (
                 <LoadingComp />
             ) : (
-                <div>
+                <div className= 'matchOverview'>
                     <Link to={PageRoutes.adminMatches} onClick={() => setModalOpen(true)}>
-                        <button className="matchAddBtn">+ Add Match</button>
+                        <button className="matchOverview__matchAddBtn">+ Add Match</button>
                     </Link>
-                    <MatchCard />
+                    <div className= 'matchOverview__matchCard'>
+                    {matchDocs?.map((matchDoc)=><MatchCard matchDoc={matchDoc} key={matchDoc.docId??''}/>)}
+                   
+                    </div>
                     {isModalOpen ?<MatchAdd isOpen={true} setModalOpen={setModalOpen} />:null}
-                    
                 </div>
             )}
         </div>

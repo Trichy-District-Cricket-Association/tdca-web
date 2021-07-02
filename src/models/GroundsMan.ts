@@ -53,13 +53,13 @@ export default class GroundsMan {
         if (field == 'dateOfBirth') this.dateOfBirth = new Date(Date.parse(value));
         if (field == 'primaryContact') this.primaryContact = value;
         if (field == 'secondaryContact') this.secondaryContact = value;
+        if (field == 'aadharNumber') this.aadharNumber = value;
         if (field == 'payPhoneNumber') this.payPhoneNumber = value;
         if (field == 'bankAccountNumber') this.bankAccountNumber = value;
         if (field == 'bankName') this.bankName = value;
         if (field == 'bankBranch') this.bankBranch = value;
         if (field == 'bankIFSC') this.bankIFSC = value;
         if (field == 'address') this.address = value;
-        
     }
     set setAvatar(url: string) { this.avatarUrl = url};
     constructor({

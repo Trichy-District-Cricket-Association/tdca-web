@@ -7,6 +7,7 @@ import LoadingComp from '../../../../../shared_components/loading_comp/LoadingCo
 import { PageRoutes } from '../../../../../../enums/pageRoutes';
 import { Link } from 'react-router-dom';
 import UmpireAdd from '../umpire_add/UmpireAdd'
+import UmpireCard from '../umpire_card/UmpireCard';
 
 const UmpiresOverview: React.FC<void> = (): JSX.Element => {
     const [isModalOpen, setModalOpen] = useState(false);
@@ -28,10 +29,14 @@ const UmpiresOverview: React.FC<void> = (): JSX.Element => {
             {umpireDocs == undefined ? (
                 <LoadingComp />
             ) : (
-                <div>
+                <div className = "umpiresOverview">
                     <Link to={PageRoutes.adminUmpires} onClick={() => setModalOpen(true)}>
-                        <button className="umpireAddBtn">+ Add Umpire</button>
+                        <button className="umpiresOverview__umpireAddBtn">+ Add Umpire</button>
                     </Link>
+                    <div className= 'umpiresOverview__umpireCard'>
+                    {umpireDocs?.map((umpireDoc)=><UmpireCard umpireDoc={umpireDoc} key={umpireDoc.docId??''}/>)}
+                   
+                    </div>
                     {isModalOpen ? <UmpireAdd isOpen={true} setModalOpen={setModalOpen} /> : null}
                     
                 </div>
