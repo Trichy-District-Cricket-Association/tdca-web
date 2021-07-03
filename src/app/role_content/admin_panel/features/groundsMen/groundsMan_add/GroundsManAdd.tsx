@@ -18,7 +18,6 @@ const GroundsManAdd = (props: any) => {
     // Getting the progress and avatarUrl from the hook.
     const { avatarUrl } = useStorage(file);
 
-
     const types = ['image/png', 'image/jpeg', 'image/jpg'];
 
     // Functions to check the type of file.
@@ -35,7 +34,6 @@ const GroundsManAdd = (props: any) => {
             }
         }
     };
-
 
     const handleForm = (e: React.ChangeEvent<HTMLInputElement>) => {
         const fieldName = `${e.target.name}` as const;
@@ -73,11 +71,16 @@ const GroundsManAdd = (props: any) => {
                     {/* image display */}
 
                     <div>
-                    <img src={avatarUrl} alt="profile" className="groundsManAddForm__general--avatar" />
+                        <img src={avatarUrl} alt="profile" className="groundsManAddForm__general--avatar" />
                         <div className="groundsManAddForm__general--avatarOverlay">
                             <label>
-                            <input type="file" name="avatarUrl" className="groundsManAddForm__general--uploadBtn"  onChange= {handleAvatarChange}/>
-                            <MdEdit className="editIcon" />
+                                <input
+                                    type="file"
+                                    name="avatarUrl"
+                                    className="groundsManAddForm__general--uploadBtn"
+                                    onChange={handleAvatarChange}
+                                />
+                                <MdEdit className="editIcon" />
                             </label>
                         </div>
                     </div>
@@ -85,7 +88,7 @@ const GroundsManAdd = (props: any) => {
                     <div className="groundsManAddForm__general--input">
                         <InputBox title="GroundsMan Id" name="groundsManId" type="text" textHandler={handleForm} />
                         <InputBox title="GroundsMan Name" name="groundsManName" type="text" textHandler={handleForm} />
-                        <InputBox title="Email Id" name="email Id" type="text" textHandler={handleForm} />
+                        <InputBox title="Email Id" name="emailId" type="text" textHandler={handleForm} />
                         <InputBox title="Date of Birth" name="dateOfBirth" type="date" textHandler={handleForm} />
                         <InputBox title="Primary Contact" name="primaryContact" type="text" textHandler={handleForm} />
                         <InputBox
@@ -123,7 +126,7 @@ const GroundsManAdd = (props: any) => {
                     <button className="groundsManAddForm__btn--cancel" onClick={() => props.setModalOpen(false)}>
                         Cancel
                     </button>
-                    <button className="groundsManAddForm__btn--submit" type="submit"  >
+                    <button className="groundsManAddForm__btn--submit" type="submit">
                         Save
                     </button>
                 </div>

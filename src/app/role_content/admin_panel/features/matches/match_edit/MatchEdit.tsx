@@ -4,7 +4,7 @@ import { firestore } from '../../../../../../firebase';
 import { Collections } from '../../../../../../enums/collection';
 import Match from '../../../../../../models/Match';
 import InputBox from '../../../shared_components/input_box/InputBox';
-import './MatchAdd.scss';
+import './MatchEdit.scss';
 import Team from '../../../../../../models/Team';
 import Scorer from '../../../../../../models/Scorer';
 import Umpire from '../../../../../../models/Umpire';
@@ -12,8 +12,22 @@ import LoadingComp from '../../../../../shared_components/loading_comp/LoadingCo
 import SelectInputBox from '../../../shared_components/select_input_box/SelectInputBox';
 import Ground from '../../../../../../models/Ground';
 
-const MatchAdd = (props: any) => {
-    const [match, setMatch] = useState<Match>(new Match({}));
+const MatchEdit = (props: any) => {
+    const matchDoc = props.matchDoc;
+    const [match, setMatch] = useState<Match>(
+        new Match({
+            matchId: matchDoc.matchId,
+            division: matchDoc.division,
+            teamA: matchDoc.teamA,
+            teamB: matchDoc.teamB,
+            umpireA: matchDoc.umpireA,
+            umpireB: matchDoc.umpireB,
+            scorer: matchDoc.scorer,
+            type: matchDoc.type,
+            date: matchDoc.date,
+            venue: matchDoc.venue,
+        }),
+    );
     const [selectable, setSelectable] = useState<
         { teams: Team[]; scorers: Scorer[]; umpires: Umpire[]; grounds: Ground[] } | undefined
     >();
@@ -74,7 +88,8 @@ const MatchAdd = (props: any) => {
         e.preventDefault();
         await firestore
             .collection(Collections.matches)
-            .add(JSON.parse(JSON.stringify(match)))
+            .doc(matchDoc.docId)
+            .set(JSON.parse(JSON.stringify(match)))
             .then((doc) => {
                 console.log(doc);
             })
@@ -85,103 +100,120 @@ const MatchAdd = (props: any) => {
     };
     return (
         <Modal
-            className="matchAdd"
+            className="matchEdit"
             isOpen={props.isOpen}
             onRequestClose={() => props.setModalOpen(false)}
             ariaHideApp={false}
             overlayClassName="Overlay"
         >
             {selectable ? (
-                <form className="matchAddForm" onSubmit={submitForm}>
-                    {console.log(selectable.teams.map((team) => team.teamName))}
-                    <div className="matchAddForm__matchData">
-                        <h1 className="matchAddForm__matchData--header">Match Details</h1>
-                        <div className="matchAddForm__matchData--input">
-                            <InputBox title="Match Id" name="matchId" type="text" textHandler={handleInputForm} />
+                <form className="matchEditForm" onSubmit={submitForm}>
+                    <div className="matchEditForm__matchData">
+                        <h1 className="matchEditForm__matchData--header">Match Details</h1>
+                        <div className="matchEditForm__matchData--input">
+                            <InputBox
+                                title="Match Id"
+                                name="matchId"
+                                type="text"
+                                value={matchDoc.matchId}
+                                textHandler={handleInputForm}
+                            />
                             <SelectInputBox
                                 title="Match Type"
                                 name="type"
                                 options={['leagueMatch', 'schoolMatch', 'knockoutMatch']}
+                                value={matchDoc.type}
                                 textHandler={handleSelectForm}
                             />
                             <SelectInputBox
                                 title="Division"
                                 name="division"
                                 options={[1, 2, 3, 4, 5]}
+                                value={matchDoc.division}
                                 textHandler={handleSelectForm}
                             />
                             <SelectInputBox
                                 title="Team A"
                                 name="teamA_teamName"
                                 options={selectable.teams.map((team) => team.teamName)}
+                                value={matchDoc.teamA.teamName}
                                 textHandler={handleSelectForm}
                             />
                             <SelectInputBox
                                 title="Team B"
                                 name="teamB_teamName"
                                 options={selectable.teams.map((team) => team.teamName)}
+                                value={matchDoc.teamB.teamName}
                                 textHandler={handleSelectForm}
                             />
                             <SelectInputBox
                                 title="Umpire I"
                                 name="umpireA_umpireName"
                                 options={selectable.umpires.map((umpire) => umpire.umpireName)}
+                                value={matchDoc.umpireA.umpireName}
                                 textHandler={handleSelectForm}
                             />
                             <SelectInputBox
                                 title="umpire II"
                                 name="umpireB_umpireName"
                                 options={selectable.umpires.map((umpire) => umpire.umpireName)}
+                                value={matchDoc.umpireB.umpireName}
                                 textHandler={handleSelectForm}
                             />
                             <SelectInputBox
                                 title="Scorer"
                                 name="scorer"
                                 options={selectable.scorers.map((scorer) => scorer.scorerName)}
+                                value={matchDoc.scorer}
                                 textHandler={handleSelectForm}
                             />
                             <SelectInputBox
                                 title="Venue"
                                 name="venue"
                                 options={selectable.grounds.map((ground) => ground.groundName)}
+                                value={matchDoc.venue}
                                 textHandler={handleSelectForm}
                             />
                             <InputBox
                                 title="Date of Match"
                                 name="date"
                                 type="datetime-local"
+                                value={matchDoc.date}
                                 textHandler={handleInputForm}
                             />
                         </div>
-                        <div className="matchAddForm__feeStatus">
-                            <h1 className="matchAddForm__feeStatus--header">Fee Status</h1>
-                            <div className="matchAddForm__feeStatus--input">
+                        <div className="matchEditForm__feeStatus">
+                            <h1 className="matchEditForm__feeStatus--header">Fee Status</h1>
+                            <div className="matchEditForm__feeStatus--input">
                                 <SelectInputBox
                                     title="Umpire I Fee Status"
                                     name="umpireA_umpireFeeStatus"
                                     options={['Not Paid', 'Paid']}
+                                    value={matchDoc.umpireA.umpireFeeStatus}
                                     textHandler={handleSelectForm}
                                 />
                                 <SelectInputBox
                                     title="Umpire II Fee Status"
-                                    name="umpireB_umpireFeeStatus"
+                                    name="umpireFeeStatus"
                                     options={['Not Paid', 'Paid']}
+                                    value={matchDoc.umpireB.umpireFeeStatus}
                                     textHandler={handleSelectForm}
                                 />
                                 <SelectInputBox
                                     title="Scorer Fee Status"
                                     name="scorer_scorerFeeStatus"
                                     options={['Not Paid', 'Paid']}
+                                    value={matchDoc.scorer.scorerFeeStatus}
                                     textHandler={handleSelectForm}
                                 />
                             </div>
                         </div>
                     </div>
-                    <div className="matchAddForm__btn">
-                        <button className="matchAddForm__btn--cancel" onClick={() => props.setModalOpen(false)}>
+                    <div className="matchEditForm__btn">
+                        <button className="matchEditForm__btn--cancel" onClick={() => props.setModalOpen(false)}>
                             Cancel
                         </button>
-                        <button className="matchAddForm__btn--submit" type="submit">
+                        <button className="matchEditForm__btn--submit" type="submit">
                             Save
                         </button>
                     </div>
@@ -193,4 +225,4 @@ const MatchAdd = (props: any) => {
     );
 };
 
-export default MatchAdd;
+export default MatchEdit;

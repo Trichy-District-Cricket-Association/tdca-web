@@ -23,7 +23,7 @@ const GroundsOverview: React.FC<void> = () => {
         });
         return () => unsub();
     }, []);
-
+    
     return (
         <div>
             {groundDocs == undefined ? (

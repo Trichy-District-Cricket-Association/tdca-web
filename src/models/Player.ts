@@ -42,7 +42,7 @@ export default class Player {
         if (field == 'playerId') this.playerId = value;
         if (field == 'teamName') this.teamName = value;
         if (field == 'emailId') this.emailId = value;
-        if (field == 'dateOfBirth') this.dateOfBirth = new Date(Date.parse(value));
+        if (field == 'dateOfBirth') this.dateOfBirth = new Date(value);
         if (field == 'fatherName') this.fatherName = value;
         if (field == 'primaryContact') this.primaryContact = value;
         if (field == 'aadharNumber') this.aadharNumber = value;

@@ -50,7 +50,7 @@ export default class GroundsMan {
         if (field == 'groundsManId') this.groundsManId = value;
         if (field == 'groundsManName') this.groundsManName = value;
         if (field == 'emailId') this.emailId = value;
-        if (field == 'dateOfBirth') this.dateOfBirth = new Date(Date.parse(value));
+        if (field == 'dateOfBirth') this.dateOfBirth = new Date(value);
         if (field == 'primaryContact') this.primaryContact = value;
         if (field == 'secondaryContact') this.secondaryContact = value;
         if (field == 'aadharNumber') this.aadharNumber = value;
@@ -119,7 +119,7 @@ export default class GroundsMan {
             groundsManName: doc.data()?.groundsManName,
             avatarUrl: doc.data()?.avatarUrl,
             emailId: doc.data()?.emailId,
-            dateOfBirth: doc.data()?.dateOfBirth,
+            dateOfBirth: new Date(doc.data()?.dateOfBirth),
             primaryContact: doc.data()?.primaryContact,
             secondaryContact: doc.data()?.secondaryContact,
             payPhoneNumber: doc.data()?.payPhoneNumber,

@@ -5,14 +5,34 @@ import { firestore } from '../../../../../../firebase';
 import { Collections } from '../../../../../../enums/collection';
 import Player from '../../../../../../models/Player';
 import InputBox from '../../../shared_components/input_box/InputBox';
-import './PlayerAdd.scss';
+import './PlayerEdit.scss';
 import useStorage from '../../../../../../hooks/useStorage';
 import SelectInputBox from '../../../shared_components/select_input_box/SelectInputBox';
 import Team from '../../../../../../models/Team';
 import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
 
-const PlayerAdd = (props: any) => {
-    const [player, setPlayer] = useState<Player>(new Player({}));
+const PlayerEdit = (props: any) => {
+    const playerDoc = props.playerDoc;
+    const [player, setPlayer] = useState<Player>(
+        new Player({
+            playerId: playerDoc.playerId,
+            teamName: playerDoc.teamName,
+            playerName: playerDoc.playerName,
+            avatarUrl: playerDoc.avatarUrl,
+            emailId: playerDoc.emailId,
+            dateOfBirth: playerDoc.dateOfBirth,
+            primaryContact: playerDoc.primaryContact,
+            fatherName: playerDoc.fatherName,
+            aadharNumber: playerDoc.aadharNumber,
+            rationCardNumber: playerDoc.rationCardNumber,
+            voterId: playerDoc.rationCardNumber,
+            drivingLicense: playerDoc.drivingLicense,
+            panCardNumber: playerDoc.panCardNumber,
+            passport: playerDoc.passport,
+            battingStats: playerDoc.battingStats,
+            bowlingStats: playerDoc.bowlingStats,
+        }),
+    );
 
     // State to handle uploading files.
     const [file, setFile] = useState(null);
@@ -71,7 +91,8 @@ const PlayerAdd = (props: any) => {
         player.setAvatar = avatarUrl;
         await firestore
             .collection(Collections.players)
-            .add(JSON.parse(JSON.stringify(player)))
+            .doc(playerDoc.docId)
+            .set(JSON.parse(JSON.stringify(player)))
             .then((doc) => {
                 console.log(doc);
             })
@@ -82,207 +103,245 @@ const PlayerAdd = (props: any) => {
     };
     return (
         <Modal
-            className="playerAdd"
+            className="playerEdit"
             isOpen={props.isOpen}
             onRequestClose={() => props.setModalOpen(false)}
             ariaHideApp={false}
             overlayClassName="Overlay"
         >
             {selectable ? (
-                <form className="playerAddForm" onSubmit={submitForm}>
-                    <div className="playerAddForm__general">
+                <form className="playerEditForm" onSubmit={submitForm}>
+                    <div className="playerEditForm__general">
                         {/* error message */}
                         {<p>{error}</p>}
 
                         {/* image display */}
 
                         <div>
-                            <img src={avatarUrl} alt="profile" className="playerAddForm__general--avatar" />
-                            <div className="playerAddForm__general--avatarOverlay">
+                            <img src={playerDoc.avatarUrl} alt="profile" className="playerEditForm__general--avatar" />
+                            <div className="playerEditForm__general--avatarOverlay">
                                 <label>
                                     <input
                                         type="file"
                                         name="avatarUrl"
-                                        className="playerAddForm__general--uploadBtn"
+                                        className="playerEditForm__general--uploadBtn"
                                         onChange={handleAvatarChange}
                                     />
                                     <MdEdit className="editIcon" />
                                 </label>
                             </div>
                         </div>
-                        <h1 className="playerAddForm__general--header">General</h1>
-                        <div className="playerAddForm__general--input">
-                            <InputBox title="player Name" name="playerName" type="text" textHandler={handleInputForm} />
-                            <InputBox title="player Id" name="playerId" type="text" textHandler={handleInputForm} />
+                        <h1 className="playerEditForm__general--header">General</h1>
+                        <div className="playerEditForm__general--input">
+                            <InputBox
+                                title="player Name"
+                                name="playerName"
+                                type="text"
+                                value={playerDoc.playerName}
+                                textHandler={handleInputForm}
+                            />
+                            <InputBox
+                                title="player Id"
+                                name="playerId"
+                                type="text"
+                                value={playerDoc.playerId}
+                                textHandler={handleInputForm}
+                            />
 
-                            <InputBox title="Email Id" name="emailId" type="email" textHandler={handleInputForm} />
+                            <InputBox
+                                title="Email Id"
+                                name="emailId"
+                                type="email"
+                                value={playerDoc.emailId}
+                                textHandler={handleInputForm}
+                            />
                             <InputBox
                                 title="Father's Name"
                                 name="fatherName"
                                 type="text"
+                                value={playerDoc.fatherName}
                                 textHandler={handleInputForm}
                             />
                             <InputBox
                                 title="Date of Birth"
                                 name="dateOfBirth"
                                 type="date"
+                                value={playerDoc.dateOfBirth}
                                 textHandler={handleInputForm}
                             />
                             <SelectInputBox
                                 title="Team Name"
                                 name="teamName"
                                 options={selectable.teams.map((team) => team.teamName)}
+                                value={playerDoc.teamName}
                                 textHandler={handleSelectForm}
                             />
                             <InputBox
                                 title="Primary Contact"
                                 name="primaryContact"
                                 type="text"
+                                value={playerDoc.primaryContact}
                                 textHandler={handleInputForm}
                             />
                         </div>
                     </div>
-                    <div className="playerAddForm__personalData">
-                        <h1 className="playerAddForm__personalData--header">Personal Details</h1>
-                        <div className="playerAddForm__personalData--input">
+                    <div className="playerEditForm__personalData">
+                        <h1 className="playerEditForm__personalData--header">Personal Details</h1>
+                        <div className="playerEditForm__personalData--input">
                             <InputBox
                                 title="Aadhar Number"
                                 name="aadharNumber"
                                 type="text"
+                                value={playerDoc.aadharNumber}
                                 textHandler={handleInputForm}
                             />
-                            <InputBox title="Voter Id" name="voterId" type="text" textHandler={handleInputForm} />
+                            <InputBox
+                                title="Voter Id"
+                                name="voterId"
+                                type="text"
+                                value={playerDoc.voterId}
+                                textHandler={handleInputForm}
+                            />
                             <InputBox
                                 title="Ration Card Number"
                                 name="rationCardNumber"
                                 type="text"
+                                value={playerDoc.rationCardNumber}
                                 textHandler={handleInputForm}
                             />
                             <InputBox
                                 title="Driving License"
                                 name="drivingLicense"
                                 type="text"
+                                value={playerDoc.drivingLicense}
                                 textHandler={handleInputForm}
                             />
                             <InputBox
                                 title="Pan Card Number"
                                 name="panCardNumber"
                                 type="text"
+                                value={playerDoc.panCardNumber}
                                 textHandler={handleInputForm}
                             />
-                            <InputBox title="Passport" name="passport" type="text" textHandler={handleInputForm} />
+                            <InputBox
+                                title="Passport"
+                                name="passport"
+                                type="text"
+                                value={playerDoc.passport}
+                                textHandler={handleInputForm}
+                            />
                         </div>
                     </div>
-                    <div className="playerAddForm__stats">
-                        <h1 className="playerAddForm__stats--header">Statistics</h1>
+                    <div className="playerEditForm__stats">
+                        <h1 className="playerEditForm__stats--header">Statistics</h1>
                         <div>
-                            <h1 className="playerAddForm__stats--header1">Batting Statistics</h1>
-                            <div className="playerAddForm__stats--input">
+                            <h1 className="playerEditForm__stats--header1">Batting Statistics</h1>
+                            <div className="playerEditForm__stats--input">
                                 <InputBox
                                     title="Number Of Matches"
                                     name="battingStats_numberOfmatches"
                                     type="number"
-                                    value={0}
+                                    value={playerDoc.battingStats.numberOfMatches}
                                     textHandler={handleInputForm}
                                 />
                                 <InputBox
                                     title="Number Of Innings"
                                     name="battingStats_numberOfInnings"
                                     type="number"
-                                    value={0}
+                                    value={playerDoc.battingStats.numberOfInnings}
                                     textHandler={handleInputForm}
                                 />
                                 <InputBox
                                     title="Total Runs"
                                     name="battingStats_totalRuns"
                                     type="number"
-                                    value={0}
+                                    value={playerDoc.battingStats.totalRuns}
                                     textHandler={handleInputForm}
                                 />
                                 <InputBox
                                     title="Highest Score (HS)"
                                     name="battingStats_highestRuns"
                                     type="number"
-                                    value={0}
+                                    value={playerDoc.battingStats.highestRuns}
                                     textHandler={handleInputForm}
                                 />
                                 <InputBox
                                     title="Number Of Fifties"
                                     name="battingStats_numberOfFifties"
                                     type="number"
-                                    value={0}
+                                    value={playerDoc.battingStats.numberOfFifties}
                                     textHandler={handleInputForm}
                                 />
                                 <InputBox
                                     title="Number Of Hundreds"
                                     name="battingStats_numberOfHundreds"
                                     type="number"
-                                    value={0}
+                                    value={playerDoc.battingStats.numberOfHundreds}
                                     textHandler={handleInputForm}
                                 />
                             </div>
                             <div>
-                                <h1 className="playerAddForm__stats--header2">Bowling Statistics</h1>
-                                <div className="playerAddForm__stats--input">
+                                <h1 className="playerEditForm__stats--header2">Bowling Statistics</h1>
+                                <div className="playerEditForm__stats--input">
                                     <InputBox
                                         title="Number Of Overs"
                                         name="bowlingStats_numberOfOvers"
                                         type="number"
-                                        value={0}
+                                        value={playerDoc.bowlingStats.numberOfOvers}
                                         textHandler={handleInputForm}
                                     />
                                     <InputBox
                                         title="Number Of Maidens"
                                         name="bowlingStats_noOfMaidens"
                                         type="number"
-                                        value={0}
+                                        value={playerDoc.bowlingStats.noOfMaidens}
                                         textHandler={handleInputForm}
                                     />
                                     <InputBox
                                         title="Runs Given"
                                         name="bowlingStats_runsGiven"
                                         type="number"
-                                        value={0}
+                                        value={playerDoc.bowlingStats.runsGiven}
                                         textHandler={handleInputForm}
                                     />
                                     <InputBox
                                         title="Wickets Taken"
                                         name="bowlingStats_wicketsTaken"
                                         type="number"
-                                        value={0}
+                                        value={playerDoc.bowlingStats.wicketsTaken}
                                         textHandler={handleInputForm}
                                     />
                                     <InputBox
                                         title="Best Bowling / Runs Given"
                                         name="bowlingStats_bestBowling_runsGiven"
                                         type="number"
-                                        value={0}
+                                        value={playerDoc.bowlingStats.bestBowling.runsGiven}
                                         textHandler={handleInputForm}
                                     />
                                     <InputBox
                                         title="Best Bowling / Wickets Taken"
                                         name="bowlingStats_bestBowling_wicketsTaken"
                                         type="number"
+                                        value={playerDoc.bowlingStats.bestBowling.wicketsTaken}
                                         textHandler={handleInputForm}
-                                        value={0}
                                     />
                                     <InputBox
                                         title="Five Wicket Haul"
                                         name="bowlingStats_fiveWicketHaul"
                                         type="number"
+                                        value={playerDoc.bowlingStats.fiveWicketHaul}
                                         textHandler={handleInputForm}
-                                        value={0}
                                     />
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div className="playerAddForm__btn">
-                        <button className="playerAddForm__btn--cancel" onClick={() => props.setModalOpen(false)}>
+                    <div className="playerEditForm__btn">
+                        <button className="playerEditForm__btn--cancel" onClick={() => props.setModalOpen(false)}>
                             Cancel
                         </button>
-                        <button className="playerAddForm__btn--submit" type="submit">
+                        <button className="playerEditForm__btn--submit" type="submit">
                             Save
                         </button>
                     </div>
@@ -294,4 +353,4 @@ const PlayerAdd = (props: any) => {
     );
 };
 
-export default PlayerAdd;
+export default PlayerEdit;

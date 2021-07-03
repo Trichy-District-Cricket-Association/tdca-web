@@ -1,0 +1,134 @@
+.groundEdit {
+    width: 60%;
+    height: 75%;
+    border-radius: 10px;
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    bottom: 40px;
+    background-color: #fff;
+    overflow-y: scroll;
+    &__overlay {
+        background-color: #131313;
+    }
+    .groundEditForm {
+        &__general {
+            &--header {
+                margin-top: 2%;
+                margin-left: 3%;
+                font-family: 'Poppins';
+                font-weight: 400;
+                color: #131313;
+            }
+            &--input {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+                margin-left: 1%;
+            }
+            .input_box {
+                max-width: 400px;
+                margin-left: 0;
+            }
+        }
+        &__matchData {
+            &--header {
+                margin-left: 3%;
+                font-family: 'Poppins';
+                font-weight: 400;
+                color: #131313;
+            }
+            &--input {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+                margin-left: 0;
+            }
+        }
+        &__btn {
+            display: flex;
+            margin-left: 3%;
+            margin-top: 2%;
+            margin-bottom: 2%;
+            &--cancel,
+            &--submit {
+                font-size: 14px;
+                color: #fff;
+                margin-right: 0.8rem;
+                font-family: 'Poppins';
+                padding: 0.4rem 1.2em;
+                background-color: transparent;
+                border: none;
+                font-weight: 600;
+                cursor: pointer;
+                text-align: center;
+                border-radius: 10px;
+                box-shadow: 0 0 40px 40px #3d26d6 inset;
+                &:hover {
+                    box-shadow: 0 0 40px 40px #4a2eff inset;
+                }
+            }
+            &--cancel {
+                box-shadow: 0 0 40px 40px #131313 inset;
+                &:hover {
+                    box-shadow: 0 0 40px 40px #3a3a3a inset;
+                }
+            }
+        }
+    }
+}
+.Overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.541);
+}
+/* scrollbar width */
+::-webkit-scrollbar {
+    width: 13px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #41596b;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+@media screen and (max-width: 799px) {
+    .groundEdit {
+        width: 90%;
+
+        .groundEditForm {
+            &__general {
+                &--header {
+                    margin-left: 35%;
+                }
+            }
+            &__matchData {
+                &--header {
+                    margin-left: 25%;
+                }
+                .input_box {
+                    max-width: 400px;
+                    margin-left: 0;
+                }
+            }
+            &__btn {
+                display: grid;
+                &--submit {
+                    margin-top: 4%;
+                    margin-bottom: 4%;
+                }
+            }
+        }
+    }
+}

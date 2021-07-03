@@ -6,8 +6,6 @@ import Team from '../../../../../../models/Team';
 import InputBox from '../../../shared_components/input_box/InputBox';
 import './TeamAdd.scss';
 
-
-
 const TeamAdd = (props: any) => {
     const [team, setTeam] = useState<Team>(new Team({}));
 
@@ -28,10 +26,8 @@ const TeamAdd = (props: any) => {
             .catch((e) => {
                 console.log(e);
             });
-            props.setModalOpen(false);
+        props.setModalOpen(false);
     };
-
-
 
     return (
         <Modal
@@ -47,19 +43,13 @@ const TeamAdd = (props: any) => {
                     <div className="teamAddForm__general--input">
                         <InputBox title="Team Id" name="teamId" type="text" textHandler={handleForm} />
                         <InputBox title="Team Name" name="teamName" type="text" textHandler={handleForm} />
-                        <InputBox title="Email Id" name="email Id" type="text" textHandler={handleForm} />
+                        <InputBox title="Email Id" name="emailId" type="text" textHandler={handleForm} />
                     </div>
                 </div>
                 <div className="teamAddForm__matchData">
                     <h1 className="teamAddForm__matchData--header">Match Details</h1>
                     <div className="teamAddForm__matchData--input">
-                        <InputBox
-                            title="Division"
-                            name="division"
-                            type="number"
-                            textHandler={handleForm}
-                            value={0}
-                        />
+                        <InputBox title="Division" name="division" type="number" textHandler={handleForm} value={0} />
                         <InputBox
                             title="Matches Played"
                             name="numberOfMatches"
@@ -67,41 +57,11 @@ const TeamAdd = (props: any) => {
                             textHandler={handleForm}
                             value={0}
                         />
-                        <InputBox
-                            title="Won"
-                            name="won"
-                            type="number"
-                            textHandler={handleForm}
-                            value={0}
-                        />
-                        <InputBox
-                            title="Lost"
-                            name="lost"
-                            type="number"
-                            textHandler={handleForm}
-                            value={0}
-                        />
-                        <InputBox
-                            title="Draw"
-                            name="draw"
-                            type="number"
-                            textHandler={handleForm}
-                            value={0}
-                        />
-                        <InputBox
-                            title="Tie"
-                            name="tie"
-                            type="number"
-                            textHandler={handleForm}
-                            value={0}
-                        />
-                        <InputBox
-                            title="No Result"
-                            name="noResult"
-                            type="number"
-                            textHandler={handleForm}
-                            value={0}
-                        />
+                        <InputBox title="Won" name="won" type="number" textHandler={handleForm} value={0} />
+                        <InputBox title="Lost" name="lost" type="number" textHandler={handleForm} value={0} />
+                        <InputBox title="Draw" name="draw" type="number" textHandler={handleForm} value={0} />
+                        <InputBox title="Tie" name="tie" type="number" textHandler={handleForm} value={0} />
+                        <InputBox title="No Result" name="noResult" type="number" textHandler={handleForm} value={0} />
                         <InputBox
                             title="Total Points"
                             name="totalPoints"
@@ -116,41 +76,17 @@ const TeamAdd = (props: any) => {
                             textHandler={handleForm}
                             value={0}
                         />
-                        <InputBox
-                            title="Walkover"
-                            name="walkover"
-                            type="number"
-                            textHandler={handleForm}
-                            value={0}
-                        />
-                         <InputBox
-                            title="Conceed"
-                            name="conceed"
-                            type="number"
-                            textHandler={handleForm}
-                            value={0}
-                        />
-                         <InputBox
-                            title="Refusal"
-                            name="refusal"
-                            type="number"
-                            textHandler={handleForm}
-                            value={0}
-                        />
-                         <InputBox
-                            title="Penalty"
-                            name="penalty"
-                            type="number"
-                            textHandler={handleForm}
-                            value={0}
-                        />
+                        <InputBox title="Walkover" name="walkover" type="number" textHandler={handleForm} value={0} />
+                        <InputBox title="Conceed" name="conceed" type="number" textHandler={handleForm} value={0} />
+                        <InputBox title="Refusal" name="refusal" type="number" textHandler={handleForm} value={0} />
+                        <InputBox title="Penalty" name="penalty" type="number" textHandler={handleForm} value={0} />
                     </div>
                 </div>
                 <div className="teamAddForm__btn">
                     <button className="teamAddForm__btn--cancel" onClick={() => props.setModalOpen(false)}>
                         Cancel
                     </button>
-                    <button className="teamAddForm__btn--submit" type="submit"  >
+                    <button className="teamAddForm__btn--submit" type="submit">
                         Save
                     </button>
                 </div>

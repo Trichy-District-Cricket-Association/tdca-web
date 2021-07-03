@@ -88,7 +88,7 @@ const ScorerAdd = (props: any) => {
                     <div className="scorerAddForm__general--input">
                         <InputBox title="Scorer Id" name="scorerId" type="text" textHandler={handleForm} />
                         <InputBox title="Scorer Name" name="scorerName" type="text" textHandler={handleForm} />
-                        <InputBox title="Email Id" name="email Id" type="text" textHandler={handleForm} />
+                        <InputBox title="Email Id" name="emailId" type="text" textHandler={handleForm} />
                         <InputBox title="Date of Birth" name="dateOfBirth" type="date" textHandler={handleForm} />
                         <InputBox title="Primary Contact" name="primaryContact" type="text" textHandler={handleForm} />
                         <InputBox
@@ -194,7 +194,7 @@ const ScorerAdd = (props: any) => {
                             textHandler={handleForm}
                             value={0}
                         />
-                          <InputBox
+                        <InputBox
                             title="TNCA Matches"
                             name="typeMatches_tncaMatch"
                             type="number"
@@ -228,7 +228,7 @@ const ScorerAdd = (props: any) => {
                     <button className="scorerAddForm__btn--cancel" onClick={() => props.setModalOpen(false)}>
                         Cancel
                     </button>
-                    <button className="scorerAddForm__btn--submit" type="submit"  >
+                    <button className="scorerAddForm__btn--submit" type="submit">
                         Save
                     </button>
                 </div>
