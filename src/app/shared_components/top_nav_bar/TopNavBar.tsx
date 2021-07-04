@@ -12,10 +12,10 @@ import { Devices } from '../../../enums/devices';
 import SideNavBar from '../../role_content/admin_panel/shared_components/side_navbar/SideNavBar';
 import InputBox from '../../role_content/admin_panel/shared_components/input_box/InputBox';
 import useInput from '../../../hooks/useInput';
-import {BsGear} from "react-icons/bs"
+import { BsGear } from 'react-icons/bs';
 
 const logo = `${process.env.PUBLIC_URL}/assets/images/tdca_logo.jpg`;
-const TopNav = () => {
+const TopNav = (): JSX.Element => {
     const authData = useAuth();
     const [isMobileOpen, toggleMobileOpen] = useState(false);
     const [isModalOpen, setModalOpen] = useState(false);
@@ -28,14 +28,13 @@ const TopNav = () => {
         <div>
             <div className="nav">
                 <div className="nav__header">
-                
-                {authData?.role == UserRoles.admin ? (
-                    <div>
-                    <button className='nav__menu-bars' >
-                    <BsGear onClick={showSidebar} />
-                  </button>
-                       <SideNavBar sidebar ={sidebar} showSidebar = {showSidebar} />
-                       </div>
+                    {authData?.role == UserRoles.admin ? (
+                        <div>
+                            <button className="nav__menu-bars">
+                                <BsGear onClick={showSidebar} />
+                            </button>
+                            <SideNavBar sidebar={sidebar} showSidebar={showSidebar} />
+                        </div>
                     ) : (
                         <div />
                     )}
@@ -43,12 +42,11 @@ const TopNav = () => {
                         <img src={logo} alt="Logo" className="nav__header--logo" />
                     </div>
                     <div>
-                        <h1 className="nav__header--text"  >Trichy District Cricket Association</h1>
+                        <h1 className="nav__header--text">Trichy District Cricket Association</h1>
                         <h1 className="nav__header--textAbbr">TDCA</h1>
                     </div>
                 </div>
                 <div>
-                    
                     <button type="button" className="hamburger" onClick={() => toggleMobileOpen(!isMobileOpen)}>
                         {isMobileOpen ? <FaTimes /> : <FaBars />}
                     </button>
@@ -79,7 +77,7 @@ const TopNav = () => {
                             Contact
                         </Link>
                     </div>
-                   
+
                     {authData === undefined ? (
                         <div>
                             <Link to={PageRoutes.home} className="nav__btn" onClick={loginClick}>
@@ -99,11 +97,9 @@ const TopNav = () => {
                             </Link>
                         </div>
                     )}
-                         
                 </div>
             </div>
-            {isModalOpen?<Login isOpen={true} setModalOpen={setModalOpen} />:null}
-            
+            {isModalOpen ? <Login setModalOpen={setModalOpen} /> : null}
         </div>
     );
 };

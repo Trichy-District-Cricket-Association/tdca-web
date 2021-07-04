@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { MdEdit } from 'react-icons/md';
 import Modal from 'react-modal';
-import { firestore } from '../../../../../../firebase';
+import { duumyAuth, firestore, dummyFirestore } from '../../../../../../firebase';
 import { Collections } from '../../../../../../enums/collection';
 import Scorer from '../../../../../../models/Scorer';
 import InputBox from '../../../shared_components/input_box/InputBox';
 import './ScorerAdd.scss';
 import useStorage from '../../../../../../hooks/useStorage';
+import User from '../../../../../../models/User';
+import { UserRoles } from '../../../../../../enums/auth';
 
 type ScorerAddProps = {
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -14,6 +16,7 @@ type ScorerAddProps = {
 
 const ScorerAdd: React.FC<ScorerAddProps> = ({ setModalOpen }): JSX.Element => {
     const [scorer, setScorer] = useState<Scorer>(new Scorer({}));
+    const [user, setUser] = useState<{ email: string; password: string }>({ email: '', password: '' });
 
     // State to handle uploading files.
     const [file, setFile] = useState(null);
@@ -45,6 +48,15 @@ const ScorerAdd: React.FC<ScorerAddProps> = ({ setModalOpen }): JSX.Element => {
         newScorer.handleScorer({ field: fieldName, value: e.target.value });
         setScorer(newScorer);
     };
+    const handleUserForm = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const fieldName = `${e.target.name}` as const;
+        if (fieldName == 'email') {
+            setUser({ ...user, email: e.target.value });
+        } else if (fieldName == 'password') {
+            setUser({ ...user, password: e.target.value });
+        }
+    };
+
     const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         scorer.setAvatar = avatarUrl;
@@ -58,6 +70,26 @@ const ScorerAdd: React.FC<ScorerAddProps> = ({ setModalOpen }): JSX.Element => {
                 console.log(e);
             });
         setModalOpen(false);
+    };
+
+    const createAccount = async () => {
+        await duumyAuth.createUserWithEmailAndPassword(user.email, user.password).then(async () => {
+            await dummyFirestore
+                .collection(Collections.users)
+                .doc(duumyAuth.currentUser?.uid)
+                .set(
+                    JSON.parse(
+                        JSON.stringify(
+                            new User({
+                                email: duumyAuth.currentUser?.email ?? '',
+                                role: UserRoles.scorer,
+                                name: scorer.scorerName ?? '',
+                            }),
+                        ),
+                    ),
+                )
+                .then(async () => await duumyAuth.signOut());
+        });
     };
     return (
         <Modal
@@ -228,6 +260,17 @@ const ScorerAdd: React.FC<ScorerAddProps> = ({ setModalOpen }): JSX.Element => {
                         />
                     </div>
                 </div>
+                <div className="scorerAddForm__createAccount">
+                    <h1 className="scorerAddForm__createAccount--header">Create Account</h1>
+                    <div className="scorerAddForm__createAccount--input">
+                        <InputBox title="Email Id" name="email" type="text" textHandler={handleUserForm} />
+                        <InputBox title="Password" name="password" type="password" textHandler={handleUserForm} />
+                        <button className="scorerAddForm__createAccount--btn" onClick={createAccount}>
+                            + Add Account
+                        </button>
+                    </div>
+                </div>
+
                 <div className="scorerAddForm__btn">
                     <button className="scorerAddForm__btn--cancel" onClick={() => setModalOpen(false)}>
                         Cancel

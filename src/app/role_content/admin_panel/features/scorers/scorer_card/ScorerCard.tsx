@@ -19,12 +19,10 @@ const scorerCard: React.FC<ScorerCardProps> = ({ scorerDoc, key }): JSX.Element 
                 <div className="scorerCard__container">
                     <label className="scorerCard__container--label">scorer Name</label>
                     <p className="scorerCard__container--text">{scorerDoc.scorerName}</p>
-                    <label className="scorerCard__container--label">scorer Id</label>
-                    <p className="scorerCard__container--text">{scorerDoc.scorerId}</p>
-                    <label className="scorerCard__container--label">Total Matches</label>
-                    <p className="scorerCard__container--text">{scorerDoc.totalMatches}</p>
                     <label className="scorerCard__container--label">Phone Number</label>
                     <p className="scorerCard__container--text">{scorerDoc.primaryContact}</p>
+                    <label className="scorerCard__container--label">Total Matches</label>
+                    <p className="scorerCard__container--text">{scorerDoc.totalMatches}</p>
                 </div>
             </div>
             {isModalOpen ? <ScorerEdit setModalOpen={setModalOpen} scorerDoc={scorerDoc} /> : null}

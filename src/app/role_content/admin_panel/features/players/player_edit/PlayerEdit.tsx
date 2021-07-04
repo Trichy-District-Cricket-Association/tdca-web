@@ -10,6 +10,7 @@ import useStorage from '../../../../../../hooks/useStorage';
 import SelectInputBox from '../../../shared_components/select_input_box/SelectInputBox';
 import Team from '../../../../../../models/Team';
 import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
+const defaultAvatar = `${process.env.PUBLIC_URL}/assets/images/defaultAvatar.png`;
 
 type PlayerEditProps = {
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -122,7 +123,11 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
                         {/* image display */}
 
                         <div>
-                            <img src={playerDoc.avatarUrl} alt="profile" className="playerEditForm__general--avatar" />
+                            <img
+                                src={avatarUrl == defaultAvatar ? playerDoc.avatarUrl : avatarUrl}
+                                alt="profile"
+                                className="playerEditForm__general--avatar"
+                            />
                             <div className="playerEditForm__general--avatarOverlay">
                                 <label>
                                     <input

@@ -26,7 +26,7 @@ const MatchCard: React.FC<MatchCardProps> = ({ matchDoc, key }): JSX.Element => 
                     <label className="matchCard__container--label">Venue</label>
                     <p className="matchCard__container--text">{matchDoc.venue}</p>
                     <label className="matchCard__container--label">Time</label>
-                    <p className="matchCard__container--text">{matchDoc.date}</p>
+                    <p className="matchCard__container--text">{matchDoc.date?.toISOString().substr(0, 16)}</p>
                 </div>
             </div>
             {isModalOpen ? <MatchEdit setModalOpen={setModalOpen} matchDoc={matchDoc} /> : null}

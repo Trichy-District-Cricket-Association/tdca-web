@@ -18,12 +18,10 @@ const umpireCard: React.FC<UmpireCardProps> = ({ umpireDoc, key }): JSX.Element 
                 <div className="umpireCard__container">
                     <label className="umpireCard__container--label">umpire Name</label>
                     <p className="umpireCard__container--text">{umpireDoc.umpireName}</p>
-                    <label className="umpireCard__container--label">umpire Id</label>
-                    <p className="umpireCard__container--text">{umpireDoc.umpireId}</p>
-                    <label className="umpireCard__container--label">Total Matches</label>
-                    <p className="umpireCard__container--text">{umpireDoc.totalMatches}</p>
                     <label className="umpireCard__container--label">Phone Number</label>
                     <p className="umpireCard__container--text">{umpireDoc.primaryContact}</p>
+                    <label className="umpireCard__container--label">Total Matches</label>
+                    <p className="umpireCard__container--text">{umpireDoc.totalMatches}</p>
                 </div>
             </div>
             {isModalOpen ? <UmpireEdit setModalOpen={setModalOpen} umpireDoc={umpireDoc} /> : null}

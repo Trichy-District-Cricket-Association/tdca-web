@@ -3,19 +3,19 @@ import { UserRoles } from '../enums/auth';
 
 export default class User {
     /** User ID of that user. */
-    uid: string;
+    uid?: string;
 
     /** Role of that user. */
-    role: UserRoles;
+    role?: UserRoles;
 
     /** Name of that user. */
-    name: string;
+    name?: string;
 
     /** Email of that user. */
-    email: string;
+    email?: string;
 
     constructor({ uid, role, name, email }: User) {
-        this.uid = uid;
+        if(uid)this.uid = uid;
         this.role = role;
         this.name = name;
         this.email = email;

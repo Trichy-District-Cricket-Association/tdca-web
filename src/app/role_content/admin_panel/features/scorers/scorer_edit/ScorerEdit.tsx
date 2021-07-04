@@ -7,6 +7,7 @@ import Scorer from '../../../../../../models/Scorer';
 import InputBox from '../../../shared_components/input_box/InputBox';
 import './ScorerEdit.scss';
 import useStorage from '../../../../../../hooks/useStorage';
+const defaultAvatar = `${process.env.PUBLIC_URL}/assets/images/defaultAvatar.png`;
 
 type ScorerEditProps = {
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -98,7 +99,11 @@ const ScorerEdit: React.FC<ScorerEditProps> = ({ setModalOpen, scorerDoc }): JSX
                     {/* image display */}
 
                     <div>
-                        <img src={scorerDoc.avatarUrl} alt="profile" className="scorerEditForm__general--avatar" />
+                        <img
+                            src={avatarUrl == defaultAvatar ? scorerDoc.avatarUrl : avatarUrl}
+                            alt="profile"
+                            className="scorerEditForm__general--avatar"
+                        />
                         <div className="scorerEditForm__general--avatarOverlay">
                             <label>
                                 <input

@@ -182,7 +182,7 @@ const MatchEdit: React.FC<MatchEditProps> = ({ setModalOpen, matchDoc }): JSX.El
                                 title="Date of Match"
                                 name="date"
                                 type="datetime-local"
-                                value={matchDoc.date}
+                                value={matchDoc.date?.toISOString().substr(0, 16)}
                                 textHandler={handleInputForm}
                             />
                         </div>

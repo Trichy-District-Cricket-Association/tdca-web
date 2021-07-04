@@ -5,12 +5,20 @@ type InputBoxProps = {
     name: string;
     type?: string;
     suggestion?: string;
-    value?:any;
+    value?: any;
     ref?: any;
     textHandler?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const InputBox: React.FC<InputBoxProps> = ({ title, name, type = 'text', suggestion='',value,ref, textHandler}): JSX.Element => {
+const InputBox: React.FC<InputBoxProps> = ({
+    title,
+    name,
+    type = 'text',
+    suggestion = '',
+    value,
+    ref,
+    textHandler,
+}): JSX.Element => {
     return (
         <div>
             <ul className="input_box">
@@ -24,7 +32,6 @@ const InputBox: React.FC<InputBoxProps> = ({ title, name, type = 'text', suggest
                         onChange={textHandler}
                         defaultValue={value}
                         ref={ref ?? undefined}
-                        required
                     />
                     <span>{suggestion}</span>
                 </li>

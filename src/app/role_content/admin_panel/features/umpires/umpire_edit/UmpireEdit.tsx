@@ -7,6 +7,7 @@ import Umpire from '../../../../../../models/Umpire';
 import InputBox from '../../../shared_components/input_box/InputBox';
 import './UmpireEdit.scss';
 import useStorage from '../../../../../../hooks/useStorage';
+const defaultAvatar = `${process.env.PUBLIC_URL}/assets/images/defaultAvatar.png`;
 
 type UmpireEditProps = {
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -98,7 +99,11 @@ const UmpireEdit: React.FC<UmpireEditProps> = ({ setModalOpen, umpireDoc }): JSX
                     {/* image display */}
 
                     <div>
-                        <img src={umpireDoc.avatarUrl} alt="profile" className="umpireEditForm__general--avatar" />
+                        <img
+                            src={avatarUrl == defaultAvatar ? umpireDoc.avatarUrl : avatarUrl}
+                            alt="profile"
+                            className="umpireEditForm__general--avatar"
+                        />
                         <div className="umpireEditForm__general--avatarOverlay">
                             <label>
                                 <input
