@@ -69,7 +69,7 @@ export default class Scorer {
         if (field == 'scorerId') this.scorerId = value;
         if (field == 'scorerName') this.scorerName = value;
         if (field == 'emailId') this.emailId = value;
-        if (field == 'dateOfBirth') this.dateOfBirth = new Date(Date.parse(value));
+        if (field == 'dateOfBirth') this.dateOfBirth = new Date(value);
         if (field == 'primaryContact') this.primaryContact = value;
         if (field == 'secondaryContact') this.secondaryContact = value;
         if (field == 'payPhoneNumber') this.payPhoneNumber = value;
@@ -78,9 +78,10 @@ export default class Scorer {
         if (field == 'bankBranch') this.bankBranch = value;
         if (field == 'bankIFSC') this.bankIFSC = value;
         if (field == 'address') this.address = value;
+        if (field == 'aadharNumber') this.aadharNumber = value;
 
         /**Matches Field */
-        if (field == 'panel') this.panel! = value;
+        if (field == 'panel') this.panel = value;
         if (field == 'divisionMatches_one') this.divisionMatches!.one = parseInt(value);
         if (field == 'divisionMatches_two') this.divisionMatches!.two = parseInt(value);
         if (field == 'divisionMatches_three') this.divisionMatches!.three = parseInt(value);
@@ -144,30 +145,49 @@ export default class Scorer {
         address?: string;
     }) {
         if (docId) this.docId = docId;
-        this.scorerId = scorerId;
-        this.scorerName = scorerName;
+        this.scorerId = scorerId ?? '';
+        this.scorerName = scorerName ?? '';
         if (avatarUrl) this.avatarUrl = avatarUrl;
-        this.emailId = emailId;
-        this.divisionMatches = divisionMatches;
-        this.typeMatches = typeMatches;
-        this.totalMatches = totalMatches;
-        this.panel = panel;
+        this.emailId = emailId ?? '';
+        this.divisionMatches =
+            divisionMatches ??
+            <DivisionMatches>{
+                one: 0,
+                two: 0,
+                three: 0,
+                four: 0,
+                five: 0,
+            };
+        this.typeMatches =
+            typeMatches ??
+            <TypeMatches>{
+                combinedDistrictMatch: 0,
+                institutionMatch: 0,
+                interDistrictMatch: 0,
+                knockoutMatch: 0,
+                leagueMatch: 0,
+                privateMatch: 0,
+                schoolMatch: 0,
+                tncaMatch: 0,
+            };
+        this.totalMatches = totalMatches ?? 0;
+        this.panel = panel ?? '';
         {
             /**  
         this.totalDue = totalDue;
         this.totalPaid = totalPaid;
         this.balanceAmount = balanceAmount;*/
         }
-        this.dateOfBirth = dateOfBirth;
-        this.primaryContact = primaryContact;
-        this.secondaryContact = secondaryContact;
-        this.payPhoneNumber = payPhoneNumber;
-        this.bankAccountNumber = bankAccountNumber;
-        this.bankName = bankName;
-        this.bankBranch = bankBranch;
-        this.bankIFSC = bankIFSC;
-        this.aadharNumber = aadharNumber;
-        this.address = address;
+        if (dateOfBirth) this.dateOfBirth = dateOfBirth;
+        this.primaryContact = primaryContact ?? '';
+        this.secondaryContact = secondaryContact ?? '';
+        this.payPhoneNumber = payPhoneNumber ?? '';
+        this.bankAccountNumber = bankAccountNumber ?? '';
+        this.bankName = bankName ?? '';
+        this.bankBranch = bankBranch ?? '';
+        this.bankIFSC = bankIFSC ?? '';
+        this.aadharNumber = aadharNumber ?? '';
+        this.address = address ?? '';
     }
 
     static fromFirestore(doc: firebase.firestore.DocumentSnapshot): Scorer {
@@ -184,7 +204,7 @@ export default class Scorer {
             // totalDue:doc.data()?.totalDue,
             // totalPaid:doc.data()?.totalPaid,
             // balanceAmount:doc.data()?.balanceAmount,
-            dateOfBirth: doc.data()?.dateOfBirth,
+            dateOfBirth: new Date(doc.data()?.dateOfBirth),
             primaryContact: doc.data()?.primaryContact,
             secondaryContact: doc.data()?.secondaryContact,
             payPhoneNumber: doc.data()?.payPhoneNumber,

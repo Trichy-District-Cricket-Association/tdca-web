@@ -1,9 +1,8 @@
 export type BattingStats = {
+    numberOfMatches: number;
 
-    numberOfmatches : number;
-    
     numberOfInnings: number;
-    
+
     totalRuns: number;
 
     highestRuns: number;
@@ -13,8 +12,7 @@ export type BattingStats = {
     numberOfHundreds: number;
 };
 
-export type BowlingStats ={
-
+export type BowlingStats = {
     numberOfOvers: number;
 
     noOfMaidens: number;
@@ -23,12 +21,11 @@ export type BowlingStats ={
 
     wicketsTaken: number;
 
-    bestBowling:{
-
+    bestBowling: {
         runsGiven: number;
 
         wicketsTaken: number;
     };
 
     fiveWicketHaul: number;
-}
+};

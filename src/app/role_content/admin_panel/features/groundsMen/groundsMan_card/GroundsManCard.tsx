@@ -7,6 +7,7 @@ type GroundsManCardProps = {
     groundsManDoc: GroundsMan;
     key: string;
 };
+
 const GroundsManCard: React.FC<GroundsManCardProps> = ({ groundsManDoc, key }): JSX.Element => {
     const [isModalOpen, setModalOpen] = useState(false);
     return (
@@ -24,9 +25,7 @@ const GroundsManCard: React.FC<GroundsManCardProps> = ({ groundsManDoc, key }): 
                     <p className="groundsManCard__container--text">{groundsManDoc.primaryContact}</p>
                 </div>
             </div>
-            {isModalOpen ? (
-                <GroundsManEdit isOpen={true} setModalOpen={setModalOpen} groundsManDoc={groundsManDoc} />
-            ) : null}
+            {isModalOpen ? <GroundsManEdit setModalOpen={setModalOpen} groundsManDoc={groundsManDoc} /> : null}
         </div>
     );
 };

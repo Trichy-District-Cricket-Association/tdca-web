@@ -12,7 +12,11 @@ import LoadingComp from '../../../../../shared_components/loading_comp/LoadingCo
 import SelectInputBox from '../../../shared_components/select_input_box/SelectInputBox';
 import Ground from '../../../../../../models/Ground';
 
-const MatchAdd = (props: any) => {
+type MatchAddProps = {
+    setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const MatchAdd: React.FC<MatchAddProps> = ({ setModalOpen }): JSX.Element => {
     const [match, setMatch] = useState<Match>(new Match({}));
     const [selectable, setSelectable] = useState<
         { teams: Team[]; scorers: Scorer[]; umpires: Umpire[]; grounds: Ground[] } | undefined
@@ -70,7 +74,7 @@ const MatchAdd = (props: any) => {
         newMatch.handleMatch({ field: fieldName, value: e.target.value });
         setMatch(newMatch);
     };
-    const submitForm = async (e: any) => {
+    const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         await firestore
             .collection(Collections.matches)
@@ -81,13 +85,13 @@ const MatchAdd = (props: any) => {
             .catch((e) => {
                 console.log(e);
             });
-        props.setModalOpen(false);
+        setModalOpen(false);
     };
     return (
         <Modal
             className="matchAdd"
-            isOpen={props.isOpen}
-            onRequestClose={() => props.setModalOpen(false)}
+            isOpen={true}
+            onRequestClose={() => setModalOpen(false)}
             ariaHideApp={false}
             overlayClassName="Overlay"
         >
@@ -178,7 +182,7 @@ const MatchAdd = (props: any) => {
                         </div>
                     </div>
                     <div className="matchAddForm__btn">
-                        <button className="matchAddForm__btn--cancel" onClick={() => props.setModalOpen(false)}>
+                        <button className="matchAddForm__btn--cancel" onClick={() => setModalOpen(false)}>
                             Cancel
                         </button>
                         <button className="matchAddForm__btn--submit" type="submit">

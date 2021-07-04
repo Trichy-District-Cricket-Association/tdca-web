@@ -11,8 +11,12 @@ import SelectInputBox from '../../../shared_components/select_input_box/SelectIn
 import Team from '../../../../../../models/Team';
 import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
 
-const PlayerEdit = (props: any) => {
-    const playerDoc = props.playerDoc;
+type PlayerEditProps = {
+    setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    playerDoc: Player;
+};
+
+const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX.Element => {
     const [player, setPlayer] = useState<Player>(
         new Player({
             playerId: playerDoc.playerId,
@@ -86,7 +90,7 @@ const PlayerEdit = (props: any) => {
         newPlayer.handlePlayer({ field: fieldName, value: e.target.value });
         setPlayer(newPlayer);
     };
-    const submitForm = async (e: any) => {
+    const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         player.setAvatar = avatarUrl;
         await firestore
@@ -99,13 +103,13 @@ const PlayerEdit = (props: any) => {
             .catch((e) => {
                 console.log(e);
             });
-        props.setModalOpen(false);
+        setModalOpen(false);
     };
     return (
         <Modal
             className="playerEdit"
-            isOpen={props.isOpen}
-            onRequestClose={() => props.setModalOpen(false)}
+            isOpen={true}
+            onRequestClose={() => setModalOpen(false)}
             ariaHideApp={false}
             overlayClassName="Overlay"
         >
@@ -166,7 +170,7 @@ const PlayerEdit = (props: any) => {
                                 title="Date of Birth"
                                 name="dateOfBirth"
                                 type="date"
-                                value={playerDoc.dateOfBirth}
+                                value={playerDoc.dateOfBirth?.toISOString().substr(0, 10)}
                                 textHandler={handleInputForm}
                             />
                             <SelectInputBox
@@ -239,44 +243,44 @@ const PlayerEdit = (props: any) => {
                             <div className="playerEditForm__stats--input">
                                 <InputBox
                                     title="Number Of Matches"
-                                    name="battingStats_numberOfmatches"
+                                    name="battingStats_numberOfMatches"
                                     type="number"
-                                    value={playerDoc.battingStats.numberOfMatches}
+                                    value={playerDoc.battingStats?.numberOfMatches}
                                     textHandler={handleInputForm}
                                 />
                                 <InputBox
                                     title="Number Of Innings"
                                     name="battingStats_numberOfInnings"
                                     type="number"
-                                    value={playerDoc.battingStats.numberOfInnings}
+                                    value={playerDoc.battingStats?.numberOfInnings}
                                     textHandler={handleInputForm}
                                 />
                                 <InputBox
                                     title="Total Runs"
                                     name="battingStats_totalRuns"
                                     type="number"
-                                    value={playerDoc.battingStats.totalRuns}
+                                    value={playerDoc.battingStats?.totalRuns}
                                     textHandler={handleInputForm}
                                 />
                                 <InputBox
                                     title="Highest Score (HS)"
                                     name="battingStats_highestRuns"
                                     type="number"
-                                    value={playerDoc.battingStats.highestRuns}
+                                    value={playerDoc.battingStats?.highestRuns}
                                     textHandler={handleInputForm}
                                 />
                                 <InputBox
                                     title="Number Of Fifties"
                                     name="battingStats_numberOfFifties"
                                     type="number"
-                                    value={playerDoc.battingStats.numberOfFifties}
+                                    value={playerDoc.battingStats?.numberOfFifties}
                                     textHandler={handleInputForm}
                                 />
                                 <InputBox
                                     title="Number Of Hundreds"
                                     name="battingStats_numberOfHundreds"
                                     type="number"
-                                    value={playerDoc.battingStats.numberOfHundreds}
+                                    value={playerDoc.battingStats?.numberOfHundreds}
                                     textHandler={handleInputForm}
                                 />
                             </div>
@@ -287,49 +291,49 @@ const PlayerEdit = (props: any) => {
                                         title="Number Of Overs"
                                         name="bowlingStats_numberOfOvers"
                                         type="number"
-                                        value={playerDoc.bowlingStats.numberOfOvers}
+                                        value={playerDoc.bowlingStats?.numberOfOvers}
                                         textHandler={handleInputForm}
                                     />
                                     <InputBox
                                         title="Number Of Maidens"
                                         name="bowlingStats_noOfMaidens"
                                         type="number"
-                                        value={playerDoc.bowlingStats.noOfMaidens}
+                                        value={playerDoc.bowlingStats?.noOfMaidens}
                                         textHandler={handleInputForm}
                                     />
                                     <InputBox
                                         title="Runs Given"
                                         name="bowlingStats_runsGiven"
                                         type="number"
-                                        value={playerDoc.bowlingStats.runsGiven}
+                                        value={playerDoc.bowlingStats?.runsGiven}
                                         textHandler={handleInputForm}
                                     />
                                     <InputBox
                                         title="Wickets Taken"
                                         name="bowlingStats_wicketsTaken"
                                         type="number"
-                                        value={playerDoc.bowlingStats.wicketsTaken}
+                                        value={playerDoc.bowlingStats?.wicketsTaken}
                                         textHandler={handleInputForm}
                                     />
                                     <InputBox
                                         title="Best Bowling / Runs Given"
                                         name="bowlingStats_bestBowling_runsGiven"
                                         type="number"
-                                        value={playerDoc.bowlingStats.bestBowling.runsGiven}
+                                        value={playerDoc.bowlingStats?.bestBowling.runsGiven}
                                         textHandler={handleInputForm}
                                     />
                                     <InputBox
                                         title="Best Bowling / Wickets Taken"
                                         name="bowlingStats_bestBowling_wicketsTaken"
                                         type="number"
-                                        value={playerDoc.bowlingStats.bestBowling.wicketsTaken}
+                                        value={playerDoc.bowlingStats?.bestBowling.wicketsTaken}
                                         textHandler={handleInputForm}
                                     />
                                     <InputBox
                                         title="Five Wicket Haul"
                                         name="bowlingStats_fiveWicketHaul"
                                         type="number"
-                                        value={playerDoc.bowlingStats.fiveWicketHaul}
+                                        value={playerDoc.bowlingStats?.fiveWicketHaul}
                                         textHandler={handleInputForm}
                                     />
                                 </div>
@@ -338,7 +342,7 @@ const PlayerEdit = (props: any) => {
                     </div>
 
                     <div className="playerEditForm__btn">
-                        <button className="playerEditForm__btn--cancel" onClick={() => props.setModalOpen(false)}>
+                        <button className="playerEditForm__btn--cancel" onClick={() => setModalOpen(false)}>
                             Cancel
                         </button>
                         <button className="playerEditForm__btn--submit" type="submit">

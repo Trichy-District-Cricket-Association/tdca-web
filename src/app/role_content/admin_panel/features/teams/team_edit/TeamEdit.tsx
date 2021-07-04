@@ -6,8 +6,12 @@ import Team from '../../../../../../models/Team';
 import InputBox from '../../../shared_components/input_box/InputBox';
 import './TeamEdit.scss';
 
-const TeamEdit = (props: any) => {
-    const teamDoc = props.teamDoc;
+type TeamEditProps = {
+    setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    teamDoc: Team;
+};
+
+const TeamEdit: React.FC<TeamEditProps> = ({ setModalOpen, teamDoc }): JSX.Element => {
     const [team, setTeam] = useState<Team>(
         new Team({
             teamId: teamDoc.teamId,
@@ -34,7 +38,8 @@ const TeamEdit = (props: any) => {
         newTeam.handleTeam({ field: fieldName, value: e.target.value });
         setTeam(newTeam);
     };
-    const submitForm = async (e: any) => {
+
+    const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         await firestore
             .collection(Collections.teams)
@@ -46,14 +51,14 @@ const TeamEdit = (props: any) => {
             .catch((e) => {
                 console.log(e);
             });
-        props.setModalOpen(false);
+        setModalOpen(false);
     };
 
     return (
         <Modal
             className="teamEdit"
-            isOpen={props.isOpen}
-            onRequestClose={() => props.setModalOpen(false)}
+            isOpen={true}
+            onRequestClose={() => setModalOpen(false)}
             ariaHideApp={false}
             overlayClassName="Overlay"
         >
@@ -162,7 +167,7 @@ const TeamEdit = (props: any) => {
                     </div>
                 </div>
                 <div className="teamEditForm__btn">
-                    <button className="teamEditForm__btn--cancel" onClick={() => props.setModalOpen(false)}>
+                    <button className="teamEditForm__btn--cancel" onClick={() => setModalOpen(false)}>
                         Cancel
                     </button>
                     <button className="teamEditForm__btn--submit" type="submit">

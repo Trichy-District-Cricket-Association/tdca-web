@@ -7,6 +7,7 @@ type TeamCardProps = {
     teamDoc: Team;
     key: string;
 };
+
 const TeamCard: React.FC<TeamCardProps> = ({ teamDoc, key }): JSX.Element => {
     const [isModalOpen, setModalOpen] = useState(false);
     return (
@@ -21,7 +22,7 @@ const TeamCard: React.FC<TeamCardProps> = ({ teamDoc, key }): JSX.Element => {
                     <p className="teamCard__container--text">{teamDoc.numberOfMatches}</p>
                 </div>
             </div>
-            {isModalOpen ? <TeamEdit isOpen={true} setModalOpen={setModalOpen} teamDoc={teamDoc} /> : null}
+            {isModalOpen ? <TeamEdit setModalOpen={setModalOpen} teamDoc={teamDoc} /> : null}
         </div>
     );
 };

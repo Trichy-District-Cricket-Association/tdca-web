@@ -8,8 +8,12 @@ import InputBox from '../../../shared_components/input_box/InputBox';
 import './GroundsManEdit.scss';
 import useStorage from '../../../../../../hooks/useStorage';
 
-const GroundsManEdit = (props: any) => {
-    const groundsManDoc = props.groundsManDoc;
+type GroundsManEditProps = {
+    setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    groundsManDoc: GroundsMan;
+};
+
+const GroundsManEdit: React.FC<GroundsManEditProps> = ({ setModalOpen, groundsManDoc }): JSX.Element => {
     const [groundsMan, setGroundsMan] = useState<GroundsMan>(
         new GroundsMan({
             groundsManId: groundsManDoc.groundsManId,
@@ -59,7 +63,7 @@ const GroundsManEdit = (props: any) => {
         newGroundsMan.handleGroundsMan({ field: fieldName, value: e.target.value });
         setGroundsMan(newGroundsMan);
     };
-    const submitForm = async (e: any) => {
+    const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         groundsMan.setAvatar = avatarUrl;
         await firestore
@@ -72,13 +76,13 @@ const GroundsManEdit = (props: any) => {
             .catch((e) => {
                 console.log(e);
             });
-        props.setModalOpen(false);
+        setModalOpen(false);
     };
     return (
         <Modal
             className="groundsManEdit"
-            isOpen={props.isOpen}
-            onRequestClose={() => props.setModalOpen(false)}
+            isOpen={true}
+            onRequestClose={() => setModalOpen(false)}
             ariaHideApp={false}
             overlayClassName="Overlay"
         >
@@ -135,7 +139,7 @@ const GroundsManEdit = (props: any) => {
                             title="Date of Birth"
                             name="dateOfBirth"
                             type="date"
-                            value={groundsManDoc.dateOfBirth.toISOString().substr(0, 10)}
+                            value={groundsManDoc.dateOfBirth?.toISOString().substr(0, 10)}
                             textHandler={handleForm}
                         />
                         <InputBox
@@ -210,7 +214,7 @@ const GroundsManEdit = (props: any) => {
                 </div>
 
                 <div className="groundsManEditForm__btn">
-                    <button className="groundsManEditForm__btn--cancel" onClick={() => props.setModalOpen(false)}>
+                    <button className="groundsManEditForm__btn--cancel" onClick={() => setModalOpen(false)}>
                         Cancel
                     </button>
                     <button className="groundsManEditForm__btn--submit" type="submit">

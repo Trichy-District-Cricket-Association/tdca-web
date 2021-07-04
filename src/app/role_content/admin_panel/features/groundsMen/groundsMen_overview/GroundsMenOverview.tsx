@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import GroundsManAdd from '../groundsMan_add/GroundsManAdd';
 import GroundsManCard from '../groundsMan_card/GroundsManCard';
 
-const GroundsMenOverview: React.FC<void> = () => {
+const GroundsMenOverview: React.FC<void> = (): JSX.Element => {
     const [isModalOpen, setModalOpen] = useState(false);
     const [groundsManDocs, setGroundsManDocs] = useState<GroundsMan[] | undefined>();
 
@@ -29,16 +29,16 @@ const GroundsMenOverview: React.FC<void> = () => {
             {groundsManDocs == undefined ? (
                 <LoadingComp />
             ) : (
-                <div className = "groundsMenOverview">
+                <div className="groundsMenOverview">
                     <Link to={PageRoutes.adminGroundsMen} onClick={() => setModalOpen(true)}>
                         <button className="groundsMenOverview__groundsManAddBtn">+ Add GroundsMan</button>
                     </Link>
-                    <div className= 'groundsMenOverview__groundsManCard'>
-                    {groundsManDocs?.map((groundsManDoc)=><GroundsManCard groundsManDoc={groundsManDoc} key={groundsManDoc.docId??''}/>)}
-                   
+                    <div className="groundsMenOverview__groundsManCard">
+                        {groundsManDocs?.map((groundsManDoc) => (
+                            <GroundsManCard groundsManDoc={groundsManDoc} key={groundsManDoc.docId ?? ''} />
+                        ))}
                     </div>
-                    {isModalOpen ? <GroundsManAdd isOpen={true} setModalOpen={setModalOpen} /> : null}
-                    
+                    {isModalOpen ? <GroundsManAdd setModalOpen={setModalOpen} /> : null}
                 </div>
             )}
         </div>

@@ -6,11 +6,12 @@ import Ground from '../../../../../../models/Ground';
 import InputBox from '../../../shared_components/input_box/InputBox';
 import './GroundEdit.scss';
 
+type GroundEditProps = {
+    setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    groundDoc: Ground;
+};
 
-
-const GroundEdit = (props: any) => {
-    
-    const groundDoc = props.groundDoc;
+const GroundEdit: React.FC<GroundEditProps> = ({ setModalOpen, groundDoc }): JSX.Element => {
     const [ground, setGround] = useState<Ground>(new Ground(groundDoc));
     const handleForm = (e: React.ChangeEvent<HTMLInputElement>) => {
         const fieldName = `${e.target.name}` as const;
@@ -18,11 +19,12 @@ const GroundEdit = (props: any) => {
         newGround.handleGround({ field: fieldName, value: e.target.value });
         setGround(newGround);
     };
-    const submitForm = async (e: any) => {
-        console.log(ground)
+    const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
+        console.log(ground);
         e.preventDefault();
         await firestore
-            .collection(Collections.grounds).doc(groundDoc.docId)
+            .collection(Collections.grounds)
+            .doc(groundDoc.docId)
             .set(JSON.parse(JSON.stringify(ground)))
             .then((doc) => {
                 console.log(doc);
@@ -30,15 +32,14 @@ const GroundEdit = (props: any) => {
             .catch((e) => {
                 console.log(e);
             });
-            props.setModalOpen(false);
+        setModalOpen(false);
     };
-    
+
     return (
-       
         <Modal
             className="groundEdit"
-            isOpen={props.isOpen}
-            onRequestClose={() => props.setModalOpen(false)}
+            isOpen={true}
+            onRequestClose={() => setModalOpen(false)}
             ariaHideApp={false}
             overlayClassName="Overlay"
         >
@@ -46,8 +47,20 @@ const GroundEdit = (props: any) => {
                 <div className="groundEditForm__general">
                     <h1 className="groundEditForm__general--header">General</h1>
                     <div className="groundEditForm__general--input">
-                        <InputBox title="Ground Id" name="groundId" type="text" value = {groundDoc.groundId} textHandler={handleForm} />
-                        <InputBox title="Ground Name" name="groundName" type="text" value = {groundDoc.groundName} textHandler={handleForm} />
+                        <InputBox
+                            title="Ground Id"
+                            name="groundId"
+                            type="text"
+                            value={groundDoc.groundId}
+                            textHandler={handleForm}
+                        />
+                        <InputBox
+                            title="Ground Name"
+                            name="groundName"
+                            type="text"
+                            value={groundDoc.groundName}
+                            textHandler={handleForm}
+                        />
                     </div>
                 </div>
                 <div className="groundEditForm__matchData">
@@ -59,75 +72,74 @@ const GroundEdit = (props: any) => {
                             type="number"
                             textHandler={handleForm}
                             value={groundDoc.totalMatches}
-
                         />
                         <InputBox
                             title="Division 1"
                             name="divisionMatches_one"
                             type="number"
                             textHandler={handleForm}
-                            value={groundDoc.divisionMatches.one}
+                            value={groundDoc.divisionMatches?.one}
                         />
                         <InputBox
                             title="Division 2"
                             name="divisionMatches_two"
                             type="number"
                             textHandler={handleForm}
-                            value={groundDoc.divisionMatches.two}
+                            value={groundDoc.divisionMatches?.two}
                         />
                         <InputBox
                             title="Division 3"
                             name="divisionMatches_three"
                             type="number"
                             textHandler={handleForm}
-                            value={groundDoc.divisionMatches.three}
+                            value={groundDoc.divisionMatches?.three}
                         />
                         <InputBox
                             title="Division 4"
                             name="divisionMatches_four"
                             type="number"
                             textHandler={handleForm}
-                            value={groundDoc.divisionMatches.four}
+                            value={groundDoc.divisionMatches?.four}
                         />
                         <InputBox
                             title="Division 5"
                             name="divisionMatches_five"
                             type="number"
                             textHandler={handleForm}
-                            value={groundDoc.divisionMatches.five}
+                            value={groundDoc.divisionMatches?.five}
                         />
                         <InputBox
                             title="Inter District Match"
                             name="typeMatches_interDistrictMatch"
                             type="number"
                             textHandler={handleForm}
-                            value={groundDoc.typeMatches.interDistrictMatch}
+                            value={groundDoc.typeMatches?.interDistrictMatch}
                         />
                         <InputBox
                             title="KnockOut Matches"
                             name="typeMatches_knockoutMatch"
                             type="number"
                             textHandler={handleForm}
-                            value={groundDoc.typeMatches.knockoutMatch}
+                            value={groundDoc.typeMatches?.knockoutMatch}
                         />
                         <InputBox
                             title="League Matches"
                             name="typeMatches_leagueMatch"
                             type="number"
                             textHandler={handleForm}
-                            value={groundDoc.typeMatches.leagueMatch}
+                            value={groundDoc.typeMatches?.leagueMatch}
                         />
                         <InputBox
                             title="School Matches"
                             name="typeMatches_schoolMatch"
                             type="number"
                             textHandler={handleForm}
-                            value={groundDoc.typeMatches.schoolMatch}
+                            value={groundDoc.typeMatches?.schoolMatch}
                         />
                     </div>
                 </div>
                 <div className="groundEditForm__btn">
-                    <button className="groundEditForm__btn--cancel" onClick={() => props.setModalOpen(false)}>
+                    <button className="groundEditForm__btn--cancel" onClick={() => setModalOpen(false)}>
                         Cancel
                     </button>
                     <button className="groundEditForm__btn--submit" type="submit" prevent-default>

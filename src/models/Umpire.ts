@@ -64,7 +64,7 @@ export default class Umpire {
         if (field == 'umpireId') this.umpireId = value;
         if (field == 'umpireName') this.umpireName = value;
         if (field == 'emailId') this.emailId = value;
-        if (field == 'dateOfBirth') this.dateOfBirth = new Date(Date.parse(value));
+        if (field == 'dateOfBirth') this.dateOfBirth = new Date(value);
         if (field == 'primaryContact') this.primaryContact = value;
         if (field == 'secondaryContact') this.secondaryContact = value;
         if (field == 'payPhoneNumber') this.payPhoneNumber = value;
@@ -73,6 +73,7 @@ export default class Umpire {
         if (field == 'bankBranch') this.bankBranch = value;
         if (field == 'bankIFSC') this.bankIFSC = value;
         if (field == 'address') this.address = value;
+        if (field == 'aadharNumber') this.aadharNumber = value;
 
         /**Matches Field */
         if (field == 'panel') this.panel! = value;
@@ -136,24 +137,43 @@ export default class Umpire {
         address?: string;
     }) {
         if (docId) this.docId = docId;
-        this.umpireId = umpireId;
-        this.umpireName = umpireName;
+        this.umpireId = umpireId ?? '';
+        this.umpireName = umpireName ?? '';
         if (avatarUrl) this.avatarUrl = avatarUrl;
-        this.emailId = emailId;
-        this.divisionMatches = divisionMatches;
-        this.typeMatches = typeMatches;
-        this.totalMatches = totalMatches;
-        this.panel = panel;
-        this.dateOfBirth = dateOfBirth;
-        this.primaryContact = primaryContact;
-        this.secondaryContact = secondaryContact;
-        this.payPhoneNumber = payPhoneNumber;
-        this.bankAccountNumber = bankAccountNumber;
-        this.bankName = bankName;
-        this.bankBranch = bankBranch;
-        this.bankIFSC = bankIFSC;
-        this.aadharNumber = aadharNumber;
-        this.address = address;
+        this.emailId = emailId ?? '';
+        this.divisionMatches =
+            divisionMatches ??
+            <DivisionMatches>{
+                one: 0,
+                two: 0,
+                three: 0,
+                four: 0,
+                five: 0,
+            };
+        this.typeMatches =
+            typeMatches ??
+            <TypeMatches>{
+                combinedDistrictMatch: 0,
+                institutionMatch: 0,
+                interDistrictMatch: 0,
+                knockoutMatch: 0,
+                leagueMatch: 0,
+                privateMatch: 0,
+                schoolMatch: 0,
+                tncaMatch: 0,
+            };
+        this.totalMatches = totalMatches ?? 0;
+        this.panel = panel ?? '';
+        if (dateOfBirth) this.dateOfBirth = dateOfBirth;
+        this.primaryContact = primaryContact ?? '';
+        this.secondaryContact = secondaryContact ?? '';
+        this.payPhoneNumber = payPhoneNumber ?? '';
+        this.bankAccountNumber = bankAccountNumber ?? '';
+        this.bankName = bankName ?? '';
+        this.bankBranch = bankBranch ?? '';
+        this.bankIFSC = bankIFSC ?? '';
+        this.aadharNumber = aadharNumber ?? '';
+        this.address = address ?? '';
     }
 
     static fromFirestore(doc: firebase.firestore.DocumentSnapshot): Umpire {
@@ -167,7 +187,7 @@ export default class Umpire {
             typeMatches: doc.data()?.typeMatches,
             totalMatches: doc.data()?.totalMatches,
             panel: doc.data()?.panel,
-            dateOfBirth: doc.data()?.dateOfBirth,
+            dateOfBirth: new Date(doc.data()?.dateOfBirth),
             primaryContact: doc.data()?.primaryContact,
             secondaryContact: doc.data()?.secondaryContact,
             payPhoneNumber: doc.data()?.payPhoneNumber,

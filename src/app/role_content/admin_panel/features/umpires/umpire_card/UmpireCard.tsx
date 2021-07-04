@@ -26,7 +26,7 @@ const umpireCard: React.FC<UmpireCardProps> = ({ umpireDoc, key }): JSX.Element 
                     <p className="umpireCard__container--text">{umpireDoc.primaryContact}</p>
                 </div>
             </div>
-            {isModalOpen ? <UmpireEdit isOpen={true} setModalOpen={setModalOpen} umpireDoc={umpireDoc} /> : null}
+            {isModalOpen ? <UmpireEdit setModalOpen={setModalOpen} umpireDoc={umpireDoc} /> : null}
         </div>
     );
 };

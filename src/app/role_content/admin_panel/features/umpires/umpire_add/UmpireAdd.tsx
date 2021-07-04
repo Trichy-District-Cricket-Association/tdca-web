@@ -8,7 +8,11 @@ import InputBox from '../../../shared_components/input_box/InputBox';
 import './UmpireAdd.scss';
 import useStorage from '../../../../../../hooks/useStorage';
 
-const UmpireAdd = (props: any) => {
+type UmpireAddProps = {
+    setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const UmpireAdd: React.FC<UmpireAddProps> = ({ setModalOpen }): JSX.Element => {
     const [umpire, setUmpire] = useState<Umpire>(new Umpire({}));
 
     // State to handle uploading files.
@@ -41,7 +45,7 @@ const UmpireAdd = (props: any) => {
         newUmpire.handleUmpire({ field: fieldName, value: e.target.value });
         setUmpire(newUmpire);
     };
-    const submitForm = async (e: any) => {
+    const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         umpire.setAvatar = avatarUrl;
         await firestore
@@ -53,13 +57,14 @@ const UmpireAdd = (props: any) => {
             .catch((e) => {
                 console.log(e);
             });
-        props.setModalOpen(false);
+        setModalOpen(false);
     };
+
     return (
         <Modal
             className="umpireAdd"
-            isOpen={props.isOpen}
-            onRequestClose={() => props.setModalOpen(false)}
+            isOpen={true}
+            onRequestClose={() => setModalOpen(false)}
             ariaHideApp={false}
             overlayClassName="Overlay"
         >
@@ -225,7 +230,7 @@ const UmpireAdd = (props: any) => {
                     </div>
                 </div>
                 <div className="umpireAddForm__btn">
-                    <button className="umpireAddForm__btn--cancel" onClick={() => props.setModalOpen(false)}>
+                    <button className="umpireAddForm__btn--cancel" onClick={() => setModalOpen(false)}>
                         Cancel
                     </button>
                     <button className="umpireAddForm__btn--submit" type="submit">

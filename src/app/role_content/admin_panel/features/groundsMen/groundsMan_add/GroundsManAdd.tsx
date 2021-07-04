@@ -8,7 +8,11 @@ import InputBox from '../../../shared_components/input_box/InputBox';
 import './GroundsManAdd.scss';
 import useStorage from '../../../../../../hooks/useStorage';
 
-const GroundsManAdd = (props: any) => {
+type GroundsManAddProps = {
+    setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const GroundsManAdd: React.FC<GroundsManAddProps> = ({ setModalOpen }): JSX.Element => {
     const [groundsMan, setGroundsMan] = useState<GroundsMan>(new GroundsMan({}));
 
     // State to handle uploading files.
@@ -41,7 +45,7 @@ const GroundsManAdd = (props: any) => {
         newGroundsMan.handleGroundsMan({ field: fieldName, value: e.target.value });
         setGroundsMan(newGroundsMan);
     };
-    const submitForm = async (e: any) => {
+    const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         groundsMan.setAvatar = avatarUrl;
         await firestore
@@ -53,13 +57,13 @@ const GroundsManAdd = (props: any) => {
             .catch((e) => {
                 console.log(e);
             });
-        props.setModalOpen(false);
+        setModalOpen(false);
     };
     return (
         <Modal
             className="groundsManAdd"
-            isOpen={props.isOpen}
-            onRequestClose={() => props.setModalOpen(false)}
+            isOpen={true}
+            onRequestClose={() => setModalOpen(false)}
             ariaHideApp={false}
             overlayClassName="Overlay"
         >
@@ -123,7 +127,7 @@ const GroundsManAdd = (props: any) => {
                 </div>
 
                 <div className="groundsManAddForm__btn">
-                    <button className="groundsManAddForm__btn--cancel" onClick={() => props.setModalOpen(false)}>
+                    <button className="groundsManAddForm__btn--cancel" onClick={() => setModalOpen(false)}>
                         Cancel
                     </button>
                     <button className="groundsManAddForm__btn--submit" type="submit">

@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import TeamAdd from '../team_add/TeamAdd';
 import TeamCard from '../team_card/TeamCard';
 
-const TeamsOverview: React.FC<void> = () => {
+const TeamsOverview: React.FC<void> = (): JSX.Element => {
     const [isModalOpen, setModalOpen] = useState(false);
     const [teamDocs, setTeamDocs] = useState<Team[] | undefined>();
 
@@ -29,7 +29,7 @@ const TeamsOverview: React.FC<void> = () => {
             {teamDocs == undefined ? (
                 <LoadingComp />
             ) : (
-                <div className = 'teamsOverview'>
+                <div className="teamsOverview">
                     <Link to={PageRoutes.adminTeams} onClick={() => setModalOpen(true)}>
                         <button className="teamsOverview__teamAddBtn">+ Add Team</button>
                     </Link>
@@ -38,8 +38,7 @@ const TeamsOverview: React.FC<void> = () => {
                             <TeamCard teamDoc={teamDoc} key={teamDoc.docId ?? ''} />
                         ))}
                     </div>
-                    {isModalOpen ?<TeamAdd isOpen={true} setModalOpen={setModalOpen} />:null}
-                    
+                    {isModalOpen ? <TeamAdd setModalOpen={setModalOpen} /> : null}
                 </div>
             )}
         </div>

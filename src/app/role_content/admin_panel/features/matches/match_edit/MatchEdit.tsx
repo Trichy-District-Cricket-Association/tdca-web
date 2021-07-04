@@ -12,8 +12,12 @@ import LoadingComp from '../../../../../shared_components/loading_comp/LoadingCo
 import SelectInputBox from '../../../shared_components/select_input_box/SelectInputBox';
 import Ground from '../../../../../../models/Ground';
 
-const MatchEdit = (props: any) => {
-    const matchDoc = props.matchDoc;
+type MatchEditProps = {
+    setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    matchDoc: Match;
+};
+
+const MatchEdit: React.FC<MatchEditProps> = ({ setModalOpen, matchDoc }): JSX.Element => {
     const [match, setMatch] = useState<Match>(
         new Match({
             matchId: matchDoc.matchId,
@@ -84,7 +88,7 @@ const MatchEdit = (props: any) => {
         newMatch.handleMatch({ field: fieldName, value: e.target.value });
         setMatch(newMatch);
     };
-    const submitForm = async (e: any) => {
+    const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         await firestore
             .collection(Collections.matches)
@@ -96,13 +100,13 @@ const MatchEdit = (props: any) => {
             .catch((e) => {
                 console.log(e);
             });
-        props.setModalOpen(false);
+        setModalOpen(false);
     };
     return (
         <Modal
             className="matchEdit"
-            isOpen={props.isOpen}
-            onRequestClose={() => props.setModalOpen(false)}
+            isOpen={true}
+            onRequestClose={() => setModalOpen(false)}
             ariaHideApp={false}
             overlayClassName="Overlay"
         >
@@ -136,28 +140,28 @@ const MatchEdit = (props: any) => {
                                 title="Team A"
                                 name="teamA_teamName"
                                 options={selectable.teams.map((team) => team.teamName)}
-                                value={matchDoc.teamA.teamName}
+                                value={matchDoc.teamA?.teamName}
                                 textHandler={handleSelectForm}
                             />
                             <SelectInputBox
                                 title="Team B"
                                 name="teamB_teamName"
                                 options={selectable.teams.map((team) => team.teamName)}
-                                value={matchDoc.teamB.teamName}
+                                value={matchDoc.teamB?.teamName}
                                 textHandler={handleSelectForm}
                             />
                             <SelectInputBox
                                 title="Umpire I"
                                 name="umpireA_umpireName"
                                 options={selectable.umpires.map((umpire) => umpire.umpireName)}
-                                value={matchDoc.umpireA.umpireName}
+                                value={matchDoc.umpireA?.umpireName}
                                 textHandler={handleSelectForm}
                             />
                             <SelectInputBox
                                 title="umpire II"
                                 name="umpireB_umpireName"
                                 options={selectable.umpires.map((umpire) => umpire.umpireName)}
-                                value={matchDoc.umpireB.umpireName}
+                                value={matchDoc.umpireB?.umpireName}
                                 textHandler={handleSelectForm}
                             />
                             <SelectInputBox
@@ -189,28 +193,28 @@ const MatchEdit = (props: any) => {
                                     title="Umpire I Fee Status"
                                     name="umpireA_umpireFeeStatus"
                                     options={['Not Paid', 'Paid']}
-                                    value={matchDoc.umpireA.umpireFeeStatus}
+                                    value={matchDoc.umpireA?.umpireFeeStatus}
                                     textHandler={handleSelectForm}
                                 />
                                 <SelectInputBox
                                     title="Umpire II Fee Status"
                                     name="umpireFeeStatus"
                                     options={['Not Paid', 'Paid']}
-                                    value={matchDoc.umpireB.umpireFeeStatus}
+                                    value={matchDoc.umpireB?.umpireFeeStatus}
                                     textHandler={handleSelectForm}
                                 />
                                 <SelectInputBox
                                     title="Scorer Fee Status"
                                     name="scorer_scorerFeeStatus"
                                     options={['Not Paid', 'Paid']}
-                                    value={matchDoc.scorer.scorerFeeStatus}
+                                    value={matchDoc.scorer?.scorerFeeStatus}
                                     textHandler={handleSelectForm}
                                 />
                             </div>
                         </div>
                     </div>
                     <div className="matchEditForm__btn">
-                        <button className="matchEditForm__btn--cancel" onClick={() => props.setModalOpen(false)}>
+                        <button className="matchEditForm__btn--cancel" onClick={() => setModalOpen(false)}>
                             Cancel
                         </button>
                         <button className="matchEditForm__btn--submit" type="submit">

@@ -6,9 +6,11 @@ import Ground from '../../../../../../models/Ground';
 import InputBox from '../../../shared_components/input_box/InputBox';
 import './GroundAdd.scss';
 
+type GroundAddProps = {
+    setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
-
-const GroundAdd = (props: any) => {
+const GroundAdd: React.FC<GroundAddProps> = ({ setModalOpen }): JSX.Element => {
     const [ground, setGround] = useState<Ground>(new Ground({}));
 
     const handleForm = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,7 +19,7 @@ const GroundAdd = (props: any) => {
         newGround.handleGround({ field: fieldName, value: e.target.value });
         setGround(newGround);
     };
-    const submitForm = async (e: any) => {
+    const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         await firestore
             .collection(Collections.grounds)
@@ -28,16 +30,14 @@ const GroundAdd = (props: any) => {
             .catch((e) => {
                 console.log(e);
             });
-            props.setModalOpen(false);
+        setModalOpen(false);
     };
-
-
 
     return (
         <Modal
             className="groundAdd"
-            isOpen={props.isOpen}
-            onRequestClose={() => props.setModalOpen(false)}
+            isOpen={true}
+            onRequestClose={() => setModalOpen(false)}
             ariaHideApp={false}
             overlayClassName="Overlay"
         >
@@ -58,7 +58,6 @@ const GroundAdd = (props: any) => {
                             type="number"
                             textHandler={handleForm}
                             value={0}
-
                         />
                         <InputBox
                             title="Division 1"
@@ -126,7 +125,7 @@ const GroundAdd = (props: any) => {
                     </div>
                 </div>
                 <div className="groundAddForm__btn">
-                    <button className="groundAddForm__btn--cancel" onClick={() => props.setModalOpen(false)}>
+                    <button className="groundAddForm__btn--cancel" onClick={() => setModalOpen(false)}>
                         Cancel
                     </button>
                     <button className="groundAddForm__btn--submit" type="submit" prevent-default>

@@ -8,7 +8,11 @@ import InputBox from '../../../shared_components/input_box/InputBox';
 import './ScorerAdd.scss';
 import useStorage from '../../../../../../hooks/useStorage';
 
-const ScorerAdd = (props: any) => {
+type ScorerAddProps = {
+    setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const ScorerAdd: React.FC<ScorerAddProps> = ({ setModalOpen }): JSX.Element => {
     const [scorer, setScorer] = useState<Scorer>(new Scorer({}));
 
     // State to handle uploading files.
@@ -41,7 +45,7 @@ const ScorerAdd = (props: any) => {
         newScorer.handleScorer({ field: fieldName, value: e.target.value });
         setScorer(newScorer);
     };
-    const submitForm = async (e: any) => {
+    const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         scorer.setAvatar = avatarUrl;
         await firestore
@@ -53,13 +57,13 @@ const ScorerAdd = (props: any) => {
             .catch((e) => {
                 console.log(e);
             });
-        props.setModalOpen(false);
+        setModalOpen(false);
     };
     return (
         <Modal
             className="scorerAdd"
-            isOpen={props.isOpen}
-            onRequestClose={() => props.setModalOpen(false)}
+            isOpen={true}
+            onRequestClose={() => setModalOpen(false)}
             ariaHideApp={false}
             overlayClassName="Overlay"
         >
@@ -225,7 +229,7 @@ const ScorerAdd = (props: any) => {
                     </div>
                 </div>
                 <div className="scorerAddForm__btn">
-                    <button className="scorerAddForm__btn--cancel" onClick={() => props.setModalOpen(false)}>
+                    <button className="scorerAddForm__btn--cancel" onClick={() => setModalOpen(false)}>
                         Cancel
                     </button>
                     <button className="scorerAddForm__btn--submit" type="submit">

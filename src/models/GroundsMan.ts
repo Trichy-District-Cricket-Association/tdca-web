@@ -17,7 +17,7 @@ export default class GroundsMan {
     emailId?: string;
 
     /** Date of Birth of groundsMan */
-    dateOfBirth?:Date;
+    dateOfBirth?: Date;
 
     /** Primary Mobile Number of groundsMan */
     primaryContact?: string;
@@ -61,7 +61,9 @@ export default class GroundsMan {
         if (field == 'bankIFSC') this.bankIFSC = value;
         if (field == 'address') this.address = value;
     }
-    set setAvatar(url: string) { this.avatarUrl = url};
+    set setAvatar(url: string) {
+        this.avatarUrl = url;
+    }
     constructor({
         docId,
         groundsManId,
@@ -95,21 +97,21 @@ export default class GroundsMan {
         aadharNumber?: string;
         address?: string;
     }) {
-        if (docId) this.docId = docId??'';
-        this.groundsManId = groundsManId??'';
-        this.groundsManName = groundsManName??'';
-        if (avatarUrl) this.avatarUrl = avatarUrl??"";
-        this.emailId = emailId??'';
-        this.dateOfBirth = dateOfBirth;
-        this.primaryContact = primaryContact??'';
-        this.secondaryContact = secondaryContact??'';
-        this.payPhoneNumber = payPhoneNumber??'';
-        this.bankAccountNumber = bankAccountNumber??'';
-        this.bankName = bankName??'';
-        this.bankBranch = bankBranch??'';
-        this.bankIFSC = bankIFSC??'';
-        this.aadharNumber = aadharNumber??'';
-        this.address = address??'';
+        if (docId) this.docId = docId ?? '';
+        this.groundsManId = groundsManId ?? '';
+        this.groundsManName = groundsManName ?? '';
+        if (avatarUrl) this.avatarUrl = avatarUrl ?? '';
+        this.emailId = emailId ?? '';
+        if (dateOfBirth) this.dateOfBirth = dateOfBirth;
+        this.primaryContact = primaryContact ?? '';
+        this.secondaryContact = secondaryContact ?? '';
+        this.payPhoneNumber = payPhoneNumber ?? '';
+        this.bankAccountNumber = bankAccountNumber ?? '';
+        this.bankName = bankName ?? '';
+        this.bankBranch = bankBranch ?? '';
+        this.bankIFSC = bankIFSC ?? '';
+        this.aadharNumber = aadharNumber ?? '';
+        this.address = address ?? '';
     }
 
     static fromFirestore(doc: firebase.firestore.DocumentSnapshot): GroundsMan {

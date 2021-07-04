@@ -11,7 +11,11 @@ import SelectInputBox from '../../../shared_components/select_input_box/SelectIn
 import Team from '../../../../../../models/Team';
 import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
 
-const PlayerAdd = (props: any) => {
+type PlayerAddProps = {
+    setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const PlayerAdd: React.FC<PlayerAddProps> = ({ setModalOpen }): JSX.Element => {
     const [player, setPlayer] = useState<Player>(new Player({}));
 
     // State to handle uploading files.
@@ -66,7 +70,7 @@ const PlayerAdd = (props: any) => {
         newPlayer.handlePlayer({ field: fieldName, value: e.target.value });
         setPlayer(newPlayer);
     };
-    const submitForm = async (e: any) => {
+    const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         player.setAvatar = avatarUrl;
         await firestore
@@ -78,13 +82,13 @@ const PlayerAdd = (props: any) => {
             .catch((e) => {
                 console.log(e);
             });
-        props.setModalOpen(false);
+        setModalOpen(false);
     };
     return (
         <Modal
             className="playerAdd"
-            isOpen={props.isOpen}
-            onRequestClose={() => props.setModalOpen(false)}
+            isOpen={true}
+            onRequestClose={() => setModalOpen(false)}
             ariaHideApp={false}
             overlayClassName="Overlay"
         >
@@ -279,7 +283,7 @@ const PlayerAdd = (props: any) => {
                     </div>
 
                     <div className="playerAddForm__btn">
-                        <button className="playerAddForm__btn--cancel" onClick={() => props.setModalOpen(false)}>
+                        <button className="playerAddForm__btn--cancel" onClick={() => setModalOpen(false)}>
                             Cancel
                         </button>
                         <button className="playerAddForm__btn--submit" type="submit">

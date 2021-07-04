@@ -8,8 +8,12 @@ import InputBox from '../../../shared_components/input_box/InputBox';
 import './UmpireEdit.scss';
 import useStorage from '../../../../../../hooks/useStorage';
 
-const UmpireEdit = (props: any) => {
-    const umpireDoc = props.umpireDoc;
+type UmpireEditProps = {
+    setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    umpireDoc: Umpire;
+};
+
+const UmpireEdit: React.FC<UmpireEditProps> = ({ setModalOpen, umpireDoc }): JSX.Element => {
     const [umpire, setUmpire] = useState<Umpire>(
         new Umpire({
             umpireId: umpireDoc.umpireId,
@@ -63,7 +67,7 @@ const UmpireEdit = (props: any) => {
         newUmpire.handleUmpire({ field: fieldName, value: e.target.value });
         setUmpire(newUmpire);
     };
-    const submitForm = async (e: any) => {
+    const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         umpire.setAvatar = avatarUrl;
         await firestore
@@ -76,13 +80,13 @@ const UmpireEdit = (props: any) => {
             .catch((e) => {
                 console.log(e);
             });
-        props.setModalOpen(false);
+        setModalOpen(false);
     };
     return (
         <Modal
             className="umpireEdit"
-            isOpen={props.isOpen}
-            onRequestClose={() => props.setModalOpen(false)}
+            isOpen={true}
+            onRequestClose={() => setModalOpen(false)}
             ariaHideApp={false}
             overlayClassName="Overlay"
         >
@@ -134,7 +138,7 @@ const UmpireEdit = (props: any) => {
                             title="Date of Birth"
                             name="dateOfBirth"
                             type="date"
-                            value={umpireDoc.dateOfBirth.toISOString().substr(0, 10)}
+                            value={umpireDoc.dateOfBirth?.toISOString().substr(0, 10)}
                             textHandler={handleForm}
                         />
                         <InputBox
@@ -222,96 +226,96 @@ const UmpireEdit = (props: any) => {
                             name="divisionMatches_one"
                             type="number"
                             textHandler={handleForm}
-                            value={umpireDoc.divisionMatches.one}
+                            value={umpireDoc.divisionMatches?.one}
                         />
                         <InputBox
                             title="Division 2"
                             name="divisionMatches_two"
                             type="number"
                             textHandler={handleForm}
-                            value={umpireDoc.divisionMatches.two}
+                            value={umpireDoc.divisionMatches?.two}
                         />
                         <InputBox
                             title="Division 3"
                             name="divisionMatches_three"
                             type="number"
                             textHandler={handleForm}
-                            value={umpireDoc.divisionMatches.three}
+                            value={umpireDoc.divisionMatches?.three}
                         />
                         <InputBox
                             title="Division 4"
                             name="divisionMatches_four"
                             type="number"
                             textHandler={handleForm}
-                            value={umpireDoc.divisionMatches.four}
+                            value={umpireDoc.divisionMatches?.four}
                         />
                         <InputBox
                             title="Division 5"
                             name="divisionMatches_five"
                             type="number"
                             textHandler={handleForm}
-                            value={umpireDoc.divisionMatches.five}
+                            value={umpireDoc.divisionMatches?.five}
                         />
                         <InputBox
                             title="Inter District Match"
                             name="typeMatches_interDistrictMatch"
                             type="number"
                             textHandler={handleForm}
-                            value={umpireDoc.typeMatches.interDistrictMatch}
+                            value={umpireDoc.typeMatches?.interDistrictMatch}
                         />
                         <InputBox
                             title="KnockOut Matches"
                             name="typeMatches_knockoutMatch"
                             type="number"
                             textHandler={handleForm}
-                            value={umpireDoc.typeMatches.knockoutMatch}
+                            value={umpireDoc.typeMatches?.knockoutMatch}
                         />
                         <InputBox
                             title="League Matches"
                             name="typeMatches_leagueMatch"
                             type="number"
                             textHandler={handleForm}
-                            value={umpireDoc.typeMatches.leagueMatch}
+                            value={umpireDoc.typeMatches?.leagueMatch}
                         />
                         <InputBox
                             title="School Matches"
                             name="typeMatches_schoolMatch"
                             type="number"
                             textHandler={handleForm}
-                            value={umpireDoc.typeMatches.schoolMatch}
+                            value={umpireDoc.typeMatches?.schoolMatch}
                         />
                         <InputBox
                             title="TNCA Matches"
                             name="typeMatches_tncaMatch"
                             type="number"
                             textHandler={handleForm}
-                            value={umpireDoc.typeMatches.tncaMatch}
+                            value={umpireDoc.typeMatches?.tncaMatch}
                         />
                         <InputBox
                             title="Combined District Matches"
                             name="typeMatches_combinedDistrictMatch"
                             type="number"
                             textHandler={handleForm}
-                            value={umpireDoc.typeMatches.combinedDistrictMatch}
+                            value={umpireDoc.typeMatches?.combinedDistrictMatch}
                         />
                         <InputBox
                             title="InterDistrict Matches"
                             name="typeMatches_interDistrictMatch"
                             type="number"
                             textHandler={handleForm}
-                            value={umpireDoc.typeMatches.interDistrictMatch}
+                            value={umpireDoc.typeMatches?.interDistrictMatch}
                         />
                         <InputBox
                             title="Private Matches"
                             name="typeMatches_privateMatch"
                             type="number"
                             textHandler={handleForm}
-                            value={umpireDoc.typeMatches.privateMatch}
+                            value={umpireDoc.typeMatches?.privateMatch}
                         />
                     </div>
                 </div>
                 <div className="umpireEditForm__btn">
-                    <button className="umpireEditForm__btn--cancel" onClick={() => props.setModalOpen(false)}>
+                    <button className="umpireEditForm__btn--cancel" onClick={() => setModalOpen(false)}>
                         Cancel
                     </button>
                     <button className="umpireEditForm__btn--submit" type="submit">

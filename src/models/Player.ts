@@ -52,7 +52,7 @@ export default class Player {
         if (field == 'panCardNumber') this.panCardNumber = value;
         if (field == 'passport') this.passport = value;
 
-        if (field == 'battingStats_numberOfmatches') this.battingStats!.numberOfmatches = parseInt(value);
+        if (field == 'battingStats_numberOfMatches') this.battingStats!.numberOfMatches = parseInt(value);
         if (field == 'battingStats_numberOfInnings') this.battingStats!.numberOfInnings = parseInt(value);
         if (field == 'battingStats_totalRuns') this.battingStats!.totalRuns = parseInt(value);
         if (field == 'battingStats_highestRuns') this.battingStats!.highestRuns = parseInt(value);
@@ -64,7 +64,8 @@ export default class Player {
         if (field == 'bowlingStats_runsGiven') this.bowlingStats!.runsGiven = parseInt(value);
         if (field == 'bowlingStats_wicketsTaken') this.bowlingStats!.wicketsTaken = parseInt(value);
         if (field == 'bowlingStats_bestBowling_runsGiven') this.bowlingStats!.bestBowling!.runsGiven = parseInt(value);
-        if (field == 'bowlingStats_bestBowling_wicketsTaken') this.bowlingStats!.bestBowling!.wicketsTaken = parseInt(value);
+        if (field == 'bowlingStats_bestBowling_wicketsTaken')
+            this.bowlingStats!.bestBowling!.wicketsTaken = parseInt(value);
         if (field == 'bowlingStats_fiveWicketHaul') this.bowlingStats!.fiveWicketHaul = parseInt(value);
     }
     set setAvatar(url: string) {
@@ -124,7 +125,7 @@ export default class Player {
         this.panCardNumber = panCardNumber ?? '';
         this.passport = passport ?? '';
         this.battingStats = battingStats ?? {
-            numberOfmatches: 0,
+            numberOfMatches: 0,
             numberOfInnings: 0,
             totalRuns: 0,
             highestRuns: 0,
@@ -149,7 +150,7 @@ export default class Player {
             playerName: doc.data()?.playerName,
             avatarUrl: doc.data()?.avatarUrl,
             emailId: doc.data()?.emailId,
-            dateOfBirth: doc.data()?.dateOfBirth,
+            dateOfBirth: new Date(doc.data()?.dateOfBirth),
             primaryContact: doc.data()?.primaryContact,
             fatherName: doc.data()?.fatherName,
             aadharNumber: doc.data()?.aadharNumber,

@@ -8,6 +8,7 @@ type GroundCardProps = {
     groundDoc: Ground;
     key: string;
 };
+
 const GroundCard: React.FC<GroundCardProps> = ({ groundDoc, key }): JSX.Element => {
     const [isModalOpen, setModalOpen] = useState(false);
     return (
@@ -25,7 +26,7 @@ const GroundCard: React.FC<GroundCardProps> = ({ groundDoc, key }): JSX.Element 
                     <p className="groundCard__container--text">{groundDoc.totalMatches}</p>
                 </div>
             </div>
-            {isModalOpen ? <GroundEdit isOpen={true} setModalOpen={setModalOpen} groundDoc={groundDoc} /> : null}
+            {isModalOpen ? <GroundEdit setModalOpen={setModalOpen} groundDoc={groundDoc} /> : null}
         </div>
     );
 };

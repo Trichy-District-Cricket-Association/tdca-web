@@ -5,13 +5,13 @@ import './PlayerCard.scss';
 
 type PlayerCardProps = {
     playerDoc: Player;
-    key: string;
 };
-const PlayerCard: React.FC<PlayerCardProps> = ({ playerDoc, key }): JSX.Element => {
+
+const PlayerCard: React.FC<PlayerCardProps> = ({ playerDoc }): JSX.Element => {
     const [isModalOpen, setModalOpen] = useState(false);
     return (
         <div>
-            <div className="playerCard" key={key} onClick={() => setModalOpen(true)}>
+            <div className="playerCard" onClick={() => setModalOpen(true)}>
                 <div className="playerCard__header">
                     <img src={playerDoc.avatarUrl} alt="avatar" className="playerCard__header--img" />
                 </div>
@@ -21,10 +21,10 @@ const PlayerCard: React.FC<PlayerCardProps> = ({ playerDoc, key }): JSX.Element 
                     <label className="playerCard__container--label">Player Id</label>
                     <p className="playerCard__container--text">{playerDoc.playerId}</p>
                     <label className="playerCard__container--label">Date of Birth</label>
-                    <p className="playerCard__container--text">{playerDoc.dateOfBirth}</p>
+                    <p className="playerCard__container--text">{playerDoc.dateOfBirth?.toISOString().substr(0, 10)}</p>
                 </div>
             </div>
-            {isModalOpen ? <PlayerEdit isOpen={true} setModalOpen={setModalOpen} playerDoc={playerDoc} /> : null}
+            {isModalOpen ? <PlayerEdit setModalOpen={setModalOpen} playerDoc={playerDoc} /> : null}
         </div>
     );
 };

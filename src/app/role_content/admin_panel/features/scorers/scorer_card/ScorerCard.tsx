@@ -7,6 +7,7 @@ type ScorerCardProps = {
     scorerDoc: Scorer;
     key: string;
 };
+
 const scorerCard: React.FC<ScorerCardProps> = ({ scorerDoc, key }): JSX.Element => {
     const [isModalOpen, setModalOpen] = useState(false);
     return (
@@ -26,7 +27,7 @@ const scorerCard: React.FC<ScorerCardProps> = ({ scorerDoc, key }): JSX.Element 
                     <p className="scorerCard__container--text">{scorerDoc.primaryContact}</p>
                 </div>
             </div>
-            {isModalOpen ? <ScorerEdit isOpen={true} setModalOpen={setModalOpen} scorerDoc={scorerDoc} /> : null}
+            {isModalOpen ? <ScorerEdit setModalOpen={setModalOpen} scorerDoc={scorerDoc} /> : null}
         </div>
     );
 };

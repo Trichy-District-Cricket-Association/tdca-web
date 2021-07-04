@@ -29,7 +29,7 @@ const MatchCard: React.FC<MatchCardProps> = ({ matchDoc, key }): JSX.Element => 
                     <p className="matchCard__container--text">{matchDoc.date}</p>
                 </div>
             </div>
-            {isModalOpen ? <MatchEdit isOpen={true} setModalOpen={setModalOpen} matchDoc={matchDoc} /> : null}
+            {isModalOpen ? <MatchEdit setModalOpen={setModalOpen} matchDoc={matchDoc} /> : null}
         </div>
     );
 };
