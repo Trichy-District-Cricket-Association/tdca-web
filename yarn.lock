@@ -2977,15 +2977,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-paginate@npm:^7":
-  version: 7.1.0
-  resolution: "@types/react-paginate@npm:7.1.0"
-  dependencies:
-    "@types/react": "*"
-  checksum: 42496127813edd6e4749595c54d1d36171f881dc2ae1de28e2d56178abe61d4043c7643296871220b1664c9d33f2851413d29d27a641f4422714acf1a08aa831
-  languageName: node
-  linkType: hard
-
 "@types/react-responsive@npm:^8.0.2":
   version: 8.0.2
   resolution: "@types/react-responsive@npm:8.0.2"
@@ -13546,17 +13537,6 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"react-paginate@npm:^7.1.3":
-  version: 7.1.3
-  resolution: "react-paginate@npm:7.1.3"
-  dependencies:
-    prop-types: ^15.6.1
-  peerDependencies:
-    react: ^16.0.0 || ^17.0.0
-  checksum: 15a4e3bc5c94776efee1c4487e1f67388cba849b0883459f5585a0026946bd6b1ff1fe182ef373c92f0016565496973d945a2cddd64d5c4a00fac9150b4b0878
-  languageName: node
-  linkType: hard
-
 "react-refresh@npm:^0.8.3":
   version: 0.8.3
   resolution: "react-refresh@npm:0.8.3"
@@ -15601,7 +15581,6 @@ resolve@^2.0.0-next.3:
     "@types/react": ^17.0.11
     "@types/react-dom": ^17.0.8
     "@types/react-modal": ^3.12.0
-    "@types/react-paginate": ^7
     "@types/react-responsive": ^8.0.2
     "@types/react-router-dom": ^5.1.7
     "@typescript-eslint/eslint-plugin": ^4.27.0
@@ -15626,12 +15605,12 @@ resolve@^2.0.0-next.3:
     react-hook-form: ^7.9.0
     react-icons: ^4.2.0
     react-modal: ^3.14.3
-    react-paginate: ^7.1.3
     react-responsive: ^8.2.0
     react-router-dom: ^5.2.0
     react-scripts: 4.0.3
     source-map-explorer: ^2.5.2
     typescript: ^4.3.4
+    use-pagination-firestore: ^0.5.0
     web-vitals: ^1.1.2
   languageName: unknown
   linkType: soft
@@ -16326,6 +16305,15 @@ typescript@^4.3.4:
     punycode: 1.3.2
     querystring: 0.2.0
   checksum: 537f785b16f873fdd2b63ccb7a61463b8e41370fdba95385b0102f3ed7b953c300d95b8755ec3b65f3e406372d47d16c3c989e196b25b70f42190da1fc36c56f
+  languageName: node
+  linkType: hard
+
+"use-pagination-firestore@npm:^0.5.0":
+  version: 0.5.0
+  resolution: "use-pagination-firestore@npm:0.5.0"
+  peerDependencies:
+    react: ^16.13.1
+  checksum: 8a7c505f81f7a852f50a1e1041420737ec9651463acbb04a7450ac183775ec2c109760e7228ab2e8a18613016f45ff91250616f5204fc4e6c9cc3daf576a48f8
   languageName: node
   linkType: hard
 

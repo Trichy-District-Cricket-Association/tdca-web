@@ -6,13 +6,12 @@ import './MatchCard.scss';
 const cricketBall = `${process.env.PUBLIC_URL}/assets/images/cricketBall.png`;
 type MatchCardProps = {
     matchDoc: Match;
-    key: string;
 };
-const MatchCard: React.FC<MatchCardProps> = ({ matchDoc, key }): JSX.Element => {
+const MatchCard: React.FC<MatchCardProps> = ({ matchDoc }): JSX.Element => {
     const [isModalOpen, setModalOpen] = useState(false);
     return (
         <div>
-            <div className="matchCard" key={key} onClick={() => setModalOpen(true)}>
+            <div className="matchCard" onClick={() => setModalOpen(true)}>
                 <div className="matchCard__header">
                     <p className="matchCard__header--title">{matchDoc.teamA?.teamName}</p>
                     <img src={cricketBall} alt="vs" className="matchCard__header--img" />

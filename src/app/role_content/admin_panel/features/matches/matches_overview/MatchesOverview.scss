@@ -24,6 +24,10 @@
         grid-template-columns: repeat(4, 1fr);
         grid-auto-rows: auto;
     }
+    &__matchPageSelect {
+        justify-content: center;
+        justify-items: center;
+    }
 }
 @media screen and (max-width: 1400px) {
     .matchOverview {
