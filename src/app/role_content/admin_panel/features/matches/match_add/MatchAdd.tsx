@@ -11,6 +11,7 @@ import Umpire from '../../../../../../models/Umpire';
 import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
 import SelectInputBox from '../../../shared_components/select_input_box/SelectInputBox';
 import Ground from '../../../../../../models/Ground';
+import firebase from 'firebase';
 
 type MatchAddProps = {
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -79,13 +80,17 @@ const MatchAdd: React.FC<MatchAddProps> = ({ setModalOpen }): JSX.Element => {
         await firestore
             .collection(Collections.matches)
             .add(JSON.parse(JSON.stringify(match)))
-            .then((doc) => {
+            .then(async (doc) => {
+                await firestore
+                    .collection('counter')
+                    .doc(Collections.matches)
+                    .update({ count: firebase.firestore.FieldValue.increment(1) });
                 console.log(doc);
             })
             .catch((e) => {
                 console.log(e);
-            });
-        setModalOpen(false);
+            })
+            .finally(() => setModalOpen(false));
     };
     return (
         <Modal

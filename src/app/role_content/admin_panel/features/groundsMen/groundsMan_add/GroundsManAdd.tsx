@@ -7,6 +7,7 @@ import GroundsMan from '../../../../../../models/GroundsMan';
 import InputBox from '../../../shared_components/input_box/InputBox';
 import './GroundsManAdd.scss';
 import useStorage from '../../../../../../hooks/useStorage';
+import firebase from 'firebase';
 
 type GroundsManAddProps = {
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -51,7 +52,11 @@ const GroundsManAdd: React.FC<GroundsManAddProps> = ({ setModalOpen }): JSX.Elem
         await firestore
             .collection(Collections.groundsMen)
             .add(JSON.parse(JSON.stringify(groundsMan)))
-            .then((doc) => {
+            .then(async (doc) => {
+                await firestore
+                    .collection('counter')
+                    .doc(Collections.groundsMen)
+                    .update({ count: firebase.firestore.FieldValue.increment(1) });
                 console.log(doc);
             })
             .catch((e) => {

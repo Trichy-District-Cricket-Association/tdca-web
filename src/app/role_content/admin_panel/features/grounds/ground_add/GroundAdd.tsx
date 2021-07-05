@@ -5,6 +5,7 @@ import { Collections } from '../../../../../../enums/collection';
 import Ground from '../../../../../../models/Ground';
 import InputBox from '../../../shared_components/input_box/InputBox';
 import './GroundAdd.scss';
+import firebase from 'firebase';
 
 type GroundAddProps = {
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -24,7 +25,11 @@ const GroundAdd: React.FC<GroundAddProps> = ({ setModalOpen }): JSX.Element => {
         await firestore
             .collection(Collections.grounds)
             .add(JSON.parse(JSON.stringify(ground)))
-            .then((doc) => {
+            .then(async (doc) => {
+                await firestore
+                    .collection('counter')
+                    .doc(Collections.grounds)
+                    .update({ count: firebase.firestore.FieldValue.increment(1) });
                 console.log(doc);
             })
             .catch((e) => {

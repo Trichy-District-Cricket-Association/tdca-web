@@ -9,6 +9,6 @@ export const auth = app.auth();
 export const firestore = app.firestore();
 
 export const dummyFirestore = dummyApp.firestore();
-export const duumyAuth = dummyApp.auth();
+export const dummyAuth = dummyApp.auth();
 
 export default app;

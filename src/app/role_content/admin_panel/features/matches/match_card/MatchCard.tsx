@@ -19,6 +19,8 @@ const MatchCard: React.FC<MatchCardProps> = ({ matchDoc, key }): JSX.Element => 
                     <p className="matchCard__header--title">{matchDoc.teamB?.teamName}</p>
                 </div>
                 <div className="matchCard__container">
+                    <label className="matchCard__container--label">Match Id</label>
+                    <p className="matchCard__container--text">Match Id{matchDoc.matchId}</p>
                     <label className="matchCard__container--label">Division</label>
                     <p className="matchCard__container--text">Division {matchDoc.division}</p>
                     <label className="matchCard__container--label">Match Type</label>

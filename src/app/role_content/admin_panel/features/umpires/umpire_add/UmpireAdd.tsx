@@ -7,6 +7,7 @@ import Umpire from '../../../../../../models/Umpire';
 import InputBox from '../../../shared_components/input_box/InputBox';
 import './UmpireAdd.scss';
 import useStorage from '../../../../../../hooks/useStorage';
+import firebase from 'firebase';
 
 type UmpireAddProps = {
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -48,15 +49,21 @@ const UmpireAdd: React.FC<UmpireAddProps> = ({ setModalOpen }): JSX.Element => {
     const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         umpire.setAvatar = avatarUrl;
+
         await firestore
             .collection(Collections.umpires)
             .add(JSON.parse(JSON.stringify(umpire)))
-            .then((doc) => {
+            .then(async (doc) => {
+                await firestore
+                    .collection('counter')
+                    .doc(Collections.umpires)
+                    .update({ count: firebase.firestore.FieldValue.increment(1) });
                 console.log(doc);
             })
             .catch((e) => {
                 console.log(e);
             });
+
         setModalOpen(false);
     };
 

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { MdEdit } from 'react-icons/md';
 import Modal from 'react-modal';
-import { duumyAuth, firestore, dummyFirestore } from '../../../../../../firebase';
+import { dummyAuth, firestore, dummyFirestore } from '../../../../../../firebase';
 import { Collections } from '../../../../../../enums/collection';
 import Scorer from '../../../../../../models/Scorer';
 import InputBox from '../../../shared_components/input_box/InputBox';
@@ -10,6 +10,7 @@ import useStorage from '../../../../../../hooks/useStorage';
 import User from '../../../../../../models/User';
 import { UserRoles } from '../../../../../../enums/auth';
 import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
+import firebase from 'firebase';
 
 type ScorerAddProps = {
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -19,7 +20,10 @@ const ScorerAdd: React.FC<ScorerAddProps> = ({ setModalOpen }): JSX.Element => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const [scorer, setScorer] = useState<Scorer>(new Scorer({}));
-    const [user, setUser] = useState<{ email: string; password: string }>({ email: '', password: '' });
+    const [user, setUser] = useState<{ email: string; password: string }>({
+        email: '',
+        password: '',
+    });
 
     // State to handle uploading files.
     const [file, setFile] = useState(null);
@@ -67,28 +71,34 @@ const ScorerAdd: React.FC<ScorerAddProps> = ({ setModalOpen }): JSX.Element => {
         await firestore
             .collection(Collections.scorers)
             .add(JSON.parse(JSON.stringify(scorer)))
-            .then((doc) => {
+            .then(async (doc) => {
+                await firestore
+                    .collection('counter')
+                    .doc(Collections.scorers)
+                    .update({ count: firebase.firestore.FieldValue.increment(1) });
                 console.log(doc);
             })
             .catch((e) => {
                 console.log(e);
             });
-        await duumyAuth.createUserWithEmailAndPassword(user.email, user.password).then(async () => {
+        await dummyAuth.createUserWithEmailAndPassword(user.email, user.password).then(async () => {
             await dummyFirestore
                 .collection(Collections.users)
-                .doc(duumyAuth.currentUser?.uid)
+                .doc(dummyAuth.currentUser?.uid)
                 .set(
                     JSON.parse(
                         JSON.stringify(
                             new User({
-                                email: duumyAuth.currentUser?.email ?? '',
+                                email: user.email,
+                                id: scorer.scorerId,
                                 role: UserRoles.scorer,
-                                name: scorer.scorerName ?? '',
+                                name: scorer.scorerName,
                             }),
                         ),
                     ),
                 )
-                .then(async () => await duumyAuth.signOut().then(() => setModalOpen(false)));
+                .then(async () => await dummyAuth.signOut())
+                .finally(() => setModalOpen(false));
         });
     };
 
@@ -272,11 +282,8 @@ const ScorerAdd: React.FC<ScorerAddProps> = ({ setModalOpen }): JSX.Element => {
                     <div className="scorerAddForm__createAccount">
                         <h1 className="scorerAddForm__createAccount--header">Create Account</h1>
                         <div className="scorerAddForm__createAccount--input">
-                            <InputBox title="Email Id" name="email" type="text" textHandler={handleUserForm} />
+                            <InputBox title="Scorer Email" name="email" type="text" textHandler={handleUserForm} />
                             <InputBox title="Password" name="password" type="text" textHandler={handleUserForm} />
-                            {/* <button className="scorerAddForm__createAccount--btn" onClick={createAccount}>
-                            + Add Account
-                        </button> */}
                         </div>
                     </div>
 
