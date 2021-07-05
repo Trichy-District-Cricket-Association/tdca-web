@@ -11,7 +11,7 @@ import User from '../../../../../../models/User';
 import { UserRoles } from '../../../../../../enums/auth';
 import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
 import firebase from 'firebase';
-
+const defaultAvatar = `${process.env.PUBLIC_URL}/assets/images/defaultAvatar.jpg`;
 type ScorerAddProps = {
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -121,7 +121,11 @@ const ScorerAdd: React.FC<ScorerAddProps> = ({ setModalOpen }): JSX.Element => {
                         {/* image display */}
 
                         <div>
-                            <img src={avatarUrl} alt="profile" className="scorerAddForm__general--avatar" />
+                            <img
+                                src={avatarUrl ? avatarUrl : defaultAvatar}
+                                alt="profile"
+                                className="scorerAddForm__general--avatar"
+                            />
                             <div className="scorerAddForm__general--avatarOverlay">
                                 <label>
                                     <input

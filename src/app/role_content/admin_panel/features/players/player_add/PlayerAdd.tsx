@@ -10,7 +10,7 @@ import useStorage from '../../../../../../hooks/useStorage';
 import SelectInputBox from '../../../shared_components/select_input_box/SelectInputBox';
 import Team from '../../../../../../models/Team';
 import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
-
+const defaultAvatar = `${process.env.PUBLIC_URL}/assets/images/defaultAvatar.jpg`;
 type PlayerAddProps = {
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -101,7 +101,11 @@ const PlayerAdd: React.FC<PlayerAddProps> = ({ setModalOpen }): JSX.Element => {
                         {/* image display */}
 
                         <div>
-                            <img src={avatarUrl} alt="profile" className="playerAddForm__general--avatar" />
+                            <img
+                                src={avatarUrl ? avatarUrl : defaultAvatar}
+                                alt="profile"
+                                className="playerAddForm__general--avatar"
+                            />
                             <div className="playerAddForm__general--avatarOverlay">
                                 <label>
                                     <input

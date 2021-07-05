@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Scorer from '../../../../../../models/Scorer';
 import ScorerEdit from '../scorer_edit/ScorerEdit';
 import './ScorerCard.scss';
-
+const defaultAvatar = `${process.env.PUBLIC_URL}/assets/images/defaultAvatar.jpg`;
 type ScorerCardProps = {
     scorerDoc: Scorer;
     key: string;
@@ -14,7 +14,11 @@ const scorerCard: React.FC<ScorerCardProps> = ({ scorerDoc, key }): JSX.Element 
         <div>
             <div className="scorerCard" key={key} onClick={() => setModalOpen(true)}>
                 <div className="scorerCard__header">
-                    <img src={scorerDoc.avatarUrl} alt="avatar" className="scorerCard__header--img" />
+                    <img
+                        src={scorerDoc.avatarUrl ? scorerDoc.avatarUrl : defaultAvatar}
+                        alt="avatar"
+                        className="scorerCard__header--img"
+                    />
                 </div>
                 <div className="scorerCard__container">
                     <label className="scorerCard__container--label">scorer Name</label>
