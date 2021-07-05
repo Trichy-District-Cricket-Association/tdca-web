@@ -13,13 +13,15 @@ import TeamsOverview from './role_content/admin_panel/features/teams/teams_overv
 import MatchesOverview from './role_content/admin_panel/features/matches/matches_overview/MatchesOverview';
 import PlayersOverview from './role_content/admin_panel/features/players/players_overview/PlayersOverview';
 import MatchesPage from './features/matches_page/MatchesPage';
+import TeamsPage from './features/teams_page/TeamsPage';
+import StaffsPage from './features/staffs_page/StaffsPage';
 
 const Routes = () => (
     <div>
         {/* Main Routes */}
         <Route exact path={PageRoutes.home} component={LandingPage} />
-        <Route exact path={PageRoutes.teams} component={LandingPage} />
-        <Route exact path={PageRoutes.staffs} component={LandingPage} />
+        <Route exact path={PageRoutes.teams} component={TeamsPage} />
+        <Route exact path={PageRoutes.staffs} component={StaffsPage} />
         <Route exact path={PageRoutes.contact} component={LandingPage} />
         <Route exact path={PageRoutes.matches} component={MatchesPage} />
 

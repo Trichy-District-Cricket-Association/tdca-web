@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { storage } from '../firebase';
 
-
-const  defaultAvatar =`${process.env.PUBLIC_URL}/assets/images/defaultAvatar.png`;
+const defaultAvatar = `${process.env.PUBLIC_URL}/assets/images/defaultAvatar.jpg`;
 
 const useStorage = (file: any) => {
     const [progress, setProgress] = useState(0);
@@ -14,7 +13,7 @@ const useStorage = (file: any) => {
         if (file) {
             // storage refs
             const storageRef = storage.ref(file.name);
-            
+
             storageRef.put(file).on(
                 'state_changed',
                 (snap) => {
@@ -33,7 +32,7 @@ const useStorage = (file: any) => {
         }
     }, [file]);
 
-    return { progress, avatarUrl, error};
+    return { progress, avatarUrl, error };
 };
 
 export default useStorage;

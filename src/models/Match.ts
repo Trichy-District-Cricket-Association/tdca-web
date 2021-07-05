@@ -28,6 +28,8 @@ export default class Match {
 
     venue?: string;
 
+    status?: string;
+
     handleMatch({ field, value }: { field: string; value: string }): void {
         if (field == 'matchId') this.matchId = value;
 
@@ -52,6 +54,8 @@ export default class Match {
         if (field == 'type') this.type = value;
         if (field == 'date') this.date = new Date(value);
         if (field == 'venue') this.venue = value;
+
+        if (field == 'status') this.status = value;
     }
 
     constructor({
@@ -66,6 +70,7 @@ export default class Match {
         type,
         date,
         venue,
+        status,
     }: {
         docId?: string;
         matchId?: string;
@@ -78,18 +83,30 @@ export default class Match {
         type?: string;
         date?: Date;
         venue?: string;
+        status?: string;
     }) {
         if (docId) this.docId = docId;
         this.matchId = matchId ?? '';
         this.division = division ?? 1;
-        this.teamA = teamA ?? { teamId: '', teamName: '' };
-        this.teamB = teamB ?? { teamId: '', teamName: '' };
+        this.teamA = teamA ?? {
+            teamId: '',
+            teamName: '',
+            playingEleven: { batsman: [], bowler: [], allRounder: [], wicketKeeper: [], captain: '' },
+            onBench: [],
+        };
+        this.teamB = teamB ?? {
+            teamId: '',
+            teamName: '',
+            playingEleven: { batsman: [], bowler: [], allRounder: [], wicketKeeper: [], captain: '' },
+            onBench: [],
+        };
         this.umpireA = umpireA ?? { umpireId: '', umpireFeeStatus: '', umpireName: '', umpireAvatar: '' };
         this.umpireB = umpireB ?? { umpireId: '', umpireFeeStatus: '', umpireName: '', umpireAvatar: '' };
         this.scorer = scorer ?? { scorerId: '', scorerFeeStatus: '', scorerName: '', scorerAvatar: '' };
-        this.type = type;
+        this.type = type ?? '';
         this.date = date;
-        this.venue = venue;
+        this.venue = venue ?? '';
+        this.status = status ?? 'Toss Yet to Put';
     }
 
     static fromFirestore(doc: firebase.firestore.DocumentSnapshot): Match {
@@ -105,6 +122,7 @@ export default class Match {
             type: doc.data()?.type,
             date: new Date(doc.data()?.date),
             venue: doc.data()?.venue,
+            status: doc.data()?.status,
         });
     }
 }
