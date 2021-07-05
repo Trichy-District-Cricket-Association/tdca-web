@@ -7,7 +7,7 @@ import GroundsMan from '../../../../../../models/GroundsMan';
 import InputBox from '../../../shared_components/input_box/InputBox';
 import './GroundsManEdit.scss';
 import useStorage from '../../../../../../hooks/useStorage';
-const defaultAvatar = `${process.env.PUBLIC_URL}/assets/images/defaultAvatar.png`;
+const defaultAvatar = `${process.env.PUBLIC_URL}/assets/images/defaultAvatar.jpg`;
 
 type GroundsManEditProps = {
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;

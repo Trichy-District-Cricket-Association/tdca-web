@@ -12,6 +12,7 @@ type LoginProps = {
 const Login: React.FC<LoginProps> = ({ setModalOpen }): JSX.Element => {
     const [email, bindEmail] = useInput('');
     const [password, bindPassword] = useInput('');
+
     const login = async () => {
         await auth.signInWithEmailAndPassword(email, password).then(() => {
             setModalOpen(false);

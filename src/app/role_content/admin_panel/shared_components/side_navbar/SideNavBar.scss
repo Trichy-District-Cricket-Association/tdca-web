@@ -15,7 +15,6 @@
     transition: 850ms;
     overflow-y: scroll;
     scroll-behavior: smooth;
-    position: fixed;
 }
 
 .nav-menu.active {
@@ -46,7 +45,7 @@
 }
 
 .sideNav-text a:hover {
-    background-color: #3d26d6;
+    background-color: #0d4194;
     color: #f8f8f8;
 }
 

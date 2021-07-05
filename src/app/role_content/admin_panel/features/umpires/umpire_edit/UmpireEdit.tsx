@@ -7,7 +7,7 @@ import Umpire from '../../../../../../models/Umpire';
 import InputBox from '../../../shared_components/input_box/InputBox';
 import './UmpireEdit.scss';
 import useStorage from '../../../../../../hooks/useStorage';
-const defaultAvatar = `${process.env.PUBLIC_URL}/assets/images/defaultAvatar.png`;
+const defaultAvatar = `${process.env.PUBLIC_URL}/assets/images/defaultAvatar.jpg`;
 
 type UmpireEditProps = {
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;

@@ -1,22 +1,22 @@
 .matchOverview {
+    font-family: 'Poppins';
     &__matchAddBtn {
         background-color: transparent;
-        border: 2px solid #3d26d6;
+        border: 2px solid #0d4194;
         border-radius: 4px;
-        color: #3d26d6;
+        color: #0d4194;
         cursor: pointer;
         font-size: 14px;
         margin: 20px;
-        padding: 0.7rem 1em;
+        padding: 0.7rem 1rem;
         text-align: center;
         text-transform: uppercase;
-        font-family: sans-serif;
+
         font-weight: 600;
         transition: box-shadow 100ms ease-in-out, color 100ms ease-in-out;
         &:hover {
-            box-shadow: 0 0 40px 40px #3d26d6 inset;
+            box-shadow: 0 0 40px 40px #0d4194 inset;
             color: #fff;
-            outline: 0;
         }
     }
     &__matchCard {
@@ -25,8 +25,17 @@
         grid-auto-rows: auto;
     }
     &__matchPageSelect {
-        justify-content: center;
-        justify-items: center;
+        text-align: center;
+        margin: 30px;
+        &--btn {
+            background-color: #071833;
+            padding: 0.5rem 2rem;
+            color: #fff;
+            font-size: 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+        }
     }
 }
 @media screen and (max-width: 1400px) {

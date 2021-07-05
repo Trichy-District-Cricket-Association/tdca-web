@@ -166,9 +166,9 @@ const MatchEdit: React.FC<MatchEditProps> = ({ setModalOpen, matchDoc }): JSX.El
                             />
                             <SelectInputBox
                                 title="Scorer"
-                                name="scorer"
+                                name="scorer_scorerName"
+                                value={matchDoc.scorer?.scorerName}
                                 options={selectable.scorers.map((scorer) => scorer.scorerName)}
-                                value={matchDoc.scorer}
                                 textHandler={handleSelectForm}
                             />
                             <SelectInputBox
@@ -183,6 +183,13 @@ const MatchEdit: React.FC<MatchEditProps> = ({ setModalOpen, matchDoc }): JSX.El
                                 name="date"
                                 type="datetime-local"
                                 value={matchDoc.date?.toISOString().substr(0, 16)}
+                                textHandler={handleInputForm}
+                            />
+                            <InputBox
+                                title="Status"
+                                name="status"
+                                type="text"
+                                value={matchDoc.status}
                                 textHandler={handleInputForm}
                             />
                         </div>

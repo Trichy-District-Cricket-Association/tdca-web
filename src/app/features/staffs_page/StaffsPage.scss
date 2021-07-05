@@ -1,5 +1,6 @@
-.matchesPage {
+.staffsPage {
     font-family: 'Poppins';
+
     &__header {
         display: flex;
         &__header1 {
@@ -20,17 +21,26 @@
             width: 35%;
         }
     }
-    &__matchCards {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        grid-auto-rows: auto;
+    &__title {
+        margin-top: 2rem;
+        margin-left: 2rem;
     }
-    .matchCard {
+    &__umpireCards,
+    &__scorerCards {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-auto-rows: auto;
+        &__title {
+            font-size: 18px;
+        }
+    }
+    .scorerCard,
+    .umpireCard {
         color: #fff;
-        display: block;
-        background-color: #1149a3;
-        width: 330px;
-        height: 350px;
+        display: grid;
+        background-color: #0d4194;
+        width: 250px;
+        height: 280px;
         margin-left: 20px;
         margin-top: 25px;
         cursor: pointer;
@@ -40,53 +50,54 @@
         font-family: 'Poppins';
         &__header {
             text-align: center;
-            margin-top: 10px;
-            &--title {
-                font-size: 18px;
-            }
             &--img {
-                margin-top: 4px;
-                margin-bottom: -4px;
+                margin-top: -10px;
+                width: 250px;
+                height: 280px;
+                border-radius: 10px;
             }
         }
         &__container {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 10px;
-            &--label {
-                text-transform: uppercase;
-                font-size: 12px;
+            text-align: center;
+            top: -290px;
+            position: relative;
+            width: 250px;
+            height: 280px;
+            opacity: 0;
+            transition: 0.8s ease;
+            background-color: #000000b0;
+            border-radius: 10px;
+            &:hover {
+                opacity: 1;
             }
-            &--text {
-                font-size: 15px;
-                margin-bottom: 12px;
+            &__overlay {
+                margin-top: 40%;
+                &--label {
+                    text-transform: uppercase;
+                    font-size: 15px;
+                    top: 20px;
+                }
+                &--text {
+                    font-size: 20px;
+                    margin-bottom: 15px;
+                    font-weight: 800;
+                }
             }
-        }
-    }
-    &__matchPageSelect {
-        text-align: center;
-        margin: 30px;
-        &--btn {
-            background-color: #071833;
-            padding: 0.5rem 2rem;
-            color: #fff;
-            font-size: 20px;
-            border: none;
-            cursor: pointer;
-            border-radius: 8px;
         }
     }
 }
 @media screen and (max-width: 1400px) {
-    .matchesPage {
-        &__matchCards {
+    .staffsPage {
+        &__umpireCards,
+        &__scorerCards {
             grid-template-columns: repeat(3, 1fr);
         }
     }
 }
 @media screen and (max-width: 1050px) {
-    .matchesPage {
-        &__matchCards {
+    .staffsPage {
+        &__umpireCards,
+        &__scorerCards {
             grid-template-columns: repeat(2, 1fr);
         }
     }
@@ -106,8 +117,9 @@
             display: none;
         }
     }
-    .matchesPage {
-        &__matchCards {
+    .staffsPage {
+        &__umpireCards,
+        &__scorerCards {
             margin-left: 50px;
             grid-template-columns: repeat(1, 1fr);
         }

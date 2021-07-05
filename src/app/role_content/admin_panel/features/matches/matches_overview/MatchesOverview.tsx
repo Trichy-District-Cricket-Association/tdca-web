@@ -40,8 +40,16 @@ const MatchesOverview: React.FC<void> = (): JSX.Element => {
                         ))}
                     </div>
                     <div className="matchOverview__matchPageSelect">
-                        {isStart ? null : <button onClick={() => getPrev()}>Previous</button>}
-                        {isEnd ? null : <button onClick={() => getNext()}>Next</button>}
+                        {isStart || matchDocs.length < 10 ? null : (
+                            <button className="matchOverview__matchPageSelect--btn" onClick={() => getPrev()}>
+                                Previous
+                            </button>
+                        )}
+                        {isEnd ? null : (
+                            <button className="matchOverview__matchPageSelect--btn" onClick={() => getNext()}>
+                                Next
+                            </button>
+                        )}
                     </div>
                     {isModalOpen ? <MatchAdd setModalOpen={setModalOpen} /> : null}
                 </div>

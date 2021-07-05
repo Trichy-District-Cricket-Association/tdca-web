@@ -145,7 +145,7 @@ const MatchAdd: React.FC<MatchAddProps> = ({ setModalOpen }): JSX.Element => {
                             />
                             <SelectInputBox
                                 title="Scorer"
-                                name="scorer"
+                                name="scorer_scorerName"
                                 options={selectable.scorers.map((scorer) => scorer.scorerName)}
                                 textHandler={handleSelectForm}
                             />
@@ -159,6 +159,13 @@ const MatchAdd: React.FC<MatchAddProps> = ({ setModalOpen }): JSX.Element => {
                                 title="Date of Match"
                                 name="date"
                                 type="datetime-local"
+                                textHandler={handleInputForm}
+                            />
+                            <InputBox
+                                title="Status"
+                                name="status"
+                                type="text"
+                                value="Toss yet to put"
                                 textHandler={handleInputForm}
                             />
                         </div>
