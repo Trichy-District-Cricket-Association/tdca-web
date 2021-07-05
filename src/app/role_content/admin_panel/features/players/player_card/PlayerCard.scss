@@ -1,0 +1,37 @@
+.playerCard {
+    color: #fff;
+    display: grid;
+    background-color: #3d26d6;
+    width: 330px;
+    height: 410px;
+    margin-left: 20px;
+    margin-top: 25px;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.39);
+    transition: 0.3s;
+    font-family: 'Poppins';
+    &__header {
+        text-align: center;
+        margin-top: 10px;
+        &--img {
+            width: 150px;
+            height: 150px;
+            margin-top: 4px;
+            margin-bottom: 4px;
+            border-radius: 12px;
+        }
+    }
+    &__container {
+        text-align: center;
+        &--label {
+            text-transform: uppercase;
+            font-size: 15px;
+        }
+        &--text {
+            font-size: 20px;
+            margin-bottom: 12px;
+            font-weight: 800;
+        }
+    }
+}

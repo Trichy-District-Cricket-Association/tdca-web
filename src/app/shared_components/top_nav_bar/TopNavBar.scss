@@ -4,13 +4,21 @@
     padding: 0;
 }
 .nav {
-    background: rgb(0, 0, 0);
+    background: #000000;
     height: 80px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     font-family: Poppins;
-
+    &__menu-bars {
+        margin-left: 2rem;
+        font-size: 2rem;
+        background: none;
+        color: #fff;
+        transition: all 2 linear;
+        border: none;
+        cursor: pointer;
+    }
     &__header {
         display: flex;
         align-items: center;
@@ -42,22 +50,23 @@
         margin: 0 1rem;
         height: 100%;
         cursor: pointer;
-        transition-duration: 1s;
+        transition-duration: 0.2s;
     }
 
     &__link:hover {
         text-decoration: underline;
     }
     &__btn {
-        background-color: rgb(0, 0, 0);
+        background-color: #fff;
         padding: 0.4rem 1.2rem 0.4rem 1.2rem;
         border: 1px solid white;
         text-align: center;
         margin-left: 1rem;
+        color: rgb(0, 0, 0);
     }
     &__btn:hover {
-        background-color: rgb(233, 233, 233);
-        color: black;
+        background-color: #0d4194;
+        color: rgb(255, 255, 255);
     }
     .hamburger {
         display: none;
@@ -91,10 +100,10 @@
         }
         &__responsive {
             display: block;
-            background-color: #051d45;
+            background-color: #9b9b9b;
             width: 100%;
             position: absolute;
-            top: 60px;
+            top: 80px;
             flex-direction: column;
             padding-top: 2rem;
             padding-bottom: 2rem;

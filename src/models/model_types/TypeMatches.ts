@@ -2,11 +2,11 @@ export type TypeMatches = {
     
     leagueMatch: number;
 
-    institutionMatch: number;
-
     schoolMatch: number;
 
     knockoutMatch: number;
+
+    institutionMatch: number;
 
     tncaMatch: number;
 

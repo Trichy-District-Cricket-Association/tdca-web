@@ -1,0 +1,36 @@
+.matchCard {
+    color: #fff;
+    display: block;
+    background-color: #3d26d6;
+    width: 330px;
+    height: 350px;
+    margin-left: 20px;
+    margin-top: 25px;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.39);
+    transition: 0.3s;
+    font-family: 'Poppins';
+    &__header {
+        text-align: center;
+        margin-top: 10px;
+        &--title {
+            font-size: 18px;
+        }
+        &--img {
+            margin-top: 4px;
+            margin-bottom: -4px;
+        }
+    }
+    &__container {
+        margin-left: 10px;
+        &--label {
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+        &--text {
+            font-size: 15px;
+            margin-bottom: 12px;
+        }
+    }
+}

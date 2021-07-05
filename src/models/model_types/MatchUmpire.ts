@@ -6,6 +6,6 @@ export type MatchUmpire = {
 
     umpireAvatar: string;
 
-    umpireFeeStatus: boolean;
+    umpireFeeStatus: string;
 
 };

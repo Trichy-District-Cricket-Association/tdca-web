@@ -1,19 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
-.sideNav {
-    top: 3rem;
-}
+
 .container {
     margin-top: 50px;
 }
-.menu-bars {
-    margin-left: 2rem;
-    font-size: 2rem;
-    background: none;
-}
-
 .nav-menu {
     background-color: #f8f8f8;
-    width: 250px;
+    width: 280px;
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -21,6 +13,9 @@
     top: 80px;
     left: -100%;
     transition: 850ms;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    position: fixed;
 }
 
 .nav-menu.active {
@@ -46,12 +41,12 @@
     height: 100%;
     display: flex;
     align-items: center;
-    padding: 0 40px;
+    padding: 0 48px;
     border-radius: 4px;
 }
 
 .sideNav-text a:hover {
-    background-color: #0e4194;
+    background-color: #3d26d6;
     color: #f8f8f8;
 }
 

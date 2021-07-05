@@ -1,0 +1,60 @@
+.selectInputBox {
+    max-width: 300px;
+    margin: 10px auto;
+    border-radius: 2px;
+    padding: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    li {
+        display: block;
+        padding: 9px;
+        border-style: solid;
+        border-color: #dddddd;
+        border-width: 1px 1px;
+        margin-bottom: 30px;
+        border-radius: 3px;
+        &:last-child {
+            margin-bottom: 0px;
+            text-align: center;
+        }
+        label {
+            display: block;
+            float: left;
+            margin-top: -19px;
+            background: #ffffff;
+            height: 14px;
+            padding: 2px 5px 2px 5px;
+            color: #929292;
+            font-size: 14px;
+            overflow: hidden;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        span {
+            background: #f3f3f3;
+            display: block;
+            padding: 3px;
+            margin: 0 -9px -9px -9px;
+            text-align: center;
+            color: #c0c0c0;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 11px;
+            height: 10px;
+        }
+    }
+    &__select {
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        width: 100%;
+        display: block;
+        font-size: 17px;
+        height: 35px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-family: 'Poppins';
+        color: #131313;
+        &:focus {
+            color: #3d26d6;
+        }
+    }
+}
