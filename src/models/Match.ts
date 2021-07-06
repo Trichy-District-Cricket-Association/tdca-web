@@ -2,8 +2,7 @@ import firebase from 'firebase';
 import { MatchTeam } from './model_types/MatchTeam';
 import { MatchUmpire } from './model_types/MatchUmpire';
 import { MatchScorer } from './model_types/MatchScorer';
-import TeamAdd from '../app/role_content/admin_panel/features/teams/team_add/TeamAdd';
-import { DivisionMatches } from './model_types/DivisionMatches';
+
 export default class Match {
     /** Document id of the match document. */
     docId?: string;
@@ -21,7 +20,8 @@ export default class Match {
     umpireB?: MatchUmpire;
 
     scorer?: MatchScorer;
-
+    
+    /**League, knockout, school matches are the possible types */
     type?: string;
 
     date?: Date;

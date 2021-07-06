@@ -55,7 +55,7 @@ export default class Player {
         if (field == 'battingStats_numberOfMatches') this.battingStats!.numberOfMatches = parseInt(value);
         if (field == 'battingStats_numberOfInnings') this.battingStats!.numberOfInnings = parseInt(value);
         if (field == 'battingStats_totalRuns') this.battingStats!.totalRuns = parseInt(value);
-        if (field == 'battingStats_highestRuns') this.battingStats!.highestRuns = parseInt(value);
+        if (field == 'battingStats_highestScore') this.battingStats!.highestScore = parseInt(value);
         if (field == 'battingStats_numberOfFifties') this.battingStats!.numberOfFifties = parseInt(value);
         if (field == 'battingStats_numberOfHundreds') this.battingStats!.numberOfHundreds = parseInt(value);
 
@@ -128,7 +128,7 @@ export default class Player {
             numberOfMatches: 0,
             numberOfInnings: 0,
             totalRuns: 0,
-            highestRuns: 0,
+            highestScore: 0,
             numberOfFifties: 0,
             numberOfHundreds: 0,
         };

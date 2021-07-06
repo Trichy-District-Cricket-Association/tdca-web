@@ -5,7 +5,7 @@ export type BattingStats = {
 
     totalRuns: number;
 
-    highestRuns: number;
+    highestScore: number;
 
     numberOfFifties: number;
 

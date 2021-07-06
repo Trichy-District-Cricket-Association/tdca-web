@@ -16,10 +16,60 @@ const MatchesPage: React.FC<void> = (): JSX.Element => {
     );
     const [matchDocs, setMatchDocs] = useState<Match[]>([]);
 
+    const [selectedDivision, setSelectedDivision] = useState<number | undefined>();
+    const [selectedMatchDivision, setSelectedMatchDivision] = useState<Match[]>([]);
+
+    // const [selectedType, setSelectedType] = useState<string | undefined>();
+    // const [selectedMatchType, setSelectedMatchType] = useState<Match[]>([]);
+
     useEffect(() => {
         const newMatches = docs.map((doc) => Match.fromFirestore(doc));
         setMatchDocs(newMatches);
     }, [docs]);
+
+    const SelectedDivision = async (e: React.ChangeEvent<HTMLSelectElement>): Promise<void> => {
+        setSelectedDivision(parseInt(e.target.value));
+    };
+
+    // const SelectedType = async (e: React.ChangeEvent<HTMLSelectElement>): Promise<void> => {
+    //     setSelectedType(e.target.value);
+    //     console.log(e.target.value);
+    // };
+    useEffect(() => {
+        if (selectedDivision) {
+            const unsub = firestore
+                .collection(Collections.matches)
+                .where('division', '==', selectedDivision)
+                .onSnapshot((snapshot) => {
+                    if (snapshot?.docs?.length === 0) setSelectedMatchDivision([]);
+                    if (snapshot?.docs?.length > 0) {
+                        const matches = snapshot.docs.map((doc) => Match.fromFirestore(doc));
+                        setSelectedMatchDivision(matches);
+                    }
+                });
+            return () => {
+                unsub();
+            };
+        }
+    }, [selectedDivision]);
+    // useEffect(() => {
+    //     if (selectedType) {
+    //         const unsub = firestore
+    //             .collection(Collections.matches)
+    //             .where('type', '==', selectedType)
+    //             .where('division', '==', selectedDivision)
+    //             .onSnapshot((snapshot) => {
+    //                 if (snapshot?.docs?.length === 0) setSelectedMatchType([]);
+    //                 if (snapshot?.docs?.length > 0) {
+    //                     const matches = snapshot.docs.map((doc) => Match.fromFirestore(doc));
+    //                     setSelectedMatchType(matches);
+    //                 }
+    //             });
+    //         return () => {
+    //             unsub();
+    //         };
+    //     }
+    // }, [selectedType]);
     return (
         <div>
             {isLoading ? (
@@ -32,8 +82,26 @@ const MatchesPage: React.FC<void> = (): JSX.Element => {
                         </div>
                         <div className="matchesPage__header__header2"></div>
                     </div>
+                    <div>
+                        <select className="matchesPage__matchDivisionSelect" onChange={SelectedDivision}>
+                            <option>Select Division</option>
+                            {[1, 2, 3, 4, 5].map((division) => (
+                                <option key={division} value={division}>
+                                    Division {division}
+                                </option>
+                            ))}
+                        </select>
+                        {/* <select className="matchesPage__matchTypeSelect" onChange={SelectedType}>
+                            <option>Select Type</option>
+                            {['leagueMatch', 'knockOutMatch', 'schoolMatch'].map((type) => (
+                                <option key={type} value={type}>
+                                    {type}
+                                </option>
+                            ))}
+                        </select> */}
+                    </div>
                     <div className="matchesPage__matchCards">
-                        {matchDocs?.map((matchDoc) => (
+                        {selectedMatchDivision?.map((matchDoc) => (
                             <div className="matchCard" key={matchDoc.matchId}>
                                 <div className="matchCard__header">
                                     <p className="matchCard__header--title">{matchDoc.teamA?.teamName}</p>

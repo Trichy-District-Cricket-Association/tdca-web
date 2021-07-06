@@ -7,11 +7,7 @@ import { auth } from '../../../firebase';
 import useAuth from '../../../hooks/useAuth';
 import Login from '../../features/authentication/Login';
 import './TopNavBar.scss';
-import useDeviceType from '../../../hooks/useDeviceType';
-import { Devices } from '../../../enums/devices';
 import SideNavBar from '../../role_content/admin_panel/shared_components/side_navbar/SideNavBar';
-import InputBox from '../../role_content/admin_panel/shared_components/input_box/InputBox';
-import useInput from '../../../hooks/useInput';
 import { BsGear } from 'react-icons/bs';
 
 const logo = `${process.env.PUBLIC_URL}/assets/images/tdca_logo.jpg`;
@@ -20,7 +16,6 @@ const TopNav = (): JSX.Element => {
     const [isMobileOpen, toggleMobileOpen] = useState(false);
     const [isModalOpen, setModalOpen] = useState(false);
     const loginClick = () => setModalOpen(true);
-    const deviceType = useDeviceType();
     const [sidebar, setSidebar] = useState(false);
 
     const showSidebar = () => setSidebar(!sidebar);

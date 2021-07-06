@@ -1,6 +1,5 @@
 .playersOverview {
-    &__playerAddBtn,
-    &__teamSelect {
+    &__playerAddBtn {
         background-color: transparent;
         border: 2px solid #0d4194;
         border-radius: 4px;
@@ -19,6 +18,16 @@
             color: #fff;
             outline: 0;
         }
+    }
+    &__teamSelect {
+        background-color: #0d4194;
+        color: #fff;
+        border: none;
+        font-size: 18px;
+        border-radius: 5px;
+        padding: 10px 0px 10px 20px;
+        margin: 20px;
+        font-family: 'Poppins';
     }
     &__playerCard {
         display: grid;

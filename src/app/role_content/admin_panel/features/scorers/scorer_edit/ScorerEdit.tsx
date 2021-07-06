@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { CSVLink } from 'react-csv';
 import { MdEdit } from 'react-icons/md';
 import Modal from 'react-modal';
 import { firestore } from '../../../../../../firebase';
@@ -320,6 +321,7 @@ const ScorerEdit: React.FC<ScorerEditProps> = ({ setModalOpen, scorerDoc }): JSX
                         />
                     </div>
                 </div>
+
                 <div className="scorerEditForm__btn">
                     <button className="scorerEditForm__btn--cancel" onClick={() => setModalOpen(false)}>
                         Cancel

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { CSVLink } from 'react-csv';
 import { Collections } from '../../../../../../enums/collection';
 import { firestore } from '../../../../../../firebase';
 import Umpire from '../../../../../../models/Umpire';
@@ -23,7 +24,35 @@ const UmpiresOverview: React.FC<void> = (): JSX.Element => {
         });
         return () => unsub();
     }, []);
-
+    const headers = [
+        { label: 'UMPIRE ID', key: 'umpireId' },
+        { label: 'UMPIRE NAME', key: 'umpireName' },
+        { label: 'PANEL', key: 'panel' },
+        { label: 'DIVISION 1', key: 'divisionMatches.one' },
+        { label: 'DIVISION 2', key: 'divisionMatches.two' },
+        { label: 'DIVISION 3', key: 'divisionMatches.three' },
+        { label: 'DIVISION 4', key: 'divisionMatches.four' },
+        { label: 'DIVISION 5', key: 'divisionMatches.five' },
+        { label: 'INTER DISTRICTS', key: 'typeMatches.interDistrictMatch' },
+        { label: 'KNOCKOUT', key: 'typeMatches.knockoutMatch' },
+        { label: 'LEAGUE', key: 'typeMatches.leagueMatch' },
+        { label: 'SCHOOL', key: 'typeMatches.schoolMatch' },
+        { label: 'TNCA', key: 'typeMatches.tncaMatch' },
+        { label: 'PRIVATE', key: 'typeMatches.privateMatch' },
+        { label: 'COMBINED DICTRICTS', key: 'typeMatches.combinedDistrictMatch' },
+        { label: 'INSTITUTION', key: 'typeMatches.institutionMatch' },
+        { label: 'EMAIL', key: 'emailId' },
+        { label: 'DATE OF BIRTH', key: 'dateOfBirth' },
+        { label: 'PRIMARY CONTACT', key: 'primaryContact' },
+        { label: 'SECONDARY CONTACT', key: 'secondaryContact' },
+        { label: 'ADDRESS', key: 'address' },
+        { label: 'AADHAR NUMBER', key: 'aadharNumber' },
+        { label: 'GPAY / PHONEPAY NUMBER', key: 'payPhoneNumber' },
+        { label: 'BANK ACCOUNT NUMBER', key: 'bankAccountNumber' },
+        { label: 'BANK NAME', key: 'bankName' },
+        { label: 'BANK BRANCH', key: 'bankBranch' },
+        { label: 'BANK IFSC', key: 'bankIFSC' },
+    ];
     return (
         <div>
             {umpireDocs == undefined ? (
@@ -33,6 +62,12 @@ const UmpiresOverview: React.FC<void> = (): JSX.Element => {
                     <Link to={PageRoutes.adminUmpires} onClick={() => setModalOpen(true)}>
                         <button className="umpiresOverview__umpireAddBtn">+ Add Umpire</button>
                     </Link>
+                    <CSVLink
+                        data={JSON.parse(JSON.stringify(umpireDocs))}
+                        headers={JSON.parse(JSON.stringify(headers))}
+                    >
+                        Download Data
+                    </CSVLink>
                     <div className="umpiresOverview__umpireCard">
                         {umpireDocs?.map((umpireDoc) => (
                             <UmpireCard umpireDoc={umpireDoc} key={umpireDoc.docId ?? ''} />

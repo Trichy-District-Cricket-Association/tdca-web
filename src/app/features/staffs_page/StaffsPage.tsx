@@ -6,7 +6,7 @@ import LoadingComp from '../../shared_components/loading_comp/LoadingComp';
 import Team from '../../../models/Team';
 import Scorer from '../../../models/Scorer';
 import Umpire from '../../../models/Umpire';
-
+const defaultAvatar = `${process.env.PUBLIC_URL}/assets/images/defaultAvatar.jpg`;
 const StaffsPage: React.FC<void> = (): JSX.Element => {
     const [scorerDocs, setScorerDocs] = useState<Scorer[] | undefined>();
     const [umpireDocs, setUmpireDocs] = useState<Umpire[] | undefined>();
@@ -49,7 +49,11 @@ const StaffsPage: React.FC<void> = (): JSX.Element => {
                         {umpireDocs?.map((umpireDoc) => (
                             <div className="umpireCard" key={umpireDoc.umpireId}>
                                 <div className="umpireCard__header">
-                                    <img src={umpireDoc.avatarUrl} alt="avatar" className="umpireCard__header--img" />
+                                    <img
+                                        src={umpireDoc.avatarUrl ? umpireDoc.avatarUrl : defaultAvatar}
+                                        alt="avatar"
+                                        className="umpireCard__header--img"
+                                    />
                                 </div>
                                 <div className="umpireCard__container">
                                     <div className="umpireCard__container__overlay">
@@ -67,7 +71,11 @@ const StaffsPage: React.FC<void> = (): JSX.Element => {
                         {scorerDocs?.map((scorerDoc) => (
                             <div className="scorerCard" key={scorerDoc.scorerId}>
                                 <div className="scorerCard__header">
-                                    <img src={scorerDoc.avatarUrl} alt="avatar" className="scorerCard__header--img" />
+                                    <img
+                                        src={scorerDoc.avatarUrl ? scorerDoc.avatarUrl : defaultAvatar}
+                                        alt="avatar"
+                                        className="scorerCard__header--img"
+                                    />
                                 </div>
                                 <div className="scorerCard__container">
                                     <div className="scorerCard__container__overlay">

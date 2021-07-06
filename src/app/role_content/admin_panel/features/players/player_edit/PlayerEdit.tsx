@@ -271,7 +271,7 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
                                     title="Highest Score (HS)"
                                     name="battingStats_highestRuns"
                                     type="number"
-                                    value={playerDoc.battingStats?.highestRuns}
+                                    value={playerDoc.battingStats?.highestScore}
                                     textHandler={handleInputForm}
                                 />
                                 <InputBox
