@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { CSVLink } from 'react-csv';
 import { Collections } from '../../../../../../enums/collection';
+import firebase from 'firebase';
 import { firestore } from '../../../../../../firebase';
 import Match from '../../../../../../models/Match';
 import './MatchesOverview.scss';
@@ -11,44 +12,39 @@ import MatchAdd from '../match_add/MatchAdd';
 import MatchCard from '../match_card/MatchCard';
 import { usePagination } from 'use-pagination-firestore';
 
+const divisions = [1, 2, 3, 4, 5];
+const matchTypes = ['leagueMatch', 'schoolMatch', 'knockoutMatch'];
+const baseMatchQuery = firestore.collection(Collections.matches).orderBy('date', 'desc');
+
 const MatchesOverview: React.FC<void> = (): JSX.Element => {
     const [isModalOpen, setModalOpen] = useState(false);
-    const { docs, isLoading, isStart, isEnd, getPrev, getNext } = usePagination<Match>(
-        firestore.collection(Collections.matches).orderBy('date', 'desc'),
-        {
-            limit: 10,
-        },
-    );
-    const [matchDocs, setMatchDocs] = useState<Match[]>([]);
+
+    const [query, setQuery] = useState<firebase.firestore.Query<firebase.firestore.DocumentData>>(baseMatchQuery);
+    const { docs, isLoading, isStart, isEnd, getPrev, getNext } = usePagination<Match>(query, {
+        limit: 10,
+    });
+
     const [selectedDivision, setSelectedDivision] = useState<number | undefined>();
-    const [selectedMatchDivision, setSelectedMatchDivision] = useState<Match[]>([]);
+    const [selectedMatchType, setSelectedMatchType] = useState<string | undefined>();
 
-    useEffect(() => {
-        const newMatches = docs.map((doc) => Match.fromFirestore(doc));
-        setMatchDocs(newMatches);
-    }, [docs]);
-
-    const SelectedDivision = async (e: React.ChangeEvent<HTMLSelectElement>): Promise<void> => {
+    const switchDivision = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedDivision(parseInt(e.target.value));
+        setSelectedMatchType(undefined);
+    };
+    const switchMatchType = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setSelectedMatchType(e.target.value);
     };
 
+    //  Callback to change the query based on the selected type.
     useEffect(() => {
         if (selectedDivision) {
-            const unsub = firestore
-                .collection(Collections.matches)
-                .where('division', '==', selectedDivision)
-                .onSnapshot((snapshot) => {
-                    if (snapshot?.docs?.length === 0) setSelectedMatchDivision([]);
-                    if (snapshot?.docs?.length > 0) {
-                        const matches = snapshot.docs.map((doc) => Match.fromFirestore(doc));
-                        setSelectedMatchDivision(matches);
-                    }
-                });
-            return () => {
-                unsub();
-            };
+            let newQuery = baseMatchQuery.where('division', '==', selectedDivision);
+            if (selectedMatchType) {
+                newQuery = newQuery.where('type', '==', selectedMatchType);
+            }
+            setQuery(newQuery);
         }
-    }, [selectedDivision]);
+    }, [selectedDivision, selectedMatchType]);
 
     const headers = [
         { label: 'MATCH ID', key: 'matchId' },
@@ -81,26 +77,49 @@ const MatchesOverview: React.FC<void> = (): JSX.Element => {
                     <Link to={PageRoutes.adminMatches} onClick={() => setModalOpen(true)}>
                         <button className="matchOverview__matchAddBtn">+ Add Match</button>
                     </Link>
-                    <CSVLink data={JSON.parse(JSON.stringify(matchDocs))} headers={JSON.parse(JSON.stringify(headers))}>
+                    <CSVLink
+                        data={JSON.parse(JSON.stringify(docs.map((doc) => Match.fromFirestore(doc))))}
+                        headers={JSON.parse(JSON.stringify(headers))}
+                    >
                         Download Data
                     </CSVLink>
                     <div>
-                        <select className="matchesPage__matchDivisionSelect" onChange={SelectedDivision}>
+                        <select
+                            className="matchesPage__matchDivisionSelect"
+                            value={selectedDivision}
+                            onChange={switchDivision}
+                        >
                             <option>Select Division</option>
-                            {[1, 2, 3, 4, 5].map((division) => (
+                            {divisions.map((division) => (
                                 <option key={division} value={division}>
                                     Division {division}
                                 </option>
                             ))}
                         </select>
+                        {selectedDivision ? (
+                            <select
+                                className="matchesPage__matchDivisionSelect"
+                                value={selectedMatchType}
+                                onChange={switchMatchType}
+                            >
+                                <option>Select Type</option>
+                                {matchTypes.map((matchType) => (
+                                    <option key={matchType} value={matchType}>
+                                        {matchType}
+                                    </option>
+                                ))}
+                            </select>
+                        ) : null}
                     </div>
                     <div className="matchOverview__matchCard">
-                        {selectedMatchDivision?.map((matchDoc) => (
-                            <MatchCard matchDoc={matchDoc} key={matchDoc.docId ?? ''} />
-                        ))}
+                        {docs
+                            .map((doc) => Match.fromFirestore(doc))
+                            ?.map((matchDoc) => (
+                                <MatchCard matchDoc={matchDoc} key={matchDoc.docId + 'card'} />
+                            ))}
                     </div>
                     <div className="matchOverview__matchPageSelect">
-                        {isStart || matchDocs.length < 10 ? null : (
+                        {isStart || docs.length < 10 ? null : (
                             <button className="matchOverview__matchPageSelect--btn" onClick={() => getPrev()}>
                                 Previous
                             </button>

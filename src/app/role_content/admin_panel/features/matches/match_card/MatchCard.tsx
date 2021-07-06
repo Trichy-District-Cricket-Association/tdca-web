@@ -7,7 +7,7 @@ const cricketBall = `${process.env.PUBLIC_URL}/assets/images/cricketBall.png`;
 type MatchCardProps = {
     matchDoc: Match;
 };
-const MatchCard: React.FC<MatchCardProps> = ({ matchDoc }): JSX.Element => {
+const MatchCard = ({ matchDoc }: MatchCardProps): JSX.Element => {
     const [isModalOpen, setModalOpen] = useState(false);
     return (
         <div>
