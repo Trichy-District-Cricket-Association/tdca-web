@@ -1,4 +1,4 @@
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import LandingPage from './features/landing_page/LandingPage';
 import AdminPanel from './role_content/admin_panel/AdminPanel';
 import GroundsOverview from './role_content/admin_panel/features/grounds/grounds_overview/GroundsOverview';
@@ -17,7 +17,7 @@ import TeamsPage from './features/teams_page/TeamsPage';
 import StaffsPage from './features/staffs_page/StaffsPage';
 
 const Routes = () => (
-    <div>
+    <Switch>
         {/* Main Routes */}
         <Route exact path={PageRoutes.home} component={LandingPage} />
         <Route exact path={PageRoutes.teams} component={TeamsPage} />
@@ -40,7 +40,7 @@ const Routes = () => (
         <ProtectedRoute exact path={PageRoutes.adminTeams} userRole={UserRoles.admin} component={TeamsOverview} />
         <ProtectedRoute exact path={PageRoutes.adminMatches} userRole={UserRoles.admin} component={MatchesOverview} />
         <ProtectedRoute exact path={PageRoutes.adminScorecards} userRole={UserRoles.admin} component={AdminPanel} />
-    </div>
+    </Switch>
 );
 
 export default Routes;

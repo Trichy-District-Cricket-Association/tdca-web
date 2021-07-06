@@ -78,7 +78,7 @@ const TopNav = (): JSX.Element => {
                         </Link>
                     </div>
 
-                    {authData === undefined ? (
+                    {authData === undefined ? null : authData === null ? (
                         <div>
                             <Link to={PageRoutes.home} className="nav__btn" onClick={loginClick}>
                                 Log In
