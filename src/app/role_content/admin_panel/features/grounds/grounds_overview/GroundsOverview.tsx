@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { CSVLink } from 'react-csv';
 import { Collections } from '../../../../../../enums/collection';
 import { firestore } from '../../../../../../firebase';
 import Ground from '../../../../../../models/Ground';
@@ -23,7 +24,19 @@ const GroundsOverview: React.FC<void> = (): JSX.Element => {
         });
         return () => unsub();
     }, []);
-
+    const headers = [
+        { label: 'GROUND ID', key: 'groundId' },
+        { label: 'GROUND NAME', key: 'groundName' },
+        { label: 'PANEL', key: 'panel' },
+        { label: 'DIVISION 1', key: 'divisionMatches.one' },
+        { label: 'DIVISION 2', key: 'divisionMatches.two' },
+        { label: 'DIVISION 3', key: 'divisionMatches.three' },
+        { label: 'DIVISION 4', key: 'divisionMatches.four' },
+        { label: 'DIVISION 5', key: 'divisionMatches.five' },
+        { label: 'KNOCKOUT', key: 'typeMatches.knockoutMatch' },
+        { label: 'LEAGUE', key: 'typeMatches.leagueMatch' },
+        { label: 'SCHOOL', key: 'typeMatches.schoolMatch' },
+    ];
     return (
         <div>
             {groundDocs == undefined ? (
@@ -33,6 +46,12 @@ const GroundsOverview: React.FC<void> = (): JSX.Element => {
                     <Link to={PageRoutes.adminGrounds} onClick={() => setModalOpen(true)}>
                         <button className="groundsOverview__groundAddBtn">+ Add Ground</button>
                     </Link>
+                    <CSVLink
+                        data={JSON.parse(JSON.stringify(groundDocs))}
+                        headers={JSON.parse(JSON.stringify(headers))}
+                    >
+                        Download Data
+                    </CSVLink>
                     <div className="groundsOverview__groundCard">
                         {groundDocs?.map((groundDoc) => (
                             <GroundCard groundDoc={groundDoc} key={groundDoc.docId ?? ''} />

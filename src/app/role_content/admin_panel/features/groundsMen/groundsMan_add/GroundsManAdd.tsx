@@ -8,7 +8,7 @@ import InputBox from '../../../shared_components/input_box/InputBox';
 import './GroundsManAdd.scss';
 import useStorage from '../../../../../../hooks/useStorage';
 import firebase from 'firebase';
-
+const defaultAvatar = `${process.env.PUBLIC_URL}/assets/images/defaultAvatar.jpg`;
 type GroundsManAddProps = {
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
@@ -80,7 +80,11 @@ const GroundsManAdd: React.FC<GroundsManAddProps> = ({ setModalOpen }): JSX.Elem
                     {/* image display */}
 
                     <div>
-                        <img src={avatarUrl} alt="profile" className="groundsManAddForm__general--avatar" />
+                        <img
+                            src={avatarUrl ? avatarUrl : defaultAvatar}
+                            alt="profile"
+                            className="groundsManAddForm__general--avatar"
+                        />
                         <div className="groundsManAddForm__general--avatarOverlay">
                             <label>
                                 <input

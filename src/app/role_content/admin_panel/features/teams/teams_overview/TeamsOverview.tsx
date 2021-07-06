@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { CSVLink } from 'react-csv';
 import { Collections } from '../../../../../../enums/collection';
 import { firestore } from '../../../../../../firebase';
 import Team from '../../../../../../models/Team';
@@ -23,7 +24,23 @@ const TeamsOverview: React.FC<void> = (): JSX.Element => {
         });
         return () => unsub();
     }, []);
-
+    const headers = [
+        { label: 'TEAM ID', key: 'teamId' },
+        { label: 'TEAM NAME', key: 'teamName' },
+        { label: 'EMAIL', key: 'emailId' },
+        { label: 'DIVISION', key: 'division' },
+        { label: 'MATCHES PLAYED', key: 'numberOfMatches' },
+        { label: 'WON', key: 'won' },
+        { label: 'LOST', key: 'lost' },
+        { label: 'DRAW', key: 'draw' },
+        { label: 'TIE', key: 'tie' },
+        { label: 'NO RESULT', key: 'noResult' },
+        { label: 'TOTAL POINTS', key: 'totalPoints' },
+        { label: 'WALKOVER', key: 'walkover' },
+        { label: 'CONCEED', key: 'conceed' },
+        { label: 'REFUSAL', key: 'refusal' },
+        { label: 'PENALTY', key: 'penalty' },
+    ];
     return (
         <div>
             {teamDocs == undefined ? (
@@ -33,6 +50,9 @@ const TeamsOverview: React.FC<void> = (): JSX.Element => {
                     <Link to={PageRoutes.adminTeams} onClick={() => setModalOpen(true)}>
                         <button className="teamsOverview__teamAddBtn">+ Add Team</button>
                     </Link>
+                    <CSVLink data={JSON.parse(JSON.stringify(teamDocs))} headers={JSON.parse(JSON.stringify(headers))}>
+                        Download Data
+                    </CSVLink>
                     <div className="teamsOverview__teamCard">
                         {teamDocs?.map((teamDoc) => (
                             <TeamCard teamDoc={teamDoc} key={teamDoc.docId ?? ''} />

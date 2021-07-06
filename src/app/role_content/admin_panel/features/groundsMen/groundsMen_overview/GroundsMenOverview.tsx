@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { CSVLink } from 'react-csv';
 import { Collections } from '../../../../../../enums/collection';
 import { firestore } from '../../../../../../firebase';
 import GroundsMan from '../../../../../../models/GroundsMan';
@@ -23,7 +24,21 @@ const GroundsMenOverview: React.FC<void> = (): JSX.Element => {
         });
         return () => unsub();
     }, []);
-
+    const headers = [
+        { label: 'GROUNDSMAN ID', key: 'groundsManId' },
+        { label: 'GROUNDSMAN NAME', key: 'groundsManName' },
+        { label: 'EMAIL', key: 'emailId' },
+        { label: 'DATE OF BIRTH', key: 'dateOfBirth' },
+        { label: 'PRIMARY CONTACT', key: 'primaryContact' },
+        { label: 'SECONDARY CONTACT', key: 'secondaryContact' },
+        { label: 'ADDRESS', key: 'address' },
+        { label: 'AADHAR NUMBER', key: 'aadharNumber' },
+        { label: 'GPAY / PHONEPAY NUMBER', key: 'payPhoneNumber' },
+        { label: 'BANK ACCOUNT NUMBER', key: 'bankAccountNumber' },
+        { label: 'BANK NAME', key: 'bankName' },
+        { label: 'BANK BRANCH', key: 'bankBranch' },
+        { label: 'BANK IFSC', key: 'bankIFSC' },
+    ];
     return (
         <div>
             {groundsManDocs == undefined ? (
@@ -33,6 +48,12 @@ const GroundsMenOverview: React.FC<void> = (): JSX.Element => {
                     <Link to={PageRoutes.adminGroundsMen} onClick={() => setModalOpen(true)}>
                         <button className="groundsMenOverview__groundsManAddBtn">+ Add GroundsMan</button>
                     </Link>
+                    <CSVLink
+                        data={JSON.parse(JSON.stringify(groundsManDocs))}
+                        headers={JSON.parse(JSON.stringify(headers))}
+                    >
+                        Download Data
+                    </CSVLink>
                     <div className="groundsMenOverview__groundsManCard">
                         {groundsManDocs?.map((groundsManDoc) => (
                             <GroundsManCard groundsManDoc={groundsManDoc} key={groundsManDoc.docId ?? ''} />

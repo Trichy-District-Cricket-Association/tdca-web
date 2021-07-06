@@ -2,7 +2,7 @@ import { useState } from 'react';
 import GroundsMan from '../../../../../../models/GroundsMan';
 import GroundsManEdit from '../groundsMan_edit/GroundsManEdit';
 import './GroundsManCard.scss';
-
+const defaultAvatar = `${process.env.PUBLIC_URL}/assets/images/defaultAvatar.jpg`;
 type GroundsManCardProps = {
     groundsManDoc: GroundsMan;
     key: string;
@@ -14,7 +14,11 @@ const GroundsManCard: React.FC<GroundsManCardProps> = ({ groundsManDoc, key }): 
         <div>
             <div className="groundsManCard" key={key} onClick={() => setModalOpen(true)}>
                 <div className="groundsManCard__header">
-                    <img src={groundsManDoc.avatarUrl} alt="avatar" className="groundsManCard__header--img" />
+                    <img
+                        src={groundsManDoc.avatarUrl ? groundsManDoc.avatarUrl : defaultAvatar}
+                        alt="avatar"
+                        className="groundsManCard__header--img"
+                    />
                 </div>
                 <div className="groundsManCard__container">
                     <label className="groundsManCard__container--label">GroundsMan Name</label>

@@ -8,6 +8,7 @@ import InputBox from '../../../shared_components/input_box/InputBox';
 import './UmpireAdd.scss';
 import useStorage from '../../../../../../hooks/useStorage';
 import firebase from 'firebase';
+const defaultAvatar = `${process.env.PUBLIC_URL}/assets/images/defaultAvatar.jpg`;
 
 type UmpireAddProps = {
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -83,7 +84,11 @@ const UmpireAdd: React.FC<UmpireAddProps> = ({ setModalOpen }): JSX.Element => {
                     {/* image display */}
 
                     <div>
-                        <img src={avatarUrl} alt="profile" className="umpireAddForm__general--avatar" />
+                        <img
+                            src={avatarUrl ? avatarUrl : defaultAvatar}
+                            alt="profile"
+                            className="umpireAddForm__general--avatar"
+                        />
                         <div className="umpireAddForm__general--avatarOverlay">
                             <label>
                                 <input

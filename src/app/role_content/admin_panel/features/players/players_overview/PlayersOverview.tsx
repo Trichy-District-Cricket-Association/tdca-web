@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { CSVLink } from 'react-csv';
 import { Collections } from '../../../../../../enums/collection';
 import { firestore } from '../../../../../../firebase';
 import Player from '../../../../../../models/Player';
@@ -16,6 +17,7 @@ const PlayersOverview: React.FC<void> = (): JSX.Element => {
     const [teamDocs, setTeamDocs] = useState<Team[] | undefined>();
     const [selectedTeamName, setSelectedTeamName] = useState<string | undefined>();
     const [selectedTeamPlayers, setSelectedTeamPlayers] = useState<Player[]>([]);
+
     useEffect(() => {
         const PlayerDocs = firestore.collection(Collections.players).onSnapshot((snapshot) => {
             if (snapshot.docs?.length === 0) setPlayerDocs([]);
@@ -59,15 +61,40 @@ const PlayersOverview: React.FC<void> = (): JSX.Element => {
         setSelectedTeamName(e.target.value);
     };
 
+    const headers = [
+        { label: 'PLAYER ID', key: 'playerId' },
+        { label: 'PLAYER NAME', key: 'playerName' },
+        { label: 'TEAM NAME', key: 'teamName' },
+        { label: 'EMAIL', key: 'emailId' },
+        { label: 'DATE OF BIRTH', key: 'dateOfBirth' },
+        { label: `FATHER'S NAME`, key: 'fatherName' },
+        { label: 'PRIMARY CONTACT', key: 'primaryContact' },
+        { label: 'AADHAR NUMBER', key: 'drivingLicense' },
+        { label: 'VOTER ID', key: 'voterId' },
+        { label: 'RATION CARD NUMBER', key: 'rationCardNumber' },
+        { label: 'PAN CARD NUMBER', key: 'panCardNumber' },
+        { label: 'PASSPORT', key: 'passport' },
+        { label: 'MATCHES PLAYED', key: 'battingStats.numberOfMatches' },
+        { label: 'INNINGS PLAYED', key: 'battingStats.numberOfInnings' },
+        { label: 'TOTAL RUNS', key: 'battingStats.totalRuns' },
+        { label: 'HIGHEST SCORE (HS)', key: 'battingStats.highestScore' },
+        { label: 'FIFTIES', key: 'battingStats.numberOfFifties' },
+        { label: 'HUNDREDS', key: 'battingStats.numberOfHundreds' },
+        { label: 'OVERS BOWLED', key: 'bowlingStats.numberOfOvers' },
+        { label: 'NO. OF MAIDENS', key: 'bowlingStats.noOfMaidens' },
+        { label: 'RUNS GIVEN', key: 'bowlingStats.runsGiven' },
+        { label: 'WICKETS TAKEN', key: 'bowlingStats.wicketsTaken' },
+        { label: 'BEST BOWLING / RUNS', key: 'bowlingStats.bestBowling.runsGiven' },
+        { label: 'BEST BOWLING / WICKETS', key: 'bowlingStats.bestBowling.wicketsTaken' },
+        { label: 'FIVE WICKET HAUL', key: 'bowlingStats.fiveWicketHaul' },
+    ];
+
     return (
         <div>
             {playerDocs == undefined || teamDocs == undefined ? (
                 <LoadingComp />
             ) : (
                 <div className="playersOverview">
-                    <Link to={PageRoutes.adminPlayers} onClick={() => setModalOpen(true)}>
-                        <button className="playersOverview__playerAddBtn">+ Add Player</button>
-                    </Link>
                     {teamDocs.length !== 0 ? (
                         <div>
                             <h2>Select Team</h2>
@@ -83,6 +110,15 @@ const PlayersOverview: React.FC<void> = (): JSX.Element => {
                     ) : (
                         <div />
                     )}
+                    <Link to={PageRoutes.adminPlayers} onClick={() => setModalOpen(true)}>
+                        <button className="playersOverview__playerAddBtn">+ Add Player</button>
+                    </Link>
+                    <CSVLink
+                        data={JSON.parse(JSON.stringify(selectedTeamPlayers))}
+                        headers={JSON.parse(JSON.stringify(headers))}
+                    >
+                        Download Data
+                    </CSVLink>
 
                     <div className="playersOverview__playerCard">
                         {selectedTeamPlayers.length === 0 ? (

@@ -109,6 +109,7 @@ const MatchEdit: React.FC<MatchEditProps> = ({ setModalOpen, matchDoc }): JSX.El
             onRequestClose={() => setModalOpen(false)}
             ariaHideApp={false}
             overlayClassName="Overlay"
+            key={matchDoc.docId + 'editCard'}
         >
             {selectable ? (
                 <form className="matchEditForm" onSubmit={submitForm}>

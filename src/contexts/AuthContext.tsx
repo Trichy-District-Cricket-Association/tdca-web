@@ -4,15 +4,16 @@ import React, { useState, useEffect } from 'react';
 import { auth, firestore } from '../firebase';
 import User from '../models/User';
 import { Collections } from '../enums/collection';
+import { UserRoles } from '../enums/auth';
 
 const AuthContext = React.createContext<User | undefined>(undefined);
 
 const AuthProvider = (props: any) => {
-    const [authState, setAuthState] = useState<User | undefined>(undefined);
+    const [authState, setAuthState] = useState<User | undefined | null>(undefined);
     useEffect(() => {
         const listener = auth.onAuthStateChanged((user: firebase.User | null) => {
             if (user == null) {
-                setAuthState(undefined);
+                setAuthState(null);
                 return;
             }
             firestore

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Player from '../../../../../../models/Player';
 import PlayerEdit from '../player_edit/PlayerEdit';
 import './PlayerCard.scss';
-
+const defaultAvatar = `${process.env.PUBLIC_URL}/assets/images/defaultAvatar.jpg`;
 type PlayerCardProps = {
     playerDoc: Player;
 };
@@ -13,7 +13,11 @@ const PlayerCard: React.FC<PlayerCardProps> = ({ playerDoc }): JSX.Element => {
         <div>
             <div className="playerCard" onClick={() => setModalOpen(true)}>
                 <div className="playerCard__header">
-                    <img src={playerDoc.avatarUrl} alt="avatar" className="playerCard__header--img" />
+                    <img
+                        src={playerDoc.avatarUrl ? playerDoc.avatarUrl : defaultAvatar}
+                        alt="avatar"
+                        className="playerCard__header--img"
+                    />
                 </div>
                 <div className="playerCard__container">
                     <label className="playerCard__container--label">Player Name</label>

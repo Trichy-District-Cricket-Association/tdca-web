@@ -93,7 +93,7 @@ export default class Scorer {
         if (field == 'typeMatches_schoolMatch') this.typeMatches!.schoolMatch = parseInt(value);
         if (field == 'typeMatches_tncaMatch') this.typeMatches!.tncaMatch = parseInt(value);
         if (field == 'typeMatches_combinedDistrictMatch') this.typeMatches!.combinedDistrictMatch = parseInt(value);
-        if (field == 'typeMatches_interDistrictMatch') this.typeMatches!.interDistrictMatch = parseInt(value);
+        if (field == 'typeMatches_institutionMatch') this.typeMatches!.institutionMatch= parseInt(value);
         if (field == 'typeMatches_privateMatch') this.typeMatches!.privateMatch = parseInt(value);
     }
     set setAvatar(url: string) {

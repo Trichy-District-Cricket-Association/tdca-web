@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react';
 import { storage } from '../firebase';
 
-const defaultAvatar = `${process.env.PUBLIC_URL}/assets/images/defaultAvatar.jpg`;
-
 const useStorage = (file: any) => {
     const [progress, setProgress] = useState(0);
     const [error, setError] = useState('');
-    const [avatarUrl, setavatarUrl] = useState(defaultAvatar);
+    const [avatarUrl, setavatarUrl] = useState('');
 
     // runs every time the file value changes
     useEffect(() => {
