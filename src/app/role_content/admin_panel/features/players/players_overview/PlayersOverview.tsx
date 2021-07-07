@@ -95,11 +95,20 @@ const PlayersOverview: React.FC<void> = (): JSX.Element => {
                 <LoadingComp />
             ) : (
                 <div className="playersOverview">
+                    <Link to={PageRoutes.adminPlayers} onClick={() => setModalOpen(true)}>
+                        <button className="playersOverview__playerAddBtn">+ Add Player</button>
+                    </Link>
+                    <CSVLink
+                        className="playersOverview__dataDownload"
+                        data={JSON.parse(JSON.stringify(selectedTeamPlayers))}
+                        headers={JSON.parse(JSON.stringify(headers))}
+                    >
+                        Download Data
+                    </CSVLink>
                     {teamDocs.length !== 0 ? (
                         <div>
-                            <h2>Select Team</h2>
                             <select className="playersOverview__teamSelect" onChange={SelectedTeamPlayers}>
-                                <option>Select</option>
+                                <option>Select Team</option>
                                 {teamDocs.map((teamDoc) => (
                                     <option key={teamDoc.teamId} value={teamDoc.teamName}>
                                         {teamDoc.teamName}
@@ -110,19 +119,10 @@ const PlayersOverview: React.FC<void> = (): JSX.Element => {
                     ) : (
                         <div />
                     )}
-                    <Link to={PageRoutes.adminPlayers} onClick={() => setModalOpen(true)}>
-                        <button className="playersOverview__playerAddBtn">+ Add Player</button>
-                    </Link>
-                    <CSVLink
-                        data={JSON.parse(JSON.stringify(selectedTeamPlayers))}
-                        headers={JSON.parse(JSON.stringify(headers))}
-                    >
-                        Download Data
-                    </CSVLink>
 
                     <div className="playersOverview__playerCard">
                         {selectedTeamPlayers.length === 0 ? (
-                            <h3>No items here</h3>
+                            <h2>No items here</h2>
                         ) : (
                             selectedTeamPlayers.map((playerDoc) => (
                                 <PlayerCard playerDoc={playerDoc} key={playerDoc.docId ?? ''} />

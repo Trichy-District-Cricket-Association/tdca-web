@@ -1,13 +1,13 @@
-.matchOverview {
+.matchesOverview {
     font-family: 'Poppins';
     &__matchAddBtn {
         background-color: transparent;
-        border: 2px solid #0d4194;
+        border: 2px solid #071833;
         border-radius: 4px;
-        color: #0d4194;
+        color: #071833;
         cursor: pointer;
         font-size: 14px;
-        margin: 20px;
+        margin: 50px 20px 0px;
         padding: 0.7rem 1rem;
         text-align: center;
         text-transform: uppercase;
@@ -15,7 +15,7 @@
         font-weight: 600;
         transition: box-shadow 100ms ease-in-out, color 100ms ease-in-out;
         &:hover {
-            box-shadow: 0 0 40px 40px #0d4194 inset;
+            box-shadow: 0 0 40px 40px #071833 inset;
             color: #fff;
         }
     }
@@ -24,38 +24,50 @@
         grid-template-columns: repeat(4, 1fr);
         grid-auto-rows: auto;
     }
-    &__matchPageSelect {
-        text-align: center;
-        margin: 30px;
-        &--btn {
-            background-color: #071833;
-            padding: 0.5rem 2rem;
-            color: #fff;
-            font-size: 20px;
-            border: none;
-            cursor: pointer;
-            border-radius: 8px;
-        }
+    &__matchTypeSelect,
+    &__matchDivisionSelect select {
+        background-color: #071833;
+        color: #fff;
+        border: none;
+        font-size: 18px;
+        border-radius: 5px;
+        padding: 0.4rem 0.5rem;
+        margin: 20px;
+        font-family: 'Poppins';
+        justify-content: center;
+        cursor: pointer;
+        text-transform: uppercase;
+    }
+    &__dataDownload {
+        font: bold 16px 'Poppins';
+        text-decoration: none;
+        background-color: #071833;
+        color: #fff;
+        padding: 0.6rem 0.5rem;
+        border-radius: 2px;
+        text-transform: uppercase;
     }
 }
 @media screen and (max-width: 1400px) {
-    .matchOverview {
+    .matchesOverview {
         &__matchCard {
             grid-template-columns: repeat(3, 1fr);
         }
     }
 }
 @media screen and (max-width: 1050px) {
-    .matchOverview {
+    .matchesOverview {
+        text-align: center;
         &__matchCard {
             grid-template-columns: repeat(2, 1fr);
         }
     }
 }
 @media screen and (max-width: 695px) {
-    .matchOverview {
+    .matchesOverview {
         &__matchCard {
             grid-template-columns: repeat(1, 1fr);
+            justify-items: center;
         }
     }
 }

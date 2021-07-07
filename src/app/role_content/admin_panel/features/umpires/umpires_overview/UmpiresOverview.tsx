@@ -63,6 +63,7 @@ const UmpiresOverview: React.FC<void> = (): JSX.Element => {
                         <button className="umpiresOverview__umpireAddBtn">+ Add Umpire</button>
                     </Link>
                     <CSVLink
+                        className="umpiresOverview__dataDownload"
                         data={JSON.parse(JSON.stringify(umpireDocs))}
                         headers={JSON.parse(JSON.stringify(headers))}
                     >

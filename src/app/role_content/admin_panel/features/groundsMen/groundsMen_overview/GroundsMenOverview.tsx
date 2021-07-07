@@ -49,6 +49,7 @@ const GroundsMenOverview: React.FC<void> = (): JSX.Element => {
                         <button className="groundsMenOverview__groundsManAddBtn">+ Add GroundsMan</button>
                     </Link>
                     <CSVLink
+                        className="groundsMenOverview__dataDownload"
                         data={JSON.parse(JSON.stringify(groundsManDocs))}
                         headers={JSON.parse(JSON.stringify(headers))}
                     >

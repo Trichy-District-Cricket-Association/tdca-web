@@ -47,6 +47,7 @@ const GroundsOverview: React.FC<void> = (): JSX.Element => {
                         <button className="groundsOverview__groundAddBtn">+ Add Ground</button>
                     </Link>
                     <CSVLink
+                        className="groundsOverview__dataDownload"
                         data={JSON.parse(JSON.stringify(groundDocs))}
                         headers={JSON.parse(JSON.stringify(headers))}
                     >

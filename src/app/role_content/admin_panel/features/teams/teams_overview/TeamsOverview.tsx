@@ -50,7 +50,11 @@ const TeamsOverview: React.FC<void> = (): JSX.Element => {
                     <Link to={PageRoutes.adminTeams} onClick={() => setModalOpen(true)}>
                         <button className="teamsOverview__teamAddBtn">+ Add Team</button>
                     </Link>
-                    <CSVLink data={JSON.parse(JSON.stringify(teamDocs))} headers={JSON.parse(JSON.stringify(headers))}>
+                    <CSVLink
+                        className="teamsOverview__dataDownload"
+                        data={JSON.parse(JSON.stringify(teamDocs))}
+                        headers={JSON.parse(JSON.stringify(headers))}
+                    >
                         Download Data
                     </CSVLink>
                     <div className="teamsOverview__teamCard">

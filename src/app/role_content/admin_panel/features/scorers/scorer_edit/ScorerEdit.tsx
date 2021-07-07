@@ -101,10 +101,17 @@ const ScorerEdit: React.FC<ScorerEditProps> = ({ setModalOpen, scorerDoc }): JSX
 
                     <div>
                         <img
-                            src={avatarUrl == defaultAvatar ? scorerDoc.avatarUrl : avatarUrl}
+                            src={
+                                scorerDoc.avatarUrl == null
+                                    ? defaultAvatar
+                                    : avatarUrl
+                                    ? avatarUrl
+                                    : scorerDoc.avatarUrl
+                            }
                             alt="profile"
                             className="scorerEditForm__general--avatar"
                         />
+
                         <div className="scorerEditForm__general--avatarOverlay">
                             <label>
                                 <input

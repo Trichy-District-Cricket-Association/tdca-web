@@ -124,7 +124,13 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
 
                         <div>
                             <img
-                                src={avatarUrl == defaultAvatar ? playerDoc.avatarUrl : avatarUrl}
+                                src={
+                                    playerDoc.avatarUrl == null
+                                        ? defaultAvatar
+                                        : avatarUrl
+                                        ? avatarUrl
+                                        : playerDoc.avatarUrl
+                                }
                                 alt="profile"
                                 className="playerEditForm__general--avatar"
                             />

@@ -36,19 +36,14 @@ export default class Match {
         if (field == 'division') this.division = parseInt(value);
 
         if (field == 'teamA_teamName') this.teamA!.teamName = value;
-        if (field == 'teamA_teamId') this.teamA!.teamId = value;
         if (field == 'teamB_teamName') this.teamB!.teamName = value;
-        if (field == 'teamB_teamId') this.teamB!.teamId = value;
 
         if (field == 'umpireA_umpireName') this.umpireA!.umpireName = value;
-        if (field == 'umpireA_umpireId') this.umpireA!.umpireId = value;
         if (field == 'umpireA_umpireFeeStatus') this.umpireA!.umpireFeeStatus = value;
         if (field == 'umpireB_umpireName') this.umpireB!.umpireName = value;
-        if (field == 'umpireB_umpireId') this.umpireB!.umpireId = value;
         if (field == 'umpireB_umpireFeeStatus') this.umpireB!.umpireFeeStatus = value;
 
         if (field == 'scorer_scorerName') this.scorer!.scorerName = value;
-        if (field == 'scorer_scorerId') this.scorer!.scorerId = value;
         if (field == 'scorer_scorerFeeStatus') this.scorer!.scorerFeeStatus = value;
 
         if (field == 'type') this.type = value;

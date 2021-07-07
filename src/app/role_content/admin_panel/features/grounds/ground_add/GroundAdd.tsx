@@ -44,7 +44,7 @@ const GroundAdd: React.FC<GroundAddProps> = ({ setModalOpen }): JSX.Element => {
             isOpen={true}
             onRequestClose={() => setModalOpen(false)}
             ariaHideApp={false}
-            overlayClassName="Overlay"
+            overlayClassName="groundAdd__overlay"
         >
             <form className="groundAddForm" onSubmit={submitForm}>
                 <div className="groundAddForm__general">

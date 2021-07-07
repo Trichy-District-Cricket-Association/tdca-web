@@ -63,6 +63,7 @@ const ScorersOverview: React.FC<void> = (): JSX.Element => {
                         <button className="scorersOverview__scorerAddBtn">+ Add Scorer</button>
                     </Link>
                     <CSVLink
+                        className="scorersOverview__dataDownload"
                         data={JSON.parse(JSON.stringify(scorerDocs))}
                         headers={JSON.parse(JSON.stringify(headers))}
                     >

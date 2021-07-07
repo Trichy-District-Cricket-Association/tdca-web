@@ -2,8 +2,8 @@
     color: #fff;
     display: grid;
     background-color: #0d4194;
-    width: 380px;
-    height: 410px;
+    width: 290px;
+    height: 370px;
     margin-left: 20px;
     margin-top: 25px;
     cursor: pointer;
@@ -16,6 +16,7 @@
         margin-top: 10px;
         &--img {
             width: 150px;
+            height: 150px;
             margin-top: 4px;
             margin-bottom: 4px;
             border-radius: 12px;

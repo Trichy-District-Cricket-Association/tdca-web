@@ -73,19 +73,20 @@ const MatchesOverview: React.FC<void> = (): JSX.Element => {
             {isLoading ? (
                 <LoadingComp />
             ) : (
-                <div className="matchOverview">
+                <div className="matchesOverview">
                     <Link to={PageRoutes.adminMatches} onClick={() => setModalOpen(true)}>
-                        <button className="matchOverview__matchAddBtn">+ Add Match</button>
+                        <button className="matchesOverview__matchAddBtn">+ Add Match</button>
                     </Link>
                     <CSVLink
+                        className="matchesOverview__dataDownload"
                         data={JSON.parse(JSON.stringify(docs.map((doc) => Match.fromFirestore(doc))))}
                         headers={JSON.parse(JSON.stringify(headers))}
                     >
                         Download Data
                     </CSVLink>
-                    <div>
+                    <div className="matchesOverview__matchDivisionSelect">
                         <select
-                            className="matchesPage__matchDivisionSelect"
+                            className="matchesOverview__matchDivisionSelect--btn"
                             value={selectedDivision}
                             onChange={switchDivision}
                         >
@@ -98,11 +99,11 @@ const MatchesOverview: React.FC<void> = (): JSX.Element => {
                         </select>
                         {selectedDivision ? (
                             <select
-                                className="matchesPage__matchDivisionSelect"
+                                className="matchesOverview__matchTypeSelect--btn"
                                 value={selectedMatchType}
                                 onChange={switchMatchType}
                             >
-                                <option>Select Type</option>
+                                <option selected>Select Type</option>
                                 {matchTypes.map((matchType) => (
                                     <option key={matchType} value={matchType}>
                                         {matchType}
@@ -111,21 +112,21 @@ const MatchesOverview: React.FC<void> = (): JSX.Element => {
                             </select>
                         ) : null}
                     </div>
-                    <div className="matchOverview__matchCard">
+                    <div className="matchesOverview__matchCard">
                         {docs
                             .map((doc) => Match.fromFirestore(doc))
                             ?.map((matchDoc) => (
-                                <MatchCard matchDoc={matchDoc} key={matchDoc.docId + 'card'} />
+                                <MatchCard matchDoc={matchDoc} key={matchDoc.matchId + 'card'} />
                             ))}
                     </div>
-                    <div className="matchOverview__matchPageSelect">
+                    <div className="matchesOverview__pagination">
                         {isStart || docs.length < 10 ? null : (
-                            <button className="matchOverview__matchPageSelect--btn" onClick={() => getPrev()}>
+                            <button className="matchesOverview__pagination--btn" onClick={() => getPrev()}>
                                 Previous
                             </button>
                         )}
                         {isEnd ? null : (
-                            <button className="matchOverview__matchPageSelect--btn" onClick={() => getNext()}>
+                            <button className="matchesOverview__pagination--btn" onClick={() => getNext()}>
                                 Next
                             </button>
                         )}

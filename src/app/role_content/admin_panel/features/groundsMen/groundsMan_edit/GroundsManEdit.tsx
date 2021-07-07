@@ -96,7 +96,13 @@ const GroundsManEdit: React.FC<GroundsManEditProps> = ({ setModalOpen, groundsMa
 
                     <div>
                         <img
-                            src={avatarUrl == defaultAvatar ? groundsManDoc.avatarUrl : avatarUrl}
+                            src={
+                                groundsManDoc.avatarUrl == null
+                                    ? defaultAvatar
+                                    : avatarUrl
+                                    ? avatarUrl
+                                    : groundsManDoc.avatarUrl
+                            }
                             alt="profile"
                             className="groundsManEditForm__general--avatar"
                         />

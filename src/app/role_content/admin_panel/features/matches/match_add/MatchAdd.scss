@@ -25,15 +25,16 @@
             &--input {
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-                margin-left: 0;
             }
-            .select {
-                width: 100px;
+        }
+        &__feeStatus {
+            &--input {
+                display: flex;
             }
         }
         &__btn {
             display: flex;
-            margin-left: 3%;
+            margin-left: 2%;
             margin-top: 2%;
             margin-bottom: 2%;
             &--cancel,
@@ -43,21 +44,22 @@
                 margin-right: 0.8rem;
                 font-family: 'Poppins';
                 padding: 0.4rem 1.2em;
-                background-color: transparent;
                 border: none;
                 font-weight: 600;
                 cursor: pointer;
                 text-align: center;
                 border-radius: 10px;
-                box-shadow: 0 0 40px 40px #3d26d6 inset;
+            }
+            &--submit {
+                background-color: #3d26d6;
                 &:hover {
-                    box-shadow: 0 0 40px 40px #4a2eff inset;
+                    background-color: #3d26d6;
                 }
             }
             &--cancel {
-                box-shadow: 0 0 40px 40px #131313 inset;
+                background-color: #131313;
                 &:hover {
-                    box-shadow: 0 0 40px 40px #3a3a3a inset;
+                    background-color: #3a3a3a;
                 }
             }
         }
@@ -71,42 +73,24 @@
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.541);
 }
-/* scrollbar width */
-::-webkit-scrollbar {
-    width: 13px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-    background: #41596b;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
 @media screen and (max-width: 799px) {
     .matchAdd {
         width: 90%;
 
         .matchAddForm {
-            &__general {
-                &--header {
-                    margin-left: 35%;
-                }
-            }
-            &__matchData {
-                &--header {
-                    margin-left: 25%;
-                }
+            text-align: center;
+            &__matchData,
+            &__feeStatus {
                 .input_box {
                     max-width: 400px;
-                    margin-left: 0;
+                }
+                .selectInputBox {
+                    max-width: 400px;
+                }
+            }
+            &__feeStatus {
+                &--input {
+                    display: grid;
                 }
             }
             &__btn {

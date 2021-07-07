@@ -20,19 +20,19 @@
             width: 35%;
         }
     }
-    &__matchTypeSelect,
-    &__matchDivisionSelect {
-        background-color: #071833;
-        color: #fff;
-        border: none;
-        font-size: 18px;
-        border-radius: 5px;
-        padding: 10px 10px 10px 20px;
-        margin: 20px;
-        font-family: 'Poppins';
-        justify-content: center;
-        cursor: pointer;
-    }
+    // &__matchTypeSelect,
+    // &__matchDivisionSelect select {
+    //     background-color: #071833;
+    //     color: #fff;
+    //     border: none;
+    //     font-size: 18px;
+    //     border-radius: 5px;
+    //     padding: 10px 10px 10px 20px;
+    //     margin: 20px;
+    //     font-family: 'Poppins';
+    //     justify-content: center;
+    //     cursor: pointer;
+    // }
 
     &__matchCards {
         display: grid;
@@ -44,7 +44,7 @@
         display: block;
         background-color: #1149a3;
         width: 330px;
-        height: 350px;
+        height: 280px;
         margin-left: 20px;
         margin-top: 25px;
         cursor: pointer;
@@ -75,6 +75,10 @@
                 font-size: 15px;
                 margin-bottom: 12px;
             }
+            &--status {
+                text-align: center;
+                margin-top: 5px;
+            }
         }
     }
     &__matchPageSelect {
@@ -90,6 +94,25 @@
             border-radius: 8px;
         }
     }
+}
+/* scrollbar width */
+::-webkit-scrollbar {
+    width: 13px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #071833;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 @media screen and (max-width: 1400px) {
     .matchesPage {

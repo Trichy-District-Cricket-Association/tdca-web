@@ -100,7 +100,13 @@ const UmpireEdit: React.FC<UmpireEditProps> = ({ setModalOpen, umpireDoc }): JSX
 
                     <div>
                         <img
-                            src={avatarUrl == defaultAvatar ? umpireDoc.avatarUrl : avatarUrl}
+                            src={
+                                umpireDoc.avatarUrl == null
+                                    ? defaultAvatar
+                                    : avatarUrl
+                                    ? avatarUrl
+                                    : umpireDoc.avatarUrl
+                            }
                             alt="profile"
                             className="umpireEditForm__general--avatar"
                         />
