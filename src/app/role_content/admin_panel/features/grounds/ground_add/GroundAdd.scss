@@ -23,15 +23,16 @@
                 color: #131313;
             }
             &--input {
-                display: flex;
+                display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-                margin-left: 1%;
             }
         }
         &__general {
             .input_box {
                 max-width: 400px;
-                margin-left: 0;
+            }
+            &--input {
+                display: flex;
             }
         }
         &__btn {
@@ -94,6 +95,24 @@
                 &--submit {
                     margin-top: 4%;
                     margin-bottom: 4%;
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 546px) {
+    .groundAdd {
+        width: 90%;
+        .groundAddForm {
+            &__general {
+                &--input {
+                    display: grid;
+                }
+            }
+            &__general,
+            &__matchData {
+                &--input {
+                    margin-left: 3.5%;
                 }
             }
         }

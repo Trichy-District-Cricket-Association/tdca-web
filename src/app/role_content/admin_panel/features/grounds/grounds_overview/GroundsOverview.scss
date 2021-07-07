@@ -22,6 +22,7 @@
         display: grid;
         grid-template-columns: repeat(5, 1fr);
         grid-auto-rows: auto;
+        margin-bottom: 80px;
     }
     &__dataDownload {
         font: bold 16px 'Poppins';
