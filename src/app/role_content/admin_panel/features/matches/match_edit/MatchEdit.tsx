@@ -76,6 +76,49 @@ const MatchEdit: React.FC<MatchEditProps> = ({ setModalOpen, matchDoc }): JSX.El
         fetchSelectable();
     }, []);
 
+    function IdAvatarSetter(newMatch: any, fieldName: string, value: string) {
+        switch (fieldName) {
+            case 'teamA_teamName':
+                selectable?.teams.map((team) => {
+                    if (team.teamName == value) {
+                        newMatch.handleMatch({ field: 'teamA_teamId', value: `${team.teamId}` });
+                    }
+                });
+                break;
+            case 'teamB_teamName':
+                selectable?.teams.map((team) => {
+                    if (team.teamName == value) {
+                        newMatch.handleMatch({ field: 'teamB_teamId', value: `${team.teamId}` });
+                    }
+                });
+                break;
+            case 'umpireA_umpireName':
+                selectable?.umpires.map((umpire) => {
+                    if (umpire.umpireName == value) {
+                        newMatch.handleMatch({ field: 'umpire_umpireId', value: `${umpire.umpireId}` });
+                        match.setUmpire1Avatar = `${umpire.avatarUrl}`;
+                    }
+                });
+                break;
+            case 'umpireB_umpireName':
+                selectable?.umpires.map((umpire) => {
+                    if (umpire.umpireName == value) {
+                        newMatch.handleMatch({ field: 'umpireB_umpireId', value: `${umpire.umpireId}` });
+                        match.setUmpire2Avatar = `${umpire.avatarUrl}`;
+                    }
+                });
+                break;
+            case 'scorer_scorerName':
+                selectable?.scorers.map((scorer) => {
+                    if (scorer.scorerName == value) {
+                        newMatch.handleMatch({ field: 'scorer_scorerId', value: `${scorer.scorerId}` });
+                        match.setScorerAvatar = `${scorer.avatarUrl}`;
+                    }
+                });
+                break;
+        }
+    }
+
     const handleInputForm = (e: React.ChangeEvent<HTMLInputElement>) => {
         const fieldName = `${e.target.name}` as const;
         const newMatch = new Match({ ...match });
@@ -85,6 +128,7 @@ const MatchEdit: React.FC<MatchEditProps> = ({ setModalOpen, matchDoc }): JSX.El
     const handleSelectForm = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const fieldName = `${e.target.name}` as const;
         const newMatch = new Match({ ...match });
+        IdAvatarSetter(newMatch, fieldName, e.target.value);
         newMatch.handleMatch({ field: fieldName, value: e.target.value });
         setMatch(newMatch);
     };

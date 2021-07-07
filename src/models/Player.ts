@@ -9,6 +9,8 @@ export default class Player {
 
     teamName?: string;
 
+    teamId?: string;
+
     playerName?: string;
 
     avatarUrl?: string;
@@ -41,6 +43,7 @@ export default class Player {
         if (field == 'playerName') this.playerName = value;
         if (field == 'playerId') this.playerId = value;
         if (field == 'teamName') this.teamName = value;
+        if (field == 'teamId') this.teamId = value;
         if (field == 'emailId') this.emailId = value;
         if (field == 'dateOfBirth') this.dateOfBirth = new Date(value);
         if (field == 'fatherName') this.fatherName = value;
@@ -76,6 +79,7 @@ export default class Player {
         docId,
         playerId,
         teamName,
+        teamId,
         playerName,
         avatarUrl,
         emailId,
@@ -94,6 +98,7 @@ export default class Player {
         docId?: string;
         playerId?: string;
         teamName?: string;
+        teamId?: string;
         playerName?: string;
         avatarUrl?: string;
         emailId?: string;
@@ -112,6 +117,7 @@ export default class Player {
         if (docId) this.docId = docId;
         this.playerId = playerId ?? '';
         this.teamName = teamName ?? '';
+        this.teamId = teamId ?? '';
         this.playerName = playerName ?? '';
         if (avatarUrl) this.avatarUrl = avatarUrl;
         this.emailId = emailId ?? '';
@@ -147,6 +153,7 @@ export default class Player {
             docId: doc.id,
             playerId: doc.data()?.playerId,
             teamName: doc.data()?.teamName,
+            teamId: doc.data()?.teamId,
             playerName: doc.data()?.playerName,
             avatarUrl: doc.data()?.avatarUrl,
             emailId: doc.data()?.emailId,

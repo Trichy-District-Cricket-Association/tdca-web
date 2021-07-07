@@ -65,8 +65,14 @@ const PlayerAdd: React.FC<PlayerAddProps> = ({ setModalOpen }): JSX.Element => {
     };
     const handleSelectForm = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const fieldName = `${e.target.name}` as const;
-        console.log(fieldName);
         const newPlayer = new Player({ ...player });
+        if (fieldName == 'teamName') {
+            selectable?.teams.map((team) => {
+                if (team.teamName == e.target.value) {
+                    newPlayer.handlePlayer({ field: 'teamId', value: `${team.teamId}` });
+                }
+            });
+        }
         newPlayer.handlePlayer({ field: fieldName, value: e.target.value });
         setPlayer(newPlayer);
     };
