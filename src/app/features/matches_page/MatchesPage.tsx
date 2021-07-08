@@ -51,9 +51,9 @@ const MatchesPage: React.FC<void> = (): JSX.Element => {
                         </div>
                         <div className="matchesPage__header__header2"></div>
                     </div>
-                    <div>
+                    <div className="matchesPage__matchDivisionSelect">
                         <select
-                            className="matchesPage__matchDivisionSelect"
+                            className="matchesPage__matchDivisionSelect--btn"
                             value={selectedDivision}
                             onChange={switchDivision}
                         >
@@ -66,11 +66,11 @@ const MatchesPage: React.FC<void> = (): JSX.Element => {
                         </select>
                         {selectedDivision ? (
                             <select
-                                className="matchesPage__matchDivisionSelect"
+                                className="matchesPage__matchTypeSelect--btn"
                                 value={selectedMatchType}
                                 onChange={switchMatchType}
                             >
-                                <option>Select Type</option>
+                                <option selected>Select Type</option>
                                 {matchTypes.map((matchType) => (
                                     <option key={matchType} value={matchType}>
                                         {matchType}
@@ -97,9 +97,13 @@ const MatchesPage: React.FC<void> = (): JSX.Element => {
                                             <p className="matchCard__container--text">{matchDoc.type}</p>
                                         </div>
                                         <div>
+                                            <label className="matchCard__container--label">Date</label>
+                                            <p className="matchCard__container--text">
+                                                {matchDoc.date?.toISOString().substr(0, 10)}
+                                            </p>
                                             <label className="matchCard__container--label">Time</label>
                                             <p className="matchCard__container--text">
-                                                {matchDoc.date?.toISOString().substr(0, 16)}
+                                                {matchDoc.date?.toISOString().substr(11, 8)}
                                             </p>
                                             <label className="matchCard__container--label">Venue</label>
                                             <p className="matchCard__container--text">{matchDoc.venue}</p>

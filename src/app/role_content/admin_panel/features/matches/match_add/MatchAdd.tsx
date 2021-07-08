@@ -103,6 +103,8 @@ const MatchAdd: React.FC<MatchAddProps> = ({ setModalOpen }): JSX.Element => {
                     }
                 });
                 break;
+            default:
+                null;
         }
     }
 
