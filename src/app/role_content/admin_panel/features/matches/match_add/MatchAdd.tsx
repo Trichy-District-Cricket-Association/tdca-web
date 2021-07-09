@@ -18,6 +18,7 @@ type MatchAddProps = {
 };
 
 const MatchAdd: React.FC<MatchAddProps> = ({ setModalOpen }): JSX.Element => {
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [match, setMatch] = useState<Match>(new Match({}));
     const [selectable, setSelectable] = useState<
         { teams: Team[]; scorers: Scorer[]; umpires: Umpire[]; grounds: Ground[] } | undefined
@@ -125,6 +126,7 @@ const MatchAdd: React.FC<MatchAddProps> = ({ setModalOpen }): JSX.Element => {
 
     const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
         await firestore
             .collection(Collections.matches)
             .add(JSON.parse(JSON.stringify(match)))
@@ -148,7 +150,9 @@ const MatchAdd: React.FC<MatchAddProps> = ({ setModalOpen }): JSX.Element => {
             ariaHideApp={false}
             overlayClassName="Overlay"
         >
-            {selectable ? (
+            {isLoading ? (
+                <LoadingComp />
+            ) : selectable ? (
                 <form className="matchAddForm" onSubmit={submitForm}>
                     {console.log(selectable.teams.map((team) => team.teamName))}
                     <div className="matchAddForm__matchData">

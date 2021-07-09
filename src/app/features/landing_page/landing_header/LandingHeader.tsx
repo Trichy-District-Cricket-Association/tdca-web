@@ -20,7 +20,7 @@ const LandingHeader: React.FC<any> = (): JSX.Element => {
                     </p>
                     <button className="header__container--contactBtn">
                         Contact
-                        <i className="icons">
+                        <i className="icon">
                             <MdKeyboardArrowRight />
                         </i>
                     </button>

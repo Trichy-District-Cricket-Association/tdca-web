@@ -8,12 +8,14 @@ import InputBox from '../../../shared_components/input_box/InputBox';
 import './GroundsManAdd.scss';
 import useStorage from '../../../../../../hooks/useStorage';
 import firebase from 'firebase';
+import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
 const defaultAvatar = `${process.env.PUBLIC_URL}/assets/images/defaultAvatar.jpg`;
 type GroundsManAddProps = {
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const GroundsManAdd: React.FC<GroundsManAddProps> = ({ setModalOpen }): JSX.Element => {
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [groundsMan, setGroundsMan] = useState<GroundsMan>(new GroundsMan({}));
 
     // State to handle uploading files.
@@ -48,6 +50,7 @@ const GroundsManAdd: React.FC<GroundsManAddProps> = ({ setModalOpen }): JSX.Elem
     };
     const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
         groundsMan.setAvatar = avatarUrl;
         await firestore
             .collection(Collections.groundsMen)
@@ -72,78 +75,89 @@ const GroundsManAdd: React.FC<GroundsManAddProps> = ({ setModalOpen }): JSX.Elem
             ariaHideApp={false}
             overlayClassName="Overlay"
         >
-            <form className="groundsManAddForm" onSubmit={submitForm}>
-                <div className="groundsManAddForm__general">
-                    {/* error message */}
-                    {<p>{error}</p>}
-
-                    {/* image display */}
-
-                    <div>
-                        <img
-                            src={avatarUrl ? avatarUrl : defaultAvatar}
-                            alt="profile"
-                            className="groundsManAddForm__general--avatar"
-                        />
-                        <div className="groundsManAddForm__general--avatarOverlay">
-                            <label>
-                                <input
-                                    type="file"
-                                    name="avatarUrl"
-                                    className="groundsManAddForm__general--uploadBtn"
-                                    onChange={handleAvatarChange}
-                                />
-                                <MdEdit className="editIcon" />
-                            </label>
+            {isLoading ? (
+                <LoadingComp />
+            ) : (
+                <form className="groundsManAddForm" onSubmit={submitForm}>
+                    <div className="groundsManAddForm__general">
+                        {/* error message */}
+                        {<p>{error}</p>}
+                        <div>
+                            <img
+                                src={avatarUrl ? avatarUrl : defaultAvatar}
+                                alt="profile"
+                                className="groundsManAddForm__general--avatar"
+                            />
+                            <div className="groundsManAddForm__general--avatarOverlay">
+                                <label>
+                                    <input
+                                        type="file"
+                                        name="avatarUrl"
+                                        className="groundsManAddForm__general--uploadBtn"
+                                        onChange={handleAvatarChange}
+                                    />
+                                    <MdEdit className="editIcon" />
+                                </label>
+                            </div>
+                        </div>
+                        <h1 className="groundsManAddForm__general--header">General</h1>
+                        <div className="groundsManAddForm__general--input">
+                            <InputBox title="GroundsMan Id" name="groundsManId" type="text" textHandler={handleForm} />
+                            <InputBox
+                                title="GroundsMan Name"
+                                name="groundsManName"
+                                type="text"
+                                textHandler={handleForm}
+                            />
+                            <InputBox title="Email Id" name="emailId" type="text" textHandler={handleForm} />
+                            <InputBox title="Date of Birth" name="dateOfBirth" type="date" textHandler={handleForm} />
+                            <InputBox
+                                title="Primary Contact"
+                                name="primaryContact"
+                                type="text"
+                                textHandler={handleForm}
+                            />
+                            <InputBox
+                                title="Secondary Contact"
+                                name="secondaryContact"
+                                type="text"
+                                textHandler={handleForm}
+                            />
+                            <InputBox title="Address" name="address" type="text" textHandler={handleForm} />
                         </div>
                     </div>
-                    <h1 className="groundsManAddForm__general--header">General</h1>
-                    <div className="groundsManAddForm__general--input">
-                        <InputBox title="GroundsMan Id" name="groundsManId" type="text" textHandler={handleForm} />
-                        <InputBox title="GroundsMan Name" name="groundsManName" type="text" textHandler={handleForm} />
-                        <InputBox title="Email Id" name="emailId" type="text" textHandler={handleForm} />
-                        <InputBox title="Date of Birth" name="dateOfBirth" type="date" textHandler={handleForm} />
-                        <InputBox title="Primary Contact" name="primaryContact" type="text" textHandler={handleForm} />
-                        <InputBox
-                            title="Secondary Contact"
-                            name="secondaryContact"
-                            type="text"
-                            textHandler={handleForm}
-                        />
-                        <InputBox title="Address" name="address" type="text" textHandler={handleForm} />
+                    <div className="groundsManAddForm__personalData">
+                        <h1 className="groundsManAddForm__personalData--header">Personal Details</h1>
+                        <div className="groundsManAddForm__personalData--input">
+                            <InputBox title="Aadhar Number" name="aadharNumber" type="text" textHandler={handleForm} />
+                            <InputBox
+                                title="GPay / PhonePay Number"
+                                name="payPhoneNumber"
+                                type="text"
+                                textHandler={handleForm}
+                            />
+                            <InputBox
+                                title="Bank Account Number"
+                                name="bankAccountNumber"
+                                type="text"
+                                textHandler={handleForm}
+                            />
+                            <InputBox title="Bank Name" name="bankName" type="text" textHandler={handleForm} />
+                            <InputBox title="Bank Branch" name="bankBranch" type="text" textHandler={handleForm} />
+                            <InputBox title="Bank IFSC Code" name="bankIFSC" type="text" textHandler={handleForm} />
+                        </div>
                     </div>
-                </div>
-                <div className="groundsManAddForm__personalData">
-                    <h1 className="groundsManAddForm__personalData--header">Personal Details</h1>
-                    <div className="groundsManAddForm__personalData--input">
-                        <InputBox title="Aadhar Number" name="aadharNumber" type="text" textHandler={handleForm} />
-                        <InputBox
-                            title="GPay / PhonePay Number"
-                            name="payPhoneNumber"
-                            type="text"
-                            textHandler={handleForm}
-                        />
-                        <InputBox
-                            title="Bank Account Number"
-                            name="bankAccountNumber"
-                            type="text"
-                            textHandler={handleForm}
-                        />
-                        <InputBox title="Bank Name" name="bankName" type="text" textHandler={handleForm} />
-                        <InputBox title="Bank Branch" name="bankBranch" type="text" textHandler={handleForm} />
-                        <InputBox title="Bank IFSC Code" name="bankIFSC" type="text" textHandler={handleForm} />
-                    </div>
-                </div>
 
-                <div className="groundsManAddForm__btn">
-                    <button className="groundsManAddForm__btn--cancel" onClick={() => setModalOpen(false)}>
-                        Cancel
-                    </button>
-                    <button className="groundsManAddForm__btn--submit" type="submit">
-                        Save
-                    </button>
-                </div>
-            </form>
+                    <div className="groundsManAddForm__btn">
+                        <button className="groundsManAddForm__btn--cancel" onClick={() => setModalOpen(false)}>
+                            Cancel
+                        </button>
+                        <button className="groundsManAddForm__btn--submit" type="submit">
+                            Save
+                        </button>
+                    </div>
+                </form>
+            )}
         </Modal>
     );
 };

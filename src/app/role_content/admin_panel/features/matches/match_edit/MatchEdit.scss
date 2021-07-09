@@ -9,18 +9,29 @@
     bottom: 40px;
     background-color: #fff;
     overflow-y: scroll;
-    &__overlay {
-        background-color: #131313;
-    }
     .matchEditForm {
         &__matchData,
         &__feeStatus {
-            &--header {
-                margin-top: 2%;
-                margin-left: 3%;
-                font-family: 'Poppins';
-                font-weight: 400;
-                color: #131313;
+            &__header {
+                display: flex;
+                justify-content: space-between;
+                &--text {
+                    margin-top: 2%;
+                    margin-left: 3%;
+                    font-family: 'Poppins';
+                    font-weight: 400;
+                    color: #131313;
+                }
+                &--iconBtn {
+                    color: rgb(236, 39, 39);
+                    font-size: 29px;
+                    margin-top: 27px;
+                    margin-right: 27px;
+                    cursor: pointer;
+                    border: none;
+                    background-color: #fff;
+                    padding: 0;
+                }
             }
             &--input {
                 display: grid;
@@ -28,6 +39,48 @@
                 margin-left: 1%;
             }
         }
+        &__btn {
+            display: flex;
+            margin-left: 2%;
+            margin-top: 2%;
+            margin-bottom: 2%;
+            &--cancel,
+            &--submit {
+                font-size: 14px;
+                color: #fff;
+                margin-right: 0.8rem;
+                font-family: 'Poppins';
+                padding: 0.4rem 1.2em;
+                border: none;
+                font-weight: 600;
+                cursor: pointer;
+                text-align: center;
+                border-radius: 10px;
+            }
+            &--submit {
+                background-color: #3d26d6;
+                &:hover {
+                    background-color: #3d26d6;
+                }
+            }
+            &--cancel {
+                background-color: #131313;
+                &:hover {
+                    background-color: #3a3a3a;
+                }
+            }
+        }
+    }
+    .matchDelete {
+        width: 30%;
+        height: 10%;
+        border-radius: 10px;
+        position: relative;
+        top: 200px;
+        left: 50%;
+        transform: translate(-50%, 0%);
+        bottom: 40px;
+        background-color: #fff;
         &__btn {
             display: flex;
             margin-left: 2%;

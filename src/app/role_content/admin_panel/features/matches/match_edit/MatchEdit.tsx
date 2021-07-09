@@ -11,6 +11,7 @@ import Umpire from '../../../../../../models/Umpire';
 import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
 import SelectInputBox from '../../../shared_components/select_input_box/SelectInputBox';
 import Ground from '../../../../../../models/Ground';
+import { MdDelete } from 'react-icons/md';
 
 type MatchEditProps = {
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -18,6 +19,7 @@ type MatchEditProps = {
 };
 
 const MatchEdit: React.FC<MatchEditProps> = ({ setModalOpen, matchDoc }): JSX.Element => {
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [match, setMatch] = useState<Match>(
         new Match({
             matchId: matchDoc.matchId,
@@ -134,6 +136,7 @@ const MatchEdit: React.FC<MatchEditProps> = ({ setModalOpen, matchDoc }): JSX.El
     };
     const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
         await firestore
             .collection(Collections.matches)
             .doc(matchDoc.docId)
@@ -146,6 +149,18 @@ const MatchEdit: React.FC<MatchEditProps> = ({ setModalOpen, matchDoc }): JSX.El
             });
         setModalOpen(false);
     };
+    const deleteForm: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
+        e.preventDefault();
+        const answer = window.confirm('Are you sure you want to delete?');
+        if (answer) {
+            setIsLoading(true);
+            await firestore
+                .collection(Collections.matches)
+                .doc(matchDoc.docId)
+                .delete()
+                .then(() => setModalOpen(false));
+        }
+    };
     return (
         <Modal
             className="matchEdit"
@@ -155,10 +170,19 @@ const MatchEdit: React.FC<MatchEditProps> = ({ setModalOpen, matchDoc }): JSX.El
             overlayClassName="Overlay"
             key={matchDoc.docId + 'editCard'}
         >
-            {selectable ? (
+            {isLoading ? (
+                <LoadingComp />
+            ) : selectable ? (
                 <form className="matchEditForm" onSubmit={submitForm}>
                     <div className="matchEditForm__matchData">
-                        <h1 className="matchEditForm__matchData--header">Match Details</h1>
+                        <div className="matchEditForm__matchData__header">
+                            <h1 className="matchEditForm__matchData__header--text">Match Details</h1>
+                            <button className="matchEditForm__matchData__header--iconBtn" onClick={deleteForm}>
+                                <i>
+                                    <MdDelete />
+                                </i>
+                            </button>
+                        </div>
                         <div className="matchEditForm__matchData--input">
                             <InputBox
                                 title="Match Id"
@@ -239,7 +263,10 @@ const MatchEdit: React.FC<MatchEditProps> = ({ setModalOpen, matchDoc }): JSX.El
                             />
                         </div>
                         <div className="matchEditForm__feeStatus">
-                            <h1 className="matchEditForm__feeStatus--header">Fee Status</h1>
+                            <div className="matchEditForm__feeStatus__header">
+                                <h1 className="matchEditForm__feeStatus__header--text">Fee Status</h1>
+                            </div>
+
                             <div className="matchEditForm__feeStatus--input">
                                 <SelectInputBox
                                     title="Umpire I Fee Status"
