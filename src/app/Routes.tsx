@@ -15,6 +15,7 @@ import PlayersOverview from './role_content/admin_panel/features/players/players
 import MatchesPage from './features/matches_page/MatchesPage';
 import TeamsPage from './features/teams_page/TeamsPage';
 import StaffsPage from './features/staffs_page/StaffsPage';
+import TeamPlayersOverview from './role_content/team_panel/team_players/team_players_overview/TeamPlayersOverview';
 
 const Routes = () => (
     <Switch>
@@ -40,6 +41,9 @@ const Routes = () => (
         <ProtectedRoute exact path={PageRoutes.adminTeams} userRole={UserRoles.admin} component={TeamsOverview} />
         <ProtectedRoute exact path={PageRoutes.adminMatches} userRole={UserRoles.admin} component={MatchesOverview} />
         <ProtectedRoute exact path={PageRoutes.adminScorecards} userRole={UserRoles.admin} component={AdminPanel} />
+
+        {/*  Team panel Route */}
+        <ProtectedRoute exact path={PageRoutes.teamPanel} userRole={UserRoles.team} component={TeamPlayersOverview} />
     </Switch>
 );
 

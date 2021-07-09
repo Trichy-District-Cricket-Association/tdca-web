@@ -45,9 +45,9 @@ const GroundsMenOverview: React.FC<void> = (): JSX.Element => {
                 <LoadingComp />
             ) : (
                 <div className="groundsMenOverview">
-                    <Link to={PageRoutes.adminGroundsMen} onClick={() => setModalOpen(true)}>
-                        <button className="groundsMenOverview__groundsManAddBtn">+ Add GroundsMan</button>
-                    </Link>
+                    <button className="groundsMenOverview__groundsManAddBtn" onClick={() => setModalOpen(true)}>
+                        + Add GroundsMan
+                    </button>
                     <CSVLink
                         className="groundsMenOverview__dataDownload"
                         data={JSON.parse(JSON.stringify(groundsManDocs))}

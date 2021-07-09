@@ -74,9 +74,9 @@ const MatchesOverview: React.FC<void> = (): JSX.Element => {
                 <LoadingComp />
             ) : (
                 <div className="matchesOverview">
-                    <Link to={PageRoutes.adminMatches} onClick={() => setModalOpen(true)}>
-                        <button className="matchesOverview__matchAddBtn">+ Add Match</button>
-                    </Link>
+                    <button className="matchesOverview__matchAddBtn" onClick={() => setModalOpen(true)}>
+                        + Add Match
+                    </button>
                     <CSVLink
                         className="matchesOverview__dataDownload"
                         data={JSON.parse(JSON.stringify(docs.map((doc) => Match.fromFirestore(doc))))}

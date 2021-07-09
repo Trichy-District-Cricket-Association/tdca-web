@@ -30,6 +30,12 @@ const TopNav = (): JSX.Element => {
                             </button>
                             <SideNavBar sidebar={sidebar} showSidebar={showSidebar} />
                         </div>
+                    ) : authData?.role == UserRoles.team ? (
+                        <div>
+                            <Link to={PageRoutes.teamPanel} className="nav__menu-bars">
+                                <BsGear />
+                            </Link>
+                        </div>
                     ) : (
                         <div />
                     )}

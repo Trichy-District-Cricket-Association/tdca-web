@@ -59,9 +59,9 @@ const UmpiresOverview: React.FC<void> = (): JSX.Element => {
                 <LoadingComp />
             ) : (
                 <div className="umpiresOverview">
-                    <Link to={PageRoutes.adminUmpires} onClick={() => setModalOpen(true)}>
-                        <button className="umpiresOverview__umpireAddBtn">+ Add Umpire</button>
-                    </Link>
+                    <button className="umpiresOverview__umpireAddBtn" onClick={() => setModalOpen(true)}>
+                        + Add Umpire
+                    </button>
                     <CSVLink
                         className="umpiresOverview__dataDownload"
                         data={JSON.parse(JSON.stringify(umpireDocs))}

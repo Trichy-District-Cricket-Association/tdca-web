@@ -43,9 +43,10 @@ const GroundsOverview: React.FC<void> = (): JSX.Element => {
                 <LoadingComp />
             ) : (
                 <div className="groundsOverview">
-                    <Link to={PageRoutes.adminGrounds} onClick={() => setModalOpen(true)}>
-                        <button className="groundsOverview__groundAddBtn">+ Add Ground</button>
-                    </Link>
+                    <button className="groundsOverview__groundAddBtn" onClick={() => setModalOpen(true)}>
+                        + Add Ground
+                    </button>
+
                     <CSVLink
                         className="groundsOverview__dataDownload"
                         data={JSON.parse(JSON.stringify(groundDocs))}

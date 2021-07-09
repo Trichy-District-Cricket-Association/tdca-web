@@ -1,24 +1,22 @@
-export enum PageRoutes{
+export enum PageRoutes {
     // MAIN ROUTES
     home = '/',
     matches = '/matches',
     staffs = '/staffs',
-    teams='/teams',
+    teams = '/teams',
     contact = '/contact',
 
     //  ADMIN PANEL ROUTES
     adminPanel = '/admin',
-    adminGrounds='/admin/grounds',
-    adminGroundsMen='/admin/groundsMen',
-    adminMatches='/admin/matches',
-    adminPlayers='/admin/players',
-    adminScorers='/admin/scorers',
-    adminScorecards='/admin/scorecards',
-    adminTeams='/admin/teams',
-    adminUmpires='/admin/umpires',  
-    
-    // ADMIN PANEL GROUND ROUTES
-    adminGroundAdd = '/admin/grounds/add',
-    adminGroundUpdate = '/admin/grounds/update',
+    adminGrounds = '/admin/grounds',
+    adminGroundsMen = '/admin/groundsMen',
+    adminMatches = '/admin/matches',
+    adminPlayers = '/admin/players',
+    adminScorers = '/admin/scorers',
+    adminScorecards = '/admin/scorecards',
+    adminTeams = '/admin/teams',
+    adminUmpires = '/admin/umpires',
 
-};
+    // TEAM PANEL ROUTES
+    teamPanel = '/team',
+}

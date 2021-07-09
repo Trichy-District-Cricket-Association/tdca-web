@@ -47,9 +47,10 @@ const TeamsOverview: React.FC<void> = (): JSX.Element => {
                 <LoadingComp />
             ) : (
                 <div className="teamsOverview">
-                    <Link to={PageRoutes.adminTeams} onClick={() => setModalOpen(true)}>
-                        <button className="teamsOverview__teamAddBtn">+ Add Team</button>
-                    </Link>
+                    <button className="teamsOverview__teamAddBtn" onClick={() => setModalOpen(true)}>
+                        + Add Team
+                    </button>
+
                     <CSVLink
                         className="teamsOverview__dataDownload"
                         data={JSON.parse(JSON.stringify(teamDocs))}
