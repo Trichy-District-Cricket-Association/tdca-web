@@ -133,9 +133,9 @@ const GroundsManEdit: React.FC<GroundsManEditProps> = ({ setModalOpen, groundsMa
                                 </label>
                             </div>
                         </div>
-                        <div className="groundsManEditForm___general__header">
-                            <h1 className="groundsManEditForm___general__header--text">General</h1>
-                            <button className="groundsManEditForm___general__header--iconBtn" onClick={deleteForm}>
+                        <div className="groundsManEditForm__general__header">
+                            <h1 className="groundsManEditForm__general__header--text">General</h1>
+                            <button className="groundsManEditForm__general__header--iconBtn" onClick={deleteForm}>
                                 <i>
                                     <MdDelete />
                                 </i>
@@ -195,7 +195,9 @@ const GroundsManEdit: React.FC<GroundsManEditProps> = ({ setModalOpen, groundsMa
                         </div>
                     </div>
                     <div className="groundsManEditForm__personalData">
-                        <h1 className="groundsManEditForm__personalData--header">Personal Details</h1>
+                        <div className="groundsManEditForm__personalData__header">
+                            <h1 className="groundsManEditForm__personalData__header--text">Personal Details</h1>
+                        </div>
                         <div className="groundsManEditForm__personalData--input">
                             <InputBox
                                 title="Aadhar Number"

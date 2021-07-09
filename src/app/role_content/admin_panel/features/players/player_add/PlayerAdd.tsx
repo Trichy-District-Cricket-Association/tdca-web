@@ -16,6 +16,7 @@ type PlayerAddProps = {
 };
 
 const PlayerAdd: React.FC<PlayerAddProps> = ({ setModalOpen }): JSX.Element => {
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [player, setPlayer] = useState<Player>(new Player({}));
 
     // State to handle uploading files.
@@ -79,6 +80,7 @@ const PlayerAdd: React.FC<PlayerAddProps> = ({ setModalOpen }): JSX.Element => {
     const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         player.setAvatar = avatarUrl;
+        setIsLoading(true);
         await firestore
             .collection(Collections.players)
             .add(JSON.parse(JSON.stringify(player)))
@@ -98,7 +100,9 @@ const PlayerAdd: React.FC<PlayerAddProps> = ({ setModalOpen }): JSX.Element => {
             ariaHideApp={false}
             overlayClassName="Overlay"
         >
-            {selectable ? (
+            {isLoading ? (
+                <LoadingComp />
+            ) : selectable ? (
                 <form className="playerAddForm" onSubmit={submitForm}>
                     <div className="playerAddForm__general">
                         {/* error message */}

@@ -5,6 +5,8 @@ import { Collections } from '../../../../../../enums/collection';
 import Team from '../../../../../../models/Team';
 import InputBox from '../../../shared_components/input_box/InputBox';
 import './TeamEdit.scss';
+import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
+import { MdDelete } from 'react-icons/md';
 
 type TeamEditProps = {
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -12,6 +14,7 @@ type TeamEditProps = {
 };
 
 const TeamEdit: React.FC<TeamEditProps> = ({ setModalOpen, teamDoc }): JSX.Element => {
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [team, setTeam] = useState<Team>(
         new Team({
             teamId: teamDoc.teamId,
@@ -41,6 +44,7 @@ const TeamEdit: React.FC<TeamEditProps> = ({ setModalOpen, teamDoc }): JSX.Eleme
 
     const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
         await firestore
             .collection(Collections.teams)
             .doc(teamDoc.docId)
@@ -53,7 +57,18 @@ const TeamEdit: React.FC<TeamEditProps> = ({ setModalOpen, teamDoc }): JSX.Eleme
             });
         setModalOpen(false);
     };
-
+    const deleteForm: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
+        e.preventDefault();
+        const answer = window.confirm('Are you sure you want to delete?');
+        if (answer) {
+            setIsLoading(true);
+            await firestore
+                .collection(Collections.teams)
+                .doc(teamDoc.docId)
+                .delete()
+                .then(() => setModalOpen(false));
+        }
+    };
     return (
         <Modal
             className="teamEdit"
@@ -62,119 +77,145 @@ const TeamEdit: React.FC<TeamEditProps> = ({ setModalOpen, teamDoc }): JSX.Eleme
             ariaHideApp={false}
             overlayClassName="Overlay"
         >
-            <form className="teamEditForm" onSubmit={submitForm}>
-                <div className="teamEditForm__general">
-                    <h1 className="teamEditForm__general--header">General</h1>
-                    <div className="teamEditForm__general--input">
-                        <InputBox
-                            title="Team Id"
-                            name="teamId"
-                            type="text"
-                            value={teamDoc.teamId}
-                            textHandler={handleForm}
-                        />
-                        <InputBox
-                            title="Team Name"
-                            name="teamName"
-                            type="text"
-                            value={teamDoc.teamName}
-                            textHandler={handleForm}
-                        />
-                        <InputBox
-                            title="Email Id"
-                            name="emailId"
-                            type="text"
-                            value={teamDoc.emailId}
-                            textHandler={handleForm}
-                        />
+            {isLoading ? (
+                <LoadingComp />
+            ) : (
+                <form className="teamEditForm" onSubmit={submitForm}>
+                    <div className="teamEditForm__general">
+                        <div className="teamEditForm__general__header">
+                            <h1 className="teamEditForm__general__header--text">General</h1>
+                            <button className="teamEditForm__general__header--iconBtn" onClick={deleteForm}>
+                                <i>
+                                    <MdDelete />
+                                </i>
+                            </button>
+                        </div>
+
+                        <div className="teamEditForm__general--input">
+                            <InputBox
+                                title="Team Id"
+                                name="teamId"
+                                type="text"
+                                value={teamDoc.teamId}
+                                textHandler={handleForm}
+                            />
+                            <InputBox
+                                title="Team Name"
+                                name="teamName"
+                                type="text"
+                                value={teamDoc.teamName}
+                                textHandler={handleForm}
+                            />
+                            <InputBox
+                                title="Email Id"
+                                name="emailId"
+                                type="text"
+                                value={teamDoc.emailId}
+                                textHandler={handleForm}
+                            />
+                        </div>
                     </div>
-                </div>
-                <div className="teamEditForm__matchData">
-                    <h1 className="teamEditForm__matchData--header">Match Details</h1>
-                    <div className="teamEditForm__matchData--input">
-                        <InputBox
-                            title="Division"
-                            name="division"
-                            type="number"
-                            value={teamDoc.division}
-                            textHandler={handleForm}
-                        />
-                        <InputBox
-                            title="Matches Played"
-                            name="numberOfMatches"
-                            type="number"
-                            value={teamDoc.numberOfMatches}
-                            textHandler={handleForm}
-                        />
-                        <InputBox title="Won" name="won" type="number" value={teamDoc.won} textHandler={handleForm} />
-                        <InputBox
-                            title="Lost"
-                            name="lost"
-                            type="number"
-                            value={teamDoc.lost}
-                            textHandler={handleForm}
-                        />
-                        <InputBox
-                            title="Draw"
-                            name="draw"
-                            type="number"
-                            value={teamDoc.draw}
-                            textHandler={handleForm}
-                        />
-                        <InputBox title="Tie" name="tie" type="number" value={teamDoc.tie} textHandler={handleForm} />
-                        <InputBox
-                            title="No Result"
-                            name="noResult"
-                            type="number"
-                            value={teamDoc.noResult}
-                            textHandler={handleForm}
-                        />
-                        <InputBox
-                            title="Total Points"
-                            name="totalPoints"
-                            type="number"
-                            textHandler={handleForm}
-                            value={teamDoc.totalPoints}
-                        />
-                        <InputBox
-                            title="Walkover"
-                            name="walkover"
-                            type="number"
-                            value={teamDoc.walkover}
-                            textHandler={handleForm}
-                        />
-                        <InputBox
-                            title="Conceed"
-                            name="conceed"
-                            type="number"
-                            value={teamDoc.conceed}
-                            textHandler={handleForm}
-                        />
-                        <InputBox
-                            title="Refusal"
-                            name="refusal"
-                            type="number"
-                            value={teamDoc.refusal}
-                            textHandler={handleForm}
-                        />
-                        <InputBox
-                            title="Penalty"
-                            name="penalty"
-                            type="number"
-                            value={teamDoc.penalty}
-                            textHandler={handleForm}
-                        />
+                    <div className="teamEditForm__matchData">
+                        <div className="teamEditForm__general__header">
+                            <h1 className="teamEditForm__general__header--text">Match Details</h1>
+                        </div>
+                        <div className="teamEditForm__matchData--input">
+                            <InputBox
+                                title="Division"
+                                name="division"
+                                type="number"
+                                value={teamDoc.division}
+                                textHandler={handleForm}
+                            />
+                            <InputBox
+                                title="Matches Played"
+                                name="numberOfMatches"
+                                type="number"
+                                value={teamDoc.numberOfMatches}
+                                textHandler={handleForm}
+                            />
+                            <InputBox
+                                title="Won"
+                                name="won"
+                                type="number"
+                                value={teamDoc.won}
+                                textHandler={handleForm}
+                            />
+                            <InputBox
+                                title="Lost"
+                                name="lost"
+                                type="number"
+                                value={teamDoc.lost}
+                                textHandler={handleForm}
+                            />
+                            <InputBox
+                                title="Draw"
+                                name="draw"
+                                type="number"
+                                value={teamDoc.draw}
+                                textHandler={handleForm}
+                            />
+                            <InputBox
+                                title="Tie"
+                                name="tie"
+                                type="number"
+                                value={teamDoc.tie}
+                                textHandler={handleForm}
+                            />
+                            <InputBox
+                                title="No Result"
+                                name="noResult"
+                                type="number"
+                                value={teamDoc.noResult}
+                                textHandler={handleForm}
+                            />
+                            <InputBox
+                                title="Total Points"
+                                name="totalPoints"
+                                type="number"
+                                textHandler={handleForm}
+                                value={teamDoc.totalPoints}
+                            />
+                            <InputBox
+                                title="Walkover"
+                                name="walkover"
+                                type="number"
+                                value={teamDoc.walkover}
+                                textHandler={handleForm}
+                            />
+                            <InputBox
+                                title="Conceed"
+                                name="conceed"
+                                type="number"
+                                value={teamDoc.conceed}
+                                textHandler={handleForm}
+                            />
+                            <InputBox
+                                title="Refusal"
+                                name="refusal"
+                                type="number"
+                                value={teamDoc.refusal}
+                                textHandler={handleForm}
+                            />
+                            <InputBox
+                                title="Penalty"
+                                name="penalty"
+                                type="number"
+                                value={teamDoc.penalty}
+                                textHandler={handleForm}
+                            />
+                        </div>
                     </div>
-                </div>
-                <div className="teamEditForm__btn">
-                    <button className="teamEditForm__btn--cancel" onClick={() => setModalOpen(false)}>
-                        Cancel
-                    </button>
-                    <button className="teamEditForm__btn--submit" type="submit">
-                        Save
-                    </button>
-                </div>
-            </form>
+                    <div className="teamEditForm__btn">
+                        <button className="teamEditForm__btn--cancel" onClick={() => setModalOpen(false)}>
+                            Cancel
+                        </button>
+                        <button className="teamEditForm__btn--submit" type="submit">
+                            Save
+                        </button>
+                    </div>
+                </form>
+            )}
         </Modal>
     );
 };

@@ -17,11 +17,26 @@
         &__general,
         &__personalData,
         &__stats {
-            &--header {
-                margin-left: 2%;
-
-                font-weight: 400;
-                color: #131313;
+            &__header {
+                display: flex;
+                justify-content: space-between;
+                &--text {
+                    margin-top: 1%;
+                    margin-left: 2%;
+                    font-family: 'Poppins';
+                    font-weight: 400;
+                    color: #131313;
+                }
+                &--iconBtn {
+                    color: red;
+                    font-size: 29px;
+                    margin-top: 27px;
+                    margin-right: 27px;
+                    cursor: pointer;
+                    border: none;
+                    background-color: #fff;
+                    padding: 0;
+                }
             }
             &--input {
                 display: grid;

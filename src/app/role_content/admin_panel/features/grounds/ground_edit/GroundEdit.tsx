@@ -62,9 +62,9 @@ const GroundEdit: React.FC<GroundEditProps> = ({ setModalOpen, groundDoc }): JSX
             ) : (
                 <form className="groundEditForm" onSubmit={submitForm}>
                     <div className="groundEditForm__general">
-                        <div className="groundEditForm___general__header">
-                            <h1 className="groundEditForm___general__header--text">General</h1>
-                            <button className="groundEditForm___general__header--iconBtn" onClick={deleteForm}>
+                        <div className="groundEditForm__general__header">
+                            <h1 className="groundEditForm__general__header--text">General</h1>
+                            <button className="groundEditForm__general__header--iconBtn" onClick={deleteForm}>
                                 <i>
                                     <MdDelete />
                                 </i>
@@ -88,8 +88,8 @@ const GroundEdit: React.FC<GroundEditProps> = ({ setModalOpen, groundDoc }): JSX
                         </div>
                     </div>
                     <div className="groundEditForm__matchData">
-                        <div className="groundEditForm___matchData__header">
-                            <h1 className="groundEditForm___matchData__header--text">Match Details</h1>
+                        <div className="groundEditForm__matchData__header">
+                            <h1 className="groundEditForm__matchData__header--text">Match Details</h1>
                         </div>
                         <div className="groundEditForm__matchData--input">
                             <InputBox

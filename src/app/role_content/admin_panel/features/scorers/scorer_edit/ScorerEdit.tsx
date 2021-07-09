@@ -107,7 +107,6 @@ const ScorerEdit: React.FC<ScorerEditProps> = ({ setModalOpen, scorerDoc }): JSX
             ariaHideApp={false}
             overlayClassName="Overlay"
         >
-            {' '}
             {isLoading ? (
                 <LoadingComp />
             ) : (
@@ -143,9 +142,9 @@ const ScorerEdit: React.FC<ScorerEditProps> = ({ setModalOpen, scorerDoc }): JSX
                                 </label>
                             </div>
                         </div>
-                        <div className="scorerEditForm___general__header">
-                            <h1 className="scorerEditForm___general__header--text">General</h1>
-                            <button className="scorerEditForm___general__header--iconBtn" onClick={deleteForm}>
+                        <div className="scorerEditForm__general__header">
+                            <h1 className="scorerEditForm__general__header--text">General</h1>
+                            <button className="scorerEditForm__general__header--iconBtn" onClick={deleteForm}>
                                 <i>
                                     <MdDelete />
                                 </i>
