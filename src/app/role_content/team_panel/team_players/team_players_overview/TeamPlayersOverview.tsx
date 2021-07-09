@@ -5,11 +5,8 @@ import { firestore } from '../../../../../firebase';
 import Player from '../../../../../models/Player';
 import './TeamPlayersOverview.scss';
 import LoadingComp from '../../../../shared_components/loading_comp/LoadingComp';
-import { PageRoutes } from '../../../../../enums/pageRoutes';
-import { Link } from 'react-router-dom';
 import TeamPlayerAdd from '../team_player_add/TeamPlayerAdd';
 import TeamPlayerCard from '../team_player_card/TeamPlayerCard';
-import Team from '../../../../../models/Team';
 import useAuth from '../../../../../hooks/useAuth';
 
 const TeamPlayersOverview = (): JSX.Element => {
@@ -66,21 +63,26 @@ const TeamPlayersOverview = (): JSX.Element => {
             {playerDocs == undefined ? (
                 <LoadingComp />
             ) : (
-                <div className="playersOverview">
-                    <h1>{authData?.name}</h1>
+                <div className="teamPlayersOverview">
+                    <div className="teamPlayersOverview__header">
+                        <div className="teamPlayersOverview__header__header1">
+                            <h1 className="teamPlayersOverview__header__header1--text">{authData?.name}</h1>
+                        </div>
+                        <div className="matchesPage__header__header2"></div>
+                    </div>
 
-                    <button className="playersOverview__playerAddBtn" onClick={() => setModalOpen(true)}>
+                    <button className="teamPlayersOverview__playerAddBtn" onClick={() => setModalOpen(true)}>
                         + Add Player
                     </button>
 
                     <CSVLink
-                        className="playersOverview__dataDownload"
+                        className="teamPlayersOverview__dataDownload"
                         data={JSON.parse(JSON.stringify(playerDocs))}
                         headers={JSON.parse(JSON.stringify(headers))}
                     >
                         Download Data
                     </CSVLink>
-                    <div className="playersOverview__playerCard">
+                    <div className="teamPlayersOverview__playerCard">
                         {playerDocs.length === 0 ? (
                             <h2>No items here</h2>
                         ) : (

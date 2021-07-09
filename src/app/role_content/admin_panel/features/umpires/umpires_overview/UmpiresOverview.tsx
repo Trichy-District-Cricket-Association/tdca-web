@@ -5,8 +5,6 @@ import { firestore } from '../../../../../../firebase';
 import Umpire from '../../../../../../models/Umpire';
 import './UmpiresOverview.scss';
 import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
-import { PageRoutes } from '../../../../../../enums/pageRoutes';
-import { Link } from 'react-router-dom';
 import UmpireAdd from '../umpire_add/UmpireAdd';
 import UmpireCard from '../umpire_card/UmpireCard';
 

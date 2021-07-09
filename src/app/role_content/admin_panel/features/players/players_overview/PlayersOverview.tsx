@@ -5,8 +5,6 @@ import { firestore } from '../../../../../../firebase';
 import Player from '../../../../../../models/Player';
 import './PlayersOverview.scss';
 import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
-import { PageRoutes } from '../../../../../../enums/pageRoutes';
-import { Link } from 'react-router-dom';
 import PlayerAdd from '../player_add/PlayerAdd';
 import PlayerCard from '../player_card/PlayerCard';
 import Team from '../../../../../../models/Team';

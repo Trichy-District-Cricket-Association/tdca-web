@@ -6,8 +6,6 @@ import { firestore } from '../../../../../../firebase';
 import Match from '../../../../../../models/Match';
 import './MatchesOverview.scss';
 import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
-import { PageRoutes } from '../../../../../../enums/pageRoutes';
-import { Link } from 'react-router-dom';
 import MatchAdd from '../match_add/MatchAdd';
 import MatchCard from '../match_card/MatchCard';
 import { usePagination } from 'use-pagination-firestore';

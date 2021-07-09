@@ -5,8 +5,6 @@ import { firestore } from '../../../../../../firebase';
 import Ground from '../../../../../../models/Ground';
 import './GroundsOverview.scss';
 import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
-import { PageRoutes } from '../../../../../../enums/pageRoutes';
-import { Link } from 'react-router-dom';
 import GroundAdd from '../ground_add/GroundAdd';
 import GroundCard from '../ground_card/GroundCard';
 

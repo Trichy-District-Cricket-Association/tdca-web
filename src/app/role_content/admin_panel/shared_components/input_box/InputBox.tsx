@@ -24,15 +24,29 @@ const InputBox: React.FC<InputBoxProps> = ({
             <ul className="input_box">
                 <li>
                     <label htmlFor={name}>{title}</label>
-                    <input
-                        type={type}
-                        name={name}
-                        min={0}
-                        maxLength={100}
-                        onChange={textHandler}
-                        defaultValue={value}
-                        ref={ref ?? undefined}
-                    />
+                    {name == 'aadharNumber' ? (
+                        <input
+                            type={type}
+                            name={name}
+                            min={0}
+                            maxLength={100}
+                            onChange={textHandler}
+                            defaultValue={value}
+                            ref={ref ?? undefined}
+                            required
+                        />
+                    ) : (
+                        <input
+                            type={type}
+                            name={name}
+                            min={0}
+                            maxLength={100}
+                            onChange={textHandler}
+                            defaultValue={value}
+                            ref={ref ?? undefined}
+                        />
+                    )}
+
                     <span>{suggestion}</span>
                 </li>
             </ul>

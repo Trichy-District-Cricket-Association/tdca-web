@@ -1,4 +1,25 @@
-.playersOverview {
+.teamPlayersOverview {
+    font-family: 'Poppins';
+    &__header {
+        display: flex;
+        &__header1 {
+            &--text {
+                color: #fff;
+                margin-top: 150px;
+                font-size: 70px;
+                margin-left: 55px;
+                letter-spacing: 3px;
+            }
+            background-color: #071833;
+            height: 400px;
+            width: 65%;
+        }
+        &__header2 {
+            background-color: #0d4194;
+            height: 400px;
+            width: 35%;
+        }
+    }
     &__playerAddBtn {
         background-color: transparent;
         border: 2px solid #071833;
@@ -19,19 +40,7 @@
             outline: 0;
         }
     }
-    &__teamSelect {
-        background-color: #071833;
-        color: #fff;
-        border: none;
-        font-size: 18px;
-        border-radius: 5px;
-        padding: 0.4rem 0.5rem;
-        margin-left: 20px;
-        font-family: 'Poppins';
-        justify-content: center;
-        cursor: pointer;
-        text-transform: uppercase;
-    }
+
     &__playerCard {
         display: grid;
         grid-template-columns: repeat(5, 1fr);
@@ -40,7 +49,7 @@
     }
     h2 {
         margin: 20px 0px 0px 20px;
-        font-family: 'Poppins';
+
         font-size: 25px;
         color: #071833;
     }
@@ -55,21 +64,21 @@
     }
 }
 @media screen and (max-width: 1599px) {
-    .playersOverview {
+    .teamPlayersOverview {
         &__playerCard {
             grid-template-columns: repeat(4, 1fr);
         }
     }
 }
 @media screen and (max-width: 1400px) {
-    .playersOverview {
+    .teamPlayersOverview {
         &__playerCard {
             grid-template-columns: repeat(3, 1fr);
         }
     }
 }
 @media screen and (max-width: 1050px) {
-    .playersOverview {
+    .teamPlayersOverview {
         text-align: center;
         &__playerCard {
             grid-template-columns: repeat(2, 1fr);
@@ -77,7 +86,21 @@
     }
 }
 @media screen and (max-width: 695px) {
-    .playersOverview {
+    .teamPlayersOverview {
+        &__header {
+            display: flex;
+            &__header1 {
+                &--text {
+                    margin-top: 70px;
+                    margin-left: 120px;
+                }
+                height: 300px;
+                width: 100%;
+            }
+            &__header2 {
+                display: none;
+            }
+        }
         &__playerCard {
             grid-template-columns: repeat(1, 1fr);
             justify-items: center;

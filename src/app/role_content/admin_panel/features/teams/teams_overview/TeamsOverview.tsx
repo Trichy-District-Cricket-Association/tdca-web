@@ -5,8 +5,6 @@ import { firestore } from '../../../../../../firebase';
 import Team from '../../../../../../models/Team';
 import './TeamsOverview.scss';
 import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
-import { PageRoutes } from '../../../../../../enums/pageRoutes';
-import { Link } from 'react-router-dom';
 import TeamAdd from '../team_add/TeamAdd';
 import TeamCard from '../team_card/TeamCard';
 
