@@ -22,7 +22,9 @@ const SelectInputBox: React.FC<SelectInputBoxProps> = ({
                 <li>
                     <label htmlFor={name}>{title}</label>
                     <select name={name} onChange={textHandler} value={value} className="selectInputBox__select">
-                        <option selected>Select</option>
+                        <option selected disabled>
+                            Select
+                        </option>
                         {options.map((option) => (
                             <option key={option} value={option}>
                                 {option}

@@ -24,7 +24,26 @@ const InputBox: React.FC<InputBoxProps> = ({
             <ul className="input_box">
                 <li>
                     <label htmlFor={name}>{title}</label>
-                    {name == 'aadharNumber' ? (
+                    {name == 'aadharNumber' ||
+                    name == 'umpireId' ||
+                    name == 'umpireName' ||
+                    name == 'emailId' ||
+                    name == 'primaryContact' ||
+                    name == 'dateOfBirth' ||
+                    name == 'scorerId' ||
+                    name == 'scorerName' ||
+                    name == 'groundId' ||
+                    name == 'groundName' ||
+                    name == 'groundsManId' ||
+                    name == 'groundsManName' ||
+                    name == 'playerId' ||
+                    name == 'playerName' ||
+                    name == 'teamId' ||
+                    name == 'teamName' ||
+                    name == 'matchId' ||
+                    name == 'date' ||
+                    name == 'dateOfRegisteration' ||
+                    name == 'registerationFee' ? (
                         <input
                             type={type}
                             name={name}

@@ -4,7 +4,6 @@ export enum PageRoutes {
     matches = '/matches',
     staffs = '/staffs',
     teams = '/teams',
-    contact = '/contact',
 
     //  ADMIN PANEL ROUTES
     adminPanel = '/admin',

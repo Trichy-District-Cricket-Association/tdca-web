@@ -158,6 +158,18 @@ const PlayerAdd: React.FC<PlayerAddProps> = ({ setModalOpen }): JSX.Element => {
                                 type="text"
                                 textHandler={handleInputForm}
                             />
+                            <InputBox
+                                title="Date of Registeration"
+                                name="dateOfRegisteration"
+                                type="date"
+                                textHandler={handleInputForm}
+                            />
+                            <SelectInputBox
+                                title="Registeration Fee"
+                                name="registerationFee"
+                                options={['Not Paid', 'Paid']}
+                                textHandler={handleSelectForm}
+                            />
                         </div>
                     </div>
                     <div className="playerAddForm__personalData">

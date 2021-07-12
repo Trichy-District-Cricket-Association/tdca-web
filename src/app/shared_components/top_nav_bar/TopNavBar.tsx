@@ -44,7 +44,7 @@ const TopNav = (): JSX.Element => {
                         <img src={logo} alt="Logo" className="nav__header--logo" />
                     </div>
                     <div>
-                        <h1 className="nav__header--text">Trichy District Cricket Association</h1>
+                        <h1 className="nav__header--text">The Tiruchirappalli District Cricket Association</h1>
                         <h1 className="nav__header--textAbbr">TDCA</h1>
                     </div>
                 </div>
@@ -74,12 +74,6 @@ const TopNav = (): JSX.Element => {
                             Staffs
                         </Link>
                     </div>
-                    <div className="item">
-                        <Link to={PageRoutes.contact} className="nav__link">
-                            Contact
-                        </Link>
-                    </div>
-
                     {authData === undefined ? null : authData === null ? (
                         <div>
                             <Link to={PageRoutes.home} className="nav__btn" onClick={loginClick}>

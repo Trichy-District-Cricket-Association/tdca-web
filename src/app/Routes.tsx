@@ -5,7 +5,6 @@ import GroundsOverview from './role_content/admin_panel/features/grounds/grounds
 import { PageRoutes } from '../enums/pageRoutes';
 import ProtectedRoute from './ProtectedRoute';
 import { UserRoles } from '../enums/auth';
-import GroundAdd from './role_content/admin_panel/features/grounds/ground_add/GroundAdd';
 import GroundsMenOverview from './role_content/admin_panel/features/groundsMen/groundsMen_overview/GroundsMenOverview';
 import UmpiresOverview from './role_content/admin_panel/features/umpires/umpires_overview/UmpiresOverview';
 import ScorersOverview from './role_content/admin_panel/features/scorers/scorers_overview/ScorersOverview';
@@ -23,7 +22,6 @@ const Routes = () => (
         <Route exact path={PageRoutes.home} component={LandingPage} />
         <Route exact path={PageRoutes.teams} component={TeamsPage} />
         <Route exact path={PageRoutes.staffs} component={StaffsPage} />
-        <Route exact path={PageRoutes.contact} component={LandingPage} />
         <Route exact path={PageRoutes.matches} component={MatchesPage} />
 
         {/* Admin Panel Route */}

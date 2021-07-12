@@ -23,6 +23,10 @@ export default class Player {
 
     primaryContact?: string;
 
+    registerationFee?: string;
+
+    dateOfRegisteration?:Date;
+
     aadharNumber?: string;
 
     voterId?: string;
@@ -48,6 +52,8 @@ export default class Player {
         if (field == 'dateOfBirth') this.dateOfBirth = new Date(value);
         if (field == 'fatherName') this.fatherName = value;
         if (field == 'primaryContact') this.primaryContact = value;
+        if (field == 'registerationFee') this.registerationFee = value;
+        if (field == 'dateOfRegisteration') this.dateOfRegisteration = new Date(value);
         if (field == 'aadharNumber') this.aadharNumber = value;
         if (field == 'voterId') this.voterId = value;
         if (field == 'rationCardNumber') this.rationCardNumber = value;
@@ -84,7 +90,10 @@ export default class Player {
         avatarUrl,
         emailId,
         dateOfBirth,
+        
         primaryContact,
+        registerationFee,
+        dateOfRegisteration,
         fatherName,
         aadharNumber,
         voterId,
@@ -105,6 +114,9 @@ export default class Player {
         dateOfBirth?: Date;
         fatherName?: string;
         primaryContact?: string;
+        registerationFee?: string;
+
+    dateOfRegisteration?:Date;
         aadharNumber?: string;
         voterId?: string;
         rationCardNumber?: string;
@@ -123,6 +135,8 @@ export default class Player {
         this.emailId = emailId ?? '';
         this.dateOfBirth = dateOfBirth;
         this.primaryContact = primaryContact ?? '';
+        this.registerationFee = registerationFee ?? '';
+        this.dateOfRegisteration = dateOfRegisteration;
         this.fatherName = fatherName ?? '';
         this.aadharNumber = aadharNumber ?? '';
         this.rationCardNumber = rationCardNumber ?? '';
@@ -159,6 +173,8 @@ export default class Player {
             emailId: doc.data()?.emailId,
             dateOfBirth: new Date(doc.data()?.dateOfBirth),
             primaryContact: doc.data()?.primaryContact,
+            registerationFee: doc.data()?.registerationFee,
+            dateOfRegisteration: new Date(doc.data()?.dateOfRegisteration),
             fatherName: doc.data()?.fatherName,
             aadharNumber: doc.data()?.aadharNumber,
             rationCardNumber: doc.data()?.rationCardNumber,
