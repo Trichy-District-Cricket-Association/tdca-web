@@ -198,13 +198,15 @@ const MatchEdit: React.FC<MatchEditProps> = ({ setModalOpen, matchDoc }): JSX.El
                                 value={matchDoc.type}
                                 textHandler={handleSelectForm}
                             />
-                            <SelectInputBox
-                                title="Division"
-                                name="division"
-                                options={[1, 2, 3, 4, 5]}
-                                value={matchDoc.division}
-                                textHandler={handleSelectForm}
-                            />
+                            {match.type == 'leagueMatch' ? (
+                                <SelectInputBox
+                                    title="Division"
+                                    name="division"
+                                    options={[1, 2, 3, 4, 5]}
+                                    value={matchDoc.division}
+                                    textHandler={handleSelectForm}
+                                />
+                            ) : null}
                             <SelectInputBox
                                 title="Team A"
                                 name="teamA_teamName"

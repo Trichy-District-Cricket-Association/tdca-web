@@ -27,22 +27,21 @@ const MatchesOverview: React.FC<void> = (): JSX.Element => {
 
     const switchDivision = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedDivision(parseInt(e.target.value));
-        setSelectedMatchType(undefined);
     };
     const switchMatchType = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedMatchType(e.target.value);
+        setSelectedDivision(undefined);
     };
-
     //  Callback to change the query based on the selected type.
     useEffect(() => {
-        if (selectedDivision) {
-            let newQuery = baseMatchQuery.where('division', '==', selectedDivision);
-            if (selectedMatchType) {
-                newQuery = newQuery.where('type', '==', selectedMatchType);
+        if (selectedMatchType) {
+            let newQuery = baseMatchQuery.where('type', '==', selectedMatchType);
+            if (selectedDivision) {
+                newQuery = newQuery.where('division', '==', selectedDivision);
             }
             setQuery(newQuery);
         }
-    }, [selectedDivision, selectedMatchType]);
+    }, [selectedMatchType, selectedDivision]);
 
     const headers = [
         { label: 'MATCH ID', key: 'matchId' },
@@ -82,29 +81,29 @@ const MatchesOverview: React.FC<void> = (): JSX.Element => {
                     >
                         Download Data
                     </CSVLink>
-                    <div className="matchesOverview__matchDivisionSelect">
+                    <div className="matchesOverview__matchSelect">
                         <select
-                            className="matchesOverview__matchDivisionSelect--btn"
-                            value={selectedDivision}
-                            onChange={switchDivision}
+                            className="matchesOverview__matchTypeSelect--btn"
+                            value={selectedMatchType}
+                            onChange={switchMatchType}
                         >
-                            <option>Select Division</option>
-                            {divisions.map((division) => (
-                                <option key={division} value={division}>
-                                    Division {division}
+                            <option selected>Select Type</option>
+                            {matchTypes.map((matchType) => (
+                                <option key={matchType} value={matchType}>
+                                    {matchType}
                                 </option>
                             ))}
                         </select>
-                        {selectedDivision ? (
+                        {selectedMatchType == 'leagueMatch' ? (
                             <select
-                                className="matchesOverview__matchTypeSelect--btn"
-                                value={selectedMatchType}
-                                onChange={switchMatchType}
+                                className="matchesOverview__matchDivisionSelect--btn"
+                                value={selectedDivision}
+                                onChange={switchDivision}
                             >
-                                <option selected>Select Type</option>
-                                {matchTypes.map((matchType) => (
-                                    <option key={matchType} value={matchType}>
-                                        {matchType}
+                                <option>Select Division</option>
+                                {divisions.map((division) => (
+                                    <option key={division} value={division}>
+                                        Division {division}
                                     </option>
                                 ))}
                             </select>

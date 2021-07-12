@@ -96,7 +96,7 @@ export default class Match {
     }) {
         if (docId) this.docId = docId;
         this.matchId = matchId ?? '';
-        this.division = division ?? 1;
+        this.division = division ?? 0;
         this.teamA = teamA ?? {
             teamId: '',
             teamName: '',

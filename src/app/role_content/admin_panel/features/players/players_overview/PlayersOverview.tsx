@@ -67,6 +67,8 @@ const PlayersOverview: React.FC<void> = (): JSX.Element => {
         { label: 'DATE OF BIRTH', key: 'dateOfBirth' },
         { label: `FATHER'S NAME`, key: 'fatherName' },
         { label: 'PRIMARY CONTACT', key: 'primaryContact' },
+        { label: 'DATE OF REGISTERATION', key: 'dateOfRegisteration' },
+        { label: 'REGISTERATION FEE', key: 'registerationFee' },
         { label: 'AADHAR NUMBER', key: 'drivingLicense' },
         { label: 'VOTER ID', key: 'voterId' },
         { label: 'RATION CARD NUMBER', key: 'rationCardNumber' },

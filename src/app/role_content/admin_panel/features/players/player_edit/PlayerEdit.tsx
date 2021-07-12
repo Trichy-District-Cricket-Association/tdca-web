@@ -28,6 +28,8 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
             emailId: playerDoc.emailId,
             dateOfBirth: playerDoc.dateOfBirth,
             primaryContact: playerDoc.primaryContact,
+            registerationFee: playerDoc.registerationFee,
+            dateOfRegisteration: playerDoc.dateOfRegisteration,
             fatherName: playerDoc.fatherName,
             aadharNumber: playerDoc.aadharNumber,
             rationCardNumber: playerDoc.rationCardNumber,
@@ -217,6 +219,20 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
                                 type="text"
                                 value={playerDoc.primaryContact}
                                 textHandler={handleInputForm}
+                            />
+                            <InputBox
+                                title="Date of Registeration"
+                                name="dateOfRegisteration"
+                                type="date"
+                                value={playerDoc.dateOfRegisteration?.toISOString().substr(0, 10)}
+                                textHandler={handleInputForm}
+                            />
+                            <SelectInputBox
+                                title="Registeration Fee"
+                                name="registerationFee"
+                                options={['Not Paid', 'Paid']}
+                                value={playerDoc.registerationFee}
+                                textHandler={handleSelectForm}
                             />
                         </div>
                     </div>
