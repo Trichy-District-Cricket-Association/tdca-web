@@ -163,14 +163,22 @@ const MatchAdd: React.FC<MatchAddProps> = ({ setModalOpen }): JSX.Element => {
                             <SelectInputBox
                                 title="Match Type"
                                 name="type"
-                                options={['leagueMatch', 'schoolMatch', 'knockoutMatch']}
+                                options={['League Match', 'School Match', 'Knockout Match']}
                                 textHandler={handleSelectForm}
                             />
-                            {match.type == 'leagueMatch' ? (
+                            {match.type == 'League Match' ? (
                                 <SelectInputBox
                                     title="Division"
                                     name="division"
                                     options={[1, 2, 3, 4, 5]}
+                                    textHandler={handleSelectForm}
+                                />
+                            ) : null}
+                            {match.type == 'School Match' ? (
+                                <SelectInputBox
+                                    title="School Match Type"
+                                    name="schoolMatchType"
+                                    options={['Below 8th Std', 'Below 10th Std', 'Below 12th Std']}
                                     textHandler={handleSelectForm}
                                 />
                             ) : null}

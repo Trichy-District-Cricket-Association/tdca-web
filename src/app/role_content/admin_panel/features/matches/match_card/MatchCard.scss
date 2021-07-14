@@ -2,8 +2,8 @@
     color: #fff;
     display: grid;
     background-color: #0d4194;
-    width: 330px;
-    height: 330px;
+    width: 340px;
+    height: 350px;
     margin-left: 20px;
     margin-top: 25px;
     cursor: pointer;
@@ -26,6 +26,8 @@
         display: flex;
         justify-content: space-around;
         margin-top: 10px;
+        margin-left: 10px;
+        margin-right: -10px;
         &--label {
             text-transform: uppercase;
             font-size: 12px;

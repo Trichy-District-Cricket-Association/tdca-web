@@ -1,7 +1,9 @@
 .header {
     background-repeat: no-repeat;
     background-size: cover;
-    height: 790px;
+    height: 750px;
+    background-position: center center;
+    background-attachment: fixed;
     &__container {
         display: flex;
         justify-content: space-around;
@@ -40,6 +42,17 @@
             }
             .icon {
                 margin-top: 3px;
+            }
+        }
+    }
+}
+@media screen and (max-width: 768px) {
+    .header {
+        &__container {
+            text-align: center;
+            display: grid;
+            &--img {
+                display: none;
             }
         }
     }

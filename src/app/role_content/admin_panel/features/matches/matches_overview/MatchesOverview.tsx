@@ -10,8 +10,10 @@ import MatchAdd from '../match_add/MatchAdd';
 import MatchCard from '../match_card/MatchCard';
 import { usePagination } from 'use-pagination-firestore';
 
-const divisions = [1, 2, 3, 4, 5];
-const matchTypes = ['leagueMatch', 'schoolMatch', 'knockoutMatch'];
+const divisionTypes = [1, 2, 3, 4, 5];
+const matchTypes = ['League Match', 'School Match', 'Knockout Match'];
+const schoolMatchTypes = ['Below 8th Std', 'Below 10th Std', 'Below 12th Std'];
+
 const baseMatchQuery = firestore.collection(Collections.matches).orderBy('date', 'desc');
 
 const MatchesOverview: React.FC<void> = (): JSX.Element => {
@@ -22,26 +24,34 @@ const MatchesOverview: React.FC<void> = (): JSX.Element => {
         limit: 10,
     });
 
-    const [selectedDivision, setSelectedDivision] = useState<number | undefined>();
     const [selectedMatchType, setSelectedMatchType] = useState<string | undefined>();
+    const [selectedDivisionType, setSelectedDivisionType] = useState<number | undefined>();
+    const [selectedSchoolMatchType, setSelectedSchoolMatchType] = useState<string | undefined>();
 
-    const switchDivision = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        setSelectedDivision(parseInt(e.target.value));
+    const switchDivisionType = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setSelectedDivisionType(parseInt(e.target.value));
     };
     const switchMatchType = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedMatchType(e.target.value);
-        setSelectedDivision(undefined);
+        setSelectedDivisionType(undefined);
+        setSelectedSchoolMatchType(undefined);
+    };
+    const switchSchoolMatchType = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setSelectedSchoolMatchType(e.target.value);
     };
     //  Callback to change the query based on the selected type.
     useEffect(() => {
         if (selectedMatchType) {
             let newQuery = baseMatchQuery.where('type', '==', selectedMatchType);
-            if (selectedDivision) {
-                newQuery = newQuery.where('division', '==', selectedDivision);
+            if (selectedDivisionType) {
+                newQuery = newQuery.where('division', '==', selectedDivisionType);
+            }
+            if (selectedSchoolMatchType) {
+                newQuery = newQuery.where('schoolMatchType', '==', selectedSchoolMatchType);
             }
             setQuery(newQuery);
         }
-    }, [selectedMatchType, selectedDivision]);
+    }, [selectedMatchType, selectedDivisionType, selectedSchoolMatchType]);
 
     const headers = [
         { label: 'MATCH ID', key: 'matchId' },
@@ -94,16 +104,30 @@ const MatchesOverview: React.FC<void> = (): JSX.Element => {
                                 </option>
                             ))}
                         </select>
-                        {selectedMatchType == 'leagueMatch' ? (
+                        {selectedMatchType == 'League Match' ? (
                             <select
                                 className="matchesOverview__matchDivisionSelect--btn"
-                                value={selectedDivision}
-                                onChange={switchDivision}
+                                value={selectedDivisionType}
+                                onChange={switchDivisionType}
                             >
                                 <option>Select Division</option>
-                                {divisions.map((division) => (
+                                {divisionTypes.map((division) => (
                                     <option key={division} value={division}>
                                         Division {division}
+                                    </option>
+                                ))}
+                            </select>
+                        ) : null}
+                        {selectedMatchType == 'School Match' ? (
+                            <select
+                                className="matchesOverview__matchSchoolSelect--btn"
+                                value={selectedSchoolMatchType}
+                                onChange={switchSchoolMatchType}
+                            >
+                                <option>Select Type</option>
+                                {schoolMatchTypes.map((schoolMatchType) => (
+                                    <option key={schoolMatchType} value={schoolMatchType}>
+                                        {schoolMatchType}
                                     </option>
                                 ))}
                             </select>

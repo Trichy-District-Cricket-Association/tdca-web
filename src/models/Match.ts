@@ -24,6 +24,8 @@ export default class Match {
     /**League, knockout, school matches are the possible types */
     type?: string;
 
+    schoolMatchType?: string;
+
     date?: Date;
 
     venue?: string;
@@ -34,6 +36,7 @@ export default class Match {
         if (field == 'matchId') this.matchId = value;
 
         if (field == 'division') this.division = parseInt(value);
+        if (field == 'schoolMatchType') this.schoolMatchType= value;
 
         if (field == 'teamA_teamName') this.teamA!.teamName = value;
         if (field == 'teamA_teamId') this.teamA!.teamId = value;
@@ -71,6 +74,7 @@ export default class Match {
         docId,
         matchId,
         division,
+        schoolMatchType,
         teamA,
         teamB,
         umpireA,
@@ -84,6 +88,7 @@ export default class Match {
         docId?: string;
         matchId?: string;
         division?: number;
+        schoolMatchType?: string;
         teamA?: MatchTeam;
         teamB?: MatchTeam;
         umpireA?: MatchUmpire;
@@ -96,7 +101,8 @@ export default class Match {
     }) {
         if (docId) this.docId = docId;
         this.matchId = matchId ?? '';
-        this.division = division ?? 0;
+        if(division)this.division = division;
+        if(schoolMatchType)this.schoolMatchType= schoolMatchType;
         this.teamA = teamA ?? {
             teamId: '',
             teamName: '',
@@ -123,6 +129,7 @@ export default class Match {
             docId: doc.id,
             matchId: doc.data()?.matchId,
             division: doc.data()?.division,
+            schoolMatchType: doc.data()?.schoolMatchType,
             teamA: doc.data()?.teamA,
             teamB: doc.data()?.teamB,
             umpireA: doc.data()?.umpireA,

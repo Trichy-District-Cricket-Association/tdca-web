@@ -24,6 +24,7 @@ const MatchEdit: React.FC<MatchEditProps> = ({ setModalOpen, matchDoc }): JSX.El
         new Match({
             matchId: matchDoc.matchId,
             division: matchDoc.division,
+            schoolMatchType: matchDoc.schoolMatchType,
             teamA: matchDoc.teamA,
             teamB: matchDoc.teamB,
             umpireA: matchDoc.umpireA,
@@ -194,16 +195,25 @@ const MatchEdit: React.FC<MatchEditProps> = ({ setModalOpen, matchDoc }): JSX.El
                             <SelectInputBox
                                 title="Match Type"
                                 name="type"
-                                options={['leagueMatch', 'schoolMatch', 'knockoutMatch']}
+                                options={['League Match', 'School Match', 'Knockout Match']}
                                 value={matchDoc.type}
                                 textHandler={handleSelectForm}
                             />
-                            {match.type == 'leagueMatch' ? (
+                            {match.type == 'League Match' ? (
                                 <SelectInputBox
                                     title="Division"
                                     name="division"
                                     options={[1, 2, 3, 4, 5]}
+                                    textHandler={handleSelectForm}
                                     value={matchDoc.division}
+                                />
+                            ) : null}
+                            {match.type == 'School Match' ? (
+                                <SelectInputBox
+                                    title="School Match Type"
+                                    name="schoolMatchType"
+                                    options={['Below 8th Std', 'Below 10th Std', 'Below 12th Std']}
+                                    value={matchDoc.schoolMatchType}
                                     textHandler={handleSelectForm}
                                 />
                             ) : null}
