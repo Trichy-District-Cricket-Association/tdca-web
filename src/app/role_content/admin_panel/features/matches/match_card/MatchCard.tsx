@@ -18,7 +18,7 @@ const MatchCard = ({ matchDoc }: MatchCardProps): JSX.Element => {
                     <p className="matchCard__header--title">{matchDoc.teamB?.teamName}</p>
                 </div>
                 <div className="matchCard__container">
-                    <div>
+                    <div className="matchCard__container__cloumn1">
                         <label className="matchCard__container--label">Match Id</label>
                         <p className="matchCard__container--text">Match Id{matchDoc.matchId}</p>
                         <label className="matchCard__container--label">Division</label>
@@ -26,7 +26,7 @@ const MatchCard = ({ matchDoc }: MatchCardProps): JSX.Element => {
                         <label className="matchCard__container--label">Match Type</label>
                         <p className="matchCard__container--text">{matchDoc.type}</p>
                     </div>
-                    <div>
+                    <div className="matchCard__container__column2">
                         <label className="matchCard__container--label">Venue</label>
                         <p className="matchCard__container--text">{matchDoc.venue}</p>
                         <label className="matchCard__container--label">Date</label>

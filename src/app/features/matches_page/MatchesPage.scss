@@ -43,8 +43,8 @@
         color: #fff;
         display: grid;
         background-color: #0d4194;
-        width: 330px;
-        height: 330px;
+        width: 340px;
+        height: 350px;
         margin-top: 25px;
         cursor: pointer;
         border-radius: 10px;
@@ -76,9 +76,11 @@
             }
             &--status {
                 text-align: center;
+                padding: 0 20px;
             }
-            &__column2 {
-                margin-left: 20px;
+            &__column2,
+            &__column1 {
+                width: 175px;
             }
         }
     }

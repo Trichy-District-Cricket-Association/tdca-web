@@ -1,0 +1,46 @@
+.aboutUsPage {
+    font-family: 'Poppins';
+
+    &__header {
+        display: flex;
+        &__header1 {
+            &--text {
+                color: #fff;
+                margin-top: 150px;
+                font-size: 70px;
+                margin-left: 55px;
+                letter-spacing: 3px;
+            }
+            background-color: #071833;
+            height: 400px;
+            width: 65%;
+        }
+        &__header2 {
+            background-color: #0d4194;
+            height: 400px;
+            width: 35%;
+        }
+    }
+    &__container {
+        width: 100%;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-attachment: fixed;
+        &__header,
+        &__footer {
+            text-align: center;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            &--quote {
+                margin-top: 20px;
+                font-size: 24px;
+                color: #0d4194;
+            }
+        }
+        &--content {
+            padding: 0 110px;
+            font-size: 21.4px;
+            line-height: 40px;
+        }
+    }
+}

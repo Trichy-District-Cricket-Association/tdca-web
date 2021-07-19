@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { CSVLink } from 'react-csv';
 import { MdDelete, MdEdit } from 'react-icons/md';
 import Modal from 'react-modal';
 import { firestore } from '../../../../../../firebase';

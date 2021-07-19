@@ -134,7 +134,9 @@ const MatchesPage: React.FC<void> = (): JSX.Element => {
                                             </p>
                                         </div>
                                     </div>
-                                    <p className="matchCard__container--status">{matchDoc.status}</p>
+                                    <div>
+                                        <p className="matchCard__container--status">{matchDoc.status}</p>
+                                    </div>
                                 </div>
                             ))}
                     </div>
