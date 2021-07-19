@@ -31,6 +31,37 @@
             .input_box {
                 max-width: 400px;
             }
+            &--avatar,
+            &--avatarOverlay {
+                width: 150px;
+                height: 150px;
+                margin-top: 3%;
+                margin-left: 43%;
+                cursor: pointer;
+                border-radius: 50%;
+            }
+            &--avatarOverlay {
+                position: relative;
+                background: #0000009b;
+                margin-top: -153px;
+                transition: 0.6s ease;
+                opacity: 0;
+
+                &:hover {
+                    opacity: 1;
+                }
+                .editIcon {
+                    padding: 70px;
+                    color: #fff;
+                    font-size: 30px;
+                    cursor: pointer;
+                    margin-left: -5px;
+                }
+            }
+            &--uploadBtn {
+                position: absolute;
+                display: none;
+            }
         }
         &__createAccount {
             &--input {

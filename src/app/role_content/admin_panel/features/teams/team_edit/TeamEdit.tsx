@@ -6,7 +6,9 @@ import Team from '../../../../../../models/Team';
 import InputBox from '../../../shared_components/input_box/InputBox';
 import './TeamEdit.scss';
 import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
-import { MdDelete } from 'react-icons/md';
+import { MdDelete, MdEdit } from 'react-icons/md';
+import useStorage from '../../../../../../hooks/useStorage';
+const defaultAvatar = `${process.env.PUBLIC_URL}/assets/images/teamAvatar.png`;
 
 type TeamEditProps = {
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -19,6 +21,7 @@ const TeamEdit: React.FC<TeamEditProps> = ({ setModalOpen, teamDoc }): JSX.Eleme
         new Team({
             teamId: teamDoc.teamId,
             teamName: teamDoc.teamName,
+            avatarUrl: teamDoc.avatarUrl,
             emailId: teamDoc.emailId,
             division: teamDoc.division,
             numberOfMatches: teamDoc.numberOfMatches,
@@ -34,6 +37,29 @@ const TeamEdit: React.FC<TeamEditProps> = ({ setModalOpen, teamDoc }): JSX.Eleme
             penalty: teamDoc.penalty,
         }),
     );
+    // State to handle uploading files.
+    const [file, setFile] = useState(null);
+    const [error, setError] = useState('');
+
+    // Getting the progress and avatarUrl from the hook.
+    const { avatarUrl } = useStorage(file);
+
+    const types = ['image/png', 'image/jpeg', 'image/jpg'];
+
+    // Functions to check the type of file.
+    const handleAvatarChange = (e: any) => {
+        const selectedFile = e.target.files[0];
+
+        if (selectedFile) {
+            if (types.includes(selectedFile.type)) {
+                setError('');
+                setFile(selectedFile);
+            } else {
+                setFile(null);
+                setError('Please select an image file (png or jpg)');
+            }
+        }
+    };
 
     const handleForm = (e: React.ChangeEvent<HTMLInputElement>) => {
         const fieldName = `${e.target.name}` as const;
@@ -45,6 +71,7 @@ const TeamEdit: React.FC<TeamEditProps> = ({ setModalOpen, teamDoc }): JSX.Eleme
     const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         setIsLoading(true);
+        team.setAvatar = avatarUrl;
         await firestore
             .collection(Collections.teams)
             .doc(teamDoc.docId)
@@ -82,6 +109,36 @@ const TeamEdit: React.FC<TeamEditProps> = ({ setModalOpen, teamDoc }): JSX.Eleme
             ) : (
                 <form className="teamEditForm" onSubmit={submitForm}>
                     <div className="teamEditForm__general">
+                        {/* error message */}
+                        {<p>{error}</p>}
+
+                        {/* image display */}
+
+                        <div>
+                            <img
+                                src={
+                                    teamDoc.avatarUrl == null
+                                        ? defaultAvatar
+                                        : avatarUrl
+                                        ? avatarUrl
+                                        : teamDoc.avatarUrl
+                                }
+                                alt="Team Profile"
+                                className="teamEditForm__general--avatar"
+                            />
+
+                            <div className="teamEditForm__general--avatarOverlay">
+                                <label>
+                                    <input
+                                        type="file"
+                                        name="avatarUrl"
+                                        className="teamEditForm__general--uploadBtn"
+                                        onChange={handleAvatarChange}
+                                    />
+                                    <MdEdit className="editIcon" />
+                                </label>
+                            </div>
+                        </div>
                         <div className="teamEditForm__general__header">
                             <h1 className="teamEditForm__general__header--text">General</h1>
                             <button className="teamEditForm__general__header--iconBtn" onClick={deleteForm}>

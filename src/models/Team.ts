@@ -8,6 +8,10 @@ export default class Team {
 
     teamName?: string;
 
+      /**Team Logo Url */
+      avatarUrl?: string;
+
+
     emailId?: string;
 
     division?: number;
@@ -51,11 +55,15 @@ export default class Team {
         if (field == 'refusal') this.refusal = parseInt(value);
         if (field == 'penalty') this.penalty = parseInt(value);
     }
+    set setAvatar(url: string) {
+        this.avatarUrl = url;
+    }
 
     constructor({
         docId,
         teamId,
         teamName,
+        avatarUrl,
         emailId,
         division,
         numberOfMatches,
@@ -73,6 +81,7 @@ export default class Team {
         docId?: string;
         teamId?: string;
         teamName?: string;
+        avatarUrl?: string;
         emailId?: string;
         division?: number;
         numberOfMatches?: number;
@@ -90,6 +99,7 @@ export default class Team {
         if (docId) this.docId = docId;
         this.teamId = teamId??'';
         this.teamName = teamName??'';
+        if (avatarUrl) this.avatarUrl = avatarUrl;
         this.emailId = emailId??'';
         this.division = division??0;
         this.numberOfMatches = numberOfMatches??0;
@@ -109,6 +119,7 @@ export default class Team {
             docId: doc.id,
             teamId: doc.data()?.teamId,
             teamName: doc.data()?.teamName,
+            avatarUrl: doc.data()?.avatarUrl,
             emailId: doc.data()?.emailId,
             division: doc.data()?.division,
             numberOfMatches: doc.data()?.numberOfMatches,
