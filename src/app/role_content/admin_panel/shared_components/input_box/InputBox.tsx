@@ -40,6 +40,7 @@ const InputBox: React.FC<InputBoxProps> = ({
                     name == 'playerName' ||
                     name == 'teamId' ||
                     name == 'teamName' ||
+                    name == 'teamColor' ||
                     name == 'matchId' ||
                     name == 'date' ||
                     name == 'dateOfRegisteration' ||

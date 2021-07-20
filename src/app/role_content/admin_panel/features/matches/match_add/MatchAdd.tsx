@@ -70,6 +70,8 @@ const MatchAdd: React.FC<MatchAddProps> = ({ setModalOpen }): JSX.Element => {
                 selectable?.teams.map((team) => {
                     if (team.teamName == value) {
                         newMatch.handleMatch({ field: 'teamA_teamId', value: `${team.teamId}` });
+                        newMatch.handleMatch({ field: 'teamA_teamColor', value: `${team.teamColor}` });
+                        match.setTeam1Logo = `${team.avatarUrl}`;
                     }
                 });
                 break;
@@ -77,6 +79,8 @@ const MatchAdd: React.FC<MatchAddProps> = ({ setModalOpen }): JSX.Element => {
                 selectable?.teams.map((team) => {
                     if (team.teamName == value) {
                         newMatch.handleMatch({ field: 'teamB_teamId', value: `${team.teamId}` });
+                        newMatch.handleMatch({ field: 'teamB_teamColor', value: `${team.teamColor}` });
+                        match.setTeam2Logo = `${team.avatarUrl}`;
                     }
                 });
                 break;
@@ -104,6 +108,15 @@ const MatchAdd: React.FC<MatchAddProps> = ({ setModalOpen }): JSX.Element => {
                     }
                 });
                 break;
+            case 'venue_groundName':
+                selectable?.grounds.map((ground) => {
+                    if (ground.groundName == value) {
+                        newMatch.handleMatch({ field: 'scorer_scorerId', value: `${ground.groundId}` });
+                        match.setGroundAvatar = `${ground.avatarUrl}`;
+                    }
+                });
+                break;
+
             default:
                 null;
         }
@@ -214,7 +227,7 @@ const MatchAdd: React.FC<MatchAddProps> = ({ setModalOpen }): JSX.Element => {
                             />
                             <SelectInputBox
                                 title="Venue"
-                                name="venue"
+                                name="venue_groundName"
                                 options={selectable.grounds.map((ground) => ground.groundName)}
                                 textHandler={handleSelectForm}
                             />

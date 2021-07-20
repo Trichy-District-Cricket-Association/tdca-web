@@ -73,7 +73,13 @@ const UmpireEdit: React.FC<UmpireEditProps> = ({ setModalOpen, umpireDoc }): JSX
     const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         setIsLoading(true);
-        umpire.setAvatar = avatarUrl;
+        if (umpireDoc.avatarUrl) {
+            umpire.setAvatar = umpireDoc.avatarUrl;
+        }
+        if (avatarUrl) {
+            umpire.setAvatar = avatarUrl;
+        }
+
         await firestore
             .collection(Collections.umpires)
             .doc(umpireDoc.docId)

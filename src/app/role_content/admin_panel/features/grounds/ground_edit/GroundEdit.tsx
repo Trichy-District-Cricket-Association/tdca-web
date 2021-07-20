@@ -5,8 +5,10 @@ import { Collections } from '../../../../../../enums/collection';
 import Ground from '../../../../../../models/Ground';
 import InputBox from '../../../shared_components/input_box/InputBox';
 import './GroundEdit.scss';
-import { MdDelete } from 'react-icons/md';
+import { MdDelete, MdEdit } from 'react-icons/md';
 import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
+import useStorage from '../../../../../../hooks/useStorage';
+const defaultAvatar = `${process.env.PUBLIC_URL}/assets/images/groundAvatar.png`;
 
 type GroundEditProps = {
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -16,6 +18,31 @@ type GroundEditProps = {
 const GroundEdit: React.FC<GroundEditProps> = ({ setModalOpen, groundDoc }): JSX.Element => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [ground, setGround] = useState<Ground>(new Ground(groundDoc));
+
+    // State to handle uploading files.
+    const [file, setFile] = useState(null);
+    const [error, setError] = useState('');
+
+    // Getting the progress and avatarUrl from the hook.
+    const { avatarUrl } = useStorage(file);
+
+    const types = ['image/png', 'image/jpeg', 'image/jpg'];
+
+    // Functions to check the type of file.
+    const handleAvatarChange = (e: any) => {
+        const selectedFile = e.target.files[0];
+
+        if (selectedFile) {
+            if (types.includes(selectedFile.type)) {
+                setError('');
+                setFile(selectedFile);
+            } else {
+                setFile(null);
+                setError('Please select an image file (png or jpg)');
+            }
+        }
+    };
+
     const handleForm = (e: React.ChangeEvent<HTMLInputElement>) => {
         const fieldName = `${e.target.name}` as const;
         const newGround = new Ground({ ...ground });
@@ -25,6 +52,7 @@ const GroundEdit: React.FC<GroundEditProps> = ({ setModalOpen, groundDoc }): JSX
     const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         setIsLoading(true);
+        ground.setAvatar = avatarUrl;
         await firestore
             .collection(Collections.grounds)
             .doc(groundDoc.docId)
@@ -62,6 +90,29 @@ const GroundEdit: React.FC<GroundEditProps> = ({ setModalOpen, groundDoc }): JSX
             ) : (
                 <form className="groundEditForm" onSubmit={submitForm}>
                     <div className="groundEditForm__general">
+                        {/* error message */}
+                        {<p>{error}</p>}
+
+                        {/* image display */}
+
+                        <div>
+                            <img
+                                src={avatarUrl ? avatarUrl : defaultAvatar}
+                                alt="Ground Photo"
+                                className="groundEditForm__general--avatar"
+                            />
+                            <div className="groundEditForm__general--avatarOverlay">
+                                <label>
+                                    <input
+                                        type="file"
+                                        name="avatarUrl"
+                                        className="groundEditForm__general--uploadBtn"
+                                        onChange={handleAvatarChange}
+                                    />
+                                    <MdEdit className="editIcon" />
+                                </label>
+                            </div>
+                        </div>
                         <div className="groundEditForm__general__header">
                             <h1 className="groundEditForm__general__header--text">General</h1>
                             <button className="groundEditForm__general__header--iconBtn" onClick={deleteForm}>

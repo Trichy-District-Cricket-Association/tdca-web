@@ -70,6 +70,12 @@ const GroundsManEdit: React.FC<GroundsManEditProps> = ({ setModalOpen, groundsMa
         e.preventDefault();
         setIsLoading(true);
         groundsMan.setAvatar = avatarUrl;
+        if (groundsManDoc.avatarUrl) {
+            groundsMan.setAvatar = groundsManDoc.avatarUrl;
+        }
+        if (avatarUrl) {
+            groundsMan.setAvatar = avatarUrl;
+        }
         await firestore
             .collection(Collections.groundsMen)
             .doc(groundsManDoc.docId)

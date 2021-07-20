@@ -4,6 +4,10 @@ export type MatchTeam = {
 
     teamName: string;
 
+    teamLogo: string;
+
+    teamColor: string;
+
     playingEleven: {
         batsman: string[],
         bowler: string[],
@@ -12,4 +16,5 @@ export type MatchTeam = {
         captain: string
     }
     onBench: string[];
+    
 };

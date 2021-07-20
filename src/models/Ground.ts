@@ -12,6 +12,9 @@ export default class Ground {
     /** Name of the ground. */
     groundName?: string;
 
+        /**ground Photo Url */
+        avatarUrl?: string;
+
     /** Number of total matches in that ground. */
     totalMatches?: number;
 
@@ -36,9 +39,14 @@ export default class Ground {
         if (field == 'typeMatches_schoolMatch') this.typeMatches!.schoolMatch = parseInt(value);
     }
 
+    set setAvatar(url: string) {
+        this.avatarUrl = url;
+    }
+
     constructor({
         docId,
         groundId,
+        avatarUrl,
         groundName,
         totalMatches,
         divisionMatches,
@@ -47,6 +55,7 @@ export default class Ground {
         docId?: string;
         groundId?: string;
         groundName?: string;
+        avatarUrl?: string;
         totalMatches?: number;
         divisionMatches?: DivisionMatches;
         typeMatches?: Omit<TypeMatches, 'institutionMatch' | 'tncaMatch' | 'combinedDistrictMatch' | 'privateMatch'>;
@@ -54,6 +63,7 @@ export default class Ground {
         if (docId) this.docId = docId;
         this.groundId = groundId ?? '';
         this.groundName = groundName ?? '';
+        if (avatarUrl) this.avatarUrl = avatarUrl;
         this.totalMatches = totalMatches ?? 0;
         this.divisionMatches = divisionMatches ?? { one: 0, two: 0, three: 0, four: 0, five: 0 };
         this.typeMatches = typeMatches ?? { interDistrictMatch: 0, knockoutMatch: 0, leagueMatch: 0, schoolMatch: 0 };
@@ -64,6 +74,7 @@ export default class Ground {
             docId: doc.id,
             groundId: doc.data()?.groundId,
             groundName: doc.data()?.groundName,
+            avatarUrl: doc.data()?.avatarUrl,
             totalMatches: doc.data()?.totalMatches,
             divisionMatches: doc.data()?.divisionMatches,
             typeMatches: doc.data()?.typeMatches,

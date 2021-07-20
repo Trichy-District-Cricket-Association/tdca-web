@@ -73,7 +73,13 @@ const ScorerEdit: React.FC<ScorerEditProps> = ({ setModalOpen, scorerDoc }): JSX
     const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         setIsLoading(true);
-        scorer.setAvatar = avatarUrl;
+
+        if (scorerDoc.avatarUrl) {
+            scorer.setAvatar = scorerDoc.avatarUrl;
+        }
+        if (avatarUrl) {
+            scorer.setAvatar = avatarUrl;
+        }
         await firestore
             .collection(Collections.scorers)
             .doc(scorerDoc.docId)

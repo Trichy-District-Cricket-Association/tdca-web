@@ -7,6 +7,9 @@ import InputBox from '../../../shared_components/input_box/InputBox';
 import './GroundAdd.scss';
 import firebase from 'firebase';
 import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
+import { MdEdit } from 'react-icons/md';
+import useStorage from '../../../../../../hooks/useStorage';
+const defaultAvatar = `${process.env.PUBLIC_URL}/assets/images/groundAvatar.png`;
 
 type GroundAddProps = {
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -15,6 +18,30 @@ type GroundAddProps = {
 const GroundAdd: React.FC<GroundAddProps> = ({ setModalOpen }): JSX.Element => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [ground, setGround] = useState<Ground>(new Ground({}));
+
+    // State to handle uploading files.
+    const [file, setFile] = useState(null);
+    const [error, setError] = useState('');
+
+    // Getting the progress and avatarUrl from the hook.
+    const { avatarUrl } = useStorage(file);
+
+    const types = ['image/png', 'image/jpeg', 'image/jpg'];
+
+    // Functions to check the type of file.
+    const handleAvatarChange = (e: any) => {
+        const selectedFile = e.target.files[0];
+
+        if (selectedFile) {
+            if (types.includes(selectedFile.type)) {
+                setError('');
+                setFile(selectedFile);
+            } else {
+                setFile(null);
+                setError('Please select an image file (png or jpg)');
+            }
+        }
+    };
 
     const handleForm = (e: React.ChangeEvent<HTMLInputElement>) => {
         const fieldName = `${e.target.name}` as const;
@@ -25,6 +52,7 @@ const GroundAdd: React.FC<GroundAddProps> = ({ setModalOpen }): JSX.Element => {
     const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         setIsLoading(true);
+        ground.setAvatar = avatarUrl;
         await firestore
             .collection(Collections.grounds)
             .add(JSON.parse(JSON.stringify(ground)))
@@ -54,6 +82,29 @@ const GroundAdd: React.FC<GroundAddProps> = ({ setModalOpen }): JSX.Element => {
             ) : (
                 <form className="groundAddForm" onSubmit={submitForm}>
                     <div className="groundAddForm__general">
+                        {/* error message */}
+                        {<p>{error}</p>}
+
+                        {/* image display */}
+
+                        <div>
+                            <img
+                                src={avatarUrl ? avatarUrl : defaultAvatar}
+                                alt="Ground Photo"
+                                className="groundAddForm__general--avatar"
+                            />
+                            <div className="groundAddForm__general--avatarOverlay">
+                                <label>
+                                    <input
+                                        type="file"
+                                        name="avatarUrl"
+                                        className="groundAddForm__general--uploadBtn"
+                                        onChange={handleAvatarChange}
+                                    />
+                                    <MdEdit className="editIcon" />
+                                </label>
+                            </div>
+                        </div>
                         <h1 className="groundAddForm__general--header">General</h1>
                         <div className="groundAddForm__general--input">
                             <InputBox title="Ground Id" name="groundId" type="text" textHandler={handleForm} />

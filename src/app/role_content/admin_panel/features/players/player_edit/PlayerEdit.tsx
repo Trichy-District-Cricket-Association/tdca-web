@@ -97,7 +97,13 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
     const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         setIsLoading(true);
-        player.setAvatar = avatarUrl;
+
+        if (playerDoc.avatarUrl) {
+            player.setAvatar = playerDoc.avatarUrl;
+        }
+        if (avatarUrl) {
+            player.setAvatar = avatarUrl;
+        }
         await firestore
             .collection(Collections.players)
             .doc(playerDoc.docId)

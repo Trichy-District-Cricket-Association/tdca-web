@@ -71,7 +71,13 @@ const TeamEdit: React.FC<TeamEditProps> = ({ setModalOpen, teamDoc }): JSX.Eleme
     const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         setIsLoading(true);
-        team.setAvatar = avatarUrl;
+        if (teamDoc.avatarUrl) {
+            team.setAvatar = teamDoc.avatarUrl;
+        }
+        if (avatarUrl) {
+            team.setAvatar = avatarUrl;
+        }
+
         await firestore
             .collection(Collections.teams)
             .doc(teamDoc.docId)
@@ -168,6 +174,13 @@ const TeamEdit: React.FC<TeamEditProps> = ({ setModalOpen, teamDoc }): JSX.Eleme
                                 name="emailId"
                                 type="text"
                                 value={teamDoc.emailId}
+                                textHandler={handleForm}
+                            />
+                            <InputBox
+                                title="Team Colour"
+                                name="teamColor"
+                                type="color"
+                                value={teamDoc.teamColor}
                                 textHandler={handleForm}
                             />
                         </div>

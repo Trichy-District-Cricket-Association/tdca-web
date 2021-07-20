@@ -85,6 +85,8 @@ const MatchEdit: React.FC<MatchEditProps> = ({ setModalOpen, matchDoc }): JSX.El
                 selectable?.teams.map((team) => {
                     if (team.teamName == value) {
                         newMatch.handleMatch({ field: 'teamA_teamId', value: `${team.teamId}` });
+                        newMatch.handleMatch({ field: 'teamA_teamColor', value: `${team.teamColor}` });
+                        match.setTeam1Logo = `${team.avatarUrl}`;
                     }
                 });
                 break;
@@ -92,6 +94,8 @@ const MatchEdit: React.FC<MatchEditProps> = ({ setModalOpen, matchDoc }): JSX.El
                 selectable?.teams.map((team) => {
                     if (team.teamName == value) {
                         newMatch.handleMatch({ field: 'teamB_teamId', value: `${team.teamId}` });
+                        newMatch.handleMatch({ field: 'teamB_teamColor', value: `${team.teamColor}` });
+                        match.setTeam2Logo = `${team.avatarUrl}`;
                     }
                 });
                 break;

@@ -8,9 +8,10 @@ export default class Team {
 
     teamName?: string;
 
-      /**Team Logo Url */
-      avatarUrl?: string;
+    /**Team Logo Url */
+    avatarUrl?: string;
 
+    teamColor?: string;
 
     emailId?: string;
 
@@ -42,6 +43,7 @@ export default class Team {
         if (field == 'teamId') this.teamId = value;
         if (field == 'teamName') this.teamName = value;
         if (field == 'emailId') this.emailId = value;
+        if (field == 'teamColor') this.teamColor = value;
         if (field == 'division') this.division = parseInt(value);
         if (field == 'numberOfMatches') this.numberOfMatches = parseInt(value);
         if (field == 'won') this.won = parseInt(value);
@@ -63,6 +65,7 @@ export default class Team {
         docId,
         teamId,
         teamName,
+        teamColor,
         avatarUrl,
         emailId,
         division,
@@ -81,6 +84,7 @@ export default class Team {
         docId?: string;
         teamId?: string;
         teamName?: string;
+        teamColor?: string;
         avatarUrl?: string;
         emailId?: string;
         division?: number;
@@ -97,28 +101,30 @@ export default class Team {
         penalty?: number;
     }) {
         if (docId) this.docId = docId;
-        this.teamId = teamId??'';
-        this.teamName = teamName??'';
+        this.teamId = teamId ?? '';
+        this.teamName = teamName ?? '';
+        this.teamColor = teamColor ?? '';
         if (avatarUrl) this.avatarUrl = avatarUrl;
-        this.emailId = emailId??'';
-        this.division = division??0;
-        this.numberOfMatches = numberOfMatches??0;
-        this.won = won??0;
-        this.lost = lost??0;
-        this.draw = draw??0;
-        this.tie = tie??0;
-        this.noResult = noResult??0;
-        this.totalPoints = totalPoints??0;
-        this.walkover = walkover??0;
-        this.conceed = conceed??0;
-        this.refusal = refusal??0;
-        this.penalty = penalty??0;
+        this.emailId = emailId ?? '';
+        this.division = division ?? 0;
+        this.numberOfMatches = numberOfMatches ?? 0;
+        this.won = won ?? 0;
+        this.lost = lost ?? 0;
+        this.draw = draw ?? 0;
+        this.tie = tie ?? 0;
+        this.noResult = noResult ?? 0;
+        this.totalPoints = totalPoints ?? 0;
+        this.walkover = walkover ?? 0;
+        this.conceed = conceed ?? 0;
+        this.refusal = refusal ?? 0;
+        this.penalty = penalty ?? 0;
     }
     static fromFirestore(doc: firebase.firestore.DocumentSnapshot): Team {
         return new Team({
             docId: doc.id,
             teamId: doc.data()?.teamId,
             teamName: doc.data()?.teamName,
+            teamColor: doc.data()?.teamColor,
             avatarUrl: doc.data()?.avatarUrl,
             emailId: doc.data()?.emailId,
             division: doc.data()?.division,

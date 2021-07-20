@@ -145,6 +145,7 @@ const TeamAdd: React.FC<TeamAddProps> = ({ setModalOpen }): JSX.Element => {
                             <InputBox title="Team Id" name="teamId" type="text" textHandler={handleForm} />
                             <InputBox title="Team Name" name="teamName" type="text" textHandler={handleForm} />
                             <InputBox title="Email Id" name="emailId" type="text" textHandler={handleForm} />
+                            <InputBox title="Team Colour" name="teamColor" type="color" textHandler={handleForm} />
                         </div>
                     </div>
                     <div className="teamAddForm__matchData">
