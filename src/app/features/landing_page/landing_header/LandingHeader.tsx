@@ -1,5 +1,4 @@
 import './LandingHeader.scss';
-import { MdKeyboardArrowRight } from 'react-icons/md';
 const landingImg = `${process.env.PUBLIC_URL}/assets/images/landingImg.svg`;
 const cricketStadium = `${process.env.PUBLIC_URL}/assets/images/cricketStadium.jpg`;
 const LandingHeader: React.FC<any> = (): JSX.Element => {
@@ -18,12 +17,7 @@ const LandingHeader: React.FC<any> = (): JSX.Element => {
                     <p className="header__container--subText">
                         We help you play in cricket matches of various levels and kinds
                     </p>
-                    <button className="header__container--contactBtn">
-                        Contact
-                        <i className="icon">
-                            <MdKeyboardArrowRight />
-                        </i>
-                    </button>
+                    <button className="header__container--contactBtn">Contact</button>
                 </div>
                 <img src={landingImg} alt="Landing" className="header__container--img" />
             </div>
