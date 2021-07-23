@@ -7,7 +7,7 @@ const LandingPage: React.FC<void> = (): JSX.Element => {
         <div className="landingPage">
             <LandingHeader />
             <LandingMatches />
-            <LandingAboutUs />
+            {/* <LandingAboutUs /> */}
         </div>
     );
 };
