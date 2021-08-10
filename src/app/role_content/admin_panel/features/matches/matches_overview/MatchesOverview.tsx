@@ -71,7 +71,7 @@ const MatchesOverview: React.FC<void> = (): JSX.Element => {
         { label: 'SCORER ID', key: 'scorer.scorerId' },
         { label: 'SCORER FEE STATUS', key: 'scorer.scorerFeeStatus' },
         { label: 'DATE AND TIME OF MATCH', key: 'date' },
-        { label: 'VENUE', key: 'venue' },
+        { label: 'VENUE', key: 'venue.groundName' },
         { label: 'STATUS', key: 'status' },
     ];
 

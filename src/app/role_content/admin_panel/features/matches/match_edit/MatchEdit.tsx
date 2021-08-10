@@ -123,6 +123,14 @@ const MatchEdit: React.FC<MatchEditProps> = ({ setModalOpen, matchDoc }): JSX.El
                     }
                 });
                 break;
+            case 'venue_groundName':
+                selectable?.grounds.map((ground) => {
+                    if (ground.groundName == value) {
+                        newMatch.handleMatch({ field: 'ground_groundId', value: `${ground.groundId}` });
+                        match.setGroundAvatar = `${ground.avatarUrl}`;
+                    }
+                });
+                break;
         }
     }
 

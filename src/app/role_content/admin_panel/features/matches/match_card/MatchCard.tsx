@@ -28,7 +28,7 @@ const MatchCard = ({ matchDoc }: MatchCardProps): JSX.Element => {
                     </div>
                     <div className="matchCard__container__column2">
                         <label className="matchCard__container--label">Venue</label>
-                        <p className="matchCard__container--text">{matchDoc.venue}</p>
+                        <p className="matchCard__container--text">{matchDoc.venue?.groundName}</p>
                         <label className="matchCard__container--label">Date</label>
                         <p className="matchCard__container--text">{matchDoc.date?.toISOString().substr(0, 10)}</p>
                         <label className="matchCard__container--label">Time</label>

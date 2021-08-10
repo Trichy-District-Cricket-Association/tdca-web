@@ -49,7 +49,7 @@ const LandingMatches: React.FC<any> = (): JSX.Element => {
                                 </div>
                                 <div className="matchCard__container__column2">
                                     <label className="matchCard__container--label">Venue</label>
-                                    <p className="matchCard__container--text">{matchDoc.venue}</p>
+                                    <p className="matchCard__container--text">{matchDoc.venue?.groundName}</p>
 
                                     <label className="matchCard__container--label">Time</label>
                                     <p className="matchCard__container--text">

@@ -111,7 +111,7 @@ const MatchAdd: React.FC<MatchAddProps> = ({ setModalOpen }): JSX.Element => {
             case 'venue_groundName':
                 selectable?.grounds.map((ground) => {
                     if (ground.groundName == value) {
-                        newMatch.handleMatch({ field: 'scorer_scorerId', value: `${ground.groundId}` });
+                        newMatch.handleMatch({ field: 'ground_groundId', value: `${ground.groundId}` });
                         match.setGroundAvatar = `${ground.avatarUrl}`;
                     }
                 });
