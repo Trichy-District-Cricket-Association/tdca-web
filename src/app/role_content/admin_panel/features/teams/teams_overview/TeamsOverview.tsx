@@ -5,8 +5,6 @@ import { firestore } from '../../../../../../firebase';
 import Team from '../../../../../../models/Team';
 import './TeamsOverview.scss';
 import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
-import { PageRoutes } from '../../../../../../enums/pageRoutes';
-import { Link } from 'react-router-dom';
 import TeamAdd from '../team_add/TeamAdd';
 import TeamCard from '../team_card/TeamCard';
 
@@ -47,10 +45,15 @@ const TeamsOverview: React.FC<void> = (): JSX.Element => {
                 <LoadingComp />
             ) : (
                 <div className="teamsOverview">
-                    <Link to={PageRoutes.adminTeams} onClick={() => setModalOpen(true)}>
-                        <button className="teamsOverview__teamAddBtn">+ Add Team</button>
-                    </Link>
-                    <CSVLink data={JSON.parse(JSON.stringify(teamDocs))} headers={JSON.parse(JSON.stringify(headers))}>
+                    <button className="teamsOverview__teamAddBtn" onClick={() => setModalOpen(true)}>
+                        + Add Team
+                    </button>
+
+                    <CSVLink
+                        className="teamsOverview__dataDownload"
+                        data={JSON.parse(JSON.stringify(teamDocs))}
+                        headers={JSON.parse(JSON.stringify(headers))}
+                    >
                         Download Data
                     </CSVLink>
                     <div className="teamsOverview__teamCard">

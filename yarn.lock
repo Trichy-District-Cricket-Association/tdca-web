@@ -1654,6 +1654,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@brainhubeu/react-carousel@npm:^2.0.4":
+  version: 2.0.4
+  resolution: "@brainhubeu/react-carousel@npm:2.0.4"
+  peerDependencies:
+    react: ^16.8.0
+    react-dom: ^16.8.0
+  checksum: 8f9690e7a42e281ce912de823313506cb7d7aac8e1e4d1d67f60786da9d653c78dae48dd5a678c9b1382922cc02f0467365dcd2d0bdabe9aa39700ae676f44e5
+  languageName: node
+  linkType: hard
+
 "@cnakazawa/watch@npm:^1.0.3":
   version: 1.0.4
   resolution: "@cnakazawa/watch@npm:1.0.4"
@@ -2804,6 +2814,15 @@ __metadata:
   dependencies:
     "@babel/types": ^7.3.0
   checksum: 74c54233db809402858fbcc0a476c285a3272f8ce295e9fa17cd526298b3f26bfdf257ad93fc9932a3168278096b146c6c5a8cb855e704bc1697a95ab9853506
+  languageName: node
+  linkType: hard
+
+"@types/brainhubeu__react-carousel@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "@types/brainhubeu__react-carousel@npm:2.0.3"
+  dependencies:
+    "@types/react": "*"
+  checksum: e394628c5ce6f8541f6670065ac404214c1c7d31b74ae55d4820fbfe96943bf0c66ba80cc42bb7852d026ef5505929ecf49595d4e1abef88f024e5030e1be231
   languageName: node
   linkType: hard
 
@@ -15618,10 +15637,12 @@ resolve@^2.0.0-next.3:
   resolution: "tdca-web@workspace:."
   dependencies:
     "@babel/core": ^7.14.6
+    "@brainhubeu/react-carousel": ^2.0.4
     "@testing-library/jest-dom": ^5.14.1
     "@testing-library/react": ^11.2.7
     "@testing-library/user-event": ^12.8.3
     "@types/babel__core": ^7.1.14
+    "@types/brainhubeu__react-carousel": ^2.0.3
     "@types/gh-pages": ^3
     "@types/jest": ^26.0.23
     "@types/node": ^12.20.15

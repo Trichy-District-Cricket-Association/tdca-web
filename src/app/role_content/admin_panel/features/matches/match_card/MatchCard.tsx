@@ -18,23 +18,24 @@ const MatchCard = ({ matchDoc }: MatchCardProps): JSX.Element => {
                     <p className="matchCard__header--title">{matchDoc.teamB?.teamName}</p>
                 </div>
                 <div className="matchCard__container">
-                    <div>
+                    <div className="matchCard__container__cloumn1">
                         <label className="matchCard__container--label">Match Id</label>
                         <p className="matchCard__container--text">Match Id{matchDoc.matchId}</p>
                         <label className="matchCard__container--label">Division</label>
                         <p className="matchCard__container--text">Division {matchDoc.division}</p>
                         <label className="matchCard__container--label">Match Type</label>
                         <p className="matchCard__container--text">{matchDoc.type}</p>
-                        <label className="matchCard__container--label">Venue</label>
-                        <p className="matchCard__container--text">{matchDoc.venue}</p>
                     </div>
-                    <div>
+                    <div className="matchCard__container__column2">
+                        <label className="matchCard__container--label">Venue</label>
+                        <p className="matchCard__container--text">{matchDoc.venue?.groundName}</p>
+                        <label className="matchCard__container--label">Date</label>
+                        <p className="matchCard__container--text">{matchDoc.date?.toISOString().substr(0, 10)}</p>
                         <label className="matchCard__container--label">Time</label>
-                        <p className="matchCard__container--text">{matchDoc.date?.toISOString().substr(0, 16)}</p>
-                        <label className="matchCard__container--label">Status</label>
-                        <p className="matchCard__container--text">{matchDoc.status}</p>
+                        <p className="matchCard__container--text">{matchDoc.date?.toISOString().substr(11, 8)}</p>
                     </div>
                 </div>
+                <p className="matchCard__container--status">{matchDoc.status}</p>
             </div>
             {isModalOpen ? <MatchEdit setModalOpen={setModalOpen} matchDoc={matchDoc} /> : null}
         </div>

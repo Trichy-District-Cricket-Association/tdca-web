@@ -1,0 +1,79 @@
+.matches {
+    margin-bottom: 50px;
+    &__header {
+        margin-top: 20px;
+        margin-left: 20px;
+    }
+    &__matchCards {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-auto-rows: auto;
+    }
+    .matchCard {
+        color: #fff;
+        display: grid;
+        background-color: #0d4194;
+        width: 340px;
+        height: 350px;
+        margin-top: 25px;
+        cursor: pointer;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.39);
+        transition: 0.3s;
+        font-family: 'Poppins';
+        &__header {
+            text-align: center;
+            margin-top: 10px;
+            &--title {
+                font-size: 18px;
+            }
+            &--img {
+                margin-top: 4px;
+                margin-bottom: -4px;
+            }
+        }
+        &__container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+            &--label {
+                text-transform: uppercase;
+                font-size: 12px;
+            }
+            &--text {
+                font-size: 15px;
+                margin-bottom: 12px;
+            }
+            &--status {
+                text-align: center;
+            }
+            &__column2,
+            &__column1 {
+                width: 150px;
+            }
+        }
+    }
+}
+@media screen and (max-width: 1400px) {
+    .matches {
+        &__matchCards {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+}
+@media screen and (max-width: 1050px) {
+    .matches {
+        text-align: center;
+        &__matchCards {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+}
+@media screen and (max-width: 695px) {
+    .matches {
+        &__matchCards {
+            grid-template-columns: repeat(1, 1fr);
+            justify-items: center;
+        }
+    }
+}

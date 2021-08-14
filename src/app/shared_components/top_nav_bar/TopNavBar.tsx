@@ -9,6 +9,7 @@ import Login from '../../features/authentication/Login';
 import './TopNavBar.scss';
 import SideNavBar from '../../role_content/admin_panel/shared_components/side_navbar/SideNavBar';
 import { BsGear } from 'react-icons/bs';
+import { MdPerson } from 'react-icons/md';
 
 const logo = `${process.env.PUBLIC_URL}/assets/images/tdca_logo.jpg`;
 const TopNav = (): JSX.Element => {
@@ -30,6 +31,12 @@ const TopNav = (): JSX.Element => {
                             </button>
                             <SideNavBar sidebar={sidebar} showSidebar={showSidebar} />
                         </div>
+                    ) : authData?.role == UserRoles.team ? (
+                        <div>
+                            <Link to={PageRoutes.teamPanel} className="nav__menu-bars">
+                                <MdPerson />
+                            </Link>
+                        </div>
                     ) : (
                         <div />
                     )}
@@ -37,7 +44,7 @@ const TopNav = (): JSX.Element => {
                         <img src={logo} alt="Logo" className="nav__header--logo" />
                     </div>
                     <div>
-                        <h1 className="nav__header--text">Trichy District Cricket Association</h1>
+                        <h1 className="nav__header--text">The Tiruchirappalli District Cricket Association</h1>
                         <h1 className="nav__header--textAbbr">TDCA</h1>
                     </div>
                 </div>
@@ -68,11 +75,10 @@ const TopNav = (): JSX.Element => {
                         </Link>
                     </div>
                     <div className="item">
-                        <Link to={PageRoutes.contact} className="nav__link">
-                            Contact
+                        <Link to={PageRoutes.aboutUs} className="nav__link">
+                            About Us
                         </Link>
                     </div>
-
                     {authData === undefined ? null : authData === null ? (
                         <div>
                             <Link to={PageRoutes.home} className="nav__btn" onClick={loginClick}>

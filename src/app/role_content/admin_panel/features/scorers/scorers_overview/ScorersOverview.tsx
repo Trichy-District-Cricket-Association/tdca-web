@@ -5,8 +5,6 @@ import { firestore } from '../../../../../../firebase';
 import Scorer from '../../../../../../models/Scorer';
 import './ScorersOverview.scss';
 import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
-import { PageRoutes } from '../../../../../../enums/pageRoutes';
-import { Link } from 'react-router-dom';
 import ScorerAdd from '../scorer_add/ScorerAdd';
 import ScorerCard from '../scorer_card/ScorerCard';
 
@@ -59,10 +57,12 @@ const ScorersOverview: React.FC<void> = (): JSX.Element => {
                 <LoadingComp />
             ) : (
                 <div className="scorersOverview">
-                    <Link to={PageRoutes.adminScorers} onClick={() => setModalOpen(true)}>
-                        <button className="scorersOverview__scorerAddBtn">+ Add Scorer</button>
-                    </Link>
+                    <button className="scorersOverview__scorerAddBtn" onClick={() => setModalOpen(true)}>
+                        + Add Scorer
+                    </button>
+
                     <CSVLink
+                        className="scorersOverview__dataDownload"
                         data={JSON.parse(JSON.stringify(scorerDocs))}
                         headers={JSON.parse(JSON.stringify(headers))}
                     >

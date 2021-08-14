@@ -24,15 +24,49 @@ const InputBox: React.FC<InputBoxProps> = ({
             <ul className="input_box">
                 <li>
                     <label htmlFor={name}>{title}</label>
-                    <input
-                        type={type}
-                        name={name}
-                        min={0}
-                        maxLength={100}
-                        onChange={textHandler}
-                        defaultValue={value}
-                        ref={ref ?? undefined}
-                    />
+                    {name == 'aadharNumber' ||
+                    name == 'umpireId' ||
+                    name == 'umpireName' ||
+                    name == 'emailId' ||
+                    name == 'primaryContact' ||
+                    name == 'dateOfBirth' ||
+                    name == 'scorerId' ||
+                    name == 'scorerName' ||
+                    name == 'groundId' ||
+                    name == 'groundName' ||
+                    name == 'groundsManId' ||
+                    name == 'groundsManName' ||
+                    name == 'playerId' ||
+                    name == 'playerName' ||
+                    name == 'teamId' ||
+                    name == 'teamName' ||
+                    name == 'teamColor' ||
+                    name == 'matchId' ||
+                    name == 'date' ||
+                    name == 'dateOfRegisteration' ||
+                    name == 'registerationFee' ? (
+                        <input
+                            type={type}
+                            name={name}
+                            min={0}
+                            maxLength={100}
+                            onChange={textHandler}
+                            defaultValue={value}
+                            ref={ref ?? undefined}
+                            required
+                        />
+                    ) : (
+                        <input
+                            type={type}
+                            name={name}
+                            min={0}
+                            maxLength={100}
+                            onChange={textHandler}
+                            defaultValue={value}
+                            ref={ref ?? undefined}
+                        />
+                    )}
+
                     <span>{suggestion}</span>
                 </li>
             </ul>

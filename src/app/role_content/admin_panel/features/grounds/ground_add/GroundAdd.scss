@@ -13,7 +13,8 @@
         background-color: #131313;
     }
     .groundAddForm {
-        &__general {
+        &__general,
+        &__matchData {
             &--header {
                 margin-top: 2%;
                 margin-left: 3%;
@@ -24,29 +25,50 @@
             &--input {
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-                margin-left: 1%;
-            }
-            .input_box {
-                max-width: 400px;
-                margin-left: 0;
             }
         }
-        &__matchData {
-            &--header {
-                margin-left: 3%;
-                font-family: 'Poppins';
-                font-weight: 400;
-                color: #131313;
+        &__general {
+            .input_box {
+                max-width: 400px;
             }
             &--input {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-                margin-left: 0;
+                display: flex;
+            }
+            &--avatar,
+            &--avatarOverlay {
+                width: 150px;
+                height: 150px;
+                margin-top: 3%;
+                margin-left: 43%;
+                cursor: pointer;
+                border-radius: 50%;
+            }
+            &--avatarOverlay {
+                position: relative;
+                background: #0000009b;
+                margin-top: -153px;
+                transition: 0.6s ease;
+                opacity: 0;
+
+                &:hover {
+                    opacity: 1;
+                }
+                .editIcon {
+                    padding: 70px;
+                    color: #fff;
+                    font-size: 30px;
+                    cursor: pointer;
+                    margin-left: -5px;
+                }
+            }
+            &--uploadBtn {
+                position: absolute;
+                display: none;
             }
         }
         &__btn {
             display: flex;
-            margin-left: 3%;
+            margin-left: 2%;
             margin-top: 2%;
             margin-bottom: 2%;
             &--cancel,
@@ -56,70 +78,47 @@
                 margin-right: 0.8rem;
                 font-family: 'Poppins';
                 padding: 0.4rem 1.2em;
-                background-color: transparent;
                 border: none;
                 font-weight: 600;
                 cursor: pointer;
                 text-align: center;
                 border-radius: 10px;
-                box-shadow: 0 0 40px 40px #3d26d6 inset;
+            }
+            &--submit {
+                background-color: #3d26d6;
                 &:hover {
-                    box-shadow: 0 0 40px 40px #4a2eff inset;
+                    background-color: #3d26d6;
                 }
             }
             &--cancel {
-                box-shadow: 0 0 40px 40px #131313 inset;
+                background-color: #131313;
                 &:hover {
-                    box-shadow: 0 0 40px 40px #3a3a3a inset;
+                    background-color: #3a3a3a;
                 }
             }
         }
     }
-}
-.Overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.541);
-}
-/* scrollbar width */
-::-webkit-scrollbar {
-    width: 13px;
+    &__overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.541);
+    }
 }
 
-/* Track */
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-    background: #41596b;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
 @media screen and (max-width: 799px) {
     .groundAdd {
         width: 90%;
 
         .groundAddForm {
+            text-align: center;
+
+            &__matchData,
             &__general {
-                &--header {
-                    margin-left: 35%;
-                }
-            }
-            &__matchData {
-                &--header {
-                    margin-left: 25%;
-                }
                 .input_box {
                     max-width: 400px;
-                    margin-left: 0;
                 }
             }
             &__btn {
@@ -127,6 +126,42 @@
                 &--submit {
                     margin-top: 4%;
                     margin-bottom: 4%;
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 546px) {
+    .groundAdd {
+        width: 90%;
+        .groundAddForm {
+            &__general {
+                &--input {
+                    display: grid;
+                }
+            }
+            &__general,
+            &__matchData {
+                &--input {
+                    margin-left: 3.5%;
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 546px) {
+    .groundAdd {
+        width: 90%;
+        .groundAddForm {
+            &__general {
+                &--input {
+                    display: grid;
+                }
+            }
+            &__general,
+            &__matchData {
+                &--input {
+                    margin-left: 3.5%;
                 }
             }
         }

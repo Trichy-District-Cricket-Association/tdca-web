@@ -9,6 +9,8 @@ export default class Player {
 
     teamName?: string;
 
+    teamId?: string;
+
     playerName?: string;
 
     avatarUrl?: string;
@@ -20,6 +22,10 @@ export default class Player {
     fatherName?: string;
 
     primaryContact?: string;
+
+    registerationFee?: string;
+
+    dateOfRegisteration?:Date;
 
     aadharNumber?: string;
 
@@ -41,10 +47,13 @@ export default class Player {
         if (field == 'playerName') this.playerName = value;
         if (field == 'playerId') this.playerId = value;
         if (field == 'teamName') this.teamName = value;
+        if (field == 'teamId') this.teamId = value;
         if (field == 'emailId') this.emailId = value;
         if (field == 'dateOfBirth') this.dateOfBirth = new Date(value);
         if (field == 'fatherName') this.fatherName = value;
         if (field == 'primaryContact') this.primaryContact = value;
+        if (field == 'registerationFee') this.registerationFee = value;
+        if (field == 'dateOfRegisteration') this.dateOfRegisteration = new Date(value);
         if (field == 'aadharNumber') this.aadharNumber = value;
         if (field == 'voterId') this.voterId = value;
         if (field == 'rationCardNumber') this.rationCardNumber = value;
@@ -76,11 +85,15 @@ export default class Player {
         docId,
         playerId,
         teamName,
+        teamId,
         playerName,
         avatarUrl,
         emailId,
         dateOfBirth,
+        
         primaryContact,
+        registerationFee,
+        dateOfRegisteration,
         fatherName,
         aadharNumber,
         voterId,
@@ -94,12 +107,16 @@ export default class Player {
         docId?: string;
         playerId?: string;
         teamName?: string;
+        teamId?: string;
         playerName?: string;
         avatarUrl?: string;
         emailId?: string;
         dateOfBirth?: Date;
         fatherName?: string;
         primaryContact?: string;
+        registerationFee?: string;
+
+    dateOfRegisteration?:Date;
         aadharNumber?: string;
         voterId?: string;
         rationCardNumber?: string;
@@ -112,11 +129,14 @@ export default class Player {
         if (docId) this.docId = docId;
         this.playerId = playerId ?? '';
         this.teamName = teamName ?? '';
+        this.teamId = teamId ?? '';
         this.playerName = playerName ?? '';
         if (avatarUrl) this.avatarUrl = avatarUrl;
         this.emailId = emailId ?? '';
         this.dateOfBirth = dateOfBirth;
         this.primaryContact = primaryContact ?? '';
+        this.registerationFee = registerationFee ?? '';
+        this.dateOfRegisteration = dateOfRegisteration;
         this.fatherName = fatherName ?? '';
         this.aadharNumber = aadharNumber ?? '';
         this.rationCardNumber = rationCardNumber ?? '';
@@ -147,11 +167,14 @@ export default class Player {
             docId: doc.id,
             playerId: doc.data()?.playerId,
             teamName: doc.data()?.teamName,
+            teamId: doc.data()?.teamId,
             playerName: doc.data()?.playerName,
             avatarUrl: doc.data()?.avatarUrl,
             emailId: doc.data()?.emailId,
             dateOfBirth: new Date(doc.data()?.dateOfBirth),
             primaryContact: doc.data()?.primaryContact,
+            registerationFee: doc.data()?.registerationFee,
+            dateOfRegisteration: new Date(doc.data()?.dateOfRegisteration),
             fatherName: doc.data()?.fatherName,
             aadharNumber: doc.data()?.aadharNumber,
             rationCardNumber: doc.data()?.rationCardNumber,

@@ -5,8 +5,6 @@ import { firestore } from '../../../../../../firebase';
 import GroundsMan from '../../../../../../models/GroundsMan';
 import './GroundsMenOverview.scss';
 import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
-import { PageRoutes } from '../../../../../../enums/pageRoutes';
-import { Link } from 'react-router-dom';
 import GroundsManAdd from '../groundsMan_add/GroundsManAdd';
 import GroundsManCard from '../groundsMan_card/GroundsManCard';
 
@@ -45,10 +43,11 @@ const GroundsMenOverview: React.FC<void> = (): JSX.Element => {
                 <LoadingComp />
             ) : (
                 <div className="groundsMenOverview">
-                    <Link to={PageRoutes.adminGroundsMen} onClick={() => setModalOpen(true)}>
-                        <button className="groundsMenOverview__groundsManAddBtn">+ Add GroundsMan</button>
-                    </Link>
+                    <button className="groundsMenOverview__groundsManAddBtn" onClick={() => setModalOpen(true)}>
+                        + Add GroundsMan
+                    </button>
                     <CSVLink
+                        className="groundsMenOverview__dataDownload"
                         data={JSON.parse(JSON.stringify(groundsManDocs))}
                         headers={JSON.parse(JSON.stringify(headers))}
                     >

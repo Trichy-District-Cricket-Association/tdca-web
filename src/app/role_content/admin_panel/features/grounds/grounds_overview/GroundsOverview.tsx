@@ -5,8 +5,6 @@ import { firestore } from '../../../../../../firebase';
 import Ground from '../../../../../../models/Ground';
 import './GroundsOverview.scss';
 import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
-import { PageRoutes } from '../../../../../../enums/pageRoutes';
-import { Link } from 'react-router-dom';
 import GroundAdd from '../ground_add/GroundAdd';
 import GroundCard from '../ground_card/GroundCard';
 
@@ -43,10 +41,12 @@ const GroundsOverview: React.FC<void> = (): JSX.Element => {
                 <LoadingComp />
             ) : (
                 <div className="groundsOverview">
-                    <Link to={PageRoutes.adminGrounds} onClick={() => setModalOpen(true)}>
-                        <button className="groundsOverview__groundAddBtn">+ Add Ground</button>
-                    </Link>
+                    <button className="groundsOverview__groundAddBtn" onClick={() => setModalOpen(true)}>
+                        + Add Ground
+                    </button>
+
                     <CSVLink
+                        className="groundsOverview__dataDownload"
                         data={JSON.parse(JSON.stringify(groundDocs))}
                         headers={JSON.parse(JSON.stringify(headers))}
                     >

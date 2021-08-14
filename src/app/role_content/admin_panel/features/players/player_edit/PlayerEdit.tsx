@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { MdEdit } from 'react-icons/md';
+import { MdDelete, MdEdit } from 'react-icons/md';
 import Modal from 'react-modal';
 import { firestore } from '../../../../../../firebase';
 import { Collections } from '../../../../../../enums/collection';
@@ -18,6 +18,7 @@ type PlayerEditProps = {
 };
 
 const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX.Element => {
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [player, setPlayer] = useState<Player>(
         new Player({
             playerId: playerDoc.playerId,
@@ -27,6 +28,8 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
             emailId: playerDoc.emailId,
             dateOfBirth: playerDoc.dateOfBirth,
             primaryContact: playerDoc.primaryContact,
+            registerationFee: playerDoc.registerationFee,
+            dateOfRegisteration: playerDoc.dateOfRegisteration,
             fatherName: playerDoc.fatherName,
             aadharNumber: playerDoc.aadharNumber,
             rationCardNumber: playerDoc.rationCardNumber,
@@ -93,7 +96,14 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
     };
     const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
-        player.setAvatar = avatarUrl;
+        setIsLoading(true);
+
+        if (playerDoc.avatarUrl) {
+            player.setAvatar = playerDoc.avatarUrl;
+        }
+        if (avatarUrl) {
+            player.setAvatar = avatarUrl;
+        }
         await firestore
             .collection(Collections.players)
             .doc(playerDoc.docId)
@@ -106,6 +116,18 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
             });
         setModalOpen(false);
     };
+    const deleteForm: React.MouseEventHandler<HTMLButtonElement> = async (e) => {
+        e.preventDefault();
+        const answer = window.confirm('Are you sure you want to delete?');
+        if (answer) {
+            setIsLoading(true);
+            await firestore
+                .collection(Collections.players)
+                .doc(playerDoc.docId)
+                .delete()
+                .then(() => setModalOpen(false));
+        }
+    };
     return (
         <Modal
             className="playerEdit"
@@ -114,17 +136,22 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
             ariaHideApp={false}
             overlayClassName="Overlay"
         >
-            {selectable ? (
+            {isLoading ? (
+                <LoadingComp />
+            ) : selectable ? (
                 <form className="playerEditForm" onSubmit={submitForm}>
                     <div className="playerEditForm__general">
                         {/* error message */}
                         {<p>{error}</p>}
-
-                        {/* image display */}
-
                         <div>
                             <img
-                                src={avatarUrl == defaultAvatar ? playerDoc.avatarUrl : avatarUrl}
+                                src={
+                                    playerDoc.avatarUrl == null
+                                        ? defaultAvatar
+                                        : avatarUrl
+                                        ? avatarUrl
+                                        : playerDoc.avatarUrl
+                                }
                                 alt="profile"
                                 className="playerEditForm__general--avatar"
                             />
@@ -140,7 +167,14 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
                                 </label>
                             </div>
                         </div>
-                        <h1 className="playerEditForm__general--header">General</h1>
+                        <div className="playerEditForm__general__header">
+                            <h1 className="playerEditForm__general__header--text">General</h1>
+                            <button className="playerEditForm__general__header--iconBtn" onClick={deleteForm}>
+                                <i>
+                                    <MdDelete />
+                                </i>
+                            </button>
+                        </div>
                         <div className="playerEditForm__general--input">
                             <InputBox
                                 title="player Name"
@@ -192,10 +226,26 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
                                 value={playerDoc.primaryContact}
                                 textHandler={handleInputForm}
                             />
+                            <InputBox
+                                title="Date of Registeration"
+                                name="dateOfRegisteration"
+                                type="date"
+                                value={playerDoc.dateOfRegisteration?.toISOString().substr(0, 10)}
+                                textHandler={handleInputForm}
+                            />
+                            <SelectInputBox
+                                title="Registeration Fee"
+                                name="registerationFee"
+                                options={['Not Paid', 'Paid']}
+                                value={playerDoc.registerationFee}
+                                textHandler={handleSelectForm}
+                            />
                         </div>
                     </div>
                     <div className="playerEditForm__personalData">
-                        <h1 className="playerEditForm__personalData--header">Personal Details</h1>
+                        <div className="playerEditForm__personalData__header">
+                            <h1 className="playerEditForm__personalData__header--text">Personal Details</h1>
+                        </div>
                         <div className="playerEditForm__personalData--input">
                             <InputBox
                                 title="Aadhar Number"
@@ -242,7 +292,9 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
                         </div>
                     </div>
                     <div className="playerEditForm__stats">
-                        <h1 className="playerEditForm__stats--header">Statistics</h1>
+                        <div className="playerEditForm__stats__header">
+                            <h1 className="playerEditForm__stats__header--text">Statistics</h1>
+                        </div>
                         <div>
                             <h1 className="playerEditForm__stats--header1">Batting Statistics</h1>
                             <div className="playerEditForm__stats--input">
