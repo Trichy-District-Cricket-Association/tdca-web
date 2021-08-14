@@ -123,7 +123,7 @@ export default class Match {
         this.teamA = teamA ?? {
             teamId: '',
             teamName: '',
-            playingEleven: { batsman: [], bowler: [], allRounder: [], wicketKeeper: [], captain: '' },
+            playingEleven: [],
             onBench: [],
             teamColor:'',
             teamLogo: ''
@@ -131,7 +131,7 @@ export default class Match {
         this.teamB = teamB ?? {
             teamId: '',
             teamName: '',
-            playingEleven: { batsman: [], bowler: [], allRounder: [], wicketKeeper: [], captain: '' },
+            playingEleven: [],
             onBench: [],
             teamColor:'',
             teamLogo: ''
