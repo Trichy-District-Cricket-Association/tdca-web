@@ -16,6 +16,7 @@ type PlayerAddProps = {
 };
 
 const PlayerAdd: React.FC<PlayerAddProps> = ({ setModalOpen }): JSX.Element => {
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [player, setPlayer] = useState<Player>(new Player({}));
 
     // State to handle uploading files.
@@ -65,14 +66,21 @@ const PlayerAdd: React.FC<PlayerAddProps> = ({ setModalOpen }): JSX.Element => {
     };
     const handleSelectForm = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const fieldName = `${e.target.name}` as const;
-        console.log(fieldName);
         const newPlayer = new Player({ ...player });
+        if (fieldName == 'teamName') {
+            selectable?.teams.map((team) => {
+                if (team.teamName == e.target.value) {
+                    newPlayer.handlePlayer({ field: 'teamId', value: `${team.teamId}` });
+                }
+            });
+        }
         newPlayer.handlePlayer({ field: fieldName, value: e.target.value });
         setPlayer(newPlayer);
     };
     const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         player.setAvatar = avatarUrl;
+        setIsLoading(true);
         await firestore
             .collection(Collections.players)
             .add(JSON.parse(JSON.stringify(player)))
@@ -92,7 +100,9 @@ const PlayerAdd: React.FC<PlayerAddProps> = ({ setModalOpen }): JSX.Element => {
             ariaHideApp={false}
             overlayClassName="Overlay"
         >
-            {selectable ? (
+            {isLoading ? (
+                <LoadingComp />
+            ) : selectable ? (
                 <form className="playerAddForm" onSubmit={submitForm}>
                     <div className="playerAddForm__general">
                         {/* error message */}
@@ -147,6 +157,18 @@ const PlayerAdd: React.FC<PlayerAddProps> = ({ setModalOpen }): JSX.Element => {
                                 name="primaryContact"
                                 type="text"
                                 textHandler={handleInputForm}
+                            />
+                            <InputBox
+                                title="Date of Registeration"
+                                name="dateOfRegisteration"
+                                type="date"
+                                textHandler={handleInputForm}
+                            />
+                            <SelectInputBox
+                                title="Registeration Fee"
+                                name="registerationFee"
+                                options={['Not Paid', 'Paid']}
+                                textHandler={handleSelectForm}
                             />
                         </div>
                     </div>

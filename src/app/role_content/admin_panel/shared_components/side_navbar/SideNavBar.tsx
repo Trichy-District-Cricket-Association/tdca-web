@@ -2,7 +2,7 @@ import { SidebarData } from './SideNavBarData';
 import { Link } from 'react-router-dom';
 import './SideNavBar.scss';
 
-const SideNavBar = (props:any) => (
+const SideNavBar = (props: any) => (
     <div>
         <div className={props.sidebar ? 'nav-menu active' : 'nav-menu'}>
             <div className="container">

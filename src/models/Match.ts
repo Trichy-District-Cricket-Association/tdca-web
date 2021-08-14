@@ -2,6 +2,7 @@ import firebase from 'firebase';
 import { MatchTeam } from './model_types/MatchTeam';
 import { MatchUmpire } from './model_types/MatchUmpire';
 import { MatchScorer } from './model_types/MatchScorer';
+import { MatchGround } from './model_types/MatchGround';
 
 export default class Match {
     /** Document id of the match document. */
@@ -20,13 +21,15 @@ export default class Match {
     umpireB?: MatchUmpire;
 
     scorer?: MatchScorer;
-    
+
     /**League, knockout, school matches are the possible types */
     type?: string;
 
+    schoolMatchType?: string;
+
     date?: Date;
 
-    venue?: string;
+    venue?: MatchGround;
 
     status?: string;
 
@@ -34,11 +37,14 @@ export default class Match {
         if (field == 'matchId') this.matchId = value;
 
         if (field == 'division') this.division = parseInt(value);
+        if (field == 'schoolMatchType') this.schoolMatchType= value;
 
         if (field == 'teamA_teamName') this.teamA!.teamName = value;
         if (field == 'teamA_teamId') this.teamA!.teamId = value;
+        if (field == 'teamA_teamColor') this.teamA!.teamColor = value;
         if (field == 'teamB_teamName') this.teamB!.teamName = value;
         if (field == 'teamB_teamId') this.teamB!.teamId = value;
+        if (field == 'teamB_teamColor') this.teamB!.teamColor = value;
 
         if (field == 'umpireA_umpireName') this.umpireA!.umpireName = value;
         if (field == 'umpireA_umpireId') this.umpireA!.umpireId = value;
@@ -53,15 +59,39 @@ export default class Match {
 
         if (field == 'type') this.type = value;
         if (field == 'date') this.date = new Date(value);
-        if (field == 'venue') this.venue = value;
+
+        if (field == 'venue_groundName') this.venue!.groundName = value;
+        if (field == 'venue_groundId') this.venue!.groundId = value;
+        
 
         if (field == 'status') this.status = value;
+    }
+    set setUmpire1Avatar(umpire1AvatarUrl: string) {
+        this.umpireA!.umpireAvatar = umpire1AvatarUrl;
+    }
+    set setUmpire2Avatar(umpire2AvatarUrl: string) {
+        this.umpireB!.umpireAvatar = umpire2AvatarUrl;
+    }
+    set setScorerAvatar(scorerAvatarUrl: string) {
+        this.scorer!.scorerAvatar = scorerAvatarUrl;
+    }
+
+    set setTeam1Logo(team1LogoUrl: string) {
+        this.teamA!.teamLogo = team1LogoUrl;
+    }
+    set setTeam2Logo(team2LogoUrl: string) {
+        this.teamB!.teamLogo = team2LogoUrl;
+    }
+
+    set setGroundAvatar(groundAvatarUrl: string) {
+        this.venue!.groundAvatar = groundAvatarUrl;
     }
 
     constructor({
         docId,
         matchId,
         division,
+        schoolMatchType,
         teamA,
         teamB,
         umpireA,
@@ -75,6 +105,7 @@ export default class Match {
         docId?: string;
         matchId?: string;
         division?: number;
+        schoolMatchType?: string;
         teamA?: MatchTeam;
         teamB?: MatchTeam;
         umpireA?: MatchUmpire;
@@ -82,30 +113,35 @@ export default class Match {
         scorer?: MatchScorer;
         type?: string;
         date?: Date;
-        venue?: string;
+        venue?: MatchGround;
         status?: string;
     }) {
         if (docId) this.docId = docId;
         this.matchId = matchId ?? '';
-        this.division = division ?? 1;
+        if(division)this.division = division;
+        if(schoolMatchType)this.schoolMatchType= schoolMatchType;
         this.teamA = teamA ?? {
             teamId: '',
             teamName: '',
-            playingEleven: { batsman: [], bowler: [], allRounder: [], wicketKeeper: [], captain: '' },
+            playingEleven: [],
             onBench: [],
+            teamColor:'',
+            teamLogo: ''
         };
         this.teamB = teamB ?? {
             teamId: '',
             teamName: '',
-            playingEleven: { batsman: [], bowler: [], allRounder: [], wicketKeeper: [], captain: '' },
+            playingEleven: [],
             onBench: [],
+            teamColor:'',
+            teamLogo: ''
         };
         this.umpireA = umpireA ?? { umpireId: '', umpireFeeStatus: '', umpireName: '', umpireAvatar: '' };
         this.umpireB = umpireB ?? { umpireId: '', umpireFeeStatus: '', umpireName: '', umpireAvatar: '' };
         this.scorer = scorer ?? { scorerId: '', scorerFeeStatus: '', scorerName: '', scorerAvatar: '' };
         this.type = type ?? '';
         this.date = date;
-        this.venue = venue ?? '';
+        this.venue = venue ?? { groundId: '', groundName: '', groundAvatar: '' };
         this.status = status ?? 'Toss Yet to Put';
     }
 
@@ -114,6 +150,7 @@ export default class Match {
             docId: doc.id,
             matchId: doc.data()?.matchId,
             division: doc.data()?.division,
+            schoolMatchType: doc.data()?.schoolMatchType,
             teamA: doc.data()?.teamA,
             teamB: doc.data()?.teamB,
             umpireA: doc.data()?.umpireA,

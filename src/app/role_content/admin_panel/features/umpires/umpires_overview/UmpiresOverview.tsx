@@ -5,8 +5,6 @@ import { firestore } from '../../../../../../firebase';
 import Umpire from '../../../../../../models/Umpire';
 import './UmpiresOverview.scss';
 import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
-import { PageRoutes } from '../../../../../../enums/pageRoutes';
-import { Link } from 'react-router-dom';
 import UmpireAdd from '../umpire_add/UmpireAdd';
 import UmpireCard from '../umpire_card/UmpireCard';
 
@@ -59,10 +57,11 @@ const UmpiresOverview: React.FC<void> = (): JSX.Element => {
                 <LoadingComp />
             ) : (
                 <div className="umpiresOverview">
-                    <Link to={PageRoutes.adminUmpires} onClick={() => setModalOpen(true)}>
-                        <button className="umpiresOverview__umpireAddBtn">+ Add Umpire</button>
-                    </Link>
+                    <button className="umpiresOverview__umpireAddBtn" onClick={() => setModalOpen(true)}>
+                        + Add Umpire
+                    </button>
                     <CSVLink
+                        className="umpiresOverview__dataDownload"
                         data={JSON.parse(JSON.stringify(umpireDocs))}
                         headers={JSON.parse(JSON.stringify(headers))}
                     >

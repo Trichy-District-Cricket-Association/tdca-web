@@ -13,18 +13,35 @@
         background-color: #131313;
     }
     .groundsManEditForm {
-        &__general {
-            &--header {
-                margin-top: 2%;
-                margin-left: 5%;
-                font-family: 'Poppins';
-                font-weight: 400;
-                color: #131313;
+        &__general,
+        &__personalData {
+            &__header {
+                display: flex;
+                justify-content: space-between;
+                &--text {
+                    margin-top: 1%;
+                    margin-left: 2%;
+                    font-family: 'Poppins';
+                    font-weight: 400;
+                    color: #131313;
+                }
+                &--iconBtn {
+                    color: red;
+                    font-size: 29px;
+                    margin-top: 27px;
+                    margin-right: 27px;
+                    cursor: pointer;
+                    border: none;
+                    background-color: #fff;
+                    padding: 0;
+                }
             }
             &--input {
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             }
+        }
+        &__general {
             &--avatar,
             &--avatarOverlay {
                 width: 150px;
@@ -47,8 +64,9 @@
                 .editIcon {
                     padding: 70px;
                     color: #fff;
-                    font-size: 23px;
+                    font-size: 30px;
                     cursor: pointer;
+                    margin-left: -5px;
                 }
             }
             &--uploadBtn {
@@ -56,21 +74,9 @@
                 display: none;
             }
         }
-        &__personalData {
-            &--header {
-                margin-left: 5%;
-                font-family: 'Poppins';
-                font-weight: 400;
-                color: #131313;
-            }
-            &--input {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            }
-        }
         &__btn {
             display: flex;
-            margin-left: 6%;
+            margin-left: 2%;
             margin-top: 2%;
             margin-bottom: 2%;
             &--cancel,
@@ -80,21 +86,22 @@
                 margin-right: 0.8rem;
                 font-family: 'Poppins';
                 padding: 0.4rem 1.2em;
-                background-color: transparent;
                 border: none;
                 font-weight: 600;
                 cursor: pointer;
                 text-align: center;
                 border-radius: 10px;
-                box-shadow: 0 0 40px 40px #3d26d6 inset;
+            }
+            &--submit {
+                background-color: #3d26d6;
                 &:hover {
-                    box-shadow: 0 0 40px 40px #4a2eff inset;
+                    background-color: #3d26d6;
                 }
             }
             &--cancel {
-                box-shadow: 0 0 40px 40px #131313 inset;
+                background-color: #131313;
                 &:hover {
-                    box-shadow: 0 0 40px 40px #3a3a3a inset;
+                    background-color: #3a3a3a;
                 }
             }
         }
@@ -108,25 +115,7 @@
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.541);
 }
-/* scrollbar width */
-::-webkit-scrollbar {
-    width: 13px;
-}
 
-/* Track */
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-    background: #41596b;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: #555;
-}
 @media screen and (max-width: 799px) {
     .groundsManEdit {
         width: 90%;
@@ -135,21 +124,18 @@
             .input_box {
                 max-width: 400px;
             }
-            &__general {
+            &__general,
+            &__personalData {
                 &--header {
-                    margin-left: 35%;
+                    text-align: center;
                 }
+            }
+            &__general {
                 &--avatar,
                 &--avatarOverlay {
                     margin-left: 32%;
                 }
             }
-            &__personalData {
-                &--header {
-                    margin-left: 20%;
-                }
-            }
-
             &__btn {
                 display: grid;
                 &--submit {

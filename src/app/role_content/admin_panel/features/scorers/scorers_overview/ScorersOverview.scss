@@ -1,12 +1,12 @@
 .scorersOverview {
     &__scorerAddBtn {
         background-color: transparent;
-        border: 2px solid #0d4194;
+        border: 2px solid #071833;
         border-radius: 4px;
-        color: #0d4194;
+        color: #071833;
         cursor: pointer;
         font-size: 14px;
-        margin: 20px;
+        margin: 130px 20px 20px 20px;
         padding: 0.7rem 1em;
         text-align: center;
         text-transform: uppercase;
@@ -14,15 +14,54 @@
         font-weight: 600;
         transition: box-shadow 100ms ease-in-out, color 100ms ease-in-out;
         &:hover {
-            box-shadow: 0 0 40px 40px #0d4194 inset;
+            box-shadow: 0 0 40px 40px #071833 inset;
             color: #fff;
             outline: 0;
         }
     }
+    &__dataDownload {
+        font: bold 16px 'Poppins';
+        text-decoration: none;
+        background-color: #071833;
+        color: #fff;
+        padding: 0.6rem 0.5rem;
+        border-radius: 2px;
+        text-transform: uppercase;
+    }
     &__scorerCard {
-        width: 95vw;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-        justify-items: center;
+        grid-template-columns: repeat(5, 1fr);
+        grid-auto-rows: auto;
+        margin-bottom: 80px;
+    }
+}
+@media screen and (max-width: 1599px) {
+    .scorersOverview {
+        &__scorerCard {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+}
+@media screen and (max-width: 1400px) {
+    .scorersOverview {
+        &__scorerCard {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+}
+@media screen and (max-width: 1050px) {
+    .scorersOverview {
+        text-align: center;
+        &__scorerCard {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+}
+@media screen and (max-width: 695px) {
+    .scorersOverview {
+        &__scorerCard {
+            grid-template-columns: repeat(1, 1fr);
+            justify-items: center;
+        }
     }
 }

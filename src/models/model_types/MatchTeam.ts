@@ -1,15 +1,13 @@
 export type MatchTeam = {
-    
     teamId: string;
 
     teamName: string;
 
-    playingEleven: {
-        batsman: string[],
-        bowler: string[],
-        allRounder: string[],
-        wicketKeeper: string[],
-        captain: string
-    }
+    teamLogo: string;
+
+    teamColor: string;
+
+    playingEleven: string[];
+
     onBench: string[];
 };

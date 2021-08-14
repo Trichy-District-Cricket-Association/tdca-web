@@ -18,6 +18,7 @@ type MatchAddProps = {
 };
 
 const MatchAdd: React.FC<MatchAddProps> = ({ setModalOpen }): JSX.Element => {
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [match, setMatch] = useState<Match>(new Match({}));
     const [selectable, setSelectable] = useState<
         { teams: Team[]; scorers: Scorer[]; umpires: Umpire[]; grounds: Ground[] } | undefined
@@ -63,20 +64,82 @@ const MatchAdd: React.FC<MatchAddProps> = ({ setModalOpen }): JSX.Element => {
         fetchSelectable();
     }, []);
 
+    function IdAvatarSetter(newMatch: any, fieldName: string, value: string) {
+        switch (fieldName) {
+            case 'teamA_teamName':
+                selectable?.teams.map((team) => {
+                    if (team.teamName == value) {
+                        newMatch.handleMatch({ field: 'teamA_teamId', value: `${team.teamId}` });
+                        newMatch.handleMatch({ field: 'teamA_teamColor', value: `${team.teamColor}` });
+                        match.setTeam1Logo = `${team.avatarUrl}`;
+                    }
+                });
+                break;
+            case 'teamB_teamName':
+                selectable?.teams.map((team) => {
+                    if (team.teamName == value) {
+                        newMatch.handleMatch({ field: 'teamB_teamId', value: `${team.teamId}` });
+                        newMatch.handleMatch({ field: 'teamB_teamColor', value: `${team.teamColor}` });
+                        match.setTeam2Logo = `${team.avatarUrl}`;
+                    }
+                });
+                break;
+            case 'umpireA_umpireName':
+                selectable?.umpires.map((umpire) => {
+                    if (umpire.umpireName == value) {
+                        newMatch.handleMatch({ field: 'umpire_umpireId', value: `${umpire.umpireId}` });
+                        match.setUmpire1Avatar = `${umpire.avatarUrl}`;
+                    }
+                });
+                break;
+            case 'umpireB_umpireName':
+                selectable?.umpires.map((umpire) => {
+                    if (umpire.umpireName == value) {
+                        newMatch.handleMatch({ field: 'umpireB_umpireId', value: `${umpire.umpireId}` });
+                        match.setUmpire2Avatar = `${umpire.avatarUrl}`;
+                    }
+                });
+                break;
+            case 'scorer_scorerName':
+                selectable?.scorers.map((scorer) => {
+                    if (scorer.scorerName == value) {
+                        newMatch.handleMatch({ field: 'scorer_scorerId', value: `${scorer.scorerId}` });
+                        match.setScorerAvatar = `${scorer.avatarUrl}`;
+                    }
+                });
+                break;
+            case 'venue_groundName':
+                selectable?.grounds.map((ground) => {
+                    if (ground.groundName == value) {
+                        newMatch.handleMatch({ field: 'ground_groundId', value: `${ground.groundId}` });
+                        match.setGroundAvatar = `${ground.avatarUrl}`;
+                    }
+                });
+                break;
+
+            default:
+                null;
+        }
+    }
+
     const handleInputForm = (e: React.ChangeEvent<HTMLInputElement>) => {
         const fieldName = `${e.target.name}` as const;
         const newMatch = new Match({ ...match });
         newMatch.handleMatch({ field: fieldName, value: e.target.value });
         setMatch(newMatch);
     };
+
     const handleSelectForm = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const fieldName = `${e.target.name}` as const;
         const newMatch = new Match({ ...match });
+        IdAvatarSetter(newMatch, fieldName, e.target.value);
         newMatch.handleMatch({ field: fieldName, value: e.target.value });
         setMatch(newMatch);
     };
+
     const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
         await firestore
             .collection(Collections.matches)
             .add(JSON.parse(JSON.stringify(match)))
@@ -92,6 +155,7 @@ const MatchAdd: React.FC<MatchAddProps> = ({ setModalOpen }): JSX.Element => {
             })
             .finally(() => setModalOpen(false));
     };
+
     return (
         <Modal
             className="matchAdd"
@@ -100,7 +164,9 @@ const MatchAdd: React.FC<MatchAddProps> = ({ setModalOpen }): JSX.Element => {
             ariaHideApp={false}
             overlayClassName="Overlay"
         >
-            {selectable ? (
+            {isLoading ? (
+                <LoadingComp />
+            ) : selectable ? (
                 <form className="matchAddForm" onSubmit={submitForm}>
                     {console.log(selectable.teams.map((team) => team.teamName))}
                     <div className="matchAddForm__matchData">
@@ -110,15 +176,25 @@ const MatchAdd: React.FC<MatchAddProps> = ({ setModalOpen }): JSX.Element => {
                             <SelectInputBox
                                 title="Match Type"
                                 name="type"
-                                options={['leagueMatch', 'schoolMatch', 'knockoutMatch']}
+                                options={['League Match', 'School Match', 'Knockout Match']}
                                 textHandler={handleSelectForm}
                             />
-                            <SelectInputBox
-                                title="Division"
-                                name="division"
-                                options={[1, 2, 3, 4, 5]}
-                                textHandler={handleSelectForm}
-                            />
+                            {match.type == 'League Match' ? (
+                                <SelectInputBox
+                                    title="Division"
+                                    name="division"
+                                    options={[1, 2, 3, 4, 5]}
+                                    textHandler={handleSelectForm}
+                                />
+                            ) : null}
+                            {match.type == 'School Match' ? (
+                                <SelectInputBox
+                                    title="School Match Type"
+                                    name="schoolMatchType"
+                                    options={['Below 8th Std', 'Below 10th Std', 'Below 12th Std']}
+                                    textHandler={handleSelectForm}
+                                />
+                            ) : null}
                             <SelectInputBox
                                 title="Team A"
                                 name="teamA_teamName"
@@ -151,7 +227,7 @@ const MatchAdd: React.FC<MatchAddProps> = ({ setModalOpen }): JSX.Element => {
                             />
                             <SelectInputBox
                                 title="Venue"
-                                name="venue"
+                                name="venue_groundName"
                                 options={selectable.grounds.map((ground) => ground.groundName)}
                                 textHandler={handleSelectForm}
                             />

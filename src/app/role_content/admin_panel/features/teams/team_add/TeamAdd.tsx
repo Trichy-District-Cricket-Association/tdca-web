@@ -9,6 +9,9 @@ import User from '../../../../../../models/User';
 import { UserRoles } from '../../../../../../enums/auth';
 import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
 import firebase from 'firebase';
+import useStorage from '../../../../../../hooks/useStorage';
+import { MdEdit } from 'react-icons/md';
+const defaultAvatar = `${process.env.PUBLIC_URL}/assets/images/teamAvatar.png`;
 
 type TeamAddProps = {
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -22,6 +25,30 @@ const TeamAdd: React.FC<TeamAddProps> = ({ setModalOpen }): JSX.Element => {
         email: '',
         password: '',
     });
+
+    // State to handle uploading files.
+    const [file, setFile] = useState(null);
+    const [error, setError] = useState('');
+
+    // Getting the progress and avatarUrl from the hook.
+    const { avatarUrl } = useStorage(file);
+
+    const types = ['image/png', 'image/jpeg', 'image/jpg'];
+
+    // Functions to check the type of file.
+    const handleAvatarChange = (e: any) => {
+        const selectedFile = e.target.files[0];
+
+        if (selectedFile) {
+            if (types.includes(selectedFile.type)) {
+                setError('');
+                setFile(selectedFile);
+            } else {
+                setFile(null);
+                setError('Please select an image file (png or jpg)');
+            }
+        }
+    };
 
     const handleForm = (e: React.ChangeEvent<HTMLInputElement>) => {
         const fieldName = `${e.target.name}` as const;
@@ -41,7 +68,7 @@ const TeamAdd: React.FC<TeamAddProps> = ({ setModalOpen }): JSX.Element => {
     const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         setIsLoading(true);
-
+        team.setAvatar = avatarUrl;
         await firestore
             .collection(Collections.teams)
             .add(JSON.parse(JSON.stringify(team)))
@@ -90,11 +117,35 @@ const TeamAdd: React.FC<TeamAddProps> = ({ setModalOpen }): JSX.Element => {
             ) : (
                 <form className="teamAddForm" onSubmit={submitForm}>
                     <div className="teamAddForm__general">
+                        {/* error message */}
+                        {<p>{error}</p>}
+
+                        {/* image display */}
+
+                        <div>
+                            <img
+                                src={avatarUrl ? avatarUrl : defaultAvatar}
+                                alt="Team Profile"
+                                className="teamAddForm__general--avatar"
+                            />
+                            <div className="teamAddForm__general--avatarOverlay">
+                                <label>
+                                    <input
+                                        type="file"
+                                        name="avatarUrl"
+                                        className="teamAddForm__general--uploadBtn"
+                                        onChange={handleAvatarChange}
+                                    />
+                                    <MdEdit className="editIcon" />
+                                </label>
+                            </div>
+                        </div>
                         <h1 className="teamAddForm__general--header">General</h1>
                         <div className="teamAddForm__general--input">
                             <InputBox title="Team Id" name="teamId" type="text" textHandler={handleForm} />
                             <InputBox title="Team Name" name="teamName" type="text" textHandler={handleForm} />
                             <InputBox title="Email Id" name="emailId" type="text" textHandler={handleForm} />
+                            <InputBox title="Team Colour" name="teamColor" type="color" textHandler={handleForm} />
                         </div>
                     </div>
                     <div className="teamAddForm__matchData">

@@ -4,9 +4,11 @@
     padding: 0;
 }
 .nav {
+    width: 100%;
     background: #000000;
     height: 80px;
     display: flex;
+    position: fixed;
     align-items: center;
     justify-content: space-between;
     font-family: Poppins;
@@ -76,7 +78,7 @@
         border: none;
     }
 }
-@media screen and (max-width: 1122px) {
+@media screen and (max-width: 1222px) {
     .nav {
         .hamburger {
             color: #fff;
@@ -101,7 +103,7 @@
         }
         &__responsive {
             display: block;
-            background-color: #9b9b9b;
+            background-color: #071833;
             width: 100%;
             position: absolute;
             top: 80px;
