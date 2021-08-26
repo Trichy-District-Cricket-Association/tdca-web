@@ -1,0 +1,43 @@
+.officeBearers {
+    margin: 80px;
+    &__heading {
+        margin: 20px;
+    }
+    &__container {
+        .officeBearer {
+            border: 1px solid #071833;
+            box-sizing: border-box;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            &__img {
+                width: 200px;
+                height: 200px;
+                transform: translate(50%, 10%);
+                border-radius: 12px;
+            }
+            &__column1 {
+                width: 400px;
+                border-radius: 11px;
+                height: 240px;
+                background-color: #071833;
+            }
+            &__column2 {
+                width: 700px;
+                height: 200px;
+                margin: 20px;
+                margin-left: 80px;
+                &--name {
+                    font-size: 45px;
+                }
+                &--designation {
+                    font-size: 20px;
+                }
+                &--contact {
+                    font-size: 22px;
+                    margin-top: 10px;
+                }
+            }
+        }
+    }
+}

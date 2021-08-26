@@ -24,8 +24,7 @@ const LandingAboutUs: React.FC<any> = (): JSX.Element => {
                         The Tiruchirappalli District Cricket Association (TDCA), affiliated to The Tamilnadu Cricket
                         Association (TNCA), is one of the earliest cricket administration bodies in Tamilnadu, formed in
                         1958. Apart from Trichy, we administered and fostered cricket in the present districts of
-                        Pudukkottai, Karur, Perambalur, Ariyalur districts (all these were part of the erstwhile Trichy
-                        district). <Link to={PageRoutes.aboutUs}>more</Link>
+                        Pudukkottai, Karur, Perambalur, Ariyalur districts <Link to={PageRoutes.aboutUs}>more</Link>.
                     </p>
                 </div>
             </div>

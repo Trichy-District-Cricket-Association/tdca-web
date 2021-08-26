@@ -1,0 +1,9 @@
+const LandingFooter: React.FC<any> = (): JSX.Element => {
+    return (
+        <div className="">
+            <h1>hello</h1>
+        </div>
+    );
+};
+
+export default LandingFooter;
