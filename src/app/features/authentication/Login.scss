@@ -67,8 +67,10 @@
             &--imgDiv {
                 width: 250px;
             }
-            &--form {
-                margin-right: 1.5rem;
+            .input_box {
+                label {
+                    font-size: 16px;
+                }
             }
         }
     }

@@ -37,8 +37,8 @@ const TeamsPage: React.FC<void> = (): JSX.Element => {
                                 <div className="teamCard__container">
                                     <label className="teamCard__container--label">Team Name</label>
                                     <p className="teamCard__container--text">{teamDoc.teamName}</p>
-                                    <label className="teamCard__container--label">Team Id</label>
-                                    <p className="teamCard__container--text">{teamDoc.teamId}</p>
+                                    <label className="teamCard__container--labelT">Division</label>
+                                    <p className="teamCard__container--text">{teamDoc.division}</p>
                                     <label className="teamCard__container--label">Matches Played</label>
                                     <p className="teamCard__container--text">{teamDoc.numberOfMatches}</p>
                                 </div>

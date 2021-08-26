@@ -142,6 +142,7 @@
             &__header1 {
                 &--text {
                     margin-top: 100px;
+                    margin-right: 50px;
                 }
                 height: 350px;
                 width: 100%;
@@ -151,8 +152,9 @@
             }
         }
         &__matchCards {
-            grid-template-columns: repeat(1, 1fr);
             justify-items: center;
+            grid-template-columns: repeat(1, 1fr);
+            margin-right: 20px;
         }
     }
 }

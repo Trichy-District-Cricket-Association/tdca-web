@@ -54,6 +54,9 @@
         cursor: pointer;
         transition-duration: 0.2s;
     }
+    &__headertxt {
+        text-decoration: none;
+    }
 
     &__link:hover {
         text-decoration: underline;

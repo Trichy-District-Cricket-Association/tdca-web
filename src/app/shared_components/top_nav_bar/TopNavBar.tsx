@@ -41,11 +41,15 @@ const TopNav = (): JSX.Element => {
                         <div />
                     )}
                     <div>
-                        <img src={logo} alt="Logo" className="nav__header--logo" />
+                        <Link to={PageRoutes.home}>
+                            <img src={logo} alt="Logo" className="nav__header--logo" />
+                        </Link>
                     </div>
                     <div>
-                        <h1 className="nav__header--text">The Tiruchirappalli District Cricket Association</h1>
-                        <h1 className="nav__header--textAbbr">TDCA</h1>
+                        <Link to={PageRoutes.home} className="nav__headertxt">
+                            <h1 className="nav__header--text">The Tiruchirappalli District Cricket Association</h1>
+                            <h1 className="nav__header--textAbbr">TDCA</h1>
+                        </Link>
                     </div>
                 </div>
                 <div>
@@ -55,27 +59,27 @@ const TopNav = (): JSX.Element => {
                 </div>
                 <div className={isMobileOpen ? 'nav__responsive' : 'nav__body'}>
                     <div>
-                        <Link to={PageRoutes.home} className="nav__link">
+                        <Link to={PageRoutes.home} className="nav__link" onClick={() => toggleMobileOpen(false)}>
                             Home
                         </Link>
                     </div>
                     <div className="item">
-                        <Link to={PageRoutes.matches} className="nav__link">
+                        <Link to={PageRoutes.matches} className="nav__link" onClick={() => toggleMobileOpen(false)}>
                             Matches
                         </Link>
                     </div>
                     <div className="item">
-                        <Link to={PageRoutes.teams} className="nav__link">
+                        <Link to={PageRoutes.teams} className="nav__link" onClick={() => toggleMobileOpen(false)}>
                             Teams
                         </Link>
                     </div>
                     <div className="item">
-                        <Link to={PageRoutes.staffs} className="nav__link">
+                        <Link to={PageRoutes.staffs} className="nav__link" onClick={() => toggleMobileOpen(false)}>
                             Staffs
                         </Link>
                     </div>
                     <div className="item">
-                        <Link to={PageRoutes.aboutUs} className="nav__link">
+                        <Link to={PageRoutes.aboutUs} className="nav__link" onClick={() => toggleMobileOpen(false)}>
                             About Us
                         </Link>
                     </div>
@@ -92,6 +96,7 @@ const TopNav = (): JSX.Element => {
                                 className="nav__btn"
                                 onClick={async () => {
                                     await auth.signOut();
+                                    toggleMobileOpen(false);
                                 }}
                             >
                                 Log Out
