@@ -4,10 +4,10 @@ import { firestore } from '../../../firebase';
 import './TeamsPage.scss';
 import LoadingComp from '../../shared_components/loading_comp/LoadingComp';
 import Team from '../../../models/Team';
+import TeamCard from './team_card/TeamCard';
 
 const TeamsPage: React.FC<void> = (): JSX.Element => {
     const [teamDocs, setTeamDocs] = useState<Team[] | undefined>();
-
     useEffect(() => {
         const unsub = firestore.collection(Collections.teams).onSnapshot((snapshot) => {
             if (snapshot.docs?.length === 0) setTeamDocs([]);
@@ -33,16 +33,7 @@ const TeamsPage: React.FC<void> = (): JSX.Element => {
                     </div>
                     <div className="teamsPage__teamCards">
                         {teamDocs?.map((teamDoc) => (
-                            <div className="teamCard" key={teamDoc.teamId}>
-                                <div className="teamCard__container">
-                                    <label className="teamCard__container--label">Team Name</label>
-                                    <p className="teamCard__container--text">{teamDoc.teamName}</p>
-                                    <label className="teamCard__container--labelT">Division</label>
-                                    <p className="teamCard__container--text">{teamDoc.division}</p>
-                                    <label className="teamCard__container--label">Matches Played</label>
-                                    <p className="teamCard__container--text">{teamDoc.numberOfMatches}</p>
-                                </div>
-                            </div>
+                            <TeamCard teamDoc={teamDoc} key={teamDoc.teamId ?? ''} />
                         ))}
                     </div>
                 </div>

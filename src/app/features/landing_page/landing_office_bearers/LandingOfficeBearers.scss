@@ -1,41 +1,113 @@
+@property --rotate {
+    syntax: '<angle>';
+    initial-value: 132deg;
+}
+
 .officeBearers {
-    margin: 80px;
     &__heading {
         margin: 20px;
     }
     &__container {
+        margin: 0 80px;
         .officeBearer {
-            border: 1px solid #071833;
-            box-sizing: border-box;
-            border-radius: 12px;
-            display: flex;
-            justify-content: space-between;
-            &__img {
-                width: 200px;
-                height: 200px;
-                transform: translate(50%, 10%);
-                border-radius: 12px;
-            }
-            &__column1 {
-                width: 400px;
-                border-radius: 11px;
-                height: 240px;
-                background-color: #071833;
-            }
-            &__column2 {
-                width: 700px;
-                height: 200px;
-                margin: 20px;
-                margin-left: 80px;
+            background: #191c29;
+            width: 380px;
+            height: 470px;
+            position: relative;
+            border-radius: 6px;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            cursor: pointer;
+            margin: 9px 30px;
+            &__row2 {
+                &--name,
+                &--designation,
+                &--contact {
+                    margin-top: 10px;
+                }
                 &--name {
-                    font-size: 45px;
+                    font-size: 30px;
                 }
                 &--designation {
                     font-size: 20px;
                 }
                 &--contact {
-                    font-size: 22px;
-                    margin-top: 10px;
+                    font-size: 19px;
+                }
+            }
+            &__img {
+                width: 230px;
+                height: 230px;
+                border-radius: 6px;
+                margin-top: 50px;
+            }
+            ::before {
+                content: '';
+                width: 104%;
+                height: 102%;
+                border-radius: 8px;
+                background-image: linear-gradient(var(--rotate), #5ddcff, #3c67e3 43%, #4e00c2);
+                position: absolute;
+                z-index: -1;
+                top: -1%;
+                left: -2%;
+                animation: spin 2.5s linear infinite;
+                border-radius: 12px;
+            }
+            ::after {
+                position: absolute;
+                top: calc(var(--card-height) / 6);
+                left: 0;
+                right: 0;
+                z-index: -1;
+                height: 100%;
+                width: 100%;
+                margin: 0 auto;
+                transform: scale(0.8);
+                filter: blur(calc(var(--card-height) / 16));
+                background-image: linear-gradient(var(--rotate), #5ddcff, #3c67e3 43%, #4e00c2);
+                opacity: 1;
+                transition: opacity 0.5s;
+                animation: spin 2.5s linear infinite;
+            }
+            @keyframes spin {
+                0% {
+                    --rotate: 0deg;
+                }
+                100% {
+                    --rotate: 360deg;
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 800px) {
+    .officeBearers {
+        text-align: center;
+        &__container {
+            margin: 5px;
+            .officeBearer {
+                height: 400px;
+                &__img {
+                    width: 180px;
+                    height: 180px;
+                    margin-top: 40px;
+                }
+                &__row2 {
+                    &--name {
+                        font-size: 5vw;
+                        padding: 0 10px;
+                    }
+                    &--designation {
+                        font-size: 3.8vw;
+                    }
+                    &--contact {
+                        font-size: 3.5vw;
+                        padding-left: 5px;
+                        padding-right: 5px;
+                    }
                 }
             }
         }

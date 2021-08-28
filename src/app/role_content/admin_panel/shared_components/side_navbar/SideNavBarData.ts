@@ -1,5 +1,5 @@
 import { PageRoutes } from '../../../../../enums/pageRoutes';
-const dashboard = `${process.env.PUBLIC_URL}/assets/images/dashboard.png`;
+// const dashboard = `${process.env.PUBLIC_URL}/assets/images/dashboard.png`;
 const matches = `${process.env.PUBLIC_URL}/assets/images/matches.png`;
 const teams = `${process.env.PUBLIC_URL}/assets/images/Teams.png`;
 const players = `${process.env.PUBLIC_URL}/assets/images/player.png`;
@@ -9,12 +9,12 @@ const groundsMen = `${process.env.PUBLIC_URL}/assets/images/groundsMen.png`;
 const grounds = `${process.env.PUBLIC_URL}/assets/images/cricketGround.png`;
 
 export const SidebarData = [
-    {
-      title: 'Dashboard',
-      path:PageRoutes.adminPanel,
-      icon: dashboard,
-      cName: 'sideNav-text'
-    },
+    // {
+    //   title: 'Dashboard',
+    //   path:PageRoutes.adminPanel,
+    //   icon: dashboard,
+    //   cName: 'sideNav-text'
+    // },
     {
       title: 'Matches',
       path: PageRoutes.adminMatches,

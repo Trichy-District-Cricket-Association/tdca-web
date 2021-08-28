@@ -12,10 +12,11 @@ const LandingHeader: React.FC<any> = (): JSX.Element => {
             <div className="header__container">
                 <div>
                     <p className="header__container--text">
-                        We are passionate group of people here at Trichy, organizing Matches for those who love cricket.
+                        We are official cricket administration body with regards to any form of cricket played in trichy
+                        district and affiliated to the TamilNadu District Cricket Association.
                     </p>
                     <p className="header__container--subText">
-                        We help you play in cricket matches of various levels and kinds
+                        IT IS FAR MORE THAN A GAME, THIS CRICKET- NEVILLE CARDUS
                     </p>
                     <button className="header__container--contactBtn">Contact</button>
                 </div>

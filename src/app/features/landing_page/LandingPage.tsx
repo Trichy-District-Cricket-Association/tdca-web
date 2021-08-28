@@ -10,8 +10,8 @@ const LandingPage: React.FC<void> = (): JSX.Element => {
             <LandingHeader />
             <LandingMatches />
             {/* <LandingAboutUs /> */}
-            {/* <LandingOfficeBearers /> */}
-            {/* <LandingFooter />*/}
+            <LandingOfficeBearers />
+            <LandingFooter />
         </div>
     );
 };

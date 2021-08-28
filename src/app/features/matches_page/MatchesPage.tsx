@@ -61,9 +61,9 @@ const MatchesPage: React.FC<void> = (): JSX.Element => {
                         </div>
                         <div className="matchesPage__header__header2"></div>
                     </div>
-                    <div className="matchesOverview__matchSelect">
+                    <div className="matchesPage__matchSelect">
                         <select
-                            className="matchesOverview__matchTypeSelect--btn"
+                            className="matchesPage__matchTypeSelect--btn"
                             value={selectedMatchType}
                             onChange={switchMatchType}
                         >
@@ -76,7 +76,7 @@ const MatchesPage: React.FC<void> = (): JSX.Element => {
                         </select>
                         {selectedMatchType == 'League Match' ? (
                             <select
-                                className="matchesOverview__matchDivisionSelect--btn"
+                                className="matchesPage__matchDivisionSelect--btn"
                                 value={selectedDivisionType}
                                 onChange={switchDivisionType}
                             >
@@ -90,7 +90,7 @@ const MatchesPage: React.FC<void> = (): JSX.Element => {
                         ) : null}
                         {selectedMatchType == 'School Match' ? (
                             <select
-                                className="matchesOverview__matchSchoolSelect--btn"
+                                className="matchesPage__matchSchoolSelect--btn"
                                 value={selectedSchoolMatchType}
                                 onChange={switchSchoolMatchType}
                             >

@@ -1,6 +1,6 @@
 import { Route, Switch } from 'react-router-dom';
 import LandingPage from './features/landing_page/LandingPage';
-import AdminPanel from './role_content/admin_panel/AdminPanel';
+
 import GroundsOverview from './role_content/admin_panel/features/grounds/grounds_overview/GroundsOverview';
 import { PageRoutes } from '../enums/pageRoutes';
 import ProtectedRoute from './ProtectedRoute';
@@ -26,7 +26,7 @@ const Routes = () => (
         <Route exact path={PageRoutes.matches} component={MatchesPage} />
         <Route exact path={PageRoutes.aboutUs} component={AboutUsPage} />
         {/* Admin Panel Route */}
-        <ProtectedRoute exact path={PageRoutes.adminPanel} userRole={UserRoles.admin} component={AdminPanel} />
+        {/* <ProtectedRoute exact path={PageRoutes.adminPanel} userRole={UserRoles.admin} component={AdminPanel} /> */}
         <ProtectedRoute exact path={PageRoutes.adminScorers} userRole={UserRoles.admin} component={ScorersOverview} />
         <ProtectedRoute exact path={PageRoutes.adminUmpires} userRole={UserRoles.admin} component={UmpiresOverview} />
         <ProtectedRoute exact path={PageRoutes.adminGrounds} userRole={UserRoles.admin} component={GroundsOverview} />
@@ -39,7 +39,7 @@ const Routes = () => (
         <ProtectedRoute exact path={PageRoutes.adminPlayers} userRole={UserRoles.admin} component={PlayersOverview} />
         <ProtectedRoute exact path={PageRoutes.adminTeams} userRole={UserRoles.admin} component={TeamsOverview} />
         <ProtectedRoute exact path={PageRoutes.adminMatches} userRole={UserRoles.admin} component={MatchesOverview} />
-        <ProtectedRoute exact path={PageRoutes.adminScorecards} userRole={UserRoles.admin} component={AdminPanel} />
+        {/* <ProtectedRoute exact path={PageRoutes.adminScorecards} userRole={UserRoles.admin} component={AdminPanel} /> */}
 
         {/*  Team panel Route */}
         <ProtectedRoute exact path={PageRoutes.teamPanel} userRole={UserRoles.team} component={TeamPlayersOverview} />

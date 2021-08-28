@@ -27,6 +27,7 @@ const LandingMatches: React.FC<any> = (): JSX.Element => {
             <div className="matches__header">
                 <h1 className="matches__header--text">Recent Matches</h1>
             </div>
+
             {matchDocs == undefined ? null : (
                 <div className="matches__matchCards">
                     {matchDocs?.map((matchDoc) => (
