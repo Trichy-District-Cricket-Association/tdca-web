@@ -111,7 +111,7 @@ const MatchAdd: React.FC<MatchAddProps> = ({ setModalOpen }): JSX.Element => {
             case 'venue_groundName':
                 selectable?.grounds.map((ground) => {
                     if (ground.groundName == value) {
-                        newMatch.handleMatch({ field: 'ground_groundId', value: `${ground.groundId}` });
+                        newMatch.handleMatch({ field: 'venue_groundId', value: `${ground.groundId}` });
                         match.setGroundAvatar = `${ground.avatarUrl}`;
                     }
                 });
@@ -168,7 +168,6 @@ const MatchAdd: React.FC<MatchAddProps> = ({ setModalOpen }): JSX.Element => {
                 <LoadingComp />
             ) : selectable ? (
                 <form className="matchAddForm" onSubmit={submitForm}>
-                    {console.log(selectable.teams.map((team) => team.teamName))}
                     <div className="matchAddForm__matchData">
                         <h1 className="matchAddForm__matchData--header">Match Details</h1>
                         <div className="matchAddForm__matchData--input">

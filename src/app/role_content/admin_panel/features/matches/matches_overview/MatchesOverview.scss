@@ -25,6 +25,19 @@
         grid-auto-rows: auto;
         margin-bottom: 80px;
     }
+    &__pagination {
+        text-align: center;
+        margin: 30px;
+        &--btn {
+            background-color: #071833;
+            padding: 0.5rem 2rem;
+            color: #fff;
+            font-size: 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+    }
     &__matchSelect select {
         background-color: #071833;
         color: #fff;

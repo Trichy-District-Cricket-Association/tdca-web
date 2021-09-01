@@ -12,7 +12,7 @@ const LandingMatches: React.FC<any> = (): JSX.Element => {
         const unsub = firestore
             .collection(Collections.matches)
             .orderBy('date', 'desc')
-            .limit(5)
+            .limit(4)
             .onSnapshot((snapshot) => {
                 if (snapshot.docs?.length === 0) setMatchDocs([]);
                 if (snapshot.docs?.length > 0) {

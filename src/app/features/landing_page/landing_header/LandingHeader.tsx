@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './LandingHeader.scss';
 const landingImg = `${process.env.PUBLIC_URL}/assets/images/landingImg.svg`;
 const cricketStadium = `${process.env.PUBLIC_URL}/assets/images/cricketStadium.jpg`;
@@ -12,13 +13,15 @@ const LandingHeader: React.FC<any> = (): JSX.Element => {
             <div className="header__container">
                 <div>
                     <p className="header__container--text">
-                        We are official cricket administration body with regards to any form of cricket played in trichy
-                        district and affiliated to the TamilNadu District Cricket Association.
+                        We are the official cricket administration body with regards to any form of cricket played in
+                        trichy district and affiliated to the TamilNadu Cricket Association.
                     </p>
                     <p className="header__container--subText">
                         IT IS FAR MORE THAN A GAME, THIS CRICKET- NEVILLE CARDUS
                     </p>
-                    <button className="header__container--contactBtn">Contact</button>
+                    <Link to="#footer">
+                        <button className="header__container--contactBtn">Contact</button>
+                    </Link>
                 </div>
                 <img src={landingImg} alt="Landing" className="header__container--img" />
             </div>

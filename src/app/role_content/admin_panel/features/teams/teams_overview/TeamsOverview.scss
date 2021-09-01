@@ -25,6 +25,33 @@
         grid-auto-rows: auto;
         margin-bottom: 80px;
     }
+    &__pagination {
+        text-align: center;
+        margin: 30px;
+        &--btn {
+            background-color: #071833;
+            padding: 0.5rem 2rem;
+            color: #fff;
+            font-size: 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+    }
+    &__teamSelect select {
+        background-color: #071833;
+        color: #fff;
+        border: none;
+        font-size: 18px;
+        border-radius: 5px;
+        padding: 0.4rem 0.5rem;
+        margin-top: 15px;
+        margin-left: 20px;
+        font-family: 'Poppins';
+        justify-content: center;
+        cursor: pointer;
+        text-transform: uppercase;
+    }
     &__dataDownload {
         font: bold 16px 'Poppins';
         text-decoration: none;

@@ -27,12 +27,18 @@ const LandingFooter: React.FC<any> = (): JSX.Element => {
                 </div>
                 <div className="footer-center col-md-4 col-sm-6">
                     <div>
+                        <i className="fa fa-map-marker">
+                            <BiMap />
+                        </i>
                         <p>Tiruchirappalli, India</p>
                     </div>
 
                     <div>
+                        <i className="fa fa-envelope">
+                            <FiMail />
+                        </i>
                         <p>
-                            <a href="#">tdcatrichy2020@gmail.com</a>
+                            <a href="#">tdcatrichy@gmail.com</a>
                         </p>
                     </div>
                 </div>

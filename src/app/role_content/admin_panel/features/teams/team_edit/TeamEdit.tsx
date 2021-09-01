@@ -8,6 +8,7 @@ import './TeamEdit.scss';
 import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
 import { MdDelete, MdEdit } from 'react-icons/md';
 import useStorage from '../../../../../../hooks/useStorage';
+import SelectInputBox from '../../../shared_components/select_input_box/SelectInputBox';
 const defaultAvatar = `${process.env.PUBLIC_URL}/assets/images/teamAvatar.png`;
 
 type TeamEditProps = {
@@ -62,6 +63,12 @@ const TeamEdit: React.FC<TeamEditProps> = ({ setModalOpen, teamDoc }): JSX.Eleme
     };
 
     const handleForm = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const fieldName = `${e.target.name}` as const;
+        const newTeam = new Team({ ...team });
+        newTeam.handleTeam({ field: fieldName, value: e.target.value });
+        setTeam(newTeam);
+    };
+    const handleSelectForm = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const fieldName = `${e.target.name}` as const;
         const newTeam = new Team({ ...team });
         newTeam.handleTeam({ field: fieldName, value: e.target.value });
@@ -175,6 +182,12 @@ const TeamEdit: React.FC<TeamEditProps> = ({ setModalOpen, teamDoc }): JSX.Eleme
                                 type="text"
                                 value={teamDoc.emailId}
                                 textHandler={handleForm}
+                            />
+                            <SelectInputBox
+                                title="Team Type"
+                                name="type"
+                                options={['League Team', 'School Team', 'Knockout Team']}
+                                textHandler={handleSelectForm}
                             />
                             <InputBox
                                 title="Team Colour"

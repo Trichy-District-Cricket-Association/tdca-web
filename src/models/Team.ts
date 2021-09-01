@@ -7,7 +7,8 @@ export default class Team {
     teamId?: string;
 
     teamName?: string;
-
+    
+    type?: string;
     /**Team Logo Url */
     avatarUrl?: string;
 
@@ -42,6 +43,7 @@ export default class Team {
     handleTeam({ field, value }: { field: string; value: string }): void {
         if (field == 'teamId') this.teamId = value;
         if (field == 'teamName') this.teamName = value;
+        if (field == 'type') this.type = value;
         if (field == 'emailId') this.emailId = value;
         if (field == 'teamColor') this.teamColor = value;
         if (field == 'division') this.division = parseInt(value);
@@ -65,6 +67,7 @@ export default class Team {
         docId,
         teamId,
         teamName,
+        type,
         teamColor,
         avatarUrl,
         emailId,
@@ -84,6 +87,7 @@ export default class Team {
         docId?: string;
         teamId?: string;
         teamName?: string;
+        type?: string;
         teamColor?: string;
         avatarUrl?: string;
         emailId?: string;
@@ -103,6 +107,7 @@ export default class Team {
         if (docId) this.docId = docId;
         this.teamId = teamId ?? '';
         this.teamName = teamName ?? '';
+        this.type = type ?? '';
         this.teamColor = teamColor ?? '';
         if (avatarUrl) this.avatarUrl = avatarUrl;
         this.emailId = emailId ?? '';
@@ -113,7 +118,7 @@ export default class Team {
         this.draw = draw ?? 0;
         this.tie = tie ?? 0;
         this.noResult = noResult ?? 0;
-        this.totalPoints = totalPoints ?? 0;
+        this.totalPoints = totalPoints;
         this.walkover = walkover ?? 0;
         this.conceed = conceed ?? 0;
         this.refusal = refusal ?? 0;
@@ -124,6 +129,7 @@ export default class Team {
             docId: doc.id,
             teamId: doc.data()?.teamId,
             teamName: doc.data()?.teamName,
+            type: doc.data()?.type,
             teamColor: doc.data()?.teamColor,
             avatarUrl: doc.data()?.avatarUrl,
             emailId: doc.data()?.emailId,

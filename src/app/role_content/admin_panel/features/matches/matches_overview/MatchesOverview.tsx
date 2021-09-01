@@ -41,6 +41,9 @@ const MatchesOverview: React.FC<void> = (): JSX.Element => {
     };
     //  Callback to change the query based on the selected type.
     useEffect(() => {
+        if (selectedMatchType == 'Select Type') {
+            window.location.reload();
+        }
         if (selectedMatchType) {
             let newQuery = baseMatchQuery.where('type', '==', selectedMatchType);
             if (selectedDivisionType) {
@@ -141,7 +144,7 @@ const MatchesOverview: React.FC<void> = (): JSX.Element => {
                             ))}
                     </div>
                     <div className="matchesOverview__pagination">
-                        {isStart || docs.length < 10 ? null : (
+                        {isStart ? null : (
                             <button className="matchesOverview__pagination--btn" onClick={() => getPrev()}>
                                 Previous
                             </button>

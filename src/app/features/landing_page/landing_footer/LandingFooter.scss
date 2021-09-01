@@ -1,6 +1,6 @@
 .footer {
     background-color: #071833;
-    width: 93.4%;
+
     text-align: left;
     font-weight: bold;
     font-size: 20px;
@@ -66,7 +66,6 @@
 }
 
 .footer .footer-center i {
-    background-color: #33383b;
     color: #ffffff;
     font-size: 25px;
     width: 38px;
@@ -146,7 +145,6 @@
 @media (max-width: 767px) {
     .footer {
         font-size: 14px;
-        width: 72%;
     }
     .footer .footer-left,
     .footer .footer-center,

@@ -11,6 +11,7 @@ import LoadingComp from '../../../../../shared_components/loading_comp/LoadingCo
 import firebase from 'firebase';
 import useStorage from '../../../../../../hooks/useStorage';
 import { MdEdit } from 'react-icons/md';
+import SelectInputBox from '../../../shared_components/select_input_box/SelectInputBox';
 const defaultAvatar = `${process.env.PUBLIC_URL}/assets/images/teamAvatar.png`;
 
 type TeamAddProps = {
@@ -56,6 +57,13 @@ const TeamAdd: React.FC<TeamAddProps> = ({ setModalOpen }): JSX.Element => {
         newTeam.handleTeam({ field: fieldName, value: e.target.value });
         setTeam(newTeam);
     };
+    const handleSelectForm = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const fieldName = `${e.target.name}` as const;
+        const newTeam = new Team({ ...team });
+        newTeam.handleTeam({ field: fieldName, value: e.target.value });
+        setTeam(newTeam);
+    };
+
     const handleUserForm = (e: React.ChangeEvent<HTMLInputElement>) => {
         const fieldName = `${e.target.name}` as const;
         if (fieldName == 'email') {
@@ -145,19 +153,30 @@ const TeamAdd: React.FC<TeamAddProps> = ({ setModalOpen }): JSX.Element => {
                             <InputBox title="Team Id" name="teamId" type="text" textHandler={handleForm} />
                             <InputBox title="Team Name" name="teamName" type="text" textHandler={handleForm} />
                             <InputBox title="Email Id" name="emailId" type="text" textHandler={handleForm} />
+                            <SelectInputBox
+                                title="Team Type"
+                                name="type"
+                                options={['League Team', 'School Team', 'Knockout Team']}
+                                textHandler={handleSelectForm}
+                            />
                             <InputBox title="Team Colour" name="teamColor" type="color" textHandler={handleForm} />
                         </div>
                     </div>
                     <div className="teamAddForm__matchData">
-                        <h1 className="teamAddForm__matchData--header">Match Details</h1>
+                        <div className="teamAddForm__general__header">
+                            <h1 className="teamAddForm__general__header--text">Match Details</h1>
+                        </div>
                         <div className="teamAddForm__matchData--input">
-                            <InputBox
-                                title="Division"
-                                name="division"
-                                type="number"
-                                textHandler={handleForm}
-                                value={0}
-                            />
+                            {team.type == 'League Team' ? (
+                                <InputBox
+                                    title="Division"
+                                    name="division"
+                                    type="number"
+                                    textHandler={handleForm}
+                                    value={0}
+                                />
+                            ) : null}
+
                             <InputBox
                                 title="Matches Played"
                                 name="numberOfMatches"
@@ -176,30 +195,53 @@ const TeamAdd: React.FC<TeamAddProps> = ({ setModalOpen }): JSX.Element => {
                                 textHandler={handleForm}
                                 value={0}
                             />
-                            <InputBox
-                                title="Total Points"
-                                name="totalPoints"
-                                type="number"
-                                textHandler={handleForm}
-                                value={0}
-                            />
-                            <InputBox
-                                title="League Matches"
-                                name="typeMatches_leagueMatch"
-                                type="number"
-                                textHandler={handleForm}
-                                value={0}
-                            />
-                            <InputBox
-                                title="Walkover"
-                                name="walkover"
-                                type="number"
-                                textHandler={handleForm}
-                                value={0}
-                            />
-                            <InputBox title="Conceed" name="conceed" type="number" textHandler={handleForm} value={0} />
-                            <InputBox title="Refusal" name="refusal" type="number" textHandler={handleForm} value={0} />
-                            <InputBox title="Penalty" name="penalty" type="number" textHandler={handleForm} value={0} />
+                            {team.type == 'League Team' ? (
+                                <InputBox
+                                    title="Total Points"
+                                    name="totalPoints"
+                                    type="number"
+                                    textHandler={handleForm}
+                                    value={0}
+                                />
+                            ) : null}
+
+                            {team.type == 'League Team' || team.type == 'Knockout Team' ? (
+                                <InputBox
+                                    title="Walkover"
+                                    name="walkover"
+                                    type="number"
+                                    textHandler={handleForm}
+                                    value={0}
+                                />
+                            ) : null}
+                            {team.type == 'League Team' || team.type == 'Knockout Team' ? (
+                                <InputBox
+                                    title="Conceed"
+                                    name="conceed"
+                                    type="number"
+                                    textHandler={handleForm}
+                                    value={0}
+                                />
+                            ) : null}
+                            {team.type == 'League Team' || team.type == 'Knockout Team' ? (
+                                <InputBox
+                                    title="Refusal"
+                                    name="refusal"
+                                    type="number"
+                                    textHandler={handleForm}
+                                    value={0}
+                                />
+                            ) : null}
+
+                            {team.type == 'League Team' ? (
+                                <InputBox
+                                    title="Penalty"
+                                    name="penalty"
+                                    type="number"
+                                    textHandler={handleForm}
+                                    value={0}
+                                />
+                            ) : null}
                         </div>
                     </div>
                     <div className="teamAddForm__createAccount">
