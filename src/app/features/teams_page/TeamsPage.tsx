@@ -43,9 +43,9 @@ const TeamsPage: React.FC<void> = (): JSX.Element => {
                         </div>
                         <div className="teamsPage__header__header2"></div>
                     </div>
-                    <div className="teamsOverview__teamSelect">
+                    <div className="teamsPage__teamSelect">
                         <select
-                            className="teamsOverview__teamTypeSelect--btn"
+                            className="teamsPage__teamTypeSelect--btn"
                             value={selectedTeamType}
                             onChange={switchSelectedTeamType}
                         >
@@ -56,6 +56,9 @@ const TeamsPage: React.FC<void> = (): JSX.Element => {
                                 </option>
                             ))}
                         </select>
+                        {selectedTeamType == 'League Team' ? (
+                            <button className="teamsPage__pointsTable">Points Table</button>
+                        ) : null}
                     </div>
                     <div className="teamsPage__teamCards">
                         {docs
@@ -64,14 +67,14 @@ const TeamsPage: React.FC<void> = (): JSX.Element => {
                                 <TeamCard teamDoc={teamDoc} key={teamDoc.teamId ?? ''} />
                             ))}
                     </div>
-                    {/* <div className="teamsOverview__pagination">
+                    {/* <div className="teamsPage__pagination">
                         {isStart ? null : (
-                            <button className="teamsOverview__pagination--btn" onClick={() => getPrev()}>
+                            <button className="teamsPage__pagination--btn" onClick={() => getPrev()}>
                                 Previous
                             </button>
                         )}
                         {isEnd ? null : (
-                            <button className="teamsOverview__pagination--btn" onClick={() => getNext()}>
+                            <button className="teamsPage__pagination--btn" onClick={() => getNext()}>
                                 Next
                             </button>
                         )}

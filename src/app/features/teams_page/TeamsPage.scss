@@ -21,6 +21,31 @@
             width: 35%;
         }
     }
+    &__teamSelect select {
+        background-color: #071833;
+        color: #fff;
+        border: none;
+        font-size: 18px;
+        border-radius: 5px;
+        padding: 0.4rem 0.5rem;
+
+        margin: 25px 0 0 20px;
+        font-family: 'Poppins';
+        justify-content: center;
+        cursor: pointer;
+        text-transform: uppercase;
+    }
+    &__pointsTable {
+        font: bold 16px 'Poppins';
+        cursor: pointer;
+        border: none;
+        background-color: #071833;
+        color: #fff;
+        padding: 0.5rem 0.5rem;
+        border-radius: 2px;
+        text-transform: uppercase;
+        margin-left: 20px;
+    }
     &__teamCards {
         display: grid;
         grid-template-columns: repeat(4, 1fr);

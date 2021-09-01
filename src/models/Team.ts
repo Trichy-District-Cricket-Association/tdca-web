@@ -40,6 +40,8 @@ export default class Team {
 
     penalty?: number;
 
+    runRate?: number;
+
     handleTeam({ field, value }: { field: string; value: string }): void {
         if (field == 'teamId') this.teamId = value;
         if (field == 'teamName') this.teamName = value;
@@ -58,6 +60,7 @@ export default class Team {
         if (field == 'conceed') this.conceed = parseInt(value);
         if (field == 'refusal') this.refusal = parseInt(value);
         if (field == 'penalty') this.penalty = parseInt(value);
+        if (field == 'runRate') this.runRate = parseInt(value);
     }
     set setAvatar(url: string) {
         this.avatarUrl = url;
@@ -83,6 +86,7 @@ export default class Team {
         conceed,
         refusal,
         penalty,
+        runRate
     }: {
         docId?: string;
         teamId?: string;
@@ -103,6 +107,7 @@ export default class Team {
         conceed?: number;
         refusal?: number;
         penalty?: number;
+        runRate?: number;
     }) {
         if (docId) this.docId = docId;
         this.teamId = teamId ?? '';
@@ -118,11 +123,12 @@ export default class Team {
         this.draw = draw ?? 0;
         this.tie = tie ?? 0;
         this.noResult = noResult ?? 0;
-        this.totalPoints = totalPoints;
+        this.totalPoints = totalPoints ?? 0;
         this.walkover = walkover ?? 0;
         this.conceed = conceed ?? 0;
         this.refusal = refusal ?? 0;
         this.penalty = penalty ?? 0;
+        this.runRate = runRate ?? 0;
     }
     static fromFirestore(doc: firebase.firestore.DocumentSnapshot): Team {
         return new Team({
@@ -145,6 +151,7 @@ export default class Team {
             conceed: doc.data()?.conceed,
             refusal: doc.data()?.refusal,
             penalty: doc.data()?.penalty,
+            runRate: doc.data()?.runRate,
         });
     }
 }

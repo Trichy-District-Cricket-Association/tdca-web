@@ -9,12 +9,14 @@ import LoadingComp from '../../../../../shared_components/loading_comp/LoadingCo
 import TeamAdd from '../team_add/TeamAdd';
 import TeamCard from '../team_card/TeamCard';
 import { usePagination } from 'use-pagination-firestore';
+import PointsTable from '../points_table/PointsTable';
 
 const teamTypes = ['League Team', 'School Team', 'Knockout Team'];
 const baseTeamQuery = firestore.collection(Collections.teams);
 
 const TeamsOverview: React.FC<void> = (): JSX.Element => {
-    const [isModalOpen, setModalOpen] = useState(false);
+    const [isTeamModalOpen, setTeamModalOpen] = useState(false);
+    const [isStandingsModalOpen, setStandingsModalOpen] = useState(false);
 
     const [query, setQuery] = useState<firebase.firestore.Query<firebase.firestore.DocumentData>>(baseTeamQuery);
     const { docs, isLoading, isStart, isEnd, getPrev, getNext } = usePagination<Team>(query, {
@@ -57,13 +59,13 @@ const TeamsOverview: React.FC<void> = (): JSX.Element => {
                 <LoadingComp />
             ) : (
                 <div className="teamsOverview">
-                    <button className="teamsOverview__teamAddBtn" onClick={() => setModalOpen(true)}>
+                    <button className="teamsOverview__teamAddBtn" onClick={() => setTeamModalOpen(true)}>
                         + Add Team
                     </button>
 
                     <CSVLink
                         className="teamsOverview__dataDownload"
-                        data={JSON.parse(JSON.stringify(docs))}
+                        data={JSON.parse(JSON.stringify(docs.map((doc) => Team.fromFirestore(doc))))}
                         headers={JSON.parse(JSON.stringify(headers))}
                     >
                         Download Data
@@ -81,6 +83,11 @@ const TeamsOverview: React.FC<void> = (): JSX.Element => {
                                 </option>
                             ))}
                         </select>
+                        {selectedTeamType == 'League Team' ? (
+                            <button className="teamsOverview__pointsTable" onClick={() => setStandingsModalOpen(true)}>
+                                Points Table
+                            </button>
+                        ) : null}
                     </div>
                     <div className="teamsOverview__teamCard">
                         {docs
@@ -101,7 +108,8 @@ const TeamsOverview: React.FC<void> = (): JSX.Element => {
                             </button>
                         )}
                     </div> */}
-                    {isModalOpen ? <TeamAdd setModalOpen={setModalOpen} /> : null}
+                    {isTeamModalOpen ? <TeamAdd setModalOpen={setTeamModalOpen} /> : null}
+                    {isStandingsModalOpen ? <PointsTable setModalOpen={setStandingsModalOpen} /> : null}
                 </div>
             )}
         </div>

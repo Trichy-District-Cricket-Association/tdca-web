@@ -22,6 +22,7 @@ const TeamEdit: React.FC<TeamEditProps> = ({ setModalOpen, teamDoc }): JSX.Eleme
         new Team({
             teamId: teamDoc.teamId,
             teamName: teamDoc.teamName,
+            type: teamDoc.type,
             avatarUrl: teamDoc.avatarUrl,
             emailId: teamDoc.emailId,
             division: teamDoc.division,
@@ -188,6 +189,7 @@ const TeamEdit: React.FC<TeamEditProps> = ({ setModalOpen, teamDoc }): JSX.Eleme
                                 name="type"
                                 options={['League Team', 'School Team', 'Knockout Team']}
                                 textHandler={handleSelectForm}
+                                value={teamDoc.type}
                             />
                             <InputBox
                                 title="Team Colour"
@@ -203,13 +205,16 @@ const TeamEdit: React.FC<TeamEditProps> = ({ setModalOpen, teamDoc }): JSX.Eleme
                             <h1 className="teamEditForm__general__header--text">Match Details</h1>
                         </div>
                         <div className="teamEditForm__matchData--input">
-                            <InputBox
-                                title="Division"
-                                name="division"
-                                type="number"
-                                value={teamDoc.division}
-                                textHandler={handleForm}
-                            />
+                            {team.type == 'League Team' ? (
+                                <InputBox
+                                    title="Division"
+                                    name="division"
+                                    type="number"
+                                    value={teamDoc.division}
+                                    textHandler={handleForm}
+                                />
+                            ) : null}
+
                             <InputBox
                                 title="Matches Played"
                                 name="numberOfMatches"
@@ -252,41 +257,53 @@ const TeamEdit: React.FC<TeamEditProps> = ({ setModalOpen, teamDoc }): JSX.Eleme
                                 value={teamDoc.noResult}
                                 textHandler={handleForm}
                             />
-                            <InputBox
-                                title="Total Points"
-                                name="totalPoints"
-                                type="number"
-                                textHandler={handleForm}
-                                value={teamDoc.totalPoints}
-                            />
-                            <InputBox
-                                title="Walkover"
-                                name="walkover"
-                                type="number"
-                                value={teamDoc.walkover}
-                                textHandler={handleForm}
-                            />
-                            <InputBox
-                                title="Conceed"
-                                name="conceed"
-                                type="number"
-                                value={teamDoc.conceed}
-                                textHandler={handleForm}
-                            />
-                            <InputBox
-                                title="Refusal"
-                                name="refusal"
-                                type="number"
-                                value={teamDoc.refusal}
-                                textHandler={handleForm}
-                            />
-                            <InputBox
-                                title="Penalty"
-                                name="penalty"
-                                type="number"
-                                value={teamDoc.penalty}
-                                textHandler={handleForm}
-                            />
+                            {team.type == 'League Team' ? (
+                                <InputBox
+                                    title="Total Points"
+                                    name="totalPoints"
+                                    type="number"
+                                    textHandler={handleForm}
+                                    value={teamDoc.totalPoints}
+                                />
+                            ) : null}
+
+                            {team.type == 'League Team' || team.type == 'Knockout Team' ? (
+                                <InputBox
+                                    title="Walkover"
+                                    name="walkover"
+                                    type="number"
+                                    value={teamDoc.walkover}
+                                    textHandler={handleForm}
+                                />
+                            ) : null}
+                            {team.type == 'League Team' || team.type == 'Knockout Team' ? (
+                                <InputBox
+                                    title="Conceed"
+                                    name="conceed"
+                                    type="number"
+                                    value={teamDoc.conceed}
+                                    textHandler={handleForm}
+                                />
+                            ) : null}
+                            {team.type == 'League Team' || team.type == 'Knockout Team' ? (
+                                <InputBox
+                                    title="Refusal"
+                                    name="refusal"
+                                    type="number"
+                                    value={teamDoc.refusal}
+                                    textHandler={handleForm}
+                                />
+                            ) : null}
+
+                            {team.type == 'League Team' ? (
+                                <InputBox
+                                    title="Penalty"
+                                    name="penalty"
+                                    type="number"
+                                    value={teamDoc.penalty}
+                                    textHandler={handleForm}
+                                />
+                            ) : null}
                         </div>
                     </div>
                     <div className="teamEditForm__btn">
