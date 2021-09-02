@@ -1,6 +1,6 @@
 {
     "name": "tdca-web",
-    "homepage": "https://trichy-district-cricket-association.github.io/tdca-web/",
+    "homepage": "https://tdca.in/",
     "version": "0.1.0",
     "private": true,
     "dependencies": {
