@@ -4,8 +4,10 @@
 }
 
 .officeBearers {
+    max-width: 1450px;
+    margin: auto;
     &__heading {
-        margin: 20px;
+        margin: 30px 20px;
     }
     &__container {
         margin: 0 80px;
@@ -25,7 +27,8 @@
                 &--name,
                 &--designation,
                 &--contact,
-                &--contact1 {
+                &--contact1,
+                &--contact2 {
                     margin-top: 10px;
                 }
                 &--name {
@@ -90,7 +93,7 @@
         &__container {
             margin: 5px;
             .officeBearer {
-                height: 400px;
+                height: 430px;
                 &__img {
                     width: 180px;
                     height: 180px;
@@ -98,16 +101,22 @@
                 }
                 &__row2 {
                     &--name {
-                        font-size: 5vw;
+                        font-size: 4vw;
                         padding: 0 10px;
                     }
                     &--designation {
-                        font-size: 3.8vw;
+                        font-size: 3.2vw;
                     }
                     &--contact {
-                        font-size: 3.5vw;
+                        font-size: 3.3vw;
                         padding-left: 5px;
                         padding-right: 5px;
+                    }
+                    &--contact1 {
+                        font-size: 2.8vw;
+                    }
+                    &--contact2 {
+                        font-size: 2.2vw;
                     }
                 }
             }

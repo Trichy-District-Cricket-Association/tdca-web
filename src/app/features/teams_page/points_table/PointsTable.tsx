@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Collections } from '../../../../../../enums/collection';
 import Modal from 'react-modal';
-import { firestore } from '../../../../../../firebase';
-import Team from '../../../../../../models/Team';
+import { Collections } from '../../../../enums/collection';
+import { firestore } from '../../../../firebase';
+import Team from '../../../../models/Team';
+import LoadingComp from '../../../shared_components/loading_comp/LoadingComp';
+
 import './PointsTable.scss';
-import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
 
 type PointsTableProps = {
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;

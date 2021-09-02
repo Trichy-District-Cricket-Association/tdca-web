@@ -107,7 +107,7 @@ const LandingOfficeBearers: React.FC<any> = (): JSX.Element => {
                     <div className="officeBearer__row2">
                         <h1 className="officeBearer__row2--name">S Pradeep</h1>
                         <p className="officeBearer__row2--designation">Vice President</p>
-                        <p className="officeBearer__row2--contact1">santhanampradeepadvocates@gmail.com</p>
+                        <p className="officeBearer__row2--contact2">santhanampradeepadvocates@gmail.com</p>
                     </div>
                 </div>
                 <div className="officeBearer">
@@ -139,7 +139,7 @@ const LandingOfficeBearers: React.FC<any> = (): JSX.Element => {
                     <div className="officeBearer__row2">
                         <h1 className="officeBearer__row2--name">V Boobeshnathan</h1>
                         <p className="officeBearer__row2--designation">Jt Secretary</p>
-                        <p className="officeBearer__row2--contact">boobeshnathan1981@gmail.com</p>
+                        <p className="officeBearer__row2--contact1">boobeshnathan1981@gmail.com</p>
                     </div>
                 </div>
 
@@ -150,7 +150,7 @@ const LandingOfficeBearers: React.FC<any> = (): JSX.Element => {
                     <div className="officeBearer__row2">
                         <h1 className="officeBearer__row2--name">M Sakthivel</h1>
                         <p className="officeBearer__row2--designation">Treasurer</p>
-                        <p className="officeBearer__row2--contact">sakthivelmurugan0479@gmail.com</p>
+                        <p className="officeBearer__row2--contact1">sakthivelmurugan0479@gmail.com</p>
                     </div>
                 </div>
             </Carousel>

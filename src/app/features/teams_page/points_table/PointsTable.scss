@@ -25,6 +25,7 @@
     border-collapse: collapse;
     color: #333;
     border-radius: 0.4em;
+    overflow: hidden;
     tr {
         &:first-child {
             border-top: none;
