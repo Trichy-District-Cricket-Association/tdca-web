@@ -19,4 +19,7 @@ export enum PageRoutes {
 
     // TEAM PANEL ROUTES
     teamPanel = '/team',
+
+    // FORGET PASSWORD
+    forgetPassword = '/forgetPassword'
 }

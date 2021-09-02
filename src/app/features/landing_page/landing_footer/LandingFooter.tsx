@@ -38,7 +38,7 @@ const LandingFooter: React.FC<any> = (): JSX.Element => {
                             <FiMail />
                         </i>
                         <p>
-                            <a href="#">tdcatrichy@gmail.com</a>
+                            <a href="mailto:tdcatrichy@gmail.com">tdcatrichy@gmail.com</a>
                         </p>
                     </div>
                 </div>

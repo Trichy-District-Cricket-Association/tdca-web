@@ -42,8 +42,8 @@ const PointsTable: React.FC<PointsTableProps> = ({ setModalOpen }): JSX.Element 
             ) : (
                 <div>
                     <h1 className="pointsTable--header">Standings</h1>
-                    <table className="rwd-table">
-                        <tbody>
+                    <div className="pointsTable__table">
+                        <table className="rwd-table">
                             <tr>
                                 <th>Teams</th>
                                 <th>Matches</th>
@@ -75,9 +75,9 @@ const PointsTable: React.FC<PointsTableProps> = ({ setModalOpen }): JSX.Element 
                                     <td>{teamDoc.totalPoints}</td>
                                     <td>{teamDoc.runRate}</td>
                                 </tr>
-                            ))}{' '}
-                        </tbody>
-                    </table>
+                            ))}
+                        </table>
+                    </div>
                 </div>
             )}
         </Modal>

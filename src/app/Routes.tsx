@@ -16,6 +16,7 @@ import TeamsPage from './features/teams_page/TeamsPage';
 import StaffsPage from './features/staffs_page/StaffsPage';
 import TeamPlayersOverview from './role_content/team_panel/team_players/team_players_overview/TeamPlayersOverview';
 import AboutUsPage from './features/about_us_page/AboutUsPage';
+import ForgetPassword from './features/authentication/forget_password/ForgetPassword';
 
 const Routes = () => (
     <Switch>
@@ -43,6 +44,9 @@ const Routes = () => (
 
         {/*  Team panel Route */}
         <ProtectedRoute exact path={PageRoutes.teamPanel} userRole={UserRoles.team} component={TeamPlayersOverview} />
+
+        {/* Forget Password Route */}
+        <Route exact path={PageRoutes.forgetPassword} component={ForgetPassword} />
     </Switch>
 );
 

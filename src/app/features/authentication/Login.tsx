@@ -3,6 +3,8 @@ import './Login.scss';
 import useInput from '../../../hooks/useInput';
 import { auth } from '../../../firebase';
 import InputBox from '../../role_content/admin_panel/shared_components/input_box/InputBox';
+import { PageRoutes } from '../../../enums/pageRoutes';
+import { Link } from 'react-router-dom';
 const logo = `${process.env.PUBLIC_URL}/assets/images/logo.jpg`;
 
 type LoginProps = {
@@ -32,10 +34,16 @@ const Login: React.FC<LoginProps> = ({ setModalOpen }): JSX.Element => {
                     <div className="Login__modal--form">
                         <InputBox title="Email" name="emailId" type="text" textHandler={bindEmail} />
                         <InputBox title="Password" name="password" type="password" textHandler={bindPassword} />
-
                         <button onClick={login} className="Login__btn">
                             Login
                         </button>
+                        <Link
+                            to={PageRoutes.forgetPassword}
+                            className="Login__forgetPass"
+                            onClick={() => setModalOpen(false)}
+                        >
+                            Forget Password?
+                        </Link>
                     </div>
                 </div>
             </Modal>

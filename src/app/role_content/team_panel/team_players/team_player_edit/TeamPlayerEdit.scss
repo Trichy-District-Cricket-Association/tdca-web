@@ -15,18 +15,11 @@
     }
     .playerEditForm {
         &__general,
-        &__personalData,
-        &__stats {
+        &__personalData {
             &__header {
                 display: flex;
                 justify-content: space-between;
-                &--text {
-                    margin-top: 1%;
-                    margin-left: 2%;
-                    font-family: 'Poppins';
-                    font-weight: 400;
-                    color: #131313;
-                }
+
                 &--iconBtn {
                     color: red;
                     font-size: 29px;
@@ -77,16 +70,16 @@
             }
         }
 
-        &__stats {
-            &--header1,
-            &--header2 {
-                margin-left: 2%;
-                font-weight: 400;
-                margin-top: 1%;
-                color: #131313;
-                font-size: 27px;
-            }
-        }
+        // &__stats {
+        //     &--header1,
+        //     &--header2 {
+        //         margin-left: 2%;
+        //         font-weight: 400;
+        //         margin-top: 1%;
+        //         color: #131313;
+        //         font-size: 27px;
+        //     }
+        // }
         &__btn {
             display: flex;
             margin-left: 2%;
@@ -106,9 +99,9 @@
                 border-radius: 10px;
             }
             &--submit {
-                background-color: #3d26d6;
+                background-color: #0d4194;
                 &:hover {
-                    background-color: #3d26d6;
+                    background-color: #104aa7;
                 }
             }
             &--cancel {
@@ -128,7 +121,21 @@
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.541);
 }
-
+.playerStats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    background-color: #f8f8f8;
+    margin: 20px;
+    border-radius: 15px;
+    color: #292929;
+    &__battingStats,
+    &__bowlingStats {
+        margin-left: 70px;
+        h1 {
+            margin: 7px 0;
+        }
+    }
+}
 @media screen and (max-width: 799px) {
     .playerEdit {
         width: 90%;
@@ -139,15 +146,6 @@
             }
             .selectInputBox {
                 max-width: 400px;
-            }
-            &__general,
-            &__personalData,
-            &__stats {
-                &--header,
-                &--header1,
-                &--header2 {
-                    text-align: center;
-                }
             }
             &__general {
                 &--avatar,
@@ -162,6 +160,13 @@
                     margin-bottom: 4%;
                 }
             }
+        }
+    }
+    .playerStats {
+        text-align: center;
+        &__battingStats,
+        &__bowlingStats {
+            margin-left: 0;
         }
     }
 }

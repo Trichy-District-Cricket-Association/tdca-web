@@ -1,5 +1,5 @@
 .pointsTable {
-    width: 87%;
+    width: 90%;
     height: 88%;
     border-radius: 10px;
     position: absolute;
@@ -21,10 +21,12 @@
 .rwd-table {
     margin: auto;
     min-width: 750px;
-    max-width: 100%;
+    max-width: 98%;
     border-collapse: collapse;
+
     color: #333;
     border-radius: 0.4em;
+    overflow-x: auto;
     tr {
         &:first-child {
             border-top: none;
@@ -43,71 +45,42 @@
         }
     }
     th {
-        display: none;
+        display: table-cell;
         text-align: left;
-        padding: 0.5em 1em;
+        padding: 0.25em 0.5em;
+        padding: 1em !important;
+        &:first-child {
+            padding-left: 0;
+        }
+        &:last-child {
+            padding-right: 0;
+        }
     }
     td {
-        display: block;
+        display: table-cell;
         text-align: left;
-        padding: 0.5em 1em;
+        padding: 0.25em 0.5em;
+        padding: 1em !important;
         &:first-child {
             margin-top: 0.5em;
+            padding-left: 0;
         }
         &:last-child {
             margin-bottom: 0.5em;
+            padding-right: 0;
         }
         &:before {
             content: attr(data-th) ': ';
             font-weight: bold;
             width: 120px;
-            display: inline-block;
+
             color: #000;
+            display: none;
         }
     }
 }
-@media screen and (max-width: 601px) {
+@media screen and (max-width: 500px) {
     .rwd-table {
-        tr {
-            &:nth-child(2) {
-                border-top: none;
-            }
-        }
-    }
-}
-@media screen and (min-width: 600px) {
-    .rwd-table {
-        tr {
-            &:hover {
-                &:not(:first-child) {
-                    background-color: #d8e7f3;
-                }
-            }
-        }
-        td {
-            &:before {
-                display: none;
-            }
-            display: table-cell;
-            padding: 0.25em 0.5em;
-            padding: 1em !important;
-            &:first-child {
-                padding-left: 0;
-            }
-            &:last-child {
-                padding-right: 0;
-            }
-        }
-        th {
-            display: table-cell;
-            padding: 0.25em 0.5em;
-            padding: 1em !important;
-            &:first-child {
-                padding-left: 0;
-            }
-            &:last-child {
-                padding-right: 0;
-            }
-        }
+        margin-right: 10px;
     }
 }
