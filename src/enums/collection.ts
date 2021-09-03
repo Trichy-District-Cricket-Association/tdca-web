@@ -8,4 +8,5 @@ export enum Collections {
     players = 'Players',
     matches = 'Matches',
     scorecards = 'Scorecards',
+    oldMatches = 'OldMatches'
 }

@@ -1,4 +1,4 @@
-.matchesOverview {
+.oldMatchesOverview {
     font-family: 'Poppins';
     &__matchAddBtn {
         background-color: transparent;
@@ -7,8 +7,7 @@
         color: #071833;
         cursor: pointer;
         font-size: 14px;
-        margin-top: 50px;
-        margin-left: 20px;
+        margin: 50px 20px 0px;
         padding: 0.7rem 1rem;
         text-align: center;
         text-transform: uppercase;
@@ -52,27 +51,16 @@
         cursor: pointer;
         text-transform: uppercase;
     }
-    &__dataDownload,
-    &__oldMatches {
-        font: bold 16px 'Poppins';
-        text-decoration: none;
-        background-color: #071833;
-        color: #fff;
-        padding: 0.6rem 0.5rem;
-        border-radius: 2px;
-        text-transform: uppercase;
-        margin-left: 20px;
-    }
 }
 @media screen and (max-width: 1400px) {
-    .matchesOverview {
+    .oldMatchesOverview {
         &__matchCard {
             grid-template-columns: repeat(3, 1fr);
         }
     }
 }
 @media screen and (max-width: 1050px) {
-    .matchesOverview {
+    .oldMatchesOverview {
         text-align: center;
         &__matchCard {
             grid-template-columns: repeat(2, 1fr);
@@ -80,7 +68,7 @@
     }
 }
 @media screen and (max-width: 695px) {
-    .matchesOverview {
+    .oldMatchesOverview {
         &__matchCard {
             grid-template-columns: repeat(1, 1fr);
         }

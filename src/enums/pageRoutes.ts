@@ -11,11 +11,13 @@ export enum PageRoutes {
     adminGrounds = '/admin/grounds',
     adminGroundsMen = '/admin/groundsMen',
     adminMatches = '/admin/matches',
+    adminOldMatches = '/admin/OldMatches',
     adminPlayers = '/admin/players',
     adminScorers = '/admin/scorers',
     adminScorecards = '/admin/scorecards',
     adminTeams = '/admin/teams',
     adminUmpires = '/admin/umpires',
+
 
     // TEAM PANEL ROUTES
     teamPanel = '/team',

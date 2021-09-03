@@ -1,28 +1,25 @@
 import { useState, useEffect } from 'react';
-import { CSVLink } from 'react-csv';
-import { Collections } from '../../../../../../enums/collection';
+import { Collections } from '../../../../../../../enums/collection';
 import firebase from 'firebase';
-import { firestore } from '../../../../../../firebase';
-import Match from '../../../../../../models/Match';
-import './MatchesOverview.scss';
-import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
-import MatchAdd from '../match_add/MatchAdd';
-import MatchCard from '../match_card/MatchCard';
+import { firestore } from '../../../../../../../firebase';
+import OldMatch from '../../../../../../../models/OldMatch';
+import './OldMatchesOverview.scss';
+import LoadingComp from '../../../../../../shared_components/loading_comp/LoadingComp';
+import OldMatchAdd from '../old_match_add/OldMatchAdd';
+import OldMatchCard from '../old_match_card/OldMatchCard';
 import { usePagination } from 'use-pagination-firestore';
-import { PageRoutes } from '../../../../../../enums/pageRoutes';
-import { Link } from 'react-router-dom';
 
 const divisionTypes = [1, 2, 3, 4, 5];
 const matchTypes = ['League Match', 'School Match', 'Knockout Match'];
 const schoolMatchTypes = ['Below 8th Std', 'Below 10th Std', 'Below 12th Std'];
 
-const baseMatchQuery = firestore.collection(Collections.matches).orderBy('date', 'desc');
+const baseMatchQuery = firestore.collection(Collections.oldMatches).orderBy('date', 'desc');
 
-const MatchesOverview: React.FC<void> = (): JSX.Element => {
+const OldMatchesOverview: React.FC<void> = (): JSX.Element => {
     const [isModalOpen, setModalOpen] = useState(false);
 
     const [query, setQuery] = useState<firebase.firestore.Query<firebase.firestore.DocumentData>>(baseMatchQuery);
-    const { docs, isLoading, isStart, isEnd, getPrev, getNext } = usePagination<Match>(query, {
+    const { docs, isLoading, isStart, isEnd, getPrev, getNext } = usePagination<OldMatch>(query, {
         limit: 10,
     });
 
@@ -58,54 +55,22 @@ const MatchesOverview: React.FC<void> = (): JSX.Element => {
         }
     }, [selectedMatchType, selectedDivisionType, selectedSchoolMatchType]);
 
-    const headers = [
-        { label: 'MATCH ID', key: 'matchId' },
-        { label: 'DIVISION', key: 'division' },
-        { label: 'MATCH TYPE', key: 'type' },
-        { label: 'TEAM A NAME', key: 'teamA.teamName' },
-        { label: 'TEAM A ID', key: 'teamA.teamId' },
-        { label: 'TEAM B NAME', key: 'teamB.teamName' },
-        { label: 'TEAM B ID', key: 'teamB.teamId' },
-        { label: 'UMPIRE A NAME', key: 'umpireA.umpireName' },
-        { label: 'UMPIRE A ID', key: 'umpireA.umpireId' },
-        { label: 'UMPIRE A FEE STATUS', key: 'umpireA.umpireFeeStatus' },
-        { label: 'UMPIRE B NAME', key: 'umpireB.umpireName' },
-        { label: 'UMPIRE B ID', key: 'umpireB.umpireId' },
-        { label: 'UMPIRE B FEE STATUS', key: 'umpireB.umpireFeeStatus' },
-        { label: 'SCORER NAME', key: 'scorer.scorerName' },
-        { label: 'SCORER ID', key: 'scorer.scorerId' },
-        { label: 'SCORER FEE STATUS', key: 'scorer.scorerFeeStatus' },
-        { label: 'DATE AND TIME OF MATCH', key: 'date' },
-        { label: 'VENUE', key: 'venue.groundName' },
-        { label: 'STATUS', key: 'status' },
-    ];
-
     return (
         <div>
             {isLoading ? (
                 <LoadingComp />
             ) : (
-                <div className="matchesOverview">
-                    <button className="matchesOverview__matchAddBtn" onClick={() => setModalOpen(true)}>
+                <div className="oldMatchesOverview">
+                    <button className="oldMatchesOverview__matchAddBtn" onClick={() => setModalOpen(true)}>
                         + Add Match
                     </button>
-                    <CSVLink
-                        className="matchesOverview__dataDownload"
-                        data={JSON.parse(JSON.stringify(docs.map((doc) => Match.fromFirestore(doc))))}
-                        headers={JSON.parse(JSON.stringify(headers))}
-                    >
-                        Download Data
-                    </CSVLink>
-                    <Link to={PageRoutes.adminOldMatches} className="matchesOverview__oldMatches">
-                        Old Matches
-                    </Link>
-                    <div className="matchesOverview__matchSelect">
+                    <div className="oldMatchesOverview__matchSelect">
                         <select
-                            className="matchesOverview__matchTypeSelect--btn"
+                            className="oldMatchesOverview__matchTypeSelect--btn"
                             value={selectedMatchType}
                             onChange={switchMatchType}
                         >
-                            <option selected>Select Type</option>
+                            <option>Select Type</option>
                             {matchTypes.map((matchType) => (
                                 <option key={matchType} value={matchType}>
                                     {matchType}
@@ -114,7 +79,7 @@ const MatchesOverview: React.FC<void> = (): JSX.Element => {
                         </select>
                         {selectedMatchType == 'League Match' ? (
                             <select
-                                className="matchesOverview__matchDivisionSelect--btn"
+                                className="oldMatchesOverview__matchDivisionSelect--btn"
                                 value={selectedDivisionType}
                                 onChange={switchDivisionType}
                             >
@@ -128,7 +93,7 @@ const MatchesOverview: React.FC<void> = (): JSX.Element => {
                         ) : null}
                         {selectedMatchType == 'School Match' ? (
                             <select
-                                className="matchesOverview__matchSchoolSelect--btn"
+                                className="oldMatchesOverview__matchSchoolSelect--btn"
                                 value={selectedSchoolMatchType}
                                 onChange={switchSchoolMatchType}
                             >
@@ -141,33 +106,33 @@ const MatchesOverview: React.FC<void> = (): JSX.Element => {
                             </select>
                         ) : null}
                     </div>
-                    <div className="matchesOverview__matchCard">
+                    <div className="oldMatchesOverview__matchCard">
                         {docs
-                            .map((doc) => Match.fromFirestore(doc))
-                            ?.map((matchDoc) => (
-                                <MatchCard matchDoc={matchDoc} key={matchDoc.matchId + 'card'} />
+                            .map((doc) => OldMatch.fromFirestore(doc))
+                            ?.map((oldMatchDoc) => (
+                                <OldMatchCard oldMatchDoc={oldMatchDoc} key={oldMatchDoc.oldMatchId} />
                             ))}
                     </div>
                     {docs.length !== 0 ? (
-                        <div className="matchesOverview__pagination">
+                        <div className="oldMatchesOverview__pagination">
                             {isStart ? null : (
-                                <button className="matchesOverview__pagination--btn" onClick={() => getPrev()}>
+                                <button className="oldMatchesOverview__pagination--btn" onClick={() => getPrev()}>
                                     Previous
                                 </button>
                             )}
                             {isEnd ? null : (
-                                <button className="matchesOverview__pagination--btn" onClick={() => getNext()}>
+                                <button className="oldMatchesOverview__pagination--btn" onClick={() => getNext()}>
                                     Next
                                 </button>
                             )}
                         </div>
                     ) : null}
 
-                    {isModalOpen ? <MatchAdd setModalOpen={setModalOpen} /> : null}
+                    {isModalOpen ? <OldMatchAdd setModalOpen={setModalOpen} /> : null}
                 </div>
             )}
         </div>
     );
 };
 
-export default MatchesOverview;
+export default OldMatchesOverview;

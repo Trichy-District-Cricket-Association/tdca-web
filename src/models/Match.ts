@@ -142,7 +142,7 @@ export default class Match {
         this.type = type ?? '';
         this.date = date;
         this.venue = venue ?? { groundId: '', groundName: '', groundAvatar: '' };
-        this.status = status ?? 'Toss Yet to Put';
+        this.status = status ??  'Toss not Done';
     }
 
     static fromFirestore(doc: firebase.firestore.DocumentSnapshot): Match {
