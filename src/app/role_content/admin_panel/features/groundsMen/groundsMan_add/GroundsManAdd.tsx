@@ -56,10 +56,6 @@ const GroundsManAdd: React.FC<GroundsManAddProps> = ({ setModalOpen }): JSX.Elem
             .collection(Collections.groundsMen)
             .add(JSON.parse(JSON.stringify(groundsMan)))
             .then(async (doc) => {
-                await firestore
-                    .collection('counter')
-                    .doc(Collections.groundsMen)
-                    .update({ count: firebase.firestore.FieldValue.increment(1) });
                 console.log(doc);
             })
             .catch((e) => {

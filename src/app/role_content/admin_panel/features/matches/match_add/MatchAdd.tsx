@@ -144,10 +144,6 @@ const MatchAdd: React.FC<MatchAddProps> = ({ setModalOpen }): JSX.Element => {
             .collection(Collections.matches)
             .add(JSON.parse(JSON.stringify(match)))
             .then(async (doc) => {
-                await firestore
-                    .collection('counter')
-                    .doc(Collections.matches)
-                    .update({ count: firebase.firestore.FieldValue.increment(1) });
                 console.log(doc);
             })
             .catch((e) => {

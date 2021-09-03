@@ -81,10 +81,6 @@ const TeamAdd: React.FC<TeamAddProps> = ({ setModalOpen }): JSX.Element => {
             .collection(Collections.teams)
             .add(JSON.parse(JSON.stringify(team)))
             .then(async (doc) => {
-                await firestore
-                    .collection('counter')
-                    .doc(Collections.teams)
-                    .update({ count: firebase.firestore.FieldValue.increment(1) });
                 console.log(doc);
             })
             .catch((e) => {
