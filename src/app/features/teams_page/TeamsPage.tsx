@@ -86,9 +86,9 @@ const TeamsPage: React.FC<void> = (): JSX.Element => {
                     </div> */}
 
                     {isModalOpen ? <PointsTable setModalOpen={setModalOpen} /> : null}
+                    <Footer />
                 </div>
             )}
-            <Footer />
         </div>
     );
 };

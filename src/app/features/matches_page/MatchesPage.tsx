@@ -127,9 +127,9 @@ const MatchesPage: React.FC<void> = (): JSX.Element => {
                             </button>
                         )}
                     </div>
+                    <Footer />
                 </div>
             )}
-            <Footer />
         </div>
     );
 };

@@ -89,9 +89,9 @@ const StaffsPage: React.FC<void> = (): JSX.Element => {
                             </div>
                         ))}
                     </div>
+                    <Footer />
                 </div>
             )}
-            <Footer />
         </div>
     );
 };
