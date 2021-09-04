@@ -43,7 +43,7 @@ const AboutUsPage: React.FC<void> = (): JSX.Element => {
                     The conduct of so many matches every year is due to the availability sufficient cricket grounds. We
                     are blessed with this facility, thanks to the educational institutions and government owned
                     entities. National institute of Technology, Saranathan college of Engineering, JJ college of
-                    engineering, National College, Ordnance Factory,RVS Institutions Southern Railway Institute, St.
+                    engineering, National College, Ordnance Factory, RVS Institutions Southern Railway Institute, St.
                     Joseph’s college, Bishop Heber College, Indira Ganesan College of Engineering, Vignesh Vidyalaya,
                     Urumu Dhanalakshmi College, PABCET, BHEL, RKV grounds are some of the institutions that are helping
                     us in no mean measure by providing grounds for the matches.

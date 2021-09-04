@@ -8,6 +8,7 @@ import Team from '../../../models/Team';
 import TeamCard from './team_card/TeamCard';
 import { usePagination } from 'use-pagination-firestore';
 import PointsTable from './points_table/PointsTable';
+import Footer from '../../shared_components/Footer/Footer';
 
 const teamTypes = ['League Team', 'School Team', 'Knockout Team'];
 const baseTeamQuery = firestore.collection(Collections.teams);
@@ -87,6 +88,7 @@ const TeamsPage: React.FC<void> = (): JSX.Element => {
                     {isModalOpen ? <PointsTable setModalOpen={setModalOpen} /> : null}
                 </div>
             )}
+            <Footer />
         </div>
     );
 };

@@ -3036,6 +3036,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-router-dom@npm:*":
+  version: 5.1.8
+  resolution: "@types/react-router-dom@npm:5.1.8"
+  dependencies:
+    "@types/history": "*"
+    "@types/react": "*"
+    "@types/react-router": "*"
+  checksum: f647bc32a7b13614375714890521327168fb54f41d2acf726f5a9a16f75335da376bd399db99e8e2865dbeb6035ec2af5769936f3b76550095340d956cf4a6c6
+  languageName: node
+  linkType: hard
+
 "@types/react-router-dom@npm:^5.1.7":
   version: 5.1.7
   resolution: "@types/react-router-dom@npm:5.1.7"
@@ -3044,6 +3055,16 @@ __metadata:
     "@types/react": "*"
     "@types/react-router": "*"
   checksum: c5afe043f99cbe8e05e85db5b95b5fd724e7b00e0314b8bbc081e36c113e22fd102cd0c7a957c7ad55a55d2def91c17b07ffba45c2ac4a00cc56c5c927c93d4c
+  languageName: node
+  linkType: hard
+
+"@types/react-router-hash-link@npm:^2":
+  version: 2.4.1
+  resolution: "@types/react-router-hash-link@npm:2.4.1"
+  dependencies:
+    "@types/react": "*"
+    "@types/react-router-dom": "*"
+  checksum: 787a94f133306d54dc90a01d967003d3fdd10639c013e74d6a0477c2229d57905458deb2167036f9797bd7fade8ba54aea882d8a35f656bab6f7ca4774df6d7a
   languageName: node
   linkType: hard
 
@@ -13648,6 +13669,18 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"react-router-hash-link@npm:^2.4.3":
+  version: 2.4.3
+  resolution: "react-router-hash-link@npm:2.4.3"
+  dependencies:
+    prop-types: ^15.7.2
+  peerDependencies:
+    react: ">=15"
+    react-router-dom: ">=4"
+  checksum: e978c53f71954d6c6b75d3e93c336fec6ba7d281cfc388096dc2dcb257092078f33213500963544c3804daf6e6bdf8904c944ca842102b4bc2691bea98135d3b
+  languageName: node
+  linkType: hard
+
 "react-router@npm:5.2.0":
   version: 5.2.0
   resolution: "react-router@npm:5.2.0"
@@ -15661,6 +15694,7 @@ resolve@^2.0.0-next.3:
     "@types/react-dom": ^17.0.8
     "@types/react-modal": ^3.12.0
     "@types/react-router-dom": ^5.1.7
+    "@types/react-router-hash-link": ^2
     "@typescript-eslint/eslint-plugin": ^4.27.0
     "@typescript-eslint/parser": ^4.27.0
     add: ^2.0.6
@@ -15687,6 +15721,7 @@ resolve@^2.0.0-next.3:
     react-icons: ^4.2.0
     react-modal: ^3.14.3
     react-router-dom: ^5.2.0
+    react-router-hash-link: ^2.4.3
     react-scripts: 4.0.3
     source-map-explorer: ^2.5.2
     typescript: ^4.3.4

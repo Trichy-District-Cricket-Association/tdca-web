@@ -7,6 +7,7 @@ import './MatchesPage.scss';
 import LoadingComp from '../../shared_components/loading_comp/LoadingComp';
 import { usePagination } from 'use-pagination-firestore';
 import MatchCard from './match_card/MatchCard';
+import Footer from '../../shared_components/Footer/Footer';
 
 const divisionTypes = [1, 2, 3, 4, 5];
 const matchTypes = ['League Match', 'School Match', 'Knockout Match'];
@@ -128,6 +129,7 @@ const MatchesPage: React.FC<void> = (): JSX.Element => {
                     </div>
                 </div>
             )}
+            <Footer />
         </div>
     );
 };

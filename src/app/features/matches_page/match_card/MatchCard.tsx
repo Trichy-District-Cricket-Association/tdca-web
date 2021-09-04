@@ -11,7 +11,7 @@ const MatchCard = ({ matchDoc }: MatchCardProps): JSX.Element => {
     const [isModalOpen, setModalOpen] = useState(false);
     return (
         <div>
-            <div className="matchCard" onClick={() => setModalOpen(true)}>
+            <div className="matchCard">
                 <div className="matchCard__header">
                     <p className="matchCard__header--title">{matchDoc.teamA?.teamName}</p>
                     <img src={cricketBall} alt="vs" className="matchCard__header--img" />
@@ -19,18 +19,17 @@ const MatchCard = ({ matchDoc }: MatchCardProps): JSX.Element => {
                 </div>
                 <div className="matchCard__container">
                     <div className="matchCard__container__cloumn1">
-                        <label className="matchCard__container--label">Match Id</label>
-                        <p className="matchCard__container--text">{matchDoc.matchId}</p>
                         <label className="matchCard__container--label">Division</label>
                         <p className="matchCard__container--text">{matchDoc.division}</p>
                         <label className="matchCard__container--label">Match Type</label>
                         <p className="matchCard__container--text">{matchDoc.type}</p>
+                        <label className="matchCard__container--label">Date</label>
+                        <p className="matchCard__container--text">{matchDoc.date?.toISOString().substr(0, 10)}</p>
                     </div>
                     <div className="matchCard__container__column2">
                         <label className="matchCard__container--label">Venue</label>
                         <p className="matchCard__container--text">{matchDoc.venue?.groundName}</p>
-                        <label className="matchCard__container--label">Date</label>
-                        <p className="matchCard__container--text">{matchDoc.date?.toISOString().substr(0, 10)}</p>
+
                         <label className="matchCard__container--label">Time</label>
                         <p className="matchCard__container--text">{matchDoc.date?.toISOString().substr(11, 8)}</p>
                     </div>

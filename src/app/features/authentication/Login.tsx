@@ -16,9 +16,14 @@ const Login: React.FC<LoginProps> = ({ setModalOpen }): JSX.Element => {
     const [password, bindPassword] = useInput('');
 
     const login = async () => {
-        await auth.signInWithEmailAndPassword(email, password).then(() => {
-            setModalOpen(false);
-        });
+        await auth
+            .signInWithEmailAndPassword(email, password)
+            .then(() => {
+                setModalOpen(false);
+            })
+            .catch(() => {
+                alert('Invalid Email or Password');
+            });
     };
     return (
         <div className="Login">

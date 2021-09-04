@@ -15,7 +15,8 @@ const ScoreCard = ({ setModalOpen }: ScoreCardProps): JSX.Element => {
             onRequestClose={() => setModalOpen(false)}
             ariaHideApp={false}
             overlayClassName="Overlay"
-        ></Modal>
+        >
+        </Modal>
     );
 };
 export default ScoreCard;

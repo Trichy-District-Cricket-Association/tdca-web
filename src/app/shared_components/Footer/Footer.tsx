@@ -2,10 +2,10 @@ import { Link } from 'react-router-dom';
 import { BiMap } from 'react-icons/bi';
 import { FiFacebook, FiMail } from 'react-icons/fi';
 
-import { PageRoutes } from '../../../../enums/pageRoutes';
-import './LandingFooter.scss';
+import { PageRoutes } from '../../../enums/pageRoutes';
+import './Footer.scss';
 
-const LandingFooter: React.FC<any> = (): JSX.Element => {
+const Footer: React.FC<any> = (): JSX.Element => {
     return (
         <div id="footer">
             <footer className="footer">
@@ -53,4 +53,4 @@ const LandingFooter: React.FC<any> = (): JSX.Element => {
     );
 };
 
-export default LandingFooter;
+export default Footer;

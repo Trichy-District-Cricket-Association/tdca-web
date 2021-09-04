@@ -113,7 +113,7 @@ export default class Team {
         this.teamId = teamId ?? '';
         this.teamName = teamName ?? '';
         this.type = type ?? '';
-        this.teamColor = teamColor ?? '';
+        this.teamColor = teamColor ?? '#fff';
         if (avatarUrl) this.avatarUrl = avatarUrl;
         this.emailId = emailId ?? '';
         this.division = division ?? 0;

@@ -89,7 +89,6 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
     };
     const handleSelectForm = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const fieldName = `${e.target.name}` as const;
-        console.log(fieldName);
         const newPlayer = new Player({ ...player });
         newPlayer.handlePlayer({ field: fieldName, value: e.target.value });
         setPlayer(newPlayer);

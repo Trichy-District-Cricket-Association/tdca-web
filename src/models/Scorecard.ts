@@ -1,3 +1,5 @@
+// import firebase from 'firebase';
+//
 export default class Scorecard {
     id: number;
 
@@ -5,7 +7,9 @@ export default class Scorecard {
         this.id = id;
     }
 }
-// interface IScorecard {
+//  export default class ScoreCard{
+//     /** Document id of the Ground document. */
+//     docId?: string;
 //     ballByBallRuns: any;
 //     extra: number;
 //     innings1: {
@@ -34,8 +38,22 @@ export default class Scorecard {
 //     team2wicket: number;
 //     toss: string;
 //     wicket: number;
+//
+//     constructor({}:{}){}
+//
+//     static fromFirestore(doc: firebase.firestore.DocumentSnapshot): ScoreCard {
+//         return new Ground({
+//             docId: doc.id,
+//             ballByBallRuns: doc.data().ballByBallRuns,
+//             groundName: doc.data().groundName,
+//             avatarUrl: doc.data()?.avatarUrl,
+//             totalMatches: doc.data()?.totalMatches,
+//             divisionMatches: doc.data()?.divisionMatches,
+//             typeMatches: doc.data()?.typeMatches,
+//         });
+//     }
 //   }
-  
+//
 //   interface IBowler {
 //     name: string;
 //     over: string;
@@ -43,7 +61,7 @@ export default class Scorecard {
 //     wicket: number;
 //     image: string;
 //   }
-  
+//
 //   interface IBatsman {
 //     ball: number;
 //     four: number;
