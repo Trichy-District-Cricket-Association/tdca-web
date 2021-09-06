@@ -72,10 +72,6 @@ const ScorerAdd: React.FC<ScorerAddProps> = ({ setModalOpen }): JSX.Element => {
             .collection(Collections.scorers)
             .add(JSON.parse(JSON.stringify(scorer)))
             .then(async (doc) => {
-                await firestore
-                    .collection('counter')
-                    .doc(Collections.scorers)
-                    .update({ count: firebase.firestore.FieldValue.increment(1) });
                 console.log(doc);
             })
             .catch((e) => {

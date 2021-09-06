@@ -7,7 +7,8 @@ export default class Team {
     teamId?: string;
 
     teamName?: string;
-
+    
+    type?: string;
     /**Team Logo Url */
     avatarUrl?: string;
 
@@ -39,9 +40,12 @@ export default class Team {
 
     penalty?: number;
 
+    runRate?: number;
+
     handleTeam({ field, value }: { field: string; value: string }): void {
         if (field == 'teamId') this.teamId = value;
         if (field == 'teamName') this.teamName = value;
+        if (field == 'type') this.type = value;
         if (field == 'emailId') this.emailId = value;
         if (field == 'teamColor') this.teamColor = value;
         if (field == 'division') this.division = parseInt(value);
@@ -56,6 +60,7 @@ export default class Team {
         if (field == 'conceed') this.conceed = parseInt(value);
         if (field == 'refusal') this.refusal = parseInt(value);
         if (field == 'penalty') this.penalty = parseInt(value);
+        if (field == 'runRate') this.runRate = parseInt(value);
     }
     set setAvatar(url: string) {
         this.avatarUrl = url;
@@ -65,6 +70,7 @@ export default class Team {
         docId,
         teamId,
         teamName,
+        type,
         teamColor,
         avatarUrl,
         emailId,
@@ -80,10 +86,12 @@ export default class Team {
         conceed,
         refusal,
         penalty,
+        runRate
     }: {
         docId?: string;
         teamId?: string;
         teamName?: string;
+        type?: string;
         teamColor?: string;
         avatarUrl?: string;
         emailId?: string;
@@ -99,11 +107,13 @@ export default class Team {
         conceed?: number;
         refusal?: number;
         penalty?: number;
+        runRate?: number;
     }) {
         if (docId) this.docId = docId;
         this.teamId = teamId ?? '';
         this.teamName = teamName ?? '';
-        this.teamColor = teamColor ?? '';
+        this.type = type ?? '';
+        this.teamColor = teamColor ?? '#fff';
         if (avatarUrl) this.avatarUrl = avatarUrl;
         this.emailId = emailId ?? '';
         this.division = division ?? 0;
@@ -118,12 +128,14 @@ export default class Team {
         this.conceed = conceed ?? 0;
         this.refusal = refusal ?? 0;
         this.penalty = penalty ?? 0;
+        this.runRate = runRate ?? 0;
     }
     static fromFirestore(doc: firebase.firestore.DocumentSnapshot): Team {
         return new Team({
             docId: doc.id,
             teamId: doc.data()?.teamId,
             teamName: doc.data()?.teamName,
+            type: doc.data()?.type,
             teamColor: doc.data()?.teamColor,
             avatarUrl: doc.data()?.avatarUrl,
             emailId: doc.data()?.emailId,
@@ -139,6 +151,7 @@ export default class Team {
             conceed: doc.data()?.conceed,
             refusal: doc.data()?.refusal,
             penalty: doc.data()?.penalty,
+            runRate: doc.data()?.runRate,
         });
     }
 }

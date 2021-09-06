@@ -9,6 +9,8 @@ import LoadingComp from '../../../../../shared_components/loading_comp/LoadingCo
 import MatchAdd from '../match_add/MatchAdd';
 import MatchCard from '../match_card/MatchCard';
 import { usePagination } from 'use-pagination-firestore';
+import { PageRoutes } from '../../../../../../enums/pageRoutes';
+import { Link } from 'react-router-dom';
 
 const divisionTypes = [1, 2, 3, 4, 5];
 const matchTypes = ['League Match', 'School Match', 'Knockout Match'];
@@ -41,6 +43,9 @@ const MatchesOverview: React.FC<void> = (): JSX.Element => {
     };
     //  Callback to change the query based on the selected type.
     useEffect(() => {
+        if (selectedMatchType == 'Select Type') {
+            window.location.reload();
+        }
         if (selectedMatchType) {
             let newQuery = baseMatchQuery.where('type', '==', selectedMatchType);
             if (selectedDivisionType) {
@@ -91,6 +96,9 @@ const MatchesOverview: React.FC<void> = (): JSX.Element => {
                     >
                         Download Data
                     </CSVLink>
+                    <Link to={PageRoutes.adminOldMatches} className="matchesOverview__oldMatches">
+                        Old Matches
+                    </Link>
                     <div className="matchesOverview__matchSelect">
                         <select
                             className="matchesOverview__matchTypeSelect--btn"
@@ -140,18 +148,21 @@ const MatchesOverview: React.FC<void> = (): JSX.Element => {
                                 <MatchCard matchDoc={matchDoc} key={matchDoc.matchId + 'card'} />
                             ))}
                     </div>
-                    <div className="matchesOverview__pagination">
-                        {isStart || docs.length < 10 ? null : (
-                            <button className="matchesOverview__pagination--btn" onClick={() => getPrev()}>
-                                Previous
-                            </button>
-                        )}
-                        {isEnd ? null : (
-                            <button className="matchesOverview__pagination--btn" onClick={() => getNext()}>
-                                Next
-                            </button>
-                        )}
-                    </div>
+                    {docs.length !== 0 ? (
+                        <div className="matchesOverview__pagination">
+                            {isStart ? null : (
+                                <button className="matchesOverview__pagination--btn" onClick={() => getPrev()}>
+                                    Previous
+                                </button>
+                            )}
+                            {isEnd ? null : (
+                                <button className="matchesOverview__pagination--btn" onClick={() => getNext()}>
+                                    Next
+                                </button>
+                            )}
+                        </div>
+                    ) : null}
+
                     {isModalOpen ? <MatchAdd setModalOpen={setModalOpen} /> : null}
                 </div>
             )}

@@ -6,6 +6,7 @@ import LoadingComp from '../../shared_components/loading_comp/LoadingComp';
 import Team from '../../../models/Team';
 import Scorer from '../../../models/Scorer';
 import Umpire from '../../../models/Umpire';
+import Footer from '../../shared_components/Footer/Footer';
 const defaultAvatar = `${process.env.PUBLIC_URL}/assets/images/defaultAvatar.jpg`;
 const StaffsPage: React.FC<void> = (): JSX.Element => {
     const [scorerDocs, setScorerDocs] = useState<Scorer[] | undefined>();
@@ -88,6 +89,7 @@ const StaffsPage: React.FC<void> = (): JSX.Element => {
                             </div>
                         ))}
                     </div>
+                    <Footer />
                 </div>
             )}
         </div>

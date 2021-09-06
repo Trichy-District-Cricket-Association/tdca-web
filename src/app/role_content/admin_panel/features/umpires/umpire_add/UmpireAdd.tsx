@@ -57,10 +57,10 @@ const UmpireAdd: React.FC<UmpireAddProps> = ({ setModalOpen }): JSX.Element => {
             .collection(Collections.umpires)
             .add(JSON.parse(JSON.stringify(umpire)))
             .then(async (doc) => {
-                await firestore
-                    .collection('counter')
-                    .doc(Collections.umpires)
-                    .update({ count: firebase.firestore.FieldValue.increment(1) });
+                // await firestore
+                //     .collection('counter')
+                //     .doc(Collections.umpires)
+                //     .update({ count: firebase.firestore.FieldValue.increment(1) });
                 console.log(doc);
             })
             .catch((e) => {

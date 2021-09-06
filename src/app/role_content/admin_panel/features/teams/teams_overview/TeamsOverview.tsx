@@ -1,27 +1,41 @@
 import { useState, useEffect } from 'react';
 import { CSVLink } from 'react-csv';
 import { Collections } from '../../../../../../enums/collection';
+import firebase from 'firebase';
 import { firestore } from '../../../../../../firebase';
 import Team from '../../../../../../models/Team';
 import './TeamsOverview.scss';
 import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
 import TeamAdd from '../team_add/TeamAdd';
 import TeamCard from '../team_card/TeamCard';
+import { usePagination } from 'use-pagination-firestore';
+import PointsTable from '../points_table/PointsTable';
+
+const teamTypes = ['League Team', 'School Team', 'Knockout Team'];
+const baseTeamQuery = firestore.collection(Collections.teams);
 
 const TeamsOverview: React.FC<void> = (): JSX.Element => {
-    const [isModalOpen, setModalOpen] = useState(false);
-    const [teamDocs, setTeamDocs] = useState<Team[] | undefined>();
+    const [isTeamModalOpen, setTeamModalOpen] = useState(false);
+    const [isStandingsModalOpen, setStandingsModalOpen] = useState(false);
 
+    const [query, setQuery] = useState<firebase.firestore.Query<firebase.firestore.DocumentData>>(baseTeamQuery);
+    const { docs, isLoading, isStart, isEnd, getPrev, getNext } = usePagination<Team>(query, {
+        limit: 10,
+    });
+    const [selectedTeamType, setSelectedTeamType] = useState<string | undefined>();
+
+    const switchSelectedTeamType = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setSelectedTeamType(e.target.value);
+    };
     useEffect(() => {
-        const unsub = firestore.collection(Collections.teams).onSnapshot((snapshot) => {
-            if (snapshot.docs?.length === 0) setTeamDocs([]);
-            if (snapshot.docs?.length > 0) {
-                const teams = snapshot.docs.map((doc) => Team.fromFirestore(doc));
-                setTeamDocs(teams);
-            }
-        });
-        return () => unsub();
-    }, []);
+        if (selectedTeamType == 'Select Type') {
+            window.location.reload();
+        }
+        if (selectedTeamType) {
+            const newQuery = baseTeamQuery.where('type', '==', selectedTeamType);
+            setQuery(newQuery);
+        }
+    }, [selectedTeamType]);
     const headers = [
         { label: 'TEAM ID', key: 'teamId' },
         { label: 'TEAM NAME', key: 'teamName' },
@@ -41,27 +55,61 @@ const TeamsOverview: React.FC<void> = (): JSX.Element => {
     ];
     return (
         <div>
-            {teamDocs == undefined ? (
+            {isLoading ? (
                 <LoadingComp />
             ) : (
                 <div className="teamsOverview">
-                    <button className="teamsOverview__teamAddBtn" onClick={() => setModalOpen(true)}>
+                    <button className="teamsOverview__teamAddBtn" onClick={() => setTeamModalOpen(true)}>
                         + Add Team
                     </button>
 
                     <CSVLink
                         className="teamsOverview__dataDownload"
-                        data={JSON.parse(JSON.stringify(teamDocs))}
+                        data={JSON.parse(JSON.stringify(docs.map((doc) => Team.fromFirestore(doc))))}
                         headers={JSON.parse(JSON.stringify(headers))}
                     >
                         Download Data
                     </CSVLink>
-                    <div className="teamsOverview__teamCard">
-                        {teamDocs?.map((teamDoc) => (
-                            <TeamCard teamDoc={teamDoc} key={teamDoc.docId ?? ''} />
-                        ))}
+                    <div className="teamsOverview__teamSelect">
+                        <select
+                            className="teamsOverview__teamTypeSelect--btn"
+                            value={selectedTeamType}
+                            onChange={switchSelectedTeamType}
+                        >
+                            <option selected>Select Type</option>
+                            {teamTypes.map((teamType) => (
+                                <option key={teamType} value={teamType}>
+                                    {teamType}
+                                </option>
+                            ))}
+                        </select>
+                        {selectedTeamType == 'League Team' ? (
+                            <button className="teamsOverview__pointsTable" onClick={() => setStandingsModalOpen(true)}>
+                                Points Table
+                            </button>
+                        ) : null}
                     </div>
-                    {isModalOpen ? <TeamAdd setModalOpen={setModalOpen} /> : null}
+                    <div className="teamsOverview__teamCard">
+                        {docs
+                            .map((doc) => Team.fromFirestore(doc))
+                            ?.map((teamDoc) => (
+                                <TeamCard teamDoc={teamDoc} key={teamDoc.teamId ?? ''} />
+                            ))}
+                    </div>
+                    {/* <div className="teamsOverview__pagination">
+                        {isStart ? null : (
+                            <button className="teamsOverview__pagination--btn" onClick={() => getPrev()}>
+                                Previous
+                            </button>
+                        )}
+                        {isEnd ? null : (
+                            <button className="teamsOverview__pagination--btn" onClick={() => getNext()}>
+                                Next
+                            </button>
+                        )}
+                    </div> */}
+                    {isTeamModalOpen ? <TeamAdd setModalOpen={setTeamModalOpen} /> : null}
+                    {isStandingsModalOpen ? <PointsTable setModalOpen={setStandingsModalOpen} /> : null}
                 </div>
             )}
         </div>

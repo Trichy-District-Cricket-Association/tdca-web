@@ -1,0 +1,125 @@
+@property --rotate {
+    syntax: '<angle>';
+    initial-value: 132deg;
+}
+
+.officeBearers {
+    max-width: 1450px;
+    margin: auto;
+    &__heading {
+        margin: 30px 20px;
+    }
+    &__container {
+        margin: 0 100px;
+        .officeBearer {
+            background: #191c29d3;
+            width: 380px;
+            height: 470px;
+            position: relative;
+            border-radius: 6px;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            cursor: pointer;
+            margin: 9px 30px;
+            &__row2 {
+                &--name,
+                &--designation,
+                &--contact,
+                &--contact1,
+                &--contact2 {
+                    margin-top: 10px;
+                }
+                &--name {
+                    font-size: 30px;
+                }
+                &--designation {
+                    font-size: 20px;
+                }
+                &--contact {
+                    font-size: 19px;
+                }
+            }
+            &__img {
+                width: 230px;
+                height: 230px;
+                border-radius: 6px;
+                margin-top: 50px;
+            }
+            ::before {
+                content: '';
+                width: 104%;
+                height: 102%;
+                border-radius: 8px;
+                background-image: linear-gradient(var(--rotate), #5d6dff, #213a83 43%, #350185);
+                position: absolute;
+                z-index: -1;
+                top: -1%;
+                left: -2%;
+                animation: spin 2.5s linear infinite;
+                border-radius: 12px;
+            }
+            ::after {
+                position: absolute;
+                top: calc(var(--card-height) / 6);
+                left: 0;
+                right: 0;
+                z-index: -1;
+                height: 100%;
+                width: 100%;
+                margin: 0 auto;
+                transform: scale(0.8);
+                filter: blur(calc(var(--card-height) / 16));
+                background-image: linear-gradient(var(--rotate), #5d6dff, #213a83 43%, #350185);
+                opacity: 1;
+                transition: opacity 0.5s;
+                animation: spin 2.5s linear infinite;
+            }
+            @keyframes spin {
+                0% {
+                    --rotate: 0deg;
+                }
+                100% {
+                    --rotate: 360deg;
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 800px) {
+    .officeBearers {
+        text-align: center;
+        &__container {
+            margin: 5px;
+            .officeBearer {
+                height: 430px;
+                &__img {
+                    width: 180px;
+                    height: 180px;
+                    margin-top: 40px;
+                }
+                &__row2 {
+                    &--name {
+                        font-size: 4vw;
+                        padding: 0 10px;
+                    }
+                    &--designation {
+                        font-size: 3.2vw;
+                    }
+                    &--contact {
+                        font-size: 3.3vw;
+                        padding-left: 5px;
+                        padding-right: 5px;
+                    }
+                    &--contact1 {
+                        font-size: 2.8vw;
+                    }
+                    &--contact2 {
+                        font-size: 2.2vw;
+                    }
+                }
+            }
+        }
+    }
+}

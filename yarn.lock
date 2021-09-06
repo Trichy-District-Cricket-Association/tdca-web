@@ -3036,6 +3036,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-router-dom@npm:*":
+  version: 5.1.8
+  resolution: "@types/react-router-dom@npm:5.1.8"
+  dependencies:
+    "@types/history": "*"
+    "@types/react": "*"
+    "@types/react-router": "*"
+  checksum: f647bc32a7b13614375714890521327168fb54f41d2acf726f5a9a16f75335da376bd399db99e8e2865dbeb6035ec2af5769936f3b76550095340d956cf4a6c6
+  languageName: node
+  linkType: hard
+
 "@types/react-router-dom@npm:^5.1.7":
   version: 5.1.7
   resolution: "@types/react-router-dom@npm:5.1.7"
@@ -3044,6 +3055,16 @@ __metadata:
     "@types/react": "*"
     "@types/react-router": "*"
   checksum: c5afe043f99cbe8e05e85db5b95b5fd724e7b00e0314b8bbc081e36c113e22fd102cd0c7a957c7ad55a55d2def91c17b07ffba45c2ac4a00cc56c5c927c93d4c
+  languageName: node
+  linkType: hard
+
+"@types/react-router-hash-link@npm:^2":
+  version: 2.4.1
+  resolution: "@types/react-router-hash-link@npm:2.4.1"
+  dependencies:
+    "@types/react": "*"
+    "@types/react-router-dom": "*"
+  checksum: 787a94f133306d54dc90a01d967003d3fdd10639c013e74d6a0477c2229d57905458deb2167036f9797bd7fade8ba54aea882d8a35f656bab6f7ca4774df6d7a
   languageName: node
   linkType: hard
 
@@ -13501,6 +13522,16 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"react-collapsible@npm:^2.8.3":
+  version: 2.8.3
+  resolution: "react-collapsible@npm:2.8.3"
+  peerDependencies:
+    react: ~15 || ~16 || ~17
+    react-dom: ~15 || ~16 || ~17
+  checksum: f17e48faf0fbdfd6d7c1fd426229777c8b819bb1cb1ca93e3a7769cea6d76b5dc4a438dbf791ccf1bd492a66e3b4071e71f76c0db4ff0ba822b1e88fe461a8b3
+  languageName: node
+  linkType: hard
+
 "react-csv@npm:^2.0.3":
   version: 2.0.3
   resolution: "react-csv@npm:2.0.3"
@@ -13635,6 +13666,18 @@ fsevents@^1.2.7:
   peerDependencies:
     react: ">=15"
   checksum: 9ad2d72630491f324a0f0c1dbcc3dc04d8d7cee7cb9dc9effd115fe736ba06104360a78a624170f863738d77e487d459864206a79d91d3c9663cf1dadb3b637f
+  languageName: node
+  linkType: hard
+
+"react-router-hash-link@npm:^2.4.3":
+  version: 2.4.3
+  resolution: "react-router-hash-link@npm:2.4.3"
+  dependencies:
+    prop-types: ^15.7.2
+  peerDependencies:
+    react: ">=15"
+    react-router-dom: ">=4"
+  checksum: e978c53f71954d6c6b75d3e93c336fec6ba7d281cfc388096dc2dcb257092078f33213500963544c3804daf6e6bdf8904c944ca842102b4bc2691bea98135d3b
   languageName: node
   linkType: hard
 
@@ -15651,6 +15694,7 @@ resolve@^2.0.0-next.3:
     "@types/react-dom": ^17.0.8
     "@types/react-modal": ^3.12.0
     "@types/react-router-dom": ^5.1.7
+    "@types/react-router-hash-link": ^2
     "@typescript-eslint/eslint-plugin": ^4.27.0
     "@typescript-eslint/parser": ^4.27.0
     add: ^2.0.6
@@ -15670,12 +15714,14 @@ resolve@^2.0.0-next.3:
     node-sass: ^6.0.0
     prettier: 2.3.1
     react: ^17.0.2
+    react-collapsible: ^2.8.3
     react-csv: ^2.0.3
     react-dom: ^17.0.2
     react-hook-form: ^7.9.0
     react-icons: ^4.2.0
     react-modal: ^3.14.3
     react-router-dom: ^5.2.0
+    react-router-hash-link: ^2.4.3
     react-scripts: 4.0.3
     source-map-explorer: ^2.5.2
     typescript: ^4.3.4

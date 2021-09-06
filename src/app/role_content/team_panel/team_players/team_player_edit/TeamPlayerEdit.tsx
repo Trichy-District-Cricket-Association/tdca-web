@@ -255,7 +255,7 @@ const TeamPlayerEdit: React.FC<TeamPlayerEditProps> = ({ setModalOpen, playerDoc
                             />
                         </div>
                     </div>
-                    <div className="playerEditForm__stats">
+                    {/* <div className="playerEditForm__stats">
                         <div className="playerEditForm__stats__header">
                             <h1 className="playerEditForm__stats__header--text">Statistics</h1>
                         </div>
@@ -359,6 +359,46 @@ const TeamPlayerEdit: React.FC<TeamPlayerEditProps> = ({ setModalOpen, playerDoc
                                     />
                                 </div>
                             </div>
+                        </div>
+                    </div> */}
+
+                    <div className="playerStats">
+                        <div className="playerStats__battingStats">
+                            <h1 className="playerStats__battingStats--heading">Batting Stats</h1>
+                            <label className="playerStats__battingStats--label">Matches Played</label>
+                            <p className="playerStats__battingStats--text">{playerDoc.battingStats?.numberOfMatches}</p>
+                            <label className="playerStats__battingStats--label">Innings Played</label>
+                            <p className="playerStats__battingStats--text">{playerDoc.battingStats?.numberOfInnings}</p>
+                            <label className="playerStats__battingStats--label">Total Runs</label>
+                            <p className="playerStats__battingStats--text">{playerDoc.battingStats?.totalRuns}</p>
+                            <label className="playerStats__battingStats--label">Highest Score</label>
+                            <p className="playerStats__battingStats--text">{playerDoc.battingStats?.highestScore}</p>
+                            <label className="playerStats__battingStats--label">Fifties</label>
+                            <p className="playerStats__battingStats--text">{playerDoc.battingStats?.numberOfFifties}</p>
+                            <label className="playerStats__battingStats--label">Hundreds</label>
+                            <p className="playerStats__battingStats--text">
+                                {playerDoc.battingStats?.numberOfHundreds}
+                            </p>
+                        </div>
+                        <div className="playerStats__bowlingStats">
+                            <h1 className="playerStats__bowlingStats--heading">Bowling Stats</h1>
+                            <label className="playerStats__bowlingStats--label">Overs Bowled</label>
+                            <p className="playerStats__bowlingStats--text">{playerDoc.bowlingStats?.numberOfOvers}</p>
+                            <label className="playerStats__bowlingStats--label">Maidens</label>
+                            <p className="playerStats__bowlingStats--text">{playerDoc.bowlingStats?.noOfMaidens}</p>
+                            <label className="playerStats__bowlingStats--label">Wickets Taken</label>
+                            <p className="playerStats__bowlingStats--text">{playerDoc.bowlingStats?.wicketsTaken}</p>
+                            <label className="playerStats__bowlingStats--label">Runs Given</label>
+                            <p className="playerStats__bowlingStats--text">{playerDoc.bowlingStats?.runsGiven}</p>
+
+                            <label className="playerStats__bowlingStats--label">Best Bowling</label>
+                            <p className="playerStats__bowlingStats--text">
+                                {playerDoc.bowlingStats?.bestBowling.wicketsTaken}/
+                                {playerDoc.bowlingStats?.bestBowling.runsGiven}
+                            </p>
+
+                            <label className="playerStats__bowlingStats--label">Five Wicket Haul</label>
+                            <p className="playerStats__bowlingStats--text">{playerDoc.bowlingStats?.fiveWicketHaul}</p>
                         </div>
                     </div>
 

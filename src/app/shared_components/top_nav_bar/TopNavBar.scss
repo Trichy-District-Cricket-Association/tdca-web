@@ -5,10 +5,10 @@
 }
 .nav {
     width: 100%;
-    background: #000000;
+    background: #071833;
     height: 80px;
     display: flex;
-    position: fixed;
+    position: relative;
     align-items: center;
     justify-content: space-between;
     font-family: Poppins;
@@ -53,6 +53,9 @@
         height: 100%;
         cursor: pointer;
         transition-duration: 0.2s;
+    }
+    &__headertxt {
+        text-decoration: none;
     }
 
     &__link:hover {

@@ -7,7 +7,8 @@
         color: #071833;
         cursor: pointer;
         font-size: 14px;
-        margin: 130px 20px 0px;
+        margin-top: 50px;
+        margin-left: 20px;
         padding: 0.7rem 1rem;
         text-align: center;
         text-transform: uppercase;
@@ -25,6 +26,19 @@
         grid-auto-rows: auto;
         margin-bottom: 80px;
     }
+    &__pagination {
+        text-align: center;
+        margin: 30px;
+        &--btn {
+            background-color: #071833;
+            padding: 0.5rem 2rem;
+            color: #fff;
+            font-size: 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+    }
     &__matchSelect select {
         background-color: #071833;
         color: #fff;
@@ -38,7 +52,8 @@
         cursor: pointer;
         text-transform: uppercase;
     }
-    &__dataDownload {
+    &__dataDownload,
+    &__oldMatches {
         font: bold 16px 'Poppins';
         text-decoration: none;
         background-color: #071833;
@@ -46,6 +61,7 @@
         padding: 0.6rem 0.5rem;
         border-radius: 2px;
         text-transform: uppercase;
+        margin-left: 20px;
     }
 }
 @media screen and (max-width: 1400px) {
@@ -67,7 +83,6 @@
     .matchesOverview {
         &__matchCard {
             grid-template-columns: repeat(1, 1fr);
-            justify-items: center;
         }
     }
 }

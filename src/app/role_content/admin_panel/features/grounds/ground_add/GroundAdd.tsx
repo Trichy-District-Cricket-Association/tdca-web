@@ -57,10 +57,6 @@ const GroundAdd: React.FC<GroundAddProps> = ({ setModalOpen }): JSX.Element => {
             .collection(Collections.grounds)
             .add(JSON.parse(JSON.stringify(ground)))
             .then(async (doc) => {
-                await firestore
-                    .collection('counter')
-                    .doc(Collections.grounds)
-                    .update({ count: firebase.firestore.FieldValue.increment(1) });
                 console.log(doc);
             })
             .catch((e) => {

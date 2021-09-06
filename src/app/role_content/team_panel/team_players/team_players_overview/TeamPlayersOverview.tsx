@@ -71,7 +71,7 @@ const TeamPlayersOverview = (): JSX.Element => {
                         <div className="matchesPage__header__header2"></div>
                     </div>
 
-                    <button className="teamPlayersOverview__playerAddBtn" onClick={() => setModalOpen(true)}>
+                    {/* <button className="teamPlayersOverview__playerAddBtn" onClick={() => setModalOpen(true)}>
                         + Add Player
                     </button>
 
@@ -81,7 +81,7 @@ const TeamPlayersOverview = (): JSX.Element => {
                         headers={JSON.parse(JSON.stringify(headers))}
                     >
                         Download Data
-                    </CSVLink>
+                    </CSVLink> */}
                     <div className="teamPlayersOverview__playerCard">
                         {playerDocs.length === 0 ? (
                             <h2>No items here</h2>
@@ -91,13 +91,13 @@ const TeamPlayersOverview = (): JSX.Element => {
                             ))
                         )}
                     </div>
-                    {isModalOpen ? (
+                    {/* {isModalOpen ? (
                         <TeamPlayerAdd
                             teamName={authData?.name ?? ''}
                             teamId={authData?.id ?? ''}
                             setModalOpen={setModalOpen}
                         />
-                    ) : null}
+                    ) : null} */}
                 </div>
             )}
         </div>

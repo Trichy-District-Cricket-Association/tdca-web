@@ -6,7 +6,7 @@
         color: #071833;
         cursor: pointer;
         font-size: 14px;
-        margin: 130px 20px 20px 20px;
+        margin: 50px 20px 20px 20px;
         padding: 0.7rem 1em;
         text-align: center;
         text-transform: uppercase;
@@ -25,6 +25,33 @@
         grid-auto-rows: auto;
         margin-bottom: 80px;
     }
+    &__pagination {
+        text-align: center;
+        margin: 30px;
+        &--btn {
+            background-color: #071833;
+            padding: 0.5rem 2rem;
+            color: #fff;
+            font-size: 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+    }
+    &__teamSelect select {
+        background-color: #071833;
+        color: #fff;
+        border: none;
+        font-size: 18px;
+        border-radius: 5px;
+        padding: 0.4rem 0.5rem;
+
+        margin-left: 20px;
+        font-family: 'Poppins';
+        justify-content: center;
+        cursor: pointer;
+        text-transform: uppercase;
+    }
     &__dataDownload {
         font: bold 16px 'Poppins';
         text-decoration: none;
@@ -33,6 +60,17 @@
         padding: 0.6rem 0.5rem;
         border-radius: 2px;
         text-transform: uppercase;
+    }
+    &__pointsTable {
+        font: bold 16px 'Poppins';
+        cursor: pointer;
+        border: none;
+        background-color: #071833;
+        color: #fff;
+        padding: 0.5rem 0.5rem;
+        border-radius: 2px;
+        text-transform: uppercase;
+        margin-left: 20px;
     }
 }
 @media screen and (max-width: 1599px) {

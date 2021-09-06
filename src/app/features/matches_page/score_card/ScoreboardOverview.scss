@@ -1,0 +1,197 @@
+/* general styling */
+
+.scoreboard {
+    width: 95%;
+    height: 95%;
+    position: absolute;
+    border-radius: 10px;
+    top: 20px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    background-color: #fff;
+    overflow-y: scroll;
+    font-family: 'Poppins';
+    text-align: center;
+    color: rgb(71, 71, 71);
+
+    &__status {
+        width: 100%;
+        margin: auto;
+    }
+    &__dummyStatus {
+        display: none;
+        margin: auto;
+        font-size: 20px;
+    }
+
+    &__container {
+        margin-bottom: 100px;
+    }
+    &__modalClose {
+        font-size: 30px;
+        text-align: right;
+        margin: 3px;
+    }
+    &__header,
+    &__header1 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        max-width: 1200px;
+        margin: auto;
+    }
+    &__header1 {
+        margin-bottom: 20px;
+    }
+
+    &__teamLogo {
+        display: flex;
+        width: 100%;
+
+        &--img {
+            width: 135px;
+            border-radius: 50%;
+        }
+        &--vs {
+            font-size: 30px;
+            margin: 50px;
+        }
+    }
+    &__board {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        background-color: #f8f8f8;
+
+        &__team {
+            margin: auto;
+            &--teamName {
+                font-size: 24px;
+            }
+            &--runsWickets {
+                font-size: 20px;
+            }
+        }
+    }
+    h1 {
+        margin: 15px;
+    }
+    table {
+        border: 1px solid #ccc;
+        border-collapse: collapse;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        table-layout: fixed;
+        margin-bottom: 5px;
+        caption {
+            font-size: 1.5em;
+            margin: 15px 0;
+        }
+        tr {
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            padding: 0.35em;
+        }
+        th {
+            padding: 0.625em;
+            text-align: center;
+            font-size: 0.85em;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        td {
+            padding: 0.625em;
+            text-align: center;
+        }
+    }
+}
+@media screen and (max-width: 1120px) {
+    .scoreboard {
+        &__teamLogo {
+            margin: auto;
+            &--img {
+                width: 150px;
+                border-radius: 50%;
+            }
+        }
+        &__header {
+            display: block;
+        }
+        &__status {
+            display: none;
+        }
+        &__dummyStatus {
+            display: block;
+        }
+    }
+}
+@media screen and (max-width: 600px) {
+    .scoreboard {
+        &__teamLogo {
+            display: block;
+            margin-bottom: 10px;
+            &--img {
+                width: 150px;
+                border-radius: 50%;
+            }
+            &--vs {
+                margin: 0;
+            }
+        }
+        &__board {
+            &__team {
+                margin: auto;
+                &--teamName {
+                    font-size: 20px;
+                    font-weight: 600;
+                    letter-spacing: 0.5px;
+                }
+                &--runsWickets {
+                    font-size: 20px;
+                }
+            }
+        }
+        &__status {
+            margin-bottom: 15px;
+        }
+        &__header {
+            display: block;
+        }
+        table {
+            border: 0;
+            caption {
+                font-size: 1.3em;
+            }
+            thead {
+                border: none;
+                clip: rect(0 0 0 0);
+                height: 1px;
+                margin: -1px;
+                overflow: hidden;
+                padding: 0;
+                position: absolute;
+                width: 1px;
+            }
+            tr {
+                border-bottom: 3px solid #ddd;
+                display: block;
+                margin-bottom: 0.625em;
+            }
+            td {
+                border-bottom: 1px solid #ddd;
+                display: block;
+                font-size: 0.8em;
+                text-align: right;
+                &::before {
+                    content: attr(data-label);
+                    float: left;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                }
+                &:last-child {
+                    border-bottom: 0;
+                }
+            }
+        }
+    }
+}

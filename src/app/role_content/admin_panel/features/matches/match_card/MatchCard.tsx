@@ -20,9 +20,9 @@ const MatchCard = ({ matchDoc }: MatchCardProps): JSX.Element => {
                 <div className="matchCard__container">
                     <div className="matchCard__container__cloumn1">
                         <label className="matchCard__container--label">Match Id</label>
-                        <p className="matchCard__container--text">Match Id{matchDoc.matchId}</p>
+                        <p className="matchCard__container--text">{matchDoc.matchId}</p>
                         <label className="matchCard__container--label">Division</label>
-                        <p className="matchCard__container--text">Division {matchDoc.division}</p>
+                        <p className="matchCard__container--text">{matchDoc.division}</p>
                         <label className="matchCard__container--label">Match Type</label>
                         <p className="matchCard__container--text">{matchDoc.type}</p>
                     </div>

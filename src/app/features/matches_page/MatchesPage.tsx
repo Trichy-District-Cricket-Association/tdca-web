@@ -6,7 +6,8 @@ import Match from '../../../models/Match';
 import './MatchesPage.scss';
 import LoadingComp from '../../shared_components/loading_comp/LoadingComp';
 import { usePagination } from 'use-pagination-firestore';
-const cricketBall = `${process.env.PUBLIC_URL}/assets/images/cricketBall.png`;
+import MatchCard from './match_card/MatchCard';
+import Footer from '../../shared_components/Footer/Footer';
 
 const divisionTypes = [1, 2, 3, 4, 5];
 const matchTypes = ['League Match', 'School Match', 'Knockout Match'];
@@ -37,6 +38,9 @@ const MatchesPage: React.FC<void> = (): JSX.Element => {
     };
     //  Callback to change the query based on the selected type.
     useEffect(() => {
+        if (selectedMatchType == 'Select Type') {
+            window.location.reload();
+        }
         if (selectedMatchType) {
             let newQuery = baseMatchQuery.where('type', '==', selectedMatchType);
             if (selectedDivisionType) {
@@ -61,13 +65,13 @@ const MatchesPage: React.FC<void> = (): JSX.Element => {
                         </div>
                         <div className="matchesPage__header__header2"></div>
                     </div>
-                    <div className="matchesOverview__matchSelect">
+                    <div className="matchesPage__matchSelect">
                         <select
-                            className="matchesOverview__matchTypeSelect--btn"
+                            className="matchesPage__matchTypeSelect--btn"
                             value={selectedMatchType}
                             onChange={switchMatchType}
                         >
-                            <option selected>Select Type</option>
+                            <option>Select Type</option>
                             {matchTypes.map((matchType) => (
                                 <option key={matchType} value={matchType}>
                                     {matchType}
@@ -76,7 +80,7 @@ const MatchesPage: React.FC<void> = (): JSX.Element => {
                         </select>
                         {selectedMatchType == 'League Match' ? (
                             <select
-                                className="matchesOverview__matchDivisionSelect--btn"
+                                className="matchesPage__matchDivisionSelect--btn"
                                 value={selectedDivisionType}
                                 onChange={switchDivisionType}
                             >
@@ -90,7 +94,7 @@ const MatchesPage: React.FC<void> = (): JSX.Element => {
                         ) : null}
                         {selectedMatchType == 'School Match' ? (
                             <select
-                                className="matchesOverview__matchSchoolSelect--btn"
+                                className="matchesPage__matchSchoolSelect--btn"
                                 value={selectedSchoolMatchType}
                                 onChange={switchSchoolMatchType}
                             >
@@ -107,42 +111,12 @@ const MatchesPage: React.FC<void> = (): JSX.Element => {
                         {docs
                             .map((doc) => Match.fromFirestore(doc))
                             ?.map((matchDoc) => (
-                                <div className="matchCard" key={matchDoc.docId + 'card'}>
-                                    <div className="matchCard__header">
-                                        <p className="matchCard__header--title">{matchDoc.teamA?.teamName}</p>
-                                        <img src={cricketBall} alt="vs" className="matchCard__header--img" />
-                                        <p className="matchCard__header--title">{matchDoc.teamB?.teamName}</p>
-                                    </div>
-                                    <div className="matchCard__container">
-                                        <div className="matchCard__container__cloumn1">
-                                            <label className="matchCard__container--label">Division</label>
-                                            <p className="matchCard__container--text">Division {matchDoc.division}</p>
-                                            <label className="matchCard__container--label">Match Type</label>
-                                            <p className="matchCard__container--text">{matchDoc.type}</p>
-                                            <label className="matchCard__container--label">Date</label>
-                                            <p className="matchCard__container--text">
-                                                {matchDoc.date?.toISOString().substr(0, 10)}
-                                            </p>
-                                        </div>
-                                        <div className="matchCard__container__column2">
-                                            <label className="matchCard__container--label">Venue</label>
-                                            <p className="matchCard__container--text">{matchDoc.venue?.groundName}</p>
-
-                                            <label className="matchCard__container--label">Time</label>
-                                            <p className="matchCard__container--text">
-                                                {matchDoc.date?.toISOString().substr(11, 8)}
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <p className="matchCard__container--status">{matchDoc.status}</p>
-                                    </div>
-                                </div>
+                                <MatchCard matchDoc={matchDoc} key={matchDoc.matchId} />
                             ))}
                     </div>
 
                     <div className="matchesPage__matchPageSelect">
-                        {isStart || docs.length < 10 ? null : (
+                        {isStart ? null : (
                             <button className="matchesPage__matchPageSelect--btn" onClick={() => getPrev()}>
                                 Previous
                             </button>
@@ -153,6 +127,7 @@ const MatchesPage: React.FC<void> = (): JSX.Element => {
                             </button>
                         )}
                     </div>
+                    <Footer />
                 </div>
             )}
         </div>

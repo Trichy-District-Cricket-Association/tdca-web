@@ -12,7 +12,7 @@ const LandingMatches: React.FC<any> = (): JSX.Element => {
         const unsub = firestore
             .collection(Collections.matches)
             .orderBy('date', 'desc')
-            .limit(5)
+            .limit(4)
             .onSnapshot((snapshot) => {
                 if (snapshot.docs?.length === 0) setMatchDocs([]);
                 if (snapshot.docs?.length > 0) {
@@ -27,6 +27,7 @@ const LandingMatches: React.FC<any> = (): JSX.Element => {
             <div className="matches__header">
                 <h1 className="matches__header--text">Recent Matches</h1>
             </div>
+
             {matchDocs == undefined ? null : (
                 <div className="matches__matchCards">
                     {matchDocs?.map((matchDoc) => (
@@ -38,8 +39,6 @@ const LandingMatches: React.FC<any> = (): JSX.Element => {
                             </div>
                             <div className="matchCard__container">
                                 <div className="matchCard__container__cloumn1">
-                                    <label className="matchCard__container--label">Division</label>
-                                    <p className="matchCard__container--text">Division {matchDoc.division}</p>
                                     <label className="matchCard__container--label">Match Type</label>
                                     <p className="matchCard__container--text">{matchDoc.type}</p>
                                     <label className="matchCard__container--label">Date</label>
