@@ -71,7 +71,7 @@ const MatchesPage: React.FC<void> = (): JSX.Element => {
                             value={selectedMatchType}
                             onChange={switchMatchType}
                         >
-                            <option selected>Select Type</option>
+                            <option>Select Type</option>
                             {matchTypes.map((matchType) => (
                                 <option key={matchType} value={matchType}>
                                     {matchType}

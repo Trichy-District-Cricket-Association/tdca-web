@@ -18,7 +18,7 @@ const LandingHeader: React.FC<any> = (): JSX.Element => {
                         trichy district and affiliated to the TamilNadu Cricket Association.
                     </p>
                     <p className="header__container--subText">
-                        IT IS FAR MORE THAN A GAME, THIS CRICKET- NEVILLE CARDUS h{' '}
+                        IT IS FAR MORE THAN A GAME, THIS CRICKET- NEVILLE CARDUS
                     </p>
 
                     <HashLink

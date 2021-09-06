@@ -6,17 +6,15 @@ import PlayersView from '../players_view/PlayersView';
 
 type TeamCardProps = {
     teamDoc: Team;
-    key: string;
 };
 
-const TeamCard: React.FC<TeamCardProps> = ({ teamDoc, key }): JSX.Element => {
+const TeamCard: React.FC<TeamCardProps> = ({ teamDoc }): JSX.Element => {
     const [isModalOpen, setModalOpen] = useState(false);
     return (
         <div>
             <div
                 className="teamCard"
                 // style={{ backgroundColor: `${teamDoc.teamColor}` }}
-                key={key}
                 onClick={() => setModalOpen(true)}
             >
                 <div className="teamCard__container">

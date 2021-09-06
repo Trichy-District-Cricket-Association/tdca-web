@@ -39,8 +39,6 @@ const LandingMatches: React.FC<any> = (): JSX.Element => {
                             </div>
                             <div className="matchCard__container">
                                 <div className="matchCard__container__cloumn1">
-                                    <label className="matchCard__container--label">Division</label>
-                                    <p className="matchCard__container--text">Division {matchDoc.division}</p>
                                     <label className="matchCard__container--label">Match Type</label>
                                     <p className="matchCard__container--text">{matchDoc.type}</p>
                                     <label className="matchCard__container--label">Date</label>

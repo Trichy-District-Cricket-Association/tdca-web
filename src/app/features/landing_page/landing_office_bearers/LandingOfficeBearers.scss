@@ -10,9 +10,9 @@
         margin: 30px 20px;
     }
     &__container {
-        margin: 0 80px;
+        margin: 0 100px;
         .officeBearer {
-            background: #191c29;
+            background: #191c29d3;
             width: 380px;
             height: 470px;
             position: relative;
@@ -52,7 +52,7 @@
                 width: 104%;
                 height: 102%;
                 border-radius: 8px;
-                background-image: linear-gradient(var(--rotate), #5ddcff, #3c67e3 43%, #4e00c2);
+                background-image: linear-gradient(var(--rotate), #5d6dff, #213a83 43%, #350185);
                 position: absolute;
                 z-index: -1;
                 top: -1%;
@@ -71,7 +71,7 @@
                 margin: 0 auto;
                 transform: scale(0.8);
                 filter: blur(calc(var(--card-height) / 16));
-                background-image: linear-gradient(var(--rotate), #5ddcff, #3c67e3 43%, #4e00c2);
+                background-image: linear-gradient(var(--rotate), #5d6dff, #213a83 43%, #350185);
                 opacity: 1;
                 transition: opacity 0.5s;
                 animation: spin 2.5s linear infinite;
