@@ -5,11 +5,13 @@ import { firestore } from '../../../../../../firebase';
 import { Collections } from '../../../../../../enums/collection';
 import Player from '../../../../../../models/Player';
 import InputBox from '../../../shared_components/input_box/InputBox';
+import { PDFDownloadLink } from '@react-pdf/renderer';
 import './PlayerEdit.scss';
 import useStorage from '../../../../../../hooks/useStorage';
 import SelectInputBox from '../../../shared_components/select_input_box/SelectInputBox';
 import Team from '../../../../../../models/Team';
 import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
+import PrintPlayer from '../PrintPlayer';
 const defaultAvatar = `${process.env.PUBLIC_URL}/assets/images/defaultAvatar.jpg`;
 
 type PlayerEditProps = {
@@ -127,6 +129,7 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
                 .then(() => setModalOpen(false));
         }
     };
+
     return (
         <Modal
             className="playerEdit"
@@ -139,17 +142,18 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
                 <LoadingComp />
             ) : selectable ? (
                 <form className="playerEditForm" onSubmit={submitForm}>
+                    <div>
+                        <PDFDownloadLink document={<PrintPlayer player={player} />} fileName="example.pdf">
+                            {({ loading }) => (loading ? 'Loading document...' : 'Download now!')}
+                        </PDFDownloadLink>
+                    </div>
                     <div className="playerEditForm__general">
                         {/* error message */}
                         {<p>{error}</p>}
                         <div>
                             <img
                                 src={
-                                    playerDoc.avatarUrl == null
-                                        ? defaultAvatar
-                                        : avatarUrl
-                                        ? avatarUrl
-                                        : playerDoc.avatarUrl
+                                    player.avatarUrl == null ? defaultAvatar : avatarUrl ? avatarUrl : player.avatarUrl
                                 }
                                 alt="profile"
                                 className="playerEditForm__general--avatar"
@@ -179,14 +183,14 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
                                 title="player Name"
                                 name="playerName"
                                 type="text"
-                                value={playerDoc.playerName}
+                                value={player.playerName}
                                 textHandler={handleInputForm}
                             />
                             <InputBox
                                 title="player Id"
                                 name="playerId"
                                 type="text"
-                                value={playerDoc.playerId}
+                                value={player.playerId}
                                 textHandler={handleInputForm}
                             />
 
@@ -194,49 +198,49 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
                                 title="Email Id"
                                 name="emailId"
                                 type="email"
-                                value={playerDoc.emailId}
+                                value={player.emailId}
                                 textHandler={handleInputForm}
                             />
                             <InputBox
                                 title="Father's Name"
                                 name="fatherName"
                                 type="text"
-                                value={playerDoc.fatherName}
+                                value={player.fatherName}
                                 textHandler={handleInputForm}
                             />
                             <InputBox
                                 title="Date of Birth"
                                 name="dateOfBirth"
                                 type="date"
-                                value={playerDoc.dateOfBirth?.toISOString().substr(0, 10)}
+                                value={player.dateOfBirth?.toISOString().substr(0, 10)}
                                 textHandler={handleInputForm}
                             />
                             <SelectInputBox
                                 title="Team Name"
                                 name="teamName"
                                 options={selectable.teams.map((team) => team.teamName)}
-                                value={playerDoc.teamName}
+                                value={player.teamName}
                                 textHandler={handleSelectForm}
                             />
                             <InputBox
                                 title="Primary Contact"
                                 name="primaryContact"
                                 type="text"
-                                value={playerDoc.primaryContact}
+                                value={player.primaryContact}
                                 textHandler={handleInputForm}
                             />
                             <InputBox
                                 title="Date of Registeration"
                                 name="dateOfRegisteration"
                                 type="date"
-                                value={playerDoc.dateOfRegisteration?.toISOString().substr(0, 10)}
+                                value={player.dateOfRegisteration?.toISOString().substr(0, 10)}
                                 textHandler={handleInputForm}
                             />
                             <SelectInputBox
                                 title="Registeration Fee"
                                 name="registerationFee"
                                 options={['Not Paid', 'Paid']}
-                                value={playerDoc.registerationFee}
+                                value={player.registerationFee}
                                 textHandler={handleSelectForm}
                             />
                         </div>
@@ -250,42 +254,42 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
                                 title="Aadhar Number"
                                 name="aadharNumber"
                                 type="text"
-                                value={playerDoc.aadharNumber}
+                                value={player.aadharNumber}
                                 textHandler={handleInputForm}
                             />
                             <InputBox
                                 title="Voter Id"
                                 name="voterId"
                                 type="text"
-                                value={playerDoc.voterId}
+                                value={player.voterId}
                                 textHandler={handleInputForm}
                             />
                             <InputBox
                                 title="Ration Card Number"
                                 name="rationCardNumber"
                                 type="text"
-                                value={playerDoc.rationCardNumber}
+                                value={player.rationCardNumber}
                                 textHandler={handleInputForm}
                             />
                             <InputBox
                                 title="Driving License"
                                 name="drivingLicense"
                                 type="text"
-                                value={playerDoc.drivingLicense}
+                                value={player.drivingLicense}
                                 textHandler={handleInputForm}
                             />
                             <InputBox
                                 title="Pan Card Number"
                                 name="panCardNumber"
                                 type="text"
-                                value={playerDoc.panCardNumber}
+                                value={player.panCardNumber}
                                 textHandler={handleInputForm}
                             />
                             <InputBox
                                 title="Passport"
                                 name="passport"
                                 type="text"
-                                value={playerDoc.passport}
+                                value={player.passport}
                                 textHandler={handleInputForm}
                             />
                         </div>
@@ -301,42 +305,42 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
                                     title="Number Of Matches"
                                     name="battingStats_numberOfMatches"
                                     type="number"
-                                    value={playerDoc.battingStats?.numberOfMatches}
+                                    value={player.battingStats?.numberOfMatches}
                                     textHandler={handleInputForm}
                                 />
                                 <InputBox
                                     title="Number Of Innings"
                                     name="battingStats_numberOfInnings"
                                     type="number"
-                                    value={playerDoc.battingStats?.numberOfInnings}
+                                    value={player.battingStats?.numberOfInnings}
                                     textHandler={handleInputForm}
                                 />
                                 <InputBox
                                     title="Total Runs"
                                     name="battingStats_totalRuns"
                                     type="number"
-                                    value={playerDoc.battingStats?.totalRuns}
+                                    value={player.battingStats?.totalRuns}
                                     textHandler={handleInputForm}
                                 />
                                 <InputBox
                                     title="Highest Score (HS)"
                                     name="battingStats_highestRuns"
                                     type="number"
-                                    value={playerDoc.battingStats?.highestScore}
+                                    value={player.battingStats?.highestScore}
                                     textHandler={handleInputForm}
                                 />
                                 <InputBox
                                     title="Number Of Fifties"
                                     name="battingStats_numberOfFifties"
                                     type="number"
-                                    value={playerDoc.battingStats?.numberOfFifties}
+                                    value={player.battingStats?.numberOfFifties}
                                     textHandler={handleInputForm}
                                 />
                                 <InputBox
                                     title="Number Of Hundreds"
                                     name="battingStats_numberOfHundreds"
                                     type="number"
-                                    value={playerDoc.battingStats?.numberOfHundreds}
+                                    value={player.battingStats?.numberOfHundreds}
                                     textHandler={handleInputForm}
                                 />
                             </div>
@@ -347,49 +351,49 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
                                         title="Number Of Overs"
                                         name="bowlingStats_numberOfOvers"
                                         type="number"
-                                        value={playerDoc.bowlingStats?.numberOfOvers}
+                                        value={player.bowlingStats?.numberOfOvers}
                                         textHandler={handleInputForm}
                                     />
                                     <InputBox
                                         title="Number Of Maidens"
                                         name="bowlingStats_noOfMaidens"
                                         type="number"
-                                        value={playerDoc.bowlingStats?.noOfMaidens}
+                                        value={player.bowlingStats?.noOfMaidens}
                                         textHandler={handleInputForm}
                                     />
                                     <InputBox
                                         title="Runs Given"
                                         name="bowlingStats_runsGiven"
                                         type="number"
-                                        value={playerDoc.bowlingStats?.runsGiven}
+                                        value={player.bowlingStats?.runsGiven}
                                         textHandler={handleInputForm}
                                     />
                                     <InputBox
                                         title="Wickets Taken"
                                         name="bowlingStats_wicketsTaken"
                                         type="number"
-                                        value={playerDoc.bowlingStats?.wicketsTaken}
+                                        value={player.bowlingStats?.wicketsTaken}
                                         textHandler={handleInputForm}
                                     />
                                     <InputBox
                                         title="Best Bowling / Runs Given"
                                         name="bowlingStats_bestBowling_runsGiven"
                                         type="number"
-                                        value={playerDoc.bowlingStats?.bestBowling.runsGiven}
+                                        value={player.bowlingStats?.bestBowling.runsGiven}
                                         textHandler={handleInputForm}
                                     />
                                     <InputBox
                                         title="Best Bowling / Wickets Taken"
                                         name="bowlingStats_bestBowling_wicketsTaken"
                                         type="number"
-                                        value={playerDoc.bowlingStats?.bestBowling.wicketsTaken}
+                                        value={player.bowlingStats?.bestBowling.wicketsTaken}
                                         textHandler={handleInputForm}
                                     />
                                     <InputBox
                                         title="Five Wicket Haul"
                                         name="bowlingStats_fiveWicketHaul"
                                         type="number"
-                                        value={playerDoc.bowlingStats?.fiveWicketHaul}
+                                        value={player.bowlingStats?.fiveWicketHaul}
                                         textHandler={handleInputForm}
                                     />
                                 </div>
