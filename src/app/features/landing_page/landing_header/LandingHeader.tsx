@@ -15,7 +15,7 @@ const LandingHeader: React.FC<any> = (): JSX.Element => {
                 <div>
                     <p className="header__container--text">
                         We are the official cricket administration body with regards to any form of cricket played in
-                        trichy district and affiliated to the TamilNadu Cricket Association.
+                        Trichy district and affiliated to the TamilNadu Cricket Association.
                     </p>
                     <p className="header__container--subText">
                         IT IS FAR MORE THAN A GAME, THIS CRICKET- NEVILLE CARDUS

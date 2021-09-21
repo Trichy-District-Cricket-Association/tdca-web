@@ -8,6 +8,7 @@ import InputBox from '../../../shared_components/input_box/InputBox';
 import './ScorerEdit.scss';
 import useStorage from '../../../../../../hooks/useStorage';
 import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
+import SelectInputBox from '../../../shared_components/select_input_box/SelectInputBox';
 const defaultAvatar = `${process.env.PUBLIC_URL}/assets/images/defaultAvatar.jpg`;
 
 type ScorerEditProps = {
@@ -70,6 +71,12 @@ const ScorerEdit: React.FC<ScorerEditProps> = ({ setModalOpen, scorerDoc }): JSX
         newScorer.handleScorer({ field: fieldName, value: e.target.value });
         setScorer(newScorer);
     };
+    const handleSelectForm = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const fieldName = `${e.target.name}` as const;
+        const newScorer = new Scorer({ ...scorer });
+        newScorer.handleScorer({ field: fieldName, value: e.target.value });
+        setScorer(newScorer);
+    };
     const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         setIsLoading(true);
@@ -125,7 +132,7 @@ const ScorerEdit: React.FC<ScorerEditProps> = ({ setModalOpen, scorerDoc }): JSX
                         <div>
                             <img
                                 src={
-                                    scorerDoc.avatarUrl == null
+                                    scorer.avatarUrl == null
                                         ? defaultAvatar
                                         : avatarUrl
                                         ? avatarUrl
@@ -159,14 +166,14 @@ const ScorerEdit: React.FC<ScorerEditProps> = ({ setModalOpen, scorerDoc }): JSX
                             <InputBox
                                 title="Scorer Id"
                                 name="scorerId"
-                                value={scorerDoc.scorerId}
+                                value={scorer.scorerId}
                                 type="text"
                                 textHandler={handleForm}
                             />
                             <InputBox
                                 title="Scorer Name"
                                 name="scorerName"
-                                value={scorerDoc.scorerName}
+                                value={scorer.scorerName}
                                 type="text"
                                 textHandler={handleForm}
                             />
@@ -174,36 +181,43 @@ const ScorerEdit: React.FC<ScorerEditProps> = ({ setModalOpen, scorerDoc }): JSX
                                 title="Email Id"
                                 name="emailId"
                                 type="text"
-                                value={scorerDoc.emailId}
+                                value={scorer.emailId}
                                 textHandler={handleForm}
                             />
                             <InputBox
                                 title="Date of Birth"
                                 name="dateOfBirth"
                                 type="date"
-                                value={scorerDoc.dateOfBirth?.toISOString().substr(0, 10)}
+                                value={scorer.dateOfBirth?.toISOString().substr(0, 10)}
                                 textHandler={handleForm}
                             />
                             <InputBox
                                 title="Primary Contact"
                                 name="primaryContact"
                                 type="text"
-                                value={scorerDoc.primaryContact}
+                                value={scorer.primaryContact}
                                 textHandler={handleForm}
                             />
                             <InputBox
                                 title="Secondary Contact"
                                 name="secondaryContact"
                                 type="text"
-                                value={scorerDoc.secondaryContact}
+                                value={scorer.secondaryContact}
                                 textHandler={handleForm}
                             />
                             <InputBox
                                 title="Address"
                                 name="address"
                                 type="text"
-                                value={scorerDoc.address}
+                                value={scorer.address}
                                 textHandler={handleForm}
+                            />
+                            <SelectInputBox
+                                title="Panel"
+                                name="panel"
+                                options={['TDCA', 'TNCA']}
+                                value={scorer.panel}
+                                textHandler={handleSelectForm}
                             />
                         </div>
                     </div>
@@ -216,42 +230,42 @@ const ScorerEdit: React.FC<ScorerEditProps> = ({ setModalOpen, scorerDoc }): JSX
                                 title="Aadhar Number"
                                 name="aadharNumber"
                                 type="text"
-                                value={scorerDoc.aadharNumber}
+                                value={scorer.aadharNumber}
                                 textHandler={handleForm}
                             />
                             <InputBox
                                 title="GPay / PhonePay Number"
                                 name="payPhoneNumber"
                                 type="text"
-                                value={scorerDoc.payPhoneNumber}
+                                value={scorer.payPhoneNumber}
                                 textHandler={handleForm}
                             />
                             <InputBox
                                 title="Bank Account Number"
                                 name="bankAccountNumber"
                                 type="text"
-                                value={scorerDoc.bankAccountNumber}
+                                value={scorer.bankAccountNumber}
                                 textHandler={handleForm}
                             />
                             <InputBox
                                 title="Bank Name"
                                 name="bankName"
                                 type="text"
-                                value={scorerDoc.bankName}
+                                value={scorer.bankName}
                                 textHandler={handleForm}
                             />
                             <InputBox
                                 title="Bank Branch"
                                 name="bankBranch"
                                 type="text"
-                                value={scorerDoc.bankBranch}
+                                value={scorer.bankBranch}
                                 textHandler={handleForm}
                             />
                             <InputBox
                                 title="Bank IFSC Code"
                                 name="bankIFSC"
                                 type="text"
-                                value={scorerDoc.bankIFSC}
+                                value={scorer.bankIFSC}
                                 textHandler={handleForm}
                             />
                         </div>
@@ -266,98 +280,98 @@ const ScorerEdit: React.FC<ScorerEditProps> = ({ setModalOpen, scorerDoc }): JSX
                                 name="totalMatches"
                                 type="number"
                                 textHandler={handleForm}
-                                value={scorerDoc.totalMatches}
+                                value={scorer.totalMatches}
                             />
                             <InputBox
                                 title="Division 1"
                                 name="divisionMatches_one"
                                 type="number"
                                 textHandler={handleForm}
-                                value={scorerDoc.divisionMatches?.one}
+                                value={scorer.divisionMatches?.one}
                             />
                             <InputBox
                                 title="Division 2"
                                 name="divisionMatches_two"
                                 type="number"
                                 textHandler={handleForm}
-                                value={scorerDoc.divisionMatches?.two}
+                                value={scorer.divisionMatches?.two}
                             />
                             <InputBox
                                 title="Division 3"
                                 name="divisionMatches_three"
                                 type="number"
                                 textHandler={handleForm}
-                                value={scorerDoc.divisionMatches?.three}
+                                value={scorer.divisionMatches?.three}
                             />
                             <InputBox
                                 title="Division 4"
                                 name="divisionMatches_four"
                                 type="number"
                                 textHandler={handleForm}
-                                value={scorerDoc.divisionMatches?.four}
+                                value={scorer.divisionMatches?.four}
                             />
                             <InputBox
                                 title="Division 5"
                                 name="divisionMatches_five"
                                 type="number"
                                 textHandler={handleForm}
-                                value={scorerDoc.divisionMatches?.five}
+                                value={scorer.divisionMatches?.five}
                             />
                             <InputBox
                                 title="Inter District Match"
                                 name="typeMatches_interDistrictMatch"
                                 type="number"
                                 textHandler={handleForm}
-                                value={scorerDoc.typeMatches?.interDistrictMatch}
+                                value={scorer.typeMatches?.interDistrictMatch}
                             />
                             <InputBox
                                 title="KnockOut Matches"
                                 name="typeMatches_knockoutMatch"
                                 type="number"
                                 textHandler={handleForm}
-                                value={scorerDoc.typeMatches?.knockoutMatch}
+                                value={scorer.typeMatches?.knockoutMatch}
                             />
                             <InputBox
                                 title="League Matches"
                                 name="typeMatches_leagueMatch"
                                 type="number"
                                 textHandler={handleForm}
-                                value={scorerDoc.typeMatches?.leagueMatch}
+                                value={scorer.typeMatches?.leagueMatch}
                             />
                             <InputBox
                                 title="School Matches"
                                 name="typeMatches_schoolMatch"
                                 type="number"
                                 textHandler={handleForm}
-                                value={scorerDoc.typeMatches?.schoolMatch}
+                                value={scorer.typeMatches?.schoolMatch}
                             />
                             <InputBox
                                 title="TNCA Matches"
                                 name="typeMatches_tncaMatch"
                                 type="number"
                                 textHandler={handleForm}
-                                value={scorerDoc.typeMatches?.tncaMatch}
+                                value={scorer.typeMatches?.tncaMatch}
                             />
                             <InputBox
                                 title="Combined District Matches"
                                 name="typeMatches_combinedDistrictMatch"
                                 type="number"
                                 textHandler={handleForm}
-                                value={scorerDoc.typeMatches?.combinedDistrictMatch}
+                                value={scorer.typeMatches?.combinedDistrictMatch}
                             />
                             <InputBox
                                 title="InterDistrict Matches"
                                 name="typeMatches_interDistrictMatch"
                                 type="number"
                                 textHandler={handleForm}
-                                value={scorerDoc.typeMatches?.interDistrictMatch}
+                                value={scorer.typeMatches?.interDistrictMatch}
                             />
                             <InputBox
                                 title="Private Matches"
                                 name="typeMatches_privateMatch"
                                 type="number"
                                 textHandler={handleForm}
-                                value={scorerDoc.typeMatches?.privateMatch}
+                                value={scorer.typeMatches?.privateMatch}
                             />
                         </div>
                     </div>

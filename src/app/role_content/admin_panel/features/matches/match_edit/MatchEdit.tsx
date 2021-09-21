@@ -201,14 +201,14 @@ const MatchEdit: React.FC<MatchEditProps> = ({ setModalOpen, matchDoc }): JSX.El
                                 title="Match Id"
                                 name="matchId"
                                 type="text"
-                                value={matchDoc.matchId}
+                                value={match.matchId}
                                 textHandler={handleInputForm}
                             />
                             <SelectInputBox
                                 title="Match Type"
                                 name="type"
                                 options={['League Match', 'School Match', 'Knockout Match']}
-                                value={matchDoc.type}
+                                value={match.type}
                                 textHandler={handleSelectForm}
                             />
                             {match.type == 'League Match' ? (
@@ -217,7 +217,7 @@ const MatchEdit: React.FC<MatchEditProps> = ({ setModalOpen, matchDoc }): JSX.El
                                     name="division"
                                     options={[1, 2, 3, 4, 5]}
                                     textHandler={handleSelectForm}
-                                    value={matchDoc.division}
+                                    value={match.division}
                                 />
                             ) : null}
                             {match.type == 'School Match' ? (
@@ -225,7 +225,7 @@ const MatchEdit: React.FC<MatchEditProps> = ({ setModalOpen, matchDoc }): JSX.El
                                     title="School Match Type"
                                     name="schoolMatchType"
                                     options={['Below 8th Std', 'Below 10th Std', 'Below 12th Std']}
-                                    value={matchDoc.schoolMatchType}
+                                    value={match.schoolMatchType}
                                     textHandler={handleSelectForm}
                                 />
                             ) : null}
@@ -233,34 +233,34 @@ const MatchEdit: React.FC<MatchEditProps> = ({ setModalOpen, matchDoc }): JSX.El
                                 title="Team A"
                                 name="teamA_teamName"
                                 options={selectable.teams.map((team) => team.teamName)}
-                                value={matchDoc.teamA?.teamName}
+                                value={match.teamA?.teamName}
                                 textHandler={handleSelectForm}
                             />
                             <SelectInputBox
                                 title="Team B"
                                 name="teamB_teamName"
                                 options={selectable.teams.map((team) => team.teamName)}
-                                value={matchDoc.teamB?.teamName}
+                                value={match.teamB?.teamName}
                                 textHandler={handleSelectForm}
                             />
                             <SelectInputBox
                                 title="Umpire I"
                                 name="umpireA_umpireName"
                                 options={selectable.umpires.map((umpire) => umpire.umpireName)}
-                                value={matchDoc.umpireA?.umpireName}
+                                value={match.umpireA?.umpireName}
                                 textHandler={handleSelectForm}
                             />
                             <SelectInputBox
                                 title="umpire II"
                                 name="umpireB_umpireName"
                                 options={selectable.umpires.map((umpire) => umpire.umpireName)}
-                                value={matchDoc.umpireB?.umpireName}
+                                value={match.umpireB?.umpireName}
                                 textHandler={handleSelectForm}
                             />
                             <SelectInputBox
                                 title="Scorer"
                                 name="scorer_scorerName"
-                                value={matchDoc.scorer?.scorerName}
+                                value={match.scorer?.scorerName}
                                 options={selectable.scorers.map((scorer) => scorer.scorerName)}
                                 textHandler={handleSelectForm}
                             />
@@ -268,21 +268,21 @@ const MatchEdit: React.FC<MatchEditProps> = ({ setModalOpen, matchDoc }): JSX.El
                                 title="Venue"
                                 name="venue"
                                 options={selectable.grounds.map((ground) => ground.groundName)}
-                                value={matchDoc.venue}
+                                value={match.venue}
                                 textHandler={handleSelectForm}
                             />
                             <InputBox
                                 title="Date of Match"
                                 name="date"
                                 type="datetime-local"
-                                value={matchDoc.date?.toISOString().substr(0, 16)}
+                                value={match.date?.toISOString().substr(0, 16)}
                                 textHandler={handleInputForm}
                             />
                             <InputBox
                                 title="Status"
                                 name="status"
                                 type="text"
-                                value={matchDoc.status}
+                                value={match.status}
                                 textHandler={handleInputForm}
                             />
                         </div>
@@ -296,21 +296,21 @@ const MatchEdit: React.FC<MatchEditProps> = ({ setModalOpen, matchDoc }): JSX.El
                                     title="Umpire I Fee Status"
                                     name="umpireA_umpireFeeStatus"
                                     options={['Not Paid', 'Paid']}
-                                    value={matchDoc.umpireA?.umpireFeeStatus}
+                                    value={match.umpireA?.umpireFeeStatus}
                                     textHandler={handleSelectForm}
                                 />
                                 <SelectInputBox
                                     title="Umpire II Fee Status"
-                                    name="umpireFeeStatus"
+                                    name="umpireB_umpireFeeStatus"
                                     options={['Not Paid', 'Paid']}
-                                    value={matchDoc.umpireB?.umpireFeeStatus}
+                                    value={match.umpireB?.umpireFeeStatus}
                                     textHandler={handleSelectForm}
                                 />
                                 <SelectInputBox
                                     title="Scorer Fee Status"
                                     name="scorer_scorerFeeStatus"
                                     options={['Not Paid', 'Paid']}
-                                    value={matchDoc.scorer?.scorerFeeStatus}
+                                    value={match.scorer?.scorerFeeStatus}
                                     textHandler={handleSelectForm}
                                 />
                             </div>

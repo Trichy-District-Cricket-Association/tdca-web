@@ -85,27 +85,32 @@ const TeamAdd: React.FC<TeamAddProps> = ({ setModalOpen }): JSX.Element => {
             })
             .catch((e) => {
                 console.log(e);
-            });
-
-        await dummyAuth.createUserWithEmailAndPassword(user.email, user.password).then(async () => {
-            await dummyFirestore
-                .collection(Collections.users)
-                .doc(dummyAuth.currentUser?.uid)
-                .set(
-                    JSON.parse(
-                        JSON.stringify(
-                            new User({
-                                email: user.email,
-                                id: team.teamId,
-                                role: UserRoles.team,
-                                name: team.teamName,
-                            }),
-                        ),
-                    ),
-                )
-                .then(async () => await dummyAuth.signOut())
-                .finally(() => setModalOpen(false));
-        });
+            })
+            .then(
+                async () =>
+                    await dummyAuth.createUserWithEmailAndPassword(user.email, user.password).then(async () => {
+                        await dummyFirestore
+                            .collection(Collections.users)
+                            .doc(dummyAuth.currentUser?.uid)
+                            .set(
+                                JSON.parse(
+                                    JSON.stringify(
+                                        new User({
+                                            email: user.email,
+                                            id: team.teamId,
+                                            role: UserRoles.team,
+                                            name: team.teamName,
+                                        }),
+                                    ),
+                                ),
+                            )
+                            .catch((e) => {
+                                console.log(e);
+                            })
+                            .then(async () => await dummyAuth.signOut())
+                            .finally(() => setModalOpen(false));
+                    }),
+            );
     };
 
     return (
