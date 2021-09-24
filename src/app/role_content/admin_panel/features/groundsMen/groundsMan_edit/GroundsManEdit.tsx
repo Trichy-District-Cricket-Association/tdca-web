@@ -113,8 +113,6 @@ const GroundsManEdit: React.FC<GroundsManEditProps> = ({ setModalOpen, groundsMa
             ) : (
                 <form className="groundsManEditForm" onSubmit={submitForm}>
                     <div className="groundsManEditForm__general">
-                        {/* error message */}
-                        {<p>{error}</p>}
                         <div>
                             <img
                                 src={
@@ -166,7 +164,7 @@ const GroundsManEdit: React.FC<GroundsManEditProps> = ({ setModalOpen, groundsMa
                             <InputBox
                                 title="Email Id"
                                 name="emailId"
-                                type="text"
+                                type="email"
                                 value={groundsManDoc.emailId}
                                 textHandler={handleForm}
                             />
@@ -181,13 +179,13 @@ const GroundsManEdit: React.FC<GroundsManEditProps> = ({ setModalOpen, groundsMa
                                 title="Primary Contact"
                                 name="primaryContact"
                                 value={groundsManDoc.primaryContact}
-                                type="text"
+                                type="number"
                                 textHandler={handleForm}
                             />
                             <InputBox
                                 title="Secondary Contact"
                                 name="secondaryContact"
-                                type="text"
+                                type="number"
                                 value={groundsManDoc.secondaryContact}
                                 textHandler={handleForm}
                             />
@@ -208,21 +206,21 @@ const GroundsManEdit: React.FC<GroundsManEditProps> = ({ setModalOpen, groundsMa
                             <InputBox
                                 title="Aadhar Number"
                                 name="aadharNumber"
-                                type="text"
+                                type="number"
                                 value={groundsManDoc.aadharNumber}
                                 textHandler={handleForm}
                             />
                             <InputBox
                                 title="GPay / PhonePay Number"
                                 name="payPhoneNumber"
-                                type="text"
+                                type="number"
                                 value={groundsManDoc.payPhoneNumber}
                                 textHandler={handleForm}
                             />
                             <InputBox
                                 title="Bank Account Number"
                                 name="bankAccountNumber"
-                                type="text"
+                                type="number"
                                 value={groundsManDoc.bankAccountNumber}
                                 textHandler={handleForm}
                             />

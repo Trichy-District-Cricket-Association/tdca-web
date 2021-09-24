@@ -249,7 +249,7 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
                             <InputBox
                                 title="Primary Contact"
                                 name="primaryContact"
-                                type="text"
+                                type="number"
                                 value={player.primaryContact}
                                 textHandler={handleInputForm}
                             />
@@ -277,7 +277,7 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
                             <InputBox
                                 title="Aadhar Number"
                                 name="aadharNumber"
-                                type="text"
+                                type="number"
                                 value={player.aadharNumber}
                                 textHandler={handleInputForm}
                             />

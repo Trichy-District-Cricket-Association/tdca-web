@@ -150,18 +150,18 @@ const ScorerAdd: React.FC<ScorerAddProps> = ({ setModalOpen }): JSX.Element => {
                         <div className="scorerAddForm__general--input">
                             <InputBox title="Scorer Id" name="scorerId" type="text" textHandler={handleForm} />
                             <InputBox title="Scorer Name" name="scorerName" type="text" textHandler={handleForm} />
-                            <InputBox title="Email Id" name="emailId" type="text" textHandler={handleForm} />
+                            <InputBox title="Email Id" name="emailId" type="email" textHandler={handleForm} />
                             <InputBox title="Date of Birth" name="dateOfBirth" type="date" textHandler={handleForm} />
                             <InputBox
                                 title="Primary Contact"
                                 name="primaryContact"
-                                type="text"
+                                type="number"
                                 textHandler={handleForm}
                             />
                             <InputBox
                                 title="Secondary Contact"
                                 name="secondaryContact"
-                                type="text"
+                                type="number"
                                 textHandler={handleForm}
                             />
                             <InputBox title="Address" name="address" type="text" textHandler={handleForm} />
@@ -180,13 +180,13 @@ const ScorerAdd: React.FC<ScorerAddProps> = ({ setModalOpen }): JSX.Element => {
                             <InputBox
                                 title="GPay / PhonePay Number"
                                 name="payPhoneNumber"
-                                type="text"
+                                type="number"
                                 textHandler={handleForm}
                             />
                             <InputBox
                                 title="Bank Account Number"
                                 name="bankAccountNumber"
-                                type="text"
+                                type="number"
                                 textHandler={handleForm}
                             />
                             <InputBox title="Bank Name" name="bankName" type="text" textHandler={handleForm} />

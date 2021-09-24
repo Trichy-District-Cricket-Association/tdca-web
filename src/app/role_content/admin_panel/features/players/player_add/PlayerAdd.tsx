@@ -161,7 +161,7 @@ const PlayerAdd: React.FC<PlayerAddProps> = ({ setModalOpen }): JSX.Element => {
                             <InputBox
                                 title="Primary Contact"
                                 name="primaryContact"
-                                type="text"
+                                type="number"
                                 textHandler={handleInputForm}
                             />
                             <InputBox
@@ -184,7 +184,7 @@ const PlayerAdd: React.FC<PlayerAddProps> = ({ setModalOpen }): JSX.Element => {
                             <InputBox
                                 title="Aadhar Number"
                                 name="aadharNumber"
-                                type="text"
+                                type="number"
                                 textHandler={handleInputForm}
                             />
                             <InputBox title="Voter Id" name="voterId" type="text" textHandler={handleInputForm} />

@@ -151,18 +151,21 @@ const UmpireEdit: React.FC<UmpireEditProps> = ({ setModalOpen, umpireDoc }): JSX
                         </div>
                         <div className="umpireEditForm__general__header">
                             <h1 className="umpireEditForm__general__header--text">General</h1>
-                            <button className="umpireEditForm__general__header--iconBtn" onClick={deleteForm}>
-                                <i>
-                                    <MdDelete />
-                                </i>
-                            </button>
-                            <PDFDownloadLink
-                                className="umpireEditForm__general__header--dataDownload"
-                                document={<PrintUmpire umpire={umpire} />}
-                                fileName={`${umpire.umpireName}.pdf`}
-                            >
-                                {({ loading }) => (loading ? '' : <FaFileDownload />)}
-                            </PDFDownloadLink>
+
+                            <div>
+                                <button className="umpireEditForm__general__header--iconBtn" onClick={deleteForm}>
+                                    <i>
+                                        <MdDelete />
+                                    </i>
+                                </button>
+                                <PDFDownloadLink
+                                    className="umpireEditForm__general__header--dataDownload"
+                                    document={<PrintUmpire umpire={umpire} />}
+                                    fileName={`${umpire.umpireName}.pdf`}
+                                >
+                                    {({ loading }) => (loading ? '' : <FaFileDownload />)}
+                                </PDFDownloadLink>
+                            </div>
                         </div>
                         <div className="umpireEditForm__general--input">
                             <InputBox
@@ -182,7 +185,7 @@ const UmpireEdit: React.FC<UmpireEditProps> = ({ setModalOpen, umpireDoc }): JSX
                             <InputBox
                                 title="Email Id"
                                 name="emailId"
-                                type="text"
+                                type="email"
                                 value={umpire.emailId}
                                 textHandler={handleForm}
                             />
@@ -196,14 +199,14 @@ const UmpireEdit: React.FC<UmpireEditProps> = ({ setModalOpen, umpireDoc }): JSX
                             <InputBox
                                 title="Primary Contact"
                                 name="primaryContact"
-                                type="text"
+                                type="number"
                                 value={umpire.primaryContact}
                                 textHandler={handleForm}
                             />
                             <InputBox
                                 title="Secondary Contact"
                                 name="secondaryContact"
-                                type="text"
+                                type="number"
                                 value={umpire.secondaryContact}
                                 textHandler={handleForm}
                             />
@@ -231,21 +234,21 @@ const UmpireEdit: React.FC<UmpireEditProps> = ({ setModalOpen, umpireDoc }): JSX
                             <InputBox
                                 title="Aadhar Number"
                                 name="aadharNumber"
-                                type="text"
+                                type="number"
                                 value={umpire.aadharNumber}
                                 textHandler={handleForm}
                             />
                             <InputBox
                                 title="GPay / PhonePay Number"
                                 name="payPhoneNumber"
-                                type="text"
+                                type="number"
                                 value={umpire.payPhoneNumber}
                                 textHandler={handleForm}
                             />
                             <InputBox
                                 title="Bank Account Number"
                                 name="bankAccountNumber"
-                                type="text"
+                                type="number"
                                 value={umpire.bankAccountNumber}
                                 textHandler={handleForm}
                             />

@@ -126,11 +126,6 @@ const ScorerEdit: React.FC<ScorerEditProps> = ({ setModalOpen, scorerDoc }): JSX
                 <LoadingComp />
             ) : (
                 <form className="scorerEditForm" onSubmit={submitForm}>
-                    <div>
-                        <PDFDownloadLink document={<PrintScorer scorer={scorer} />} fileName="example.pdf">
-                            {({ loading }) => (loading ? '' : 'Download now!')}
-                        </PDFDownloadLink>
-                    </div>
                     <div className="scorerEditForm__general">
                         <div>
                             <img
@@ -159,18 +154,20 @@ const ScorerEdit: React.FC<ScorerEditProps> = ({ setModalOpen, scorerDoc }): JSX
                         </div>
                         <div className="scorerEditForm__general__header">
                             <h1 className="scorerEditForm__general__header--text">General</h1>
-                            <button className="scorerEditForm__general__header--iconBtn" onClick={deleteForm}>
-                                <i>
-                                    <MdDelete />
-                                </i>
-                            </button>
-                            <PDFDownloadLink
-                                className="scorerEditForm__general__header--dataDownload"
-                                document={<PrintScorer scorer={scorer} />}
-                                fileName={`${scorer.scorerName}.pdf`}
-                            >
-                                {({ loading }) => (loading ? '' : <FaFileDownload />)}
-                            </PDFDownloadLink>
+                            <div>
+                                <button className="scorerEditForm__general__header--iconBtn" onClick={deleteForm}>
+                                    <i>
+                                        <MdDelete />
+                                    </i>
+                                </button>
+                                <PDFDownloadLink
+                                    className="scorerEditForm__general__header--dataDownload"
+                                    document={<PrintScorer scorer={scorer} />}
+                                    fileName={`${scorer.scorerName}.pdf`}
+                                >
+                                    {({ loading }) => (loading ? '' : <FaFileDownload />)}
+                                </PDFDownloadLink>
+                            </div>
                         </div>
                         <div className="scorerEditForm__general--input">
                             <InputBox
@@ -190,7 +187,7 @@ const ScorerEdit: React.FC<ScorerEditProps> = ({ setModalOpen, scorerDoc }): JSX
                             <InputBox
                                 title="Email Id"
                                 name="emailId"
-                                type="text"
+                                type="email"
                                 value={scorer.emailId}
                                 textHandler={handleForm}
                             />
