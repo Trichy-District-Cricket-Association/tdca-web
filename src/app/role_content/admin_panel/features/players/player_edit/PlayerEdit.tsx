@@ -29,6 +29,7 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
             teamName: playerDoc.teamName,
             playerName: playerDoc.playerName,
             avatarUrl: playerDoc.avatarUrl,
+            pdfUrl: playerDoc.pdfUrl,
             emailId: playerDoc.emailId,
             dateOfBirth: playerDoc.dateOfBirth,
             primaryContact: playerDoc.primaryContact,
@@ -107,6 +108,9 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
         newPlayer.handlePlayer({ field: fieldName, value: e.target.value });
         setPlayer(newPlayer);
     };
+    {
+        console.log(playerDoc.pdfUrl);
+    }
     const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         setIsLoading(true);
@@ -116,6 +120,12 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
         }
         if (avatarUrl) {
             player.setAvatar = avatarUrl;
+        }
+        if (playerDoc.pdfUrl) {
+            player.setPdf = playerDoc.pdfUrl;
+        }
+        if (pdfUrl) {
+            player.setPdf = pdfUrl;
         }
         await firestore
             .collection(Collections.players)
@@ -310,11 +320,15 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
                                 <div className="upload__btnWrapper">
                                     <input type="file" name="pdfUrl" title="Upload Aadhar" onChange={handlePdfChange} />
                                     <button className="upload--aadharBtn">
-                                        {pdfUrl ? 'Uploaded' : 'Upload Aadhar'}
+                                        {player.pdfUrl || pdfUrl ? 'Uploaded' : 'Upload Aadhar'}
                                     </button>
                                 </div>
-                                {pdfUrl ? (
-                                    <a className="upload--view" href={pdfUrl.trim()} target="_blank" rel="noreferrer">
+                                {player.pdfUrl ? (
+                                    <a className="upload--view" href={player.pdfUrl} target="_blank" rel="noreferrer">
+                                        Click to View
+                                    </a>
+                                ) : pdfUrl ? (
+                                    <a className="upload--view" href={pdfUrl} target="_blank" rel="noreferrer">
                                         Click to View
                                     </a>
                                 ) : null}

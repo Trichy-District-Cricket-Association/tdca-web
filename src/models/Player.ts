@@ -179,6 +179,7 @@ export default class Player {
             teamId: doc.data()?.teamId,
             playerName: doc.data()?.playerName,
             avatarUrl: doc.data()?.avatarUrl,
+            pdfUrl: doc.data()?.pdfUrl,
             emailId: doc.data()?.emailId,
             dateOfBirth: new Date(doc.data()?.dateOfBirth),
             primaryContact: doc.data()?.primaryContact,
