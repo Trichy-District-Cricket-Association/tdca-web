@@ -9,6 +9,8 @@ import './ScorerEdit.scss';
 import useStorage from '../../../../../../hooks/useStorage';
 import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
 import SelectInputBox from '../../../shared_components/select_input_box/SelectInputBox';
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import PrintScorer from '../PrintScorer';
 const defaultAvatar = `${process.env.PUBLIC_URL}/assets/images/defaultAvatar.jpg`;
 
 type ScorerEditProps = {
@@ -123,6 +125,11 @@ const ScorerEdit: React.FC<ScorerEditProps> = ({ setModalOpen, scorerDoc }): JSX
                 <LoadingComp />
             ) : (
                 <form className="scorerEditForm" onSubmit={submitForm}>
+                    <div>
+                        <PDFDownloadLink document={<PrintScorer scorer={scorer} />} fileName="example.pdf">
+                            {({ loading }) => (loading ? '' : 'Download now!')}
+                        </PDFDownloadLink>
+                    </div>
                     <div className="scorerEditForm__general">
                         {/* error message */}
                         {<p>{error}</p>}
@@ -272,7 +279,7 @@ const ScorerEdit: React.FC<ScorerEditProps> = ({ setModalOpen, scorerDoc }): JSX
                     </div>
                     <div className="scorerEditForm__matchData">
                         <div className="scorerEditForm__matchData__header">
-                            <h1 className="scorerEditForm__matchData__header--text">Personal Details</h1>
+                            <h1 className="scorerEditForm__matchData__header--text">Match Details</h1>
                         </div>
                         <div className="scorerEditForm__matchData--input">
                             <InputBox

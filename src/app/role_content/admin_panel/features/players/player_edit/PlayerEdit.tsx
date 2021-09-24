@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { MdDelete, MdEdit } from 'react-icons/md';
+import { FaFileDownload } from 'react-icons/fa';
+FaFileDownload;
 import Modal from 'react-modal';
 import { firestore } from '../../../../../../firebase';
 import { Collections } from '../../../../../../enums/collection';
@@ -11,7 +13,7 @@ import useStorage from '../../../../../../hooks/useStorage';
 import SelectInputBox from '../../../shared_components/select_input_box/SelectInputBox';
 import Team from '../../../../../../models/Team';
 import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
-import PrintPlayer from '../PrintPlayer';
+import PrintPlayer from './PrintPlayer';
 const defaultAvatar = `${process.env.PUBLIC_URL}/assets/images/defaultAvatar.jpg`;
 
 type PlayerEditProps = {
@@ -142,11 +144,6 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
                 <LoadingComp />
             ) : selectable ? (
                 <form className="playerEditForm" onSubmit={submitForm}>
-                    <div>
-                        <PDFDownloadLink document={<PrintPlayer player={player} />} fileName="example.pdf">
-                            {({ loading }) => (loading ? 'Loading document...' : 'Download now!')}
-                        </PDFDownloadLink>
-                    </div>
                     <div className="playerEditForm__general">
                         {/* error message */}
                         {<p>{error}</p>}
@@ -172,11 +169,20 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
                         </div>
                         <div className="playerEditForm__general__header">
                             <h1 className="playerEditForm__general__header--text">General</h1>
-                            <button className="playerEditForm__general__header--iconBtn" onClick={deleteForm}>
-                                <i>
-                                    <MdDelete />
-                                </i>
-                            </button>
+                            <div>
+                                <button className="playerEditForm__general__header--iconBtn" onClick={deleteForm}>
+                                    <i>
+                                        <MdDelete />
+                                    </i>
+                                </button>
+                                <PDFDownloadLink
+                                    className="playerEditForm__general__header--dataDownload"
+                                    document={<PrintPlayer player={player} />}
+                                    fileName={`${player.playerName}.pdf`}
+                                >
+                                    {({ loading }) => (loading ? '' : <FaFileDownload />)}
+                                </PDFDownloadLink>
+                            </div>
                         </div>
                         <div className="playerEditForm__general--input">
                             <InputBox

@@ -1,7 +1,8 @@
 import React from 'react';
 
 import { Page, Text, View, Document, StyleSheet, Image } from '@react-pdf/renderer';
-import Player from '../../../../../models/Player';
+import Player from '../../../../../../models/Player';
+const defaultAvatar = `${process.env.PUBLIC_URL}/assets/images/defaultAvatar.jpg`;
 const logo = `${process.env.PUBLIC_URL}/assets/images/logo.jpg`;
 type PlayerPrintProps = {
     player: Player;
@@ -13,7 +14,6 @@ const styles = StyleSheet.create({
     },
     section: {
         justifyContent: 'center',
-
         padding: 4,
         flexDirection: 'row',
     },
@@ -60,7 +60,11 @@ const styles = StyleSheet.create({
     },
     data: {
         marginTop: 15,
-        marginLeft: 20,
+    },
+    section1: {
+        display: 'flex',
+        justifyContent: 'space-evenly',
+        flexDirection: 'row',
     },
 });
 
@@ -74,9 +78,12 @@ const PrintPlayer: React.FC<PlayerPrintProps> = ({ player }): JSX.Element => (
             </View>
             <Text style={styles.heading1}>Player Details</Text>
             <View style={styles.section}>
-                <Image style={styles.profile} src={`https://cors.bridged.cc/${player.avatarUrl}`} />
+                <Image
+                    style={styles.profile}
+                    src={player.avatarUrl ? `https://cors.bridged.cc/${player.avatarUrl}` : defaultAvatar}
+                />
             </View>
-            <View style={styles.section}>
+            <View style={styles.section1}>
                 <View style={styles.data}>
                     <Text style={styles.attribute}>Player Name </Text>
                     <Text style={styles.text}>{player.playerName ?? 'NA'}</Text>

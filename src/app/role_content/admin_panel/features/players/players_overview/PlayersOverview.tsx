@@ -8,6 +8,9 @@ import LoadingComp from '../../../../../shared_components/loading_comp/LoadingCo
 import PlayerAdd from '../player_add/PlayerAdd';
 import PlayerCard from '../player_card/PlayerCard';
 import Team from '../../../../../../models/Team';
+import PrintPlayer from '../player_edit/PrintPlayer';
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import PrintSelectedTeamPlayers from './PrintSelectedTeamPlayers';
 
 const PlayersOverview: React.FC<void> = (): JSX.Element => {
     const [isModalOpen, setModalOpen] = useState(false);
@@ -106,6 +109,16 @@ const PlayersOverview: React.FC<void> = (): JSX.Element => {
                     >
                         Download Data
                     </CSVLink>
+
+                    <PDFDownloadLink
+                        document={
+                            <PrintSelectedTeamPlayers players={selectedTeamPlayers} teamName={selectedTeamName} />
+                        }
+                        fileName={`${selectedTeamName}.pdf`}
+                        className="playersOverview__pdfDownload"
+                    >
+                        {({ loading }) => (loading ? 'Loading...' : 'Players PDF')}
+                    </PDFDownloadLink>
                     {teamDocs.length !== 0 ? (
                         <div>
                             <select className="playersOverview__teamSelect" onChange={SelectedTeamPlayers}>

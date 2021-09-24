@@ -9,6 +9,8 @@ import './UmpireEdit.scss';
 import useStorage from '../../../../../../hooks/useStorage';
 import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
 import SelectInputBox from '../../../shared_components/select_input_box/SelectInputBox';
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import PrintUmpire from '../PrintUmpire';
 const defaultAvatar = `${process.env.PUBLIC_URL}/assets/images/defaultAvatar.jpg`;
 
 type UmpireEditProps = {
@@ -123,6 +125,12 @@ const UmpireEdit: React.FC<UmpireEditProps> = ({ setModalOpen, umpireDoc }): JSX
                 <LoadingComp />
             ) : (
                 <form className="umpireEditForm" onSubmit={submitForm}>
+                    {' '}
+                    <div>
+                        <PDFDownloadLink document={<PrintUmpire umpire={umpire} />} fileName="example.pdf">
+                            {({ loading }) => (loading ? '' : 'Download now!')}
+                        </PDFDownloadLink>
+                    </div>
                     <div className="umpireEditForm__general">
                         {/* error message */}
                         {<p>{error}</p>}
