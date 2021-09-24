@@ -38,6 +38,10 @@
                 cursor: pointer;
                 border-radius: 50%;
             }
+            &--uploadBtn {
+                position: absolute;
+                display: none;
+            }
             &--avatarOverlay {
                 position: relative;
                 background: #0000009b;
@@ -55,10 +59,6 @@
                     cursor: pointer;
                     margin-left: -5px;
                 }
-            }
-            &--uploadBtn {
-                position: absolute;
-                display: none;
             }
         }
 
@@ -104,14 +104,27 @@
             }
         }
     }
-}
-.Overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.541);
+    .upload-btn-wrapper {
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+    }
+    .aadharBtn {
+        color: rgb(255, 255, 255);
+        background-color: #071833;
+        padding: 8px 20px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        margin: 0 0 20px 20px;
+    }
+    input[type='file'] {
+        font-size: 20px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+    }
 }
 
 @media screen and (max-width: 799px) {

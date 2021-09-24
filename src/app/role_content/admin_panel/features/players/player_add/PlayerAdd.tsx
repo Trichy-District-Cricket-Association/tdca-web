@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { MdEdit } from 'react-icons/md';
 import Modal from 'react-modal';
-import { firestore } from '../../../../../../firebase';
+import { firestore, storage } from '../../../../../../firebase';
 import { Collections } from '../../../../../../enums/collection';
 import Player from '../../../../../../models/Player';
 import InputBox from '../../../shared_components/input_box/InputBox';
@@ -20,23 +20,33 @@ const PlayerAdd: React.FC<PlayerAddProps> = ({ setModalOpen }): JSX.Element => {
     const [player, setPlayer] = useState<Player>(new Player({}));
 
     // State to handle uploading files.
-    const [file, setFile] = useState(null);
-    const [error, setError] = useState('');
+    const [imageFile, setImageFile] = useState(null);
+    const [pdfFile, setPdfFile] = useState(null);
 
     // Getting the progress and avatarUrl from the hook.
-    const { avatarUrl } = useStorage(file);
-    const types = ['image/png', 'image/jpeg', 'image/jpg'];
+    const { avatarUrl, pdfUrl } = useStorage(imageFile, pdfFile);
+    const imageTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+    const pdfTypes = ['application/pdf'];
     // Functions to check the type of file.
     const handleAvatarChange = (e: any) => {
-        const selectedFile = e.target.files[0];
-
-        if (selectedFile) {
-            if (types.includes(selectedFile.type)) {
-                setError('');
-                setFile(selectedFile);
+        const selectedImageFile = e.target.files[0];
+        if (selectedImageFile) {
+            if (imageTypes.includes(selectedImageFile.type)) {
+                setImageFile(selectedImageFile);
             } else {
-                setFile(null);
-                setError('Please select an image file (png or jpg)');
+                setImageFile(null);
+                window.alert('Please select an image file (png or jpg)');
+            }
+        }
+    };
+    const handlePdfChange = (e: any) => {
+        const selectedPdfFile = e.target.files[0];
+        if (selectedPdfFile) {
+            if (pdfTypes.includes(selectedPdfFile.type)) {
+                setPdfFile(selectedPdfFile);
+            } else {
+                setPdfFile(null);
+                window.alert('Please select an pdf file');
             }
         }
     };
@@ -80,6 +90,7 @@ const PlayerAdd: React.FC<PlayerAddProps> = ({ setModalOpen }): JSX.Element => {
     const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         player.setAvatar = avatarUrl;
+        player.setPdf = pdfUrl;
         setIsLoading(true);
         await firestore
             .collection(Collections.players)
@@ -105,11 +116,6 @@ const PlayerAdd: React.FC<PlayerAddProps> = ({ setModalOpen }): JSX.Element => {
             ) : selectable ? (
                 <form className="playerAddForm" onSubmit={submitForm}>
                     <div className="playerAddForm__general">
-                        {/* error message */}
-                        {<p>{error}</p>}
-
-                        {/* image display */}
-
                         <div>
                             <img
                                 src={avatarUrl ? avatarUrl : defaultAvatar}
@@ -201,6 +207,10 @@ const PlayerAdd: React.FC<PlayerAddProps> = ({ setModalOpen }): JSX.Element => {
                                 textHandler={handleInputForm}
                             />
                             <InputBox title="Passport" name="passport" type="text" textHandler={handleInputForm} />
+                            <div className="upload-btn-wrapper">
+                                <input type="file" name="pdfUrl" title="Upload Aadhar" onChange={handlePdfChange} />
+                                <button className="aadharBtn">{pdfUrl ? 'Uploaded' : 'Upload Aadhar'}</button>
+                            </div>
                         </div>
                     </div>
                     <div className="playerAddForm__stats">

@@ -47,23 +47,33 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
     );
 
     // State to handle uploading files.
-    const [file, setFile] = useState(null);
-    const [error, setError] = useState('');
+    const [imageFile, setImageFile] = useState(null);
+    const [pdfFile, setPdfFile] = useState(null);
 
     // Getting the progress and avatarUrl from the hook.
-    const { avatarUrl } = useStorage(file);
-    const types = ['image/png', 'image/jpeg', 'image/jpg'];
+    const { avatarUrl, pdfUrl } = useStorage(imageFile, pdfFile);
+    const imageTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+    const pdfTypes = ['application/pdf'];
     // Functions to check the type of file.
     const handleAvatarChange = (e: any) => {
-        const selectedFile = e.target.files[0];
-
-        if (selectedFile) {
-            if (types.includes(selectedFile.type)) {
-                setError('');
-                setFile(selectedFile);
+        const selectedImageFile = e.target.files[0];
+        if (selectedImageFile) {
+            if (imageTypes.includes(selectedImageFile.type)) {
+                setImageFile(selectedImageFile);
             } else {
-                setFile(null);
-                setError('Please select an image file (png or jpg)');
+                setImageFile(null);
+                window.alert('Please select an image file (png or jpg)');
+            }
+        }
+    };
+    const handlePdfChange = (e: any) => {
+        const selectedPdfFile = e.target.files[0];
+        if (selectedPdfFile) {
+            if (pdfTypes.includes(selectedPdfFile.type)) {
+                setPdfFile(selectedPdfFile);
+            } else {
+                setPdfFile(null);
+                window.alert('Please select an pdf file');
             }
         }
     };
@@ -145,8 +155,6 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
             ) : selectable ? (
                 <form className="playerEditForm" onSubmit={submitForm}>
                     <div className="playerEditForm__general">
-                        {/* error message */}
-                        {<p>{error}</p>}
                         <div>
                             <img
                                 src={
@@ -298,6 +306,19 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
                                 value={player.passport}
                                 textHandler={handleInputForm}
                             />
+                            <div className="upload">
+                                <div className="upload__btnWrapper">
+                                    <input type="file" name="pdfUrl" title="Upload Aadhar" onChange={handlePdfChange} />
+                                    <button className="upload--aadharBtn">
+                                        {pdfUrl ? 'Uploaded' : 'Upload Aadhar'}
+                                    </button>
+                                </div>
+                                {pdfUrl ? (
+                                    <a className="upload--view" href={pdfUrl.trim()} target="_blank" rel="noreferrer">
+                                        Click to View
+                                    </a>
+                                ) : null}
+                            </div>
                         </div>
                     </div>
                     <div className="playerEditForm__stats">

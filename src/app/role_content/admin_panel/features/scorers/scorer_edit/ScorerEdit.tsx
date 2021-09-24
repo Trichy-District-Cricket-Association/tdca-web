@@ -11,6 +11,7 @@ import LoadingComp from '../../../../../shared_components/loading_comp/LoadingCo
 import SelectInputBox from '../../../shared_components/select_input_box/SelectInputBox';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import PrintScorer from '../PrintScorer';
+import { FaFileDownload } from 'react-icons/fa';
 const defaultAvatar = `${process.env.PUBLIC_URL}/assets/images/defaultAvatar.jpg`;
 
 type ScorerEditProps = {
@@ -131,11 +132,6 @@ const ScorerEdit: React.FC<ScorerEditProps> = ({ setModalOpen, scorerDoc }): JSX
                         </PDFDownloadLink>
                     </div>
                     <div className="scorerEditForm__general">
-                        {/* error message */}
-                        {<p>{error}</p>}
-
-                        {/* image display */}
-
                         <div>
                             <img
                                 src={
@@ -168,6 +164,13 @@ const ScorerEdit: React.FC<ScorerEditProps> = ({ setModalOpen, scorerDoc }): JSX
                                     <MdDelete />
                                 </i>
                             </button>
+                            <PDFDownloadLink
+                                className="scorerEditForm__general__header--dataDownload"
+                                document={<PrintScorer scorer={scorer} />}
+                                fileName={`${scorer.scorerName}.pdf`}
+                            >
+                                {({ loading }) => (loading ? '' : <FaFileDownload />)}
+                            </PDFDownloadLink>
                         </div>
                         <div className="scorerEditForm__general--input">
                             <InputBox

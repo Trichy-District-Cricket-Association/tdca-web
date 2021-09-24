@@ -43,6 +43,9 @@ export default class Player {
 
     bowlingStats?: BowlingStats;
 
+
+    pdfUrl?: string;
+
     handlePlayer({ field, value }: { field: string; value: string }): void {
         if (field == 'playerName') this.playerName = value;
         if (field == 'playerId') this.playerId = value;
@@ -80,6 +83,9 @@ export default class Player {
     set setAvatar(url: string) {
         this.avatarUrl = url;
     }
+    set setPdf(url: string) {
+        this.pdfUrl = url;
+    }
 
     constructor({
         docId,
@@ -103,6 +109,7 @@ export default class Player {
         passport,
         battingStats,
         bowlingStats,
+        pdfUrl
     }: {
         docId?: string;
         playerId?: string;
@@ -125,6 +132,7 @@ export default class Player {
         passport?: string;
         battingStats?: BattingStats;
         bowlingStats?: BowlingStats;
+        pdfUrl?: string;
     }) {
         if (docId) this.docId = docId;
         this.playerId = playerId ?? '';
@@ -132,6 +140,7 @@ export default class Player {
         this.teamId = teamId ?? '';
         this.playerName = playerName ?? '';
         if (avatarUrl) this.avatarUrl = avatarUrl;
+        if (pdfUrl) this.pdfUrl = pdfUrl;
         this.emailId = emailId ?? '';
         this.dateOfBirth = dateOfBirth;
         this.primaryContact = primaryContact ?? '';

@@ -11,6 +11,7 @@ import LoadingComp from '../../../../../shared_components/loading_comp/LoadingCo
 import SelectInputBox from '../../../shared_components/select_input_box/SelectInputBox';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import PrintUmpire from '../PrintUmpire';
+import { FaFileDownload } from 'react-icons/fa';
 const defaultAvatar = `${process.env.PUBLIC_URL}/assets/images/defaultAvatar.jpg`;
 
 type UmpireEditProps = {
@@ -45,7 +46,6 @@ const UmpireEdit: React.FC<UmpireEditProps> = ({ setModalOpen, umpireDoc }): JSX
 
     // State to handle uploading files.
     const [file, setFile] = useState(null);
-    const [error, setError] = useState('');
 
     // Getting the progress and avatarUrl from the hook.
     const { avatarUrl } = useStorage(file);
@@ -54,15 +54,14 @@ const UmpireEdit: React.FC<UmpireEditProps> = ({ setModalOpen, umpireDoc }): JSX
 
     // Functions to check the type of file.
     const handleAvatarChange = (e: any) => {
-        const selectedFile = e.target.files[0];
+        const selectedImageFile = e.target.files[0];
 
-        if (selectedFile) {
-            if (types.includes(selectedFile.type)) {
-                setError('');
-                setFile(selectedFile);
+        if (selectedImageFile) {
+            if (types.includes(selectedImageFile.type)) {
+                setFile(selectedImageFile);
             } else {
                 setFile(null);
-                setError('Please select an image file (png or jpg)');
+                window.alert('Please select an image file (png or jpg)');
             }
         }
     };
@@ -125,15 +124,7 @@ const UmpireEdit: React.FC<UmpireEditProps> = ({ setModalOpen, umpireDoc }): JSX
                 <LoadingComp />
             ) : (
                 <form className="umpireEditForm" onSubmit={submitForm}>
-                    {' '}
-                    <div>
-                        <PDFDownloadLink document={<PrintUmpire umpire={umpire} />} fileName="example.pdf">
-                            {({ loading }) => (loading ? '' : 'Download now!')}
-                        </PDFDownloadLink>
-                    </div>
                     <div className="umpireEditForm__general">
-                        {/* error message */}
-                        {<p>{error}</p>}
                         <div>
                             <img
                                 src={
@@ -165,6 +156,13 @@ const UmpireEdit: React.FC<UmpireEditProps> = ({ setModalOpen, umpireDoc }): JSX
                                     <MdDelete />
                                 </i>
                             </button>
+                            <PDFDownloadLink
+                                className="umpireEditForm__general__header--dataDownload"
+                                document={<PrintUmpire umpire={umpire} />}
+                                fileName={`${umpire.umpireName}.pdf`}
+                            >
+                                {({ loading }) => (loading ? '' : <FaFileDownload />)}
+                            </PDFDownloadLink>
                         </div>
                         <div className="umpireEditForm__general--input">
                             <InputBox
