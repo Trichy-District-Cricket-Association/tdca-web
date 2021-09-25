@@ -248,7 +248,7 @@ const TeamAdd: React.FC<TeamAddProps> = ({ setModalOpen }): JSX.Element => {
                     <div className="teamAddForm__createAccount">
                         <h1 className="teamAddForm__createAccount--header">Create Account</h1>
                         <div className="teamAddForm__createAccount--input">
-                            <InputBox title="Team Email" name="email" type="text" textHandler={handleUserForm} />
+                            <InputBox title="Team Email" name="email" type="email" textHandler={handleUserForm} />
                             <InputBox title="Password" name="password" type="text" textHandler={handleUserForm} />
                         </div>
                     </div>

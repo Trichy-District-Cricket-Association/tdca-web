@@ -51,6 +51,8 @@ const InputBox: React.FC<InputBoxProps> = ({
                     name == 'primaryContact' ||
                     name == 'dateOfBirth' ||
                     name == 'scorerId' ||
+                    name == 'email' ||
+                    name == 'password' ||
                     name == 'scorerName' ||
                     name == 'groundId' ||
                     name == 'groundName' ||

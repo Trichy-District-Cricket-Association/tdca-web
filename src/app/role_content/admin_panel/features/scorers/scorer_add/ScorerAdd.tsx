@@ -300,7 +300,7 @@ const ScorerAdd: React.FC<ScorerAddProps> = ({ setModalOpen }): JSX.Element => {
                     <div className="scorerAddForm__createAccount">
                         <h1 className="scorerAddForm__createAccount--header">Create Account</h1>
                         <div className="scorerAddForm__createAccount--input">
-                            <InputBox title="Scorer Email" name="email" type="text" textHandler={handleUserForm} />
+                            <InputBox title="Scorer Email" name="email" type="email" textHandler={handleUserForm} />
                             <InputBox title="Password" name="password" type="text" textHandler={handleUserForm} />
                         </div>
                     </div>
