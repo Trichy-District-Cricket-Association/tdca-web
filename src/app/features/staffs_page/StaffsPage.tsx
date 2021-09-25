@@ -45,7 +45,8 @@ const StaffsPage: React.FC<void> = (): JSX.Element => {
                         </div>
                         <div className="staffsPage__header__header2"></div>
                     </div>
-                    <h1 className="staffsPage__title">Umpires</h1>
+                    {umpireDocs.length !== 0 ? <h1 className="staffsPage__title">Umpires</h1> : null}
+
                     <div className="staffsPage__umpireCards">
                         {umpireDocs?.map((umpireDoc) => (
                             <div className="umpireCard" key={umpireDoc.umpireId}>
@@ -67,7 +68,8 @@ const StaffsPage: React.FC<void> = (): JSX.Element => {
                             </div>
                         ))}
                     </div>
-                    <h1 className="staffsPage__title">Scorers</h1>
+                    {scorerDocs.length !== 0 ? <h1 className="staffsPage__title">Scorers</h1> : null}
+
                     <div className="staffsPage__scorerCards">
                         {scorerDocs?.map((scorerDoc) => (
                             <div className="scorerCard" key={scorerDoc.scorerId}>
