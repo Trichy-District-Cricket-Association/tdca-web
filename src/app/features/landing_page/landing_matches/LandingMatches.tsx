@@ -24,9 +24,11 @@ const LandingMatches: React.FC<any> = (): JSX.Element => {
     }, []);
     return (
         <div className="matches">
-            <div className="matches__header">
-                <h1 className="matches__header--text">Recent Matches</h1>
-            </div>
+            {matchDocs?.length !== 0 ? (
+                <div className="matches__header">
+                    <h1 className="matches__header--text">Recent Matches</h1>
+                </div>
+            ) : null}
 
             {matchDocs == undefined ? null : (
                 <div className="matches__matchCards">

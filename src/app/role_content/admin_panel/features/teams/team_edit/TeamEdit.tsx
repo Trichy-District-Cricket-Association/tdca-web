@@ -180,7 +180,7 @@ const TeamEdit: React.FC<TeamEditProps> = ({ setModalOpen, teamDoc }): JSX.Eleme
                             <InputBox
                                 title="Email Id"
                                 name="emailId"
-                                type="text"
+                                type="email"
                                 value={teamDoc.emailId}
                                 textHandler={handleForm}
                             />

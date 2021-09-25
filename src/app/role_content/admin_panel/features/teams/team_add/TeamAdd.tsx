@@ -85,27 +85,32 @@ const TeamAdd: React.FC<TeamAddProps> = ({ setModalOpen }): JSX.Element => {
             })
             .catch((e) => {
                 console.log(e);
-            });
-
-        await dummyAuth.createUserWithEmailAndPassword(user.email, user.password).then(async () => {
-            await dummyFirestore
-                .collection(Collections.users)
-                .doc(dummyAuth.currentUser?.uid)
-                .set(
-                    JSON.parse(
-                        JSON.stringify(
-                            new User({
-                                email: user.email,
-                                id: team.teamId,
-                                role: UserRoles.team,
-                                name: team.teamName,
-                            }),
-                        ),
-                    ),
-                )
-                .then(async () => await dummyAuth.signOut())
-                .finally(() => setModalOpen(false));
-        });
+            })
+            .then(
+                async () =>
+                    await dummyAuth.createUserWithEmailAndPassword(user.email, user.password).then(async () => {
+                        await dummyFirestore
+                            .collection(Collections.users)
+                            .doc(dummyAuth.currentUser?.uid)
+                            .set(
+                                JSON.parse(
+                                    JSON.stringify(
+                                        new User({
+                                            email: user.email,
+                                            id: team.teamId,
+                                            role: UserRoles.team,
+                                            name: team.teamName,
+                                        }),
+                                    ),
+                                ),
+                            )
+                            .catch((e) => {
+                                console.log(e);
+                            })
+                            .then(async () => await dummyAuth.signOut())
+                            .finally(() => setModalOpen(false));
+                    }),
+            );
     };
 
     return (
@@ -148,7 +153,7 @@ const TeamAdd: React.FC<TeamAddProps> = ({ setModalOpen }): JSX.Element => {
                         <div className="teamAddForm__general--input">
                             <InputBox title="Team Id" name="teamId" type="text" textHandler={handleForm} />
                             <InputBox title="Team Name" name="teamName" type="text" textHandler={handleForm} />
-                            <InputBox title="Email Id" name="emailId" type="text" textHandler={handleForm} />
+                            <InputBox title="Email Id" name="emailId" type="email" textHandler={handleForm} />
                             <SelectInputBox
                                 title="Team Type"
                                 name="type"
@@ -243,7 +248,7 @@ const TeamAdd: React.FC<TeamAddProps> = ({ setModalOpen }): JSX.Element => {
                     <div className="teamAddForm__createAccount">
                         <h1 className="teamAddForm__createAccount--header">Create Account</h1>
                         <div className="teamAddForm__createAccount--input">
-                            <InputBox title="Team Email" name="email" type="text" textHandler={handleUserForm} />
+                            <InputBox title="Team Email" name="email" type="email" textHandler={handleUserForm} />
                             <InputBox title="Password" name="password" type="text" textHandler={handleUserForm} />
                         </div>
                     </div>

@@ -10,7 +10,7 @@ import useStorage from '../../../../../../hooks/useStorage';
 import User from '../../../../../../models/User';
 import { UserRoles } from '../../../../../../enums/auth';
 import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
-import firebase from 'firebase';
+import SelectInputBox from '../../../shared_components/select_input_box/SelectInputBox';
 const defaultAvatar = `${process.env.PUBLIC_URL}/assets/images/defaultAvatar.jpg`;
 type ScorerAddProps = {
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -55,6 +55,12 @@ const ScorerAdd: React.FC<ScorerAddProps> = ({ setModalOpen }): JSX.Element => {
         newScorer.handleScorer({ field: fieldName, value: e.target.value });
         setScorer(newScorer);
     };
+    const handleSelectForm = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        const fieldName = `${e.target.name}` as const;
+        const newScorer = new Scorer({ ...scorer });
+        newScorer.handleScorer({ field: fieldName, value: e.target.value });
+        setScorer(newScorer);
+    };
     const handleUserForm = (e: React.ChangeEvent<HTMLInputElement>) => {
         const fieldName = `${e.target.name}` as const;
         if (fieldName == 'email') {
@@ -76,26 +82,32 @@ const ScorerAdd: React.FC<ScorerAddProps> = ({ setModalOpen }): JSX.Element => {
             })
             .catch((e) => {
                 console.log(e);
-            });
-        await dummyAuth.createUserWithEmailAndPassword(user.email, user.password).then(async () => {
-            await dummyFirestore
-                .collection(Collections.users)
-                .doc(dummyAuth.currentUser?.uid)
-                .set(
-                    JSON.parse(
-                        JSON.stringify(
-                            new User({
-                                email: user.email,
-                                id: scorer.scorerId,
-                                role: UserRoles.scorer,
-                                name: scorer.scorerName,
-                            }),
-                        ),
-                    ),
-                )
-                .then(async () => await dummyAuth.signOut())
-                .finally(() => setModalOpen(false));
-        });
+            })
+            .then(
+                async () =>
+                    await dummyAuth.createUserWithEmailAndPassword(user.email, user.password).then(async () => {
+                        await dummyFirestore
+                            .collection(Collections.users)
+                            .doc(dummyAuth.currentUser?.uid)
+                            .set(
+                                JSON.parse(
+                                    JSON.stringify(
+                                        new User({
+                                            email: user.email,
+                                            id: scorer.scorerId,
+                                            role: UserRoles.scorer,
+                                            name: scorer.scorerName,
+                                        }),
+                                    ),
+                                ),
+                            )
+                            .catch((e) => {
+                                console.log(e);
+                            })
+                            .then(async () => await dummyAuth.signOut())
+                            .finally(() => setModalOpen(false));
+                    }),
+            );
     };
 
     return (
@@ -138,21 +150,27 @@ const ScorerAdd: React.FC<ScorerAddProps> = ({ setModalOpen }): JSX.Element => {
                         <div className="scorerAddForm__general--input">
                             <InputBox title="Scorer Id" name="scorerId" type="text" textHandler={handleForm} />
                             <InputBox title="Scorer Name" name="scorerName" type="text" textHandler={handleForm} />
-                            <InputBox title="Email Id" name="emailId" type="text" textHandler={handleForm} />
+                            <InputBox title="Email Id" name="emailId" type="email" textHandler={handleForm} />
                             <InputBox title="Date of Birth" name="dateOfBirth" type="date" textHandler={handleForm} />
                             <InputBox
                                 title="Primary Contact"
                                 name="primaryContact"
-                                type="text"
+                                type="number"
                                 textHandler={handleForm}
                             />
                             <InputBox
                                 title="Secondary Contact"
                                 name="secondaryContact"
-                                type="text"
+                                type="number"
                                 textHandler={handleForm}
                             />
                             <InputBox title="Address" name="address" type="text" textHandler={handleForm} />
+                            <SelectInputBox
+                                title="Panel"
+                                name="panel"
+                                options={['TDCA', 'TNCA']}
+                                textHandler={handleSelectForm}
+                            />
                         </div>
                     </div>
                     <div className="scorerAddForm__personalData">
@@ -162,13 +180,13 @@ const ScorerAdd: React.FC<ScorerAddProps> = ({ setModalOpen }): JSX.Element => {
                             <InputBox
                                 title="GPay / PhonePay Number"
                                 name="payPhoneNumber"
-                                type="text"
+                                type="number"
                                 textHandler={handleForm}
                             />
                             <InputBox
                                 title="Bank Account Number"
                                 name="bankAccountNumber"
-                                type="text"
+                                type="number"
                                 textHandler={handleForm}
                             />
                             <InputBox title="Bank Name" name="bankName" type="text" textHandler={handleForm} />
@@ -282,7 +300,7 @@ const ScorerAdd: React.FC<ScorerAddProps> = ({ setModalOpen }): JSX.Element => {
                     <div className="scorerAddForm__createAccount">
                         <h1 className="scorerAddForm__createAccount--header">Create Account</h1>
                         <div className="scorerAddForm__createAccount--input">
-                            <InputBox title="Scorer Email" name="email" type="text" textHandler={handleUserForm} />
+                            <InputBox title="Scorer Email" name="email" type="email" textHandler={handleUserForm} />
                             <InputBox title="Password" name="password" type="text" textHandler={handleUserForm} />
                         </div>
                     </div>

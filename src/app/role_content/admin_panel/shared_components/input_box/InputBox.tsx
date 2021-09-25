@@ -19,6 +19,26 @@ const InputBox: React.FC<InputBoxProps> = ({
     ref,
     textHandler,
 }): JSX.Element => {
+    let pattern;
+    {
+        switch (name) {
+            case 'emailId':
+                pattern = '^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$';
+                break;
+            case 'primaryContact' || 'secondaryContact' || 'payPhoneNumber':
+                pattern = '^(?:(?:\\+|0{0,2})91(\\s*[\\-]\\s*)?|[0]?)?[789]\\d{9}$';
+                break;
+            case 'aadharNumber':
+                pattern = '^[2-9]{1}[0-9]{3}\\s[0-9]{4}\\s[0-9]{4}$';
+                break;
+            case 'bankIFSC':
+                pattern = '^[A-Z]{4}0[A-Z0-9]{6}$';
+                break;
+
+            default:
+                break;
+        }
+    }
     return (
         <div>
             <ul className="input_box">
@@ -31,6 +51,8 @@ const InputBox: React.FC<InputBoxProps> = ({
                     name == 'primaryContact' ||
                     name == 'dateOfBirth' ||
                     name == 'scorerId' ||
+                    name == 'email' ||
+                    name == 'password' ||
                     name == 'scorerName' ||
                     name == 'groundId' ||
                     name == 'groundName' ||
@@ -54,6 +76,7 @@ const InputBox: React.FC<InputBoxProps> = ({
                             defaultValue={value}
                             ref={ref ?? undefined}
                             required
+                            pattern={pattern ? pattern : '.*'}
                         />
                     ) : (
                         <input

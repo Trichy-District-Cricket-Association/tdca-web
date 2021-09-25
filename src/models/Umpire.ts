@@ -27,7 +27,7 @@ export default class Umpire {
     /** total Matches of umpire*/
     totalMatches?: number;
 
-    /** Gpay of phonePay Number of umpire*/
+    /** panel */
     panel?: string;
 
     /** Date of Birth of umpire */

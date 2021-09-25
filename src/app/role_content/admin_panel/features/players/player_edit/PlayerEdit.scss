@@ -37,6 +37,11 @@
                     background-color: #fff;
                     padding: 0;
                 }
+                &--dataDownload {
+                    color: #071833;
+                    font-size: 29px;
+                    margin-right: 20px;
+                }
             }
             &--input {
                 display: grid;
@@ -119,14 +124,31 @@
             }
         }
     }
-}
-.Overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.541);
+    .upload {
+        display: flex;
+        &__btnWrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+        &--aadharBtn {
+            color: rgb(255, 255, 255);
+            background-color: #071833;
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 0 0 20px 20px;
+        }
+        &--view {
+            text-decoration: none;
+            margin: 6.5px;
+            color: #0d4194;
+            :focus {
+                text-decoration: underline;
+            }
+        }
+    }
 }
 
 @media screen and (max-width: 799px) {

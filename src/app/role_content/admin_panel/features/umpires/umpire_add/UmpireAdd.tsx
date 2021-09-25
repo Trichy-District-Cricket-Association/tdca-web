@@ -9,6 +9,7 @@ import './UmpireAdd.scss';
 import useStorage from '../../../../../../hooks/useStorage';
 import firebase from 'firebase';
 import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
+import SelectInputBox from '../../../shared_components/select_input_box/SelectInputBox';
 const defaultAvatar = `${process.env.PUBLIC_URL}/assets/images/defaultAvatar.jpg`;
 
 type UmpireAddProps = {
@@ -44,6 +45,12 @@ const UmpireAdd: React.FC<UmpireAddProps> = ({ setModalOpen }): JSX.Element => {
     };
 
     const handleForm = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const fieldName = `${e.target.name}` as const;
+        const newUmpire = new Umpire({ ...umpire });
+        newUmpire.handleUmpire({ field: fieldName, value: e.target.value });
+        setUmpire(newUmpire);
+    };
+    const handleSelectForm = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const fieldName = `${e.target.name}` as const;
         const newUmpire = new Umpire({ ...umpire });
         newUmpire.handleUmpire({ field: fieldName, value: e.target.value });
@@ -111,21 +118,27 @@ const UmpireAdd: React.FC<UmpireAddProps> = ({ setModalOpen }): JSX.Element => {
                         <div className="umpireAddForm__general--input">
                             <InputBox title="Umpire Id" name="umpireId" type="text" textHandler={handleForm} />
                             <InputBox title="Umpire Name" name="umpireName" type="text" textHandler={handleForm} />
-                            <InputBox title="Email Id" name="emailId" type="text" textHandler={handleForm} />
+                            <InputBox title="Email Id" name="emailId" type="email" textHandler={handleForm} />
                             <InputBox title="Date of Birth" name="dateOfBirth" type="date" textHandler={handleForm} />
                             <InputBox
                                 title="Primary Contact"
                                 name="primaryContact"
-                                type="text"
+                                type="number"
                                 textHandler={handleForm}
                             />
                             <InputBox
                                 title="Secondary Contact"
                                 name="secondaryContact"
-                                type="text"
+                                type="number"
                                 textHandler={handleForm}
                             />
                             <InputBox title="Address" name="address" type="text" textHandler={handleForm} />
+                            <SelectInputBox
+                                title="Panel"
+                                name="panel"
+                                options={['TDCA', 'TNCA']}
+                                textHandler={handleSelectForm}
+                            />
                         </div>
                     </div>
                     <div className="umpireAddForm__personalData">
@@ -135,13 +148,13 @@ const UmpireAdd: React.FC<UmpireAddProps> = ({ setModalOpen }): JSX.Element => {
                             <InputBox
                                 title="GPay / PhonePay Number"
                                 name="payPhoneNumber"
-                                type="text"
+                                type="number"
                                 textHandler={handleForm}
                             />
                             <InputBox
                                 title="Bank Account Number"
                                 name="bankAccountNumber"
-                                type="text"
+                                type="number"
                                 textHandler={handleForm}
                             />
                             <InputBox title="Bank Name" name="bankName" type="text" textHandler={handleForm} />

@@ -44,7 +44,8 @@
         font-size: 25px;
         color: #071833;
     }
-    &__dataDownload {
+    &__dataDownload,
+    &__pdfDownload {
         font: bold 16px 'Poppins';
         text-decoration: none;
         background-color: #071833;
@@ -52,6 +53,7 @@
         padding: 0.6rem 0.5rem;
         border-radius: 2px;
         text-transform: uppercase;
+        margin-right: 20px;
     }
 }
 @media screen and (max-width: 1599px) {

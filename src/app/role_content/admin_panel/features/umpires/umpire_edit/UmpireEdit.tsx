@@ -8,6 +8,10 @@ import InputBox from '../../../shared_components/input_box/InputBox';
 import './UmpireEdit.scss';
 import useStorage from '../../../../../../hooks/useStorage';
 import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
+import SelectInputBox from '../../../shared_components/select_input_box/SelectInputBox';
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import PrintUmpire from '../PrintUmpire';
+import { FaFileDownload } from 'react-icons/fa';
 const defaultAvatar = `${process.env.PUBLIC_URL}/assets/images/defaultAvatar.jpg`;
 
 type UmpireEditProps = {
@@ -42,7 +46,6 @@ const UmpireEdit: React.FC<UmpireEditProps> = ({ setModalOpen, umpireDoc }): JSX
 
     // State to handle uploading files.
     const [file, setFile] = useState(null);
-    const [error, setError] = useState('');
 
     // Getting the progress and avatarUrl from the hook.
     const { avatarUrl } = useStorage(file);
@@ -51,20 +54,25 @@ const UmpireEdit: React.FC<UmpireEditProps> = ({ setModalOpen, umpireDoc }): JSX
 
     // Functions to check the type of file.
     const handleAvatarChange = (e: any) => {
-        const selectedFile = e.target.files[0];
+        const selectedImageFile = e.target.files[0];
 
-        if (selectedFile) {
-            if (types.includes(selectedFile.type)) {
-                setError('');
-                setFile(selectedFile);
+        if (selectedImageFile) {
+            if (types.includes(selectedImageFile.type)) {
+                setFile(selectedImageFile);
             } else {
                 setFile(null);
-                setError('Please select an image file (png or jpg)');
+                window.alert('Please select an image file (png or jpg)');
             }
         }
     };
 
     const handleForm = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const fieldName = `${e.target.name}` as const;
+        const newUmpire = new Umpire({ ...umpire });
+        newUmpire.handleUmpire({ field: fieldName, value: e.target.value });
+        setUmpire(newUmpire);
+    };
+    const handleSelectForm = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const fieldName = `${e.target.name}` as const;
         const newUmpire = new Umpire({ ...umpire });
         newUmpire.handleUmpire({ field: fieldName, value: e.target.value });
@@ -117,12 +125,10 @@ const UmpireEdit: React.FC<UmpireEditProps> = ({ setModalOpen, umpireDoc }): JSX
             ) : (
                 <form className="umpireEditForm" onSubmit={submitForm}>
                     <div className="umpireEditForm__general">
-                        {/* error message */}
-                        {<p>{error}</p>}
                         <div>
                             <img
                                 src={
-                                    umpireDoc.avatarUrl == null
+                                    umpire.avatarUrl == null
                                         ? defaultAvatar
                                         : avatarUrl
                                         ? avatarUrl
@@ -145,61 +151,78 @@ const UmpireEdit: React.FC<UmpireEditProps> = ({ setModalOpen, umpireDoc }): JSX
                         </div>
                         <div className="umpireEditForm__general__header">
                             <h1 className="umpireEditForm__general__header--text">General</h1>
-                            <button className="umpireEditForm__general__header--iconBtn" onClick={deleteForm}>
-                                <i>
-                                    <MdDelete />
-                                </i>
-                            </button>
+
+                            <div>
+                                <button className="umpireEditForm__general__header--iconBtn" onClick={deleteForm}>
+                                    <i>
+                                        <MdDelete />
+                                    </i>
+                                </button>
+                                <PDFDownloadLink
+                                    className="umpireEditForm__general__header--dataDownload"
+                                    document={<PrintUmpire umpire={umpire} />}
+                                    fileName={`${umpire.umpireName}.pdf`}
+                                >
+                                    {({ loading }) => (loading ? '' : <FaFileDownload />)}
+                                </PDFDownloadLink>
+                            </div>
                         </div>
                         <div className="umpireEditForm__general--input">
                             <InputBox
                                 title="Umpire Id"
                                 name="umpireId"
-                                value={umpireDoc.umpireId}
+                                value={umpire.umpireId}
                                 type="text"
                                 textHandler={handleForm}
                             />
                             <InputBox
                                 title="Umpire Name"
                                 name="umpireName"
-                                value={umpireDoc.umpireName}
+                                value={umpire.umpireName}
                                 type="text"
                                 textHandler={handleForm}
                             />
                             <InputBox
                                 title="Email Id"
                                 name="emailId"
-                                type="text"
-                                value={umpireDoc.emailId}
+                                type="email"
+                                value={umpire.emailId}
                                 textHandler={handleForm}
                             />
                             <InputBox
                                 title="Date of Birth"
                                 name="dateOfBirth"
                                 type="date"
-                                value={umpireDoc.dateOfBirth?.toISOString().substr(0, 10)}
+                                value={umpire.dateOfBirth?.toISOString().substr(0, 10)}
                                 textHandler={handleForm}
                             />
                             <InputBox
                                 title="Primary Contact"
                                 name="primaryContact"
-                                type="text"
-                                value={umpireDoc.primaryContact}
+                                type="number"
+                                value={umpire.primaryContact}
                                 textHandler={handleForm}
                             />
                             <InputBox
                                 title="Secondary Contact"
                                 name="secondaryContact"
-                                type="text"
-                                value={umpireDoc.secondaryContact}
+                                type="number"
+                                value={umpire.secondaryContact}
                                 textHandler={handleForm}
                             />
                             <InputBox
                                 title="Address"
                                 name="address"
                                 type="text"
-                                value={umpireDoc.address}
+                                value={umpire.address}
                                 textHandler={handleForm}
+                            />
+                            <SelectInputBox
+                                title="Panel"
+                                name="panel"
+                                options={['TDCA', 'TNCA']}
+                                value={umpire.panel}
+                                textHandler={handleSelectForm}
                             />
                         </div>
                     </div>
@@ -211,43 +234,43 @@ const UmpireEdit: React.FC<UmpireEditProps> = ({ setModalOpen, umpireDoc }): JSX
                             <InputBox
                                 title="Aadhar Number"
                                 name="aadharNumber"
-                                type="text"
-                                value={umpireDoc.aadharNumber}
+                                type="number"
+                                value={umpire.aadharNumber}
                                 textHandler={handleForm}
                             />
                             <InputBox
                                 title="GPay / PhonePay Number"
                                 name="payPhoneNumber"
-                                type="text"
-                                value={umpireDoc.payPhoneNumber}
+                                type="number"
+                                value={umpire.payPhoneNumber}
                                 textHandler={handleForm}
                             />
                             <InputBox
                                 title="Bank Account Number"
                                 name="bankAccountNumber"
-                                type="text"
-                                value={umpireDoc.bankAccountNumber}
+                                type="number"
+                                value={umpire.bankAccountNumber}
                                 textHandler={handleForm}
                             />
                             <InputBox
                                 title="Bank Name"
                                 name="bankName"
                                 type="text"
-                                value={umpireDoc.bankName}
+                                value={umpire.bankName}
                                 textHandler={handleForm}
                             />
                             <InputBox
                                 title="Bank Branch"
                                 name="bankBranch"
                                 type="text"
-                                value={umpireDoc.bankBranch}
+                                value={umpire.bankBranch}
                                 textHandler={handleForm}
                             />
                             <InputBox
                                 title="Bank IFSC Code"
                                 name="bankIFSC"
                                 type="text"
-                                value={umpireDoc.bankIFSC}
+                                value={umpire.bankIFSC}
                                 textHandler={handleForm}
                             />
                         </div>
@@ -262,98 +285,98 @@ const UmpireEdit: React.FC<UmpireEditProps> = ({ setModalOpen, umpireDoc }): JSX
                                 name="totalMatches"
                                 type="number"
                                 textHandler={handleForm}
-                                value={umpireDoc.totalMatches}
+                                value={umpire.totalMatches}
                             />
                             <InputBox
                                 title="Division 1"
                                 name="divisionMatches_one"
                                 type="number"
                                 textHandler={handleForm}
-                                value={umpireDoc.divisionMatches?.one}
+                                value={umpire.divisionMatches?.one}
                             />
                             <InputBox
                                 title="Division 2"
                                 name="divisionMatches_two"
                                 type="number"
                                 textHandler={handleForm}
-                                value={umpireDoc.divisionMatches?.two}
+                                value={umpire.divisionMatches?.two}
                             />
                             <InputBox
                                 title="Division 3"
                                 name="divisionMatches_three"
                                 type="number"
                                 textHandler={handleForm}
-                                value={umpireDoc.divisionMatches?.three}
+                                value={umpire.divisionMatches?.three}
                             />
                             <InputBox
                                 title="Division 4"
                                 name="divisionMatches_four"
                                 type="number"
                                 textHandler={handleForm}
-                                value={umpireDoc.divisionMatches?.four}
+                                value={umpire.divisionMatches?.four}
                             />
                             <InputBox
                                 title="Division 5"
                                 name="divisionMatches_five"
                                 type="number"
                                 textHandler={handleForm}
-                                value={umpireDoc.divisionMatches?.five}
+                                value={umpire.divisionMatches?.five}
                             />
                             <InputBox
                                 title="Inter District Match"
                                 name="typeMatches_interDistrictMatch"
                                 type="number"
                                 textHandler={handleForm}
-                                value={umpireDoc.typeMatches?.interDistrictMatch}
+                                value={umpire.typeMatches?.interDistrictMatch}
                             />
                             <InputBox
                                 title="KnockOut Matches"
                                 name="typeMatches_knockoutMatch"
                                 type="number"
                                 textHandler={handleForm}
-                                value={umpireDoc.typeMatches?.knockoutMatch}
+                                value={umpire.typeMatches?.knockoutMatch}
                             />
                             <InputBox
                                 title="League Matches"
                                 name="typeMatches_leagueMatch"
                                 type="number"
                                 textHandler={handleForm}
-                                value={umpireDoc.typeMatches?.leagueMatch}
+                                value={umpire.typeMatches?.leagueMatch}
                             />
                             <InputBox
                                 title="School Matches"
                                 name="typeMatches_schoolMatch"
                                 type="number"
                                 textHandler={handleForm}
-                                value={umpireDoc.typeMatches?.schoolMatch}
+                                value={umpire.typeMatches?.schoolMatch}
                             />
                             <InputBox
                                 title="TNCA Matches"
                                 name="typeMatches_tncaMatch"
                                 type="number"
                                 textHandler={handleForm}
-                                value={umpireDoc.typeMatches?.tncaMatch}
+                                value={umpire.typeMatches?.tncaMatch}
                             />
                             <InputBox
                                 title="Combined District Matches"
                                 name="typeMatches_combinedDistrictMatch"
                                 type="number"
                                 textHandler={handleForm}
-                                value={umpireDoc.typeMatches?.combinedDistrictMatch}
+                                value={umpire.typeMatches?.combinedDistrictMatch}
                             />
                             <InputBox
                                 title="InterDistrict Matches"
                                 name="typeMatches_interDistrictMatch"
                                 type="number"
                                 textHandler={handleForm}
-                                value={umpireDoc.typeMatches?.interDistrictMatch}
+                                value={umpire.typeMatches?.interDistrictMatch}
                             />
                             <InputBox
                                 title="Private Matches"
                                 name="typeMatches_privateMatch"
                                 type="number"
                                 textHandler={handleForm}
-                                value={umpireDoc.typeMatches?.privateMatch}
+                                value={umpire.typeMatches?.privateMatch}
                             />
                         </div>
                     </div>

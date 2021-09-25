@@ -116,11 +116,14 @@ const MatchesPage: React.FC<void> = (): JSX.Element => {
                     </div>
 
                     <div className="matchesPage__matchPageSelect">
-                        {isStart ? null : (
-                            <button className="matchesPage__matchPageSelect--btn" onClick={() => getPrev()}>
-                                Previous
-                            </button>
-                        )}
+                        {docs.length !== 0 ? (
+                            isStart ? null : (
+                                <button className="matchesPage__matchPageSelect--btn" onClick={() => getPrev()}>
+                                    Previous
+                                </button>
+                            )
+                        ) : null}
+
                         {isEnd ? null : (
                             <button className="matchesPage__matchPageSelect--btn" onClick={() => getNext()}>
                                 Next
