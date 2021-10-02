@@ -316,24 +316,24 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
                                 value={player.passport}
                                 textHandler={handleInputForm}
                             />
-                            <div className="upload">
-                                <div className="upload__btnWrapper">
-                                    <input type="file" name="pdfUrl" title="Upload Aadhar" onChange={handlePdfChange} />
-                                    <button className="upload--aadharBtn">
-                                        {player.pdfUrl || pdfUrl ? 'Uploaded' : 'Upload Aadhar'}
-                                    </button>
-                                </div>
-                                {player.pdfUrl ? (
-                                    <a className="upload--view" href={player.pdfUrl} target="_blank" rel="noreferrer">
-                                        Click to View
-                                    </a>
-                                ) : pdfUrl ? (
-                                    <a className="upload--view" href={pdfUrl} target="_blank" rel="noreferrer">
-                                        Click to View
-                                    </a>
-                                ) : null}
-                            </div>
                         </div>
+                    </div>
+                    <div className="upload">
+                        <div className="upload__btnWrapper">
+                            <input type="file" name="pdfUrl" title="Upload Aadhar" onChange={handlePdfChange} />
+                            <button className="upload--aadharBtn">
+                                {player.pdfUrl || pdfUrl ? 'Uploaded' : 'Upload Aadhar'}
+                            </button>
+                        </div>
+                        {player.pdfUrl ? (
+                            <a className="upload--view" href={player.pdfUrl} target="_blank" rel="noreferrer">
+                                Click to View
+                            </a>
+                        ) : pdfUrl ? (
+                            <a className="upload--view" href={pdfUrl} target="_blank" rel="noreferrer">
+                                Click to View
+                            </a>
+                        ) : null}
                     </div>
                     <div className="playerEditForm__stats">
                         <div className="playerEditForm__stats__header">

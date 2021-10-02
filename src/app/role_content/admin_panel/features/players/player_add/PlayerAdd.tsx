@@ -207,11 +207,11 @@ const PlayerAdd: React.FC<PlayerAddProps> = ({ setModalOpen }): JSX.Element => {
                                 textHandler={handleInputForm}
                             />
                             <InputBox title="Passport" name="passport" type="text" textHandler={handleInputForm} />
-                            <div className="upload-btn-wrapper">
-                                <input type="file" name="pdfUrl" title="Upload Aadhar" onChange={handlePdfChange} />
-                                <button className="aadharBtn">{pdfUrl ? 'Uploaded' : 'Upload Aadhar'}</button>
-                            </div>
                         </div>
+                    </div>
+                    <div className="upload-btn-wrapper">
+                        <input type="file" name="pdfUrl" title="Upload Aadhar" onChange={handlePdfChange} />
+                        <button className="aadharBtn">{pdfUrl ? 'Uploaded' : 'Upload Aadhar'}</button>
                     </div>
                     <div className="playerAddForm__stats">
                         <h1 className="playerAddForm__stats--header">Statistics</h1>

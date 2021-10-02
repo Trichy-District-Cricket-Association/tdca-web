@@ -34,7 +34,7 @@
     }
     &__playerCard {
         display: grid;
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         grid-auto-rows: auto;
         margin-bottom: 80px;
     }
@@ -56,21 +56,15 @@
         margin-right: 20px;
     }
 }
-@media screen and (max-width: 1599px) {
-    .playersOverview {
-        &__playerCard {
-            grid-template-columns: repeat(4, 1fr);
-        }
-    }
-}
-@media screen and (max-width: 1400px) {
+
+@media screen and (max-width: 1250px) {
     .playersOverview {
         &__playerCard {
             grid-template-columns: repeat(3, 1fr);
         }
     }
 }
-@media screen and (max-width: 1050px) {
+@media screen and (max-width: 950px) {
     .playersOverview {
         text-align: center;
         &__playerCard {

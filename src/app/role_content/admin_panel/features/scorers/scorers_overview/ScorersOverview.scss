@@ -30,26 +30,20 @@
     }
     &__scorerCard {
         display: grid;
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         grid-auto-rows: auto;
         margin-bottom: 80px;
     }
 }
-@media screen and (max-width: 1599px) {
-    .scorersOverview {
-        &__scorerCard {
-            grid-template-columns: repeat(4, 1fr);
-        }
-    }
-}
-@media screen and (max-width: 1400px) {
+@media screen and (max-width: 1250px) {
     .scorersOverview {
         &__scorerCard {
             grid-template-columns: repeat(3, 1fr);
         }
     }
 }
-@media screen and (max-width: 1050px) {
+
+@media screen and (max-width: 950px) {
     .scorersOverview {
         text-align: center;
         &__scorerCard {
