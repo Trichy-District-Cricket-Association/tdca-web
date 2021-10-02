@@ -12,8 +12,8 @@ export default class Ground {
     /** Name of the ground. */
     groundName?: string;
 
-        /**ground Photo Url */
-        avatarUrl?: string;
+    /**ground Photo Url */
+    avatarUrl?: string;
 
     /** Number of total matches in that ground. */
     totalMatches?: number;
