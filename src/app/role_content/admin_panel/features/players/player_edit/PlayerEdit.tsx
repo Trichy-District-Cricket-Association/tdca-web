@@ -30,6 +30,7 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
             playerName: playerDoc.playerName,
             avatarUrl: playerDoc.avatarUrl,
             pdfUrl: playerDoc.pdfUrl,
+            aadharUrl: playerDoc.aadharUrl,
             emailId: playerDoc.emailId,
             dateOfBirth: playerDoc.dateOfBirth,
             primaryContact: playerDoc.primaryContact,
@@ -50,9 +51,9 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
     // State to handle uploading files.
     const [imageFile, setImageFile] = useState(null);
     const [pdfFile, setPdfFile] = useState(null);
-
+    const [aadharFile, setAadharFile] = useState(null);
     // Getting the progress and avatarUrl from the hook.
-    const { avatarUrl, pdfUrl } = useStorage(imageFile, pdfFile);
+    const { avatarUrl, pdfUrl, aadharUrl } = useStorage(imageFile, pdfFile, aadharFile);
     const imageTypes = ['image/png', 'image/jpeg', 'image/jpg'];
     const pdfTypes = ['application/pdf'];
     // Functions to check the type of file.
@@ -64,6 +65,17 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
             } else {
                 setImageFile(null);
                 window.alert('Please select an image file (png or jpg)');
+            }
+        }
+    };
+    const handleAadharChange = (e: any) => {
+        const selectedAadharFile = e.target.files[0];
+        if (selectedAadharFile) {
+            if (pdfTypes.includes(selectedAadharFile.type)) {
+                setAadharFile(selectedAadharFile);
+            } else {
+                setAadharFile(null);
+                window.alert('Please select an pdf file');
             }
         }
     };
@@ -126,6 +138,12 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
         }
         if (pdfUrl) {
             player.setPdf = pdfUrl;
+        }
+        if (playerDoc.aadharUrl) {
+            player.setAadhar = playerDoc.aadharUrl;
+        }
+        if (aadharUrl) {
+            player.setAadhar = aadharUrl;
         }
         await firestore
             .collection(Collections.players)
@@ -318,11 +336,27 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
                             />
                         </div>
                     </div>
+
                     <div className="upload">
                         <div className="upload__btnWrapper">
-                            <input type="file" name="pdfUrl" title="Upload Aadhar" onChange={handlePdfChange} />
+                            <input type="file" name="aadharUrl" title="Upload Aadhar" onChange={handleAadharChange} />
                             <button className="upload--aadharBtn">
-                                {player.pdfUrl || pdfUrl ? 'Uploaded' : 'Upload Aadhar'}
+                                {player.aadharUrl || aadharUrl ? 'Uploaded' : 'Upload Aadhar'}
+                            </button>
+                        </div>
+                        {player.aadharUrl ? (
+                            <a className="upload--view" href={player.aadharUrl} target="_blank" rel="noreferrer">
+                                Click to View
+                            </a>
+                        ) : aadharUrl ? (
+                            <a className="upload--view" href={aadharUrl} target="_blank" rel="noreferrer">
+                                Click to View
+                            </a>
+                        ) : null}
+                        <div className="upload__btnWrapper">
+                            <input type="file" name="pdfUrl" title="Upload File" onChange={handlePdfChange} />
+                            <button className="upload--pdfBtn">
+                                {player.pdfUrl || pdfUrl ? 'Uploaded' : 'Upload File'}
                             </button>
                         </div>
                         {player.pdfUrl ? (
@@ -335,6 +369,7 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
                             </a>
                         ) : null}
                     </div>
+
                     <div className="playerEditForm__stats">
                         <div className="playerEditForm__stats__header">
                             <h1 className="playerEditForm__stats__header--text">Statistics</h1>

@@ -22,9 +22,9 @@ const PlayerAdd: React.FC<PlayerAddProps> = ({ setModalOpen }): JSX.Element => {
     // State to handle uploading files.
     const [imageFile, setImageFile] = useState(null);
     const [pdfFile, setPdfFile] = useState(null);
-
+    const [aadharFile, setAadharFile] = useState(null);
     // Getting the progress and avatarUrl from the hook.
-    const { avatarUrl, pdfUrl } = useStorage(imageFile, pdfFile);
+    const { avatarUrl, pdfUrl, aadharUrl } = useStorage(imageFile, pdfFile, aadharFile);
     const imageTypes = ['image/png', 'image/jpeg', 'image/jpg'];
     const pdfTypes = ['application/pdf'];
     // Functions to check the type of file.
@@ -50,7 +50,17 @@ const PlayerAdd: React.FC<PlayerAddProps> = ({ setModalOpen }): JSX.Element => {
             }
         }
     };
-
+    const handleAadharChange = (e: any) => {
+        const selectedAadharFile = e.target.files[0];
+        if (selectedAadharFile) {
+            if (pdfTypes.includes(selectedAadharFile.type)) {
+                setAadharFile(selectedAadharFile);
+            } else {
+                setAadharFile(null);
+                window.alert('Please select an pdf file');
+            }
+        }
+    };
     const [selectable, setSelectable] = useState<{ teams: Team[] } | undefined>();
     const fetchTeam = async (): Promise<void> => {
         const newSelectable: { teams: Team[] } = {
@@ -90,6 +100,7 @@ const PlayerAdd: React.FC<PlayerAddProps> = ({ setModalOpen }): JSX.Element => {
     const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         player.setAvatar = avatarUrl;
+        player.setAadhar = aadharUrl;
         player.setPdf = pdfUrl;
         setIsLoading(true);
         await firestore
@@ -210,8 +221,12 @@ const PlayerAdd: React.FC<PlayerAddProps> = ({ setModalOpen }): JSX.Element => {
                         </div>
                     </div>
                     <div className="upload-btn-wrapper">
-                        <input type="file" name="pdfUrl" title="Upload Aadhar" onChange={handlePdfChange} />
-                        <button className="aadharBtn">{pdfUrl ? 'Uploaded' : 'Upload Aadhar'}</button>
+                        <input type="file" name="aadharUrl" title="Upload Aadhar" onChange={handleAadharChange} />
+                        <button className="aadharBtn">{aadharUrl ? 'Uploaded' : 'Upload Aadhar'}</button>
+                    </div>
+                    <div className="upload-btn-wrapper">
+                        <input type="file" name="pdfUrl" title="Upload File" onChange={handlePdfChange} />
+                        <button className="pdfBtn">{pdfUrl ? 'Uploaded' : 'Upload File'}</button>
                     </div>
                     <div className="playerAddForm__stats">
                         <h1 className="playerAddForm__stats--header">Statistics</h1>
