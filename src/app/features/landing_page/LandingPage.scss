@@ -6,7 +6,9 @@
 ::-webkit-scrollbar {
     width: 10px;
 }
-
+body {
+    zoom: 84%;
+}
 /* Track */
 ::-webkit-scrollbar-track {
     background: #f1f1f1;

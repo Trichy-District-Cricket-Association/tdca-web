@@ -15,6 +15,8 @@ export default class Player {
 
     avatarUrl?: string;
 
+    aadharUrl?: string;
+
     emailId?: string;
 
     dateOfBirth?: Date;
@@ -25,7 +27,7 @@ export default class Player {
 
     registerationFee?: string;
 
-    dateOfRegisteration?:Date;
+    dateOfRegisteration?: Date;
 
     aadharNumber?: string;
 
@@ -42,7 +44,6 @@ export default class Player {
     battingStats?: BattingStats;
 
     bowlingStats?: BowlingStats;
-
 
     pdfUrl?: string;
 
@@ -86,6 +87,9 @@ export default class Player {
     set setPdf(url: string) {
         this.pdfUrl = url;
     }
+    set setAadhar(url: string) {
+        this.aadharUrl = url;
+    }
 
     constructor({
         docId,
@@ -96,7 +100,6 @@ export default class Player {
         avatarUrl,
         emailId,
         dateOfBirth,
-        
         primaryContact,
         registerationFee,
         dateOfRegisteration,
@@ -109,7 +112,8 @@ export default class Player {
         passport,
         battingStats,
         bowlingStats,
-        pdfUrl
+        pdfUrl,
+        aadharUrl,
     }: {
         docId?: string;
         playerId?: string;
@@ -117,13 +121,14 @@ export default class Player {
         teamId?: string;
         playerName?: string;
         avatarUrl?: string;
+        aadharUrl?: string;
         emailId?: string;
         dateOfBirth?: Date;
         fatherName?: string;
         primaryContact?: string;
         registerationFee?: string;
 
-    dateOfRegisteration?:Date;
+        dateOfRegisteration?: Date;
         aadharNumber?: string;
         voterId?: string;
         rationCardNumber?: string;
@@ -141,6 +146,8 @@ export default class Player {
         this.playerName = playerName ?? '';
         if (avatarUrl) this.avatarUrl = avatarUrl;
         if (pdfUrl) this.pdfUrl = pdfUrl;
+        if (aadharUrl) this.aadharUrl = aadharUrl;
+
         this.emailId = emailId ?? '';
         this.dateOfBirth = dateOfBirth;
         this.primaryContact = primaryContact ?? '';
@@ -180,6 +187,7 @@ export default class Player {
             playerName: doc.data()?.playerName,
             avatarUrl: doc.data()?.avatarUrl,
             pdfUrl: doc.data()?.pdfUrl,
+            aadharUrl: doc.data()?.aadharUrl,
             emailId: doc.data()?.emailId,
             dateOfBirth: new Date(doc.data()?.dateOfBirth),
             primaryContact: doc.data()?.primaryContact,

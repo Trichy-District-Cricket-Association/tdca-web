@@ -126,12 +126,14 @@
     }
     .upload {
         display: flex;
+
         &__btnWrapper {
             position: relative;
             overflow: hidden;
             display: inline-block;
         }
-        &--aadharBtn {
+        &--aadharBtn,
+        &--pdfBtn {
             color: rgb(255, 255, 255);
             background-color: #071833;
             padding: 8px 20px;
