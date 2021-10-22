@@ -26,7 +26,7 @@ const PlayerAdd: React.FC<PlayerAddProps> = ({ setModalOpen }): JSX.Element => {
     // Getting the progress and avatarUrl from the hook.
     const { avatarUrl, pdfUrl, aadharUrl } = useStorage(imageFile, pdfFile, aadharFile);
     const imageTypes = ['image/png', 'image/jpeg', 'image/jpg'];
-    const pdfTypes = ['application/pdf'];
+    const pdfTypes = ['application/pdf', 'image/png', 'image/jpeg', 'image/jpg'];
     // Functions to check the type of file.
     const handleAvatarChange = (e: any) => {
         const selectedImageFile = e.target.files[0];

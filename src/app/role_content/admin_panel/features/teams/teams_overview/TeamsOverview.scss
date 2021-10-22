@@ -29,6 +29,7 @@
         text-align: center;
         margin: 30px;
         &--btn {
+            margin-left: 30px;
             background-color: #071833;
             padding: 0.5rem 2rem;
             color: #fff;
@@ -37,6 +38,9 @@
             cursor: pointer;
             border-radius: 8px;
         }
+    }
+    &__teamSelect {
+        display: flex;
     }
     &__teamSelect select {
         background-color: #071833;
