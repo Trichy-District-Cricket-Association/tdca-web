@@ -52,18 +52,20 @@
         text-transform: uppercase;
     }
 }
-@media screen and (max-width: 1400px) {
+@media screen and (max-width: 1200px) {
     .oldMatchesOverview {
         &__matchCard {
             grid-template-columns: repeat(3, 1fr);
         }
     }
 }
-@media screen and (max-width: 1050px) {
+@media screen and (max-width: 900px) {
     .oldMatchesOverview {
         text-align: center;
+
         &__matchCard {
             grid-template-columns: repeat(2, 1fr);
+            justify-items: center;
         }
     }
 }

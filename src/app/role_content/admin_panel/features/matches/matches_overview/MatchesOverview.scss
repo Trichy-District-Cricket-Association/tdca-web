@@ -64,18 +64,19 @@
         margin-left: 20px;
     }
 }
-@media screen and (max-width: 1400px) {
+@media screen and (max-width: 1250px) {
     .matchesOverview {
         &__matchCard {
             grid-template-columns: repeat(3, 1fr);
         }
     }
 }
-@media screen and (max-width: 1050px) {
+@media screen and (max-width: 950px) {
     .matchesOverview {
         text-align: center;
         &__matchCard {
             grid-template-columns: repeat(2, 1fr);
+            justify-items: center;
         }
     }
 }

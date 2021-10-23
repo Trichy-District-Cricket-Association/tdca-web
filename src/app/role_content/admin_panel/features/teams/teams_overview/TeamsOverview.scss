@@ -21,7 +21,7 @@
     }
     &__teamCard {
         display: grid;
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         grid-auto-rows: auto;
         margin-bottom: 80px;
     }
@@ -29,6 +29,7 @@
         text-align: center;
         margin: 30px;
         &--btn {
+            margin-left: 30px;
             background-color: #071833;
             padding: 0.5rem 2rem;
             color: #fff;
@@ -37,6 +38,9 @@
             cursor: pointer;
             border-radius: 8px;
         }
+    }
+    &__teamSelect {
+        display: flex;
     }
     &__teamSelect select {
         background-color: #071833;
@@ -73,24 +77,19 @@
         margin-left: 20px;
     }
 }
-@media screen and (max-width: 1599px) {
-    .teamsOverview {
-        &__teamCard {
-            grid-template-columns: repeat(4, 1fr);
-        }
-    }
-}
-@media screen and (max-width: 1400px) {
+
+@media screen and (max-width: 1200px) {
     .teamsOverview {
         &__teamCard {
             grid-template-columns: repeat(3, 1fr);
         }
     }
 }
-@media screen and (max-width: 1050px) {
+@media screen and (max-width: 900px) {
     .teamsOverview {
         text-align: center;
         &__teamCard {
+            justify-items: center;
             grid-template-columns: repeat(2, 1fr);
         }
     }
@@ -99,7 +98,6 @@
     .teamsOverview {
         &__teamCard {
             grid-template-columns: repeat(1, 1fr);
-            justify-items: center;
         }
     }
 }

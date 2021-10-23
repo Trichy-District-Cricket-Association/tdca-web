@@ -11,8 +11,9 @@ import TeamCard from '../team_card/TeamCard';
 import { usePagination } from 'use-pagination-firestore';
 import PointsTable from '../points_table/PointsTable';
 
+const divisionTypes = [1, 2, 3, 4, 5];
 const teamTypes = ['League Team', 'School Team', 'Knockout Team'];
-const baseTeamQuery = firestore.collection(Collections.teams);
+const baseTeamQuery = firestore.collection(Collections.teams).orderBy('won', 'desc');
 
 const TeamsOverview: React.FC<void> = (): JSX.Element => {
     const [isTeamModalOpen, setTeamModalOpen] = useState(false);
@@ -23,19 +24,29 @@ const TeamsOverview: React.FC<void> = (): JSX.Element => {
         limit: 10,
     });
     const [selectedTeamType, setSelectedTeamType] = useState<string | undefined>();
+    const [selectedDivisionType, setSelectedDivisionType] = useState<number | undefined>();
 
     const switchSelectedTeamType = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedTeamType(e.target.value);
+        setSelectedDivisionType(undefined);
     };
+    const switchDivisionType = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setSelectedDivisionType(parseInt(e.target.value));
+    };
+
+    //  Callback to change the query based on the selected type.
     useEffect(() => {
         if (selectedTeamType == 'Select Type') {
             window.location.reload();
         }
         if (selectedTeamType) {
-            const newQuery = baseTeamQuery.where('type', '==', selectedTeamType);
+            let newQuery = baseTeamQuery.where('type', '==', selectedTeamType);
+            if (selectedDivisionType) {
+                newQuery = newQuery.where('division', '==', selectedDivisionType);
+            }
             setQuery(newQuery);
         }
-    }, [selectedTeamType]);
+    }, [selectedTeamType, selectedDivisionType]);
     const headers = [
         { label: 'TEAM ID', key: 'teamId' },
         { label: 'TEAM NAME', key: 'teamName' },
@@ -84,9 +95,26 @@ const TeamsOverview: React.FC<void> = (): JSX.Element => {
                             ))}
                         </select>
                         {selectedTeamType == 'League Team' ? (
-                            <button className="teamsOverview__pointsTable" onClick={() => setStandingsModalOpen(true)}>
-                                Points Table
-                            </button>
+                            <div className="teamsOverview__teamSelect">
+                                <select
+                                    className="teamsOverview__teamDivisionSelect--btn"
+                                    value={selectedDivisionType}
+                                    onChange={switchDivisionType}
+                                >
+                                    <option>Select Division</option>
+                                    {divisionTypes.map((division) => (
+                                        <option key={division} value={division}>
+                                            Division {division}
+                                        </option>
+                                    ))}
+                                </select>
+                                <button
+                                    className="teamsOverview__pointsTable"
+                                    onClick={() => setStandingsModalOpen(true)}
+                                >
+                                    Points Table
+                                </button>
+                            </div>
                         ) : null}
                     </div>
                     <div className="teamsOverview__teamCard">
@@ -96,7 +124,7 @@ const TeamsOverview: React.FC<void> = (): JSX.Element => {
                                 <TeamCard teamDoc={teamDoc} key={teamDoc.teamId ?? ''} />
                             ))}
                     </div>
-                    {/* <div className="teamsOverview__pagination">
+                    <div className="teamsOverview__pagination">
                         {isStart ? null : (
                             <button className="teamsOverview__pagination--btn" onClick={() => getPrev()}>
                                 Previous
@@ -107,7 +135,7 @@ const TeamsOverview: React.FC<void> = (): JSX.Element => {
                                 Next
                             </button>
                         )}
-                    </div> */}
+                    </div>
                     {isTeamModalOpen ? <TeamAdd setModalOpen={setTeamModalOpen} /> : null}
                     {isStandingsModalOpen ? <PointsTable setModalOpen={setStandingsModalOpen} /> : null}
                 </div>
