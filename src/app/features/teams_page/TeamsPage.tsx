@@ -10,8 +10,9 @@ import { usePagination } from 'use-pagination-firestore';
 import PointsTable from './points_table/PointsTable';
 import Footer from '../../shared_components/Footer/Footer';
 
+const divisionTypes = [1, 2, 3, 4, 5];
 const teamTypes = ['League Team', 'School Team', 'Knockout Team'];
-const baseTeamQuery = firestore.collection(Collections.teams);
+const baseTeamQuery = firestore.collection(Collections.teams).orderBy('won', 'desc');
 
 const TeamsPage: React.FC<void> = (): JSX.Element => {
     const [isModalOpen, setModalOpen] = useState(false);
@@ -19,20 +20,31 @@ const TeamsPage: React.FC<void> = (): JSX.Element => {
     const { docs, isLoading, isStart, isEnd, getPrev, getNext } = usePagination<Team>(query, {
         limit: 10,
     });
+
     const [selectedTeamType, setSelectedTeamType] = useState<string | undefined>();
+    const [selectedDivisionType, setSelectedDivisionType] = useState<number | undefined>();
 
     const switchSelectedTeamType = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedTeamType(e.target.value);
+        setSelectedDivisionType(undefined);
     };
+    const switchDivisionType = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setSelectedDivisionType(parseInt(e.target.value));
+    };
+
+    //  Callback to change the query based on the selected type.
     useEffect(() => {
         if (selectedTeamType == 'Select Type') {
             window.location.reload();
         }
         if (selectedTeamType) {
-            const newQuery = baseTeamQuery.where('type', '==', selectedTeamType);
+            let newQuery = baseTeamQuery.where('type', '==', selectedTeamType);
+            if (selectedDivisionType) {
+                newQuery = newQuery.where('division', '==', selectedDivisionType);
+            }
             setQuery(newQuery);
         }
-    }, [selectedTeamType]);
+    }, [selectedTeamType, selectedDivisionType]);
 
     return (
         <div>
@@ -60,9 +72,23 @@ const TeamsPage: React.FC<void> = (): JSX.Element => {
                             ))}
                         </select>
                         {selectedTeamType == 'League Team' ? (
-                            <button className="teamsPage__pointsTable" onClick={() => setModalOpen(true)}>
-                                Points Table
-                            </button>
+                            <div className="teamsPage__teamSelect">
+                                <select
+                                    className="teamsPage__teamDivisionSelect--btn"
+                                    value={selectedDivisionType}
+                                    onChange={switchDivisionType}
+                                >
+                                    <option>Select Division</option>
+                                    {divisionTypes.map((division) => (
+                                        <option key={division} value={division}>
+                                            Division {division}
+                                        </option>
+                                    ))}
+                                </select>
+                                <button className="teamsPage__pointsTable" onClick={() => setModalOpen(true)}>
+                                    Points Table
+                                </button>
+                            </div>
                         ) : null}
                     </div>
                     <div className="teamsPage__teamCards">
@@ -72,7 +98,7 @@ const TeamsPage: React.FC<void> = (): JSX.Element => {
                                 <TeamCard teamDoc={teamDoc} key={teamDoc.teamId ?? ''} />
                             ))}
                     </div>
-                    {/* <div className="teamsPage__pagination">
+                    <div className="teamsPage__pagination">
                         {isStart ? null : (
                             <button className="teamsPage__pagination--btn" onClick={() => getPrev()}>
                                 Previous
@@ -83,7 +109,7 @@ const TeamsPage: React.FC<void> = (): JSX.Element => {
                                 Next
                             </button>
                         )}
-                    </div> */}
+                    </div>
 
                     {isModalOpen ? <PointsTable setModalOpen={setModalOpen} /> : null}
                     <Footer />

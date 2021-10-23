@@ -48,6 +48,7 @@
         text-align: center;
         &__groundsManCard {
             grid-template-columns: repeat(2, 1fr);
+            justify-items: center;
         }
     }
 }
@@ -55,7 +56,6 @@
     .groundsMenOverview {
         &__groundsManCard {
             grid-template-columns: repeat(1, 1fr);
-            justify-items: center;
         }
     }
 }
