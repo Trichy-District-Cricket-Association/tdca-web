@@ -95,7 +95,7 @@ const TeamsOverview: React.FC<void> = (): JSX.Element => {
                             ))}
                         </select>
                         {selectedTeamType == 'League Team' ? (
-                            <div className="teamsOverview__teamSelect">
+                            <div>
                                 <select
                                     className="teamsOverview__teamDivisionSelect--btn"
                                     value={selectedDivisionType}

@@ -72,7 +72,7 @@ const TeamsPage: React.FC<void> = (): JSX.Element => {
                             ))}
                         </select>
                         {selectedTeamType == 'League Team' ? (
-                            <div className="teamsPage__teamSelect">
+                            <div>
                                 <select
                                     className="teamsPage__teamDivisionSelect--btn"
                                     value={selectedDivisionType}

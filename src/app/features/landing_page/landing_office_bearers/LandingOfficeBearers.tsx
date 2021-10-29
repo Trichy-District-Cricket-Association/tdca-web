@@ -128,7 +128,7 @@ const LandingOfficeBearers: React.FC<any> = (): JSX.Element => {
                     <div className="officeBearer__row2">
                         <h1 className="officeBearer__row2--name">T Kumar</h1>
                         <p className="officeBearer__row2--designation">Jt Secretary</p>
-                        <p className="officeBearer__row2--contact">majestic.cc@gmail.com</p>
+                        <p className="officeBearer__row2--contact">mejestic.cc@gmail.com</p>
                     </div>
                 </div>
 
