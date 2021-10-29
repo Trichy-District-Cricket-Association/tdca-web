@@ -46,7 +46,7 @@ const PlayerAdd: React.FC<PlayerAddProps> = ({ setModalOpen }): JSX.Element => {
                 setPdfFile(selectedPdfFile);
             } else {
                 setPdfFile(null);
-                window.alert('Please select an pdf file');
+                window.alert('Format not supported');
             }
         }
     };
@@ -57,7 +57,7 @@ const PlayerAdd: React.FC<PlayerAddProps> = ({ setModalOpen }): JSX.Element => {
                 setAadharFile(selectedAadharFile);
             } else {
                 setAadharFile(null);
-                window.alert('Please select an pdf file');
+                window.alert('Format not supported');
             }
         }
     };
