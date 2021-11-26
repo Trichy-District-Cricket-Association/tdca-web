@@ -63,9 +63,9 @@ const MatchesPage: React.FC<void> = (): JSX.Element => {
                         <div className="matchesPage__header__header1">
                             <h1 className="matchesPage__header__header1--text">
                                 {selectedMatchType == 'League Match'
-                                    ? 'Kauvey Hospital TDCA League'
+                                    ? 'Kauvery Hospital TDCA League'
                                     : selectedMatchType == 'Knockout Match'
-                                    ? 'Kauvey Hospital TDCA Qualifying Knockout'
+                                    ? 'Kauvery Hospital TDCA Qualifying Knockout'
                                     : 'Match Details'}
                             </h1>
                         </div>
