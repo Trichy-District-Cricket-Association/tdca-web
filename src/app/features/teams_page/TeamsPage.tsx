@@ -13,6 +13,7 @@ import Footer from '../../shared_components/Footer/Footer';
 const divisionTypes = [1, 2, 3, 4, 5];
 const teamTypes = ['League Team', 'School Team', 'Knockout Team'];
 const baseTeamQuery = firestore.collection(Collections.teams).orderBy('won', 'desc');
+const kaveryLogo1 = `${process.env.PUBLIC_URL}/assets/images/kaveryHospital1.jpeg`;
 
 const TeamsPage: React.FC<void> = (): JSX.Element => {
     const [isModalOpen, setModalOpen] = useState(false);
@@ -54,6 +55,7 @@ const TeamsPage: React.FC<void> = (): JSX.Element => {
                 <div className="teamsPage">
                     <div className="teamsPage__header">
                         <div className="teamsPage__header__header1">
+                            <img src={kaveryLogo1} className="staffsPage__header__header1--img" />
                             <h1 className="teamsPage__header__header1--text">Teams Details</h1>
                         </div>
                         <div className="teamsPage__header__header2"></div>
@@ -112,7 +114,7 @@ const TeamsPage: React.FC<void> = (): JSX.Element => {
                     </div>
 
                     {isModalOpen ? <PointsTable setModalOpen={setModalOpen} /> : null}
-                    <Footer />
+                    {/* <Footer /> */}
                 </div>
             )}
         </div>

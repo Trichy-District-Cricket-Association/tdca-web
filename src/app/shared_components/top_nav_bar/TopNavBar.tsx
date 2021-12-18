@@ -64,8 +64,8 @@ const TopNav = (): JSX.Element => {
                         </Link>
                     </div>
                     <div className="item">
-                        <Link to={PageRoutes.matches} className="nav__link" onClick={() => toggleMobileOpen(false)}>
-                            Matches
+                        <Link to={PageRoutes.aboutUs} className="nav__link" onClick={() => toggleMobileOpen(false)}>
+                            About Us
                         </Link>
                     </div>
                     <div className="item">
@@ -74,15 +74,25 @@ const TopNav = (): JSX.Element => {
                         </Link>
                     </div>
                     <div className="item">
-                        <Link to={PageRoutes.staffs} className="nav__link" onClick={() => toggleMobileOpen(false)}>
-                            Staffs
+                        <Link to={PageRoutes.matches} className="nav__link" onClick={() => toggleMobileOpen(false)}>
+                            Matches
                         </Link>
                     </div>
+
                     <div className="item">
-                        <Link to={PageRoutes.aboutUs} className="nav__link" onClick={() => toggleMobileOpen(false)}>
-                            About Us
+                        <Link to={PageRoutes.staffs} className="nav__link" onClick={() => toggleMobileOpen(false)}>
+                            Governance
                         </Link>
+                        {/* <div>
+                        <Link to={PageRoutes.staffs} className="nav__link" onClick={() => toggleMobileOpen(false)}>
+                            Umpires
+                        </Link>
+                        <Link to={PageRoutes.staffs} className="nav__link" onClick={() => toggleMobileOpen(false)}>
+                            Scorers
+                        </Link>
+                        </div> */}
                     </div>
+
                     {authData === undefined ? null : authData === null ? (
                         <div>
                             <Link to={PageRoutes.home} className="nav__btn" onClick={loginClick}>

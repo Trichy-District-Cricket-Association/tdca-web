@@ -1,11 +1,14 @@
 import './AboutUsPage.scss';
 
 const logo = `${process.env.PUBLIC_URL}/assets/images/logo.jpg`;
+const kaveryLogo1 = `${process.env.PUBLIC_URL}/assets/images/kaveryHospital1.jpeg`;
+
 const AboutUsPage: React.FC<void> = (): JSX.Element => {
     return (
         <div className="aboutUsPage">
             <div className="aboutUsPage__header">
                 <div className="aboutUsPage__header__header1">
+                    <img src={kaveryLogo1} className="aboutUsPage__header__header1--img" />
                     <h1 className="aboutUsPage__header__header1--text">About TDCA</h1>
                 </div>
                 <div className="aboutUsPage__header__header2"></div>
