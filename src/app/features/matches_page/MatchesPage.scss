@@ -3,10 +3,19 @@
     &__header {
         display: flex;
         &__header1 {
-            &--text {
+            &--undefined,
+            &--SchoolTournament {
                 color: #fff;
-                margin-top: 7%;
-                font-size: 60px;
+                margin-top: 150px;
+                font-size: 70px;
+                margin-left: 55px;
+                letter-spacing: 3px;
+            }
+            &--LeagueTournament,
+            &--KnockoutTournament {
+                color: #fff;
+                margin-top: 6%;
+                font-size: 50px;
                 margin-left: 55px;
                 letter-spacing: 3px;
                 margin-right: 10px;
@@ -85,9 +94,19 @@
         &__header {
             display: flex;
             &__header1 {
-                &--text {
+                &--undefined,
+                &--SchoolTournament {
                     margin-top: 100px;
                     margin-right: 50px;
+                }
+                &--LeagueTournament,
+                &--KnockoutTournament {
+                    color: #fff;
+                    margin-top: 6%;
+                    font-size: 50px;
+                    margin-left: 55px;
+                    letter-spacing: 3px;
+                    margin-right: 10px;
                 }
                 height: 350px;
                 width: 100%;
@@ -115,10 +134,20 @@
                     height: 160px;
                     border-radius: 10px;
                 }
-                &--text {
+                &--undefined,
+                &--SchoolTournament {
                     margin-top: -2rem;
                     margin-right: 50px;
                     font-size: 50px;
+                }
+                &--LeagueTournament,
+                &--KnockoutTournament {
+                    color: #fff;
+                    margin-top: -10px;
+                    font-size: 45px;
+                    margin-left: 55px;
+                    letter-spacing: 3px;
+                    margin-right: 10px;
                 }
                 display: grid;
             }
