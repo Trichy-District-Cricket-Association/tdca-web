@@ -10,9 +10,9 @@ import MatchCard from './match_card/MatchCard';
 import Footer from '../../shared_components/Footer/Footer';
 
 const divisionTypes = [1, 2, 3, 4, 5];
-const matchTypes = ['League Match', 'School Match', 'Knockout Match'];
+const matchTypes = ['LeagueTournament', 'SchoolTournament', 'KnockoutTournament'];
 const schoolMatchTypes = ['Below 8th Std', 'Below 10th Std', 'Below 12th Std'];
-
+const kaveryLogo1 = `${process.env.PUBLIC_URL}/assets/images/kaveryHospital1.jpeg`;
 const baseMatchQuery = firestore.collection(Collections.matches).orderBy('date', 'desc');
 
 const MatchesPage: React.FC<void> = (): JSX.Element => {
@@ -61,7 +61,14 @@ const MatchesPage: React.FC<void> = (): JSX.Element => {
                 <div className="matchesPage">
                     <div className="matchesPage__header">
                         <div className="matchesPage__header__header1">
-                            <h1 className="matchesPage__header__header1--text">Match Details</h1>
+                            <img src={kaveryLogo1} className="matchesPage__header__header1--img" />
+                            <h1 className={`matchesPage__header__header1--${selectedMatchType}`}>
+                                {selectedMatchType == 'LeagueTournament'
+                                    ? 'Kauvery Hospital TDCA League Tournament'
+                                    : selectedMatchType == 'KnockoutTournament'
+                                    ? 'Kauvery Hospital TDCA Qualifying Knockout Tournament'
+                                    : 'Match Details'}
+                            </h1>
                         </div>
                         <div className="matchesPage__header__header2"></div>
                     </div>
@@ -74,11 +81,17 @@ const MatchesPage: React.FC<void> = (): JSX.Element => {
                             <option>Select Type</option>
                             {matchTypes.map((matchType) => (
                                 <option key={matchType} value={matchType}>
-                                    {matchType}
+                                    {matchType == 'LeagueTournament'
+                                        ? 'League Tournament'
+                                        : matchType == 'KnockoutTournament'
+                                        ? 'Knockout Tournament'
+                                        : matchType == 'SchoolTournament'
+                                        ? 'School Tournament'
+                                        : 'Select Type'}
                                 </option>
                             ))}
                         </select>
-                        {selectedMatchType == 'League Match' ? (
+                        {selectedMatchType == 'LeagueTournament' ? (
                             <select
                                 className="matchesPage__matchDivisionSelect--btn"
                                 value={selectedDivisionType}
@@ -92,7 +105,7 @@ const MatchesPage: React.FC<void> = (): JSX.Element => {
                                 ))}
                             </select>
                         ) : null}
-                        {selectedMatchType == 'School Match' ? (
+                        {selectedMatchType == 'SchoolTournament' ? (
                             <select
                                 className="matchesPage__matchSchoolSelect--btn"
                                 value={selectedSchoolMatchType}
@@ -130,7 +143,7 @@ const MatchesPage: React.FC<void> = (): JSX.Element => {
                             </button>
                         )}
                     </div>
-                    <Footer />
+                    {/* <Footer /> */}
                 </div>
             )}
         </div>

@@ -44,7 +44,6 @@ const GroundsOverview: React.FC<void> = (): JSX.Element => {
                     <button className="groundsOverview__groundAddBtn" onClick={() => setModalOpen(true)}>
                         + Add Ground
                     </button>
-
                     <CSVLink
                         className="groundsOverview__dataDownload"
                         data={JSON.parse(JSON.stringify(groundDocs))}
