@@ -1,0 +1,115 @@
+.media {
+    width: 76%;
+    height: 90%;
+    border-radius: 10px;
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    bottom: 40px;
+    background-color: #fff;
+    overflow-y: scroll;
+    &__overlay {
+        background-color: #131313;
+    }
+    .mediaForm {
+        margin-top: 20px;
+        .input_box {
+            max-width: 900px;
+            input {
+                height: 50px;
+                font-size: 20pxz;
+            }
+        }
+        .description {
+            margin: auto;
+            .input_box {
+                span {
+                    height: 28px;
+                }
+            }
+
+            .input_box input {
+                height: 400px;
+            }
+        }
+        .text {
+            font-family: 'Poppins';
+            font-size: 35px;
+            text-align: center;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-around;
+            .upload-btn-wrapper {
+                position: relative;
+                overflow: hidden;
+                display: inline-block;
+
+                .photoBtn {
+                    color: rgb(255, 255, 255);
+                    background-color: #071833;
+                    padding: 8px 20px;
+                    border-radius: 8px;
+                    font-size: 16px;
+                    font-weight: bold;
+                    margin: 0 0 20px 20px;
+                }
+                input[type='file'] {
+                    font-size: 20px;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    opacity: 0;
+                }
+            }
+            .submit {
+                color: rgb(255, 255, 255);
+                background-color: black;
+                padding: 8px 20px;
+                border-radius: 8px;
+                font-size: 16px;
+                font-weight: bold;
+                margin: 0 0 20px 20px;
+                margin-left: 9rem;
+            }
+        }
+    }
+    &__overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.541);
+    }
+}
+
+@media screen and (max-width: 799px) {
+    .media {
+        width: 90%;
+
+        .mediaForm {
+            text-align: center;
+            &__btn {
+                display: grid;
+                &--submit {
+                    margin-top: 4%;
+                    margin-bottom: 4%;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 546px) {
+    .news {
+        .newsForm {
+            &__general {
+                &--input {
+                    display: grid;
+                }
+            }
+        }
+    }
+}

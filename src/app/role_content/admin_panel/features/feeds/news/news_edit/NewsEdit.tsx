@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import LoadingComp from '../../../../../../shared_components/loading_comp/LoadingComp';
-import '../../News-Video.scss';
+import '../../Media.scss';
 type NewsEditProps = {
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };

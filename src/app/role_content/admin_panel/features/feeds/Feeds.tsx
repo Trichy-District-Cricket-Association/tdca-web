@@ -75,7 +75,10 @@ const Feeds: React.FC<void> = (): JSX.Element => {
     return (
         <div className="feeds">
             <ul className="tabs-titles">{listTitles}</ul>
-            <div className="tab-content">{listContent}</div>
+            <div className="tabs-contents">
+                <div className="tab-content">{listContent}</div>
+            </div>
+
             {isNewsModalOpen ? <NewsAdd setModalOpen={setNewsModalOpen} /> : null}
             {isVideoModalOpen ? <VideoAdd setModalOpen={setVideoModalOpen} /> : null}
         </div>

@@ -78,6 +78,8 @@ const InputBox: React.FC<InputBoxProps> = ({
                             required
                             pattern={pattern ? pattern : '.*'}
                         />
+                    ) : type == 'textarea' ? (
+                        <textarea name="" id="" cols={300} rows={10}></textarea>
                     ) : (
                         <input
                             type={type}
