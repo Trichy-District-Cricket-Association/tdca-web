@@ -1,6 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
+import { Collections } from '../../../../../enums/collection';
+import { firestore } from '../../../../../firebase';
 import useStorage from '../../../../../hooks/useStorage';
+import Gallery from '../../../../../models/Gallery';
 import './Feeds.scss';
 import NewsAdd from './news/news_add/NewsAdd';
 import VideoAdd from './videos/video_add/VideoAdd';
@@ -12,13 +15,16 @@ const data = [
 ];
 
 const Feeds: React.FC<void> = (): JSX.Element => {
+    const [gallery, setGallery] = useState<Gallery>(new Gallery({}));
     const [isNewsModalOpen, setNewsModalOpen] = useState(false);
     const [isVideoModalOpen, setVideoModalOpen] = useState(false);
     const [visibleTab, setVisibleTab] = useState(data[0].id);
+    const [upload, setUpload] = useState<boolean>(false);
 
     // State to handle uploading files.
     const [imageFile, setImageFile] = useState(null);
     const imageTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+    const { avatarUrl, progress } = useStorage(imageFile);
 
     const handlePhoto = (e: any) => {
         const selectedImageFile = e.target.files[0];
@@ -32,6 +38,23 @@ const Feeds: React.FC<void> = (): JSX.Element => {
         }
     };
 
+    // Upload image for gallery
+    const uploadImage: React.FormEventHandler<HTMLButtonElement> = async (e) => {
+        e.preventDefault();
+        gallery.setPhoto = avatarUrl;
+        setUpload(true);
+        await firestore
+            .collection(Collections.gallery)
+            .add(JSON.parse(JSON.stringify(gallery)))
+            .then((doc) => {
+                console.log(doc);
+            })
+            .then(() => setUpload(false))
+            .catch((e) => {
+                console.log(e);
+            });
+    };
+
     const listTitles = data?.map((item) => (
         <li
             key={item.id}
@@ -41,7 +64,6 @@ const Feeds: React.FC<void> = (): JSX.Element => {
             {item.tabTitle}
         </li>
     ));
-
     const listContent = data.map((item) => (
         <p key={item.id} style={visibleTab === item.id ? {} : { display: 'none' }}>
             {item.tabTitle == 'News' ? (
@@ -59,11 +81,13 @@ const Feeds: React.FC<void> = (): JSX.Element => {
                 </div>
             ) : null}
             {item.tabTitle == 'Gallery' ? (
-                <div>
+                <div className="buttons">
                     <div className="upload-btn-wrapper">
                         <input type="file" name="Photo" title="Add Photo" onChange={handlePhoto} />
-                        <button className="photoBtn"> + Add Photo</button>
-                        <button className="submit" type="submit">
+                        <button className="photoBtn">{upload ? 'Uploading' : 'Upload'}</button>
+                    </div>
+                    <div>
+                        <button className="submit" type="submit" onClick={uploadImage}>
                             Submit
                         </button>
                     </div>
@@ -71,14 +95,12 @@ const Feeds: React.FC<void> = (): JSX.Element => {
             ) : null}
         </p>
     ));
-
     return (
         <div className="feeds">
             <ul className="tabs-titles">{listTitles}</ul>
             <div className="tabs-contents">
                 <div className="tab-content">{listContent}</div>
             </div>
-
             {isNewsModalOpen ? <NewsAdd setModalOpen={setNewsModalOpen} /> : null}
             {isVideoModalOpen ? <VideoAdd setModalOpen={setVideoModalOpen} /> : null}
         </div>

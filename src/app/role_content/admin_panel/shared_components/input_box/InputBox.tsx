@@ -8,6 +8,7 @@ type InputBoxProps = {
     value?: any;
     ref?: any;
     textHandler?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    textAreaHandler?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
 };
 
 const InputBox: React.FC<InputBoxProps> = ({
@@ -18,6 +19,7 @@ const InputBox: React.FC<InputBoxProps> = ({
     value,
     ref,
     textHandler,
+    textAreaHandler,
 }): JSX.Element => {
     let pattern;
     {
@@ -79,7 +81,7 @@ const InputBox: React.FC<InputBoxProps> = ({
                             pattern={pattern ? pattern : '.*'}
                         />
                     ) : type == 'textarea' ? (
-                        <textarea name="" id="" cols={300} rows={10}></textarea>
+                        <textarea name={name} defaultValue={value} onChange={textAreaHandler} cols={300} rows={10} />
                     ) : (
                         <input
                             type={type}

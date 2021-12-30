@@ -1,19 +1,19 @@
 import firebase from 'firebase';
 
-export default class Video {
-    /** Document id of the Video document. */
+export default class News {
+    /** Document id of the News document. */
     docId?: string;
 
     /**Photo Url */
     photoUrl?: string;
 
-    /** Name of the ground. */
+    /** details of the match. */
     description?: string;
 
-    /** Name of the ground. */
+    /** Headline. */
     title?: string;
 
-    handleGround({ field, value }: { field: string; value: string }): void {
+    handleNews({ field, value }: { field: string; value: string }): void {
         if (field == 'description') this.description = value;
         if (field == 'title') this.title = value;
     }
@@ -39,8 +39,8 @@ export default class Video {
         this.title = title ?? '';
     }
 
-    static fromFirestore(doc: firebase.firestore.DocumentSnapshot): Video {
-        return new Video({
+    static fromFirestore(doc: firebase.firestore.DocumentSnapshot): News {
+        return new News({
             docId: doc.id,
             photoUrl: doc.data()?.photoUrl,
             description: doc.data()?.description,

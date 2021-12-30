@@ -10,9 +10,9 @@ export default class Video {
     /** Name of the ground. */
     description?: string;
 
-    handleGround({ field, value }: { field: string; value: string }): void {
+    handleVideo({ field, value }: { field: string; value: string }): void {
         if (field == 'description') this.description = value;
-        if (field == 'videoUrl') this.videoUrl = value;
+        if (field == 'url') this.videoUrl = value;
     }
 
     constructor({ docId, videoUrl, description }: { docId?: string; videoUrl?: string; description?: string }) {
