@@ -80,7 +80,7 @@ const PrintPlayer: React.FC<PlayerPrintProps> = ({ player }): JSX.Element => (
             <View style={styles.section}>
                 <Image
                     style={styles.profile}
-                    src={player.avatarUrl ? `https://cors.bridged.cc/${player.avatarUrl}` : defaultAvatar}
+                    src={player.avatarUrl ? player.avatarUrl : defaultAvatar}
                 />
             </View>
             <View style={styles.section1}>

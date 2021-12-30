@@ -80,7 +80,7 @@ const PrintSelectedTeamPlayers: React.FC<PlayersPrintProps> = ({ players, teamNa
                     <View style={styles.section}>
                         <Image
                             style={styles.profile}
-                            src={player.avatarUrl ? `https://cors.bridged.cc/${player.avatarUrl}` : defaultAvatar}
+                            src={player.avatarUrl ? player.avatarUrl  : defaultAvatar}
                         />
                     </View>
 
