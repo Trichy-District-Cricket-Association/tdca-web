@@ -18,6 +18,8 @@ import TeamPlayersOverview from './role_content/team_panel/team_players/team_pla
 import AboutUsPage from './features/about_us_page/AboutUsPage';
 import ForgetPassword from './features/authentication/forget_password/ForgetPassword';
 import OldMatchesOverview from './role_content/admin_panel/features/matches/old_matches/old_matches_overview/OldMatchesOverview';
+import Gallery from './features/gallery/Gallery';
+import Feeds from './role_content/admin_panel/features/feeds/Feeds';
 
 const Routes = () => (
     <Switch>
@@ -27,6 +29,8 @@ const Routes = () => (
         <Route exact path={PageRoutes.staffs} component={StaffsPage} />
         <Route exact path={PageRoutes.matches} component={MatchesPage} />
         <Route exact path={PageRoutes.aboutUs} component={AboutUsPage} />
+        <Route exact path={PageRoutes.gallery} component={Gallery} />
+
         {/* Admin Panel Route */}
         {/* <ProtectedRoute exact path={PageRoutes.adminPanel} userRole={UserRoles.admin} component={AdminPanel} /> */}
         <ProtectedRoute exact path={PageRoutes.adminScorers} userRole={UserRoles.admin} component={ScorersOverview} />
@@ -47,6 +51,7 @@ const Routes = () => (
             userRole={UserRoles.admin}
             component={OldMatchesOverview}
         />
+        <ProtectedRoute exact path={PageRoutes.feeds} userRole={UserRoles.admin} component={Feeds} />
         {/* <ProtectedRoute exact path={PageRoutes.adminScorecards} userRole={UserRoles.admin} component={AdminPanel} /> */}
 
         {/*  Team panel Route */}

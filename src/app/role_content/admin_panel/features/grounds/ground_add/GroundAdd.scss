@@ -131,24 +131,7 @@
         }
     }
 }
-@media screen and (max-width: 546px) {
-    .groundAdd {
-        width: 90%;
-        .groundAddForm {
-            &__general {
-                &--input {
-                    display: grid;
-                }
-            }
-            &__general,
-            &__matchData {
-                &--input {
-                    margin-left: 3.5%;
-                }
-            }
-        }
-    }
-}
+
 @media screen and (max-width: 546px) {
     .groundAdd {
         width: 90%;

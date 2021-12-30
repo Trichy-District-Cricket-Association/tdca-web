@@ -1,6 +1,7 @@
 import React from 'react';
-
+// import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 import { Page, Text, View, Document, StyleSheet, Image } from '@react-pdf/renderer';
+
 const defaultAvatar = `${process.env.PUBLIC_URL}/assets/images/defaultAvatar.jpg`;
 const logo = `${process.env.PUBLIC_URL}/assets/images/logo.jpg`;
 type PlayersPrintProps = {

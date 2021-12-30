@@ -187,7 +187,7 @@ const GroundAdd: React.FC<GroundAddProps> = ({ setModalOpen }): JSX.Element => {
                             Cancel
                         </button>
                         <button className="groundAddForm__btn--submit" type="submit" prevent-default>
-                            Save
+                            Submit
                         </button>
                     </div>
                 </form>

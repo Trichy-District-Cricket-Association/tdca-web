@@ -92,6 +92,11 @@ const TopNav = (): JSX.Element => {
                         </Link>
                         </div> */}
                     </div>
+                    <div className="item">
+                        <Link to={PageRoutes.gallery} className="nav__link" onClick={() => toggleMobileOpen(false)}>
+                            Gallery
+                        </Link>
+                    </div>
 
                     {authData === undefined ? null : authData === null ? (
                         <div>

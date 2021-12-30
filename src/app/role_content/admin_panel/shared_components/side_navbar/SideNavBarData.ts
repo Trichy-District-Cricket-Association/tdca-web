@@ -7,6 +7,7 @@ const umpires = `${process.env.PUBLIC_URL}/assets/images/umpire.png`;
 const scorers = `${process.env.PUBLIC_URL}/assets/images/scorer.png`;
 const groundsMen = `${process.env.PUBLIC_URL}/assets/images/groundsMen.png`;
 const grounds = `${process.env.PUBLIC_URL}/assets/images/cricketGround.png`;
+const feeds = `${process.env.PUBLIC_URL}/assets/images/socialMedia.png`;
 
 export const SidebarData = [
     // {
@@ -16,59 +17,57 @@ export const SidebarData = [
     //   cName: 'sideNav-text'
     // },
     {
-      title: 'Matches',
-      path: PageRoutes.adminMatches,
-      icon: matches,
-      cName: 'sideNav-text'
+        title: 'Matches',
+        path: PageRoutes.adminMatches,
+        icon: matches,
+        cName: 'sideNav-text',
     },
     {
-      title: 'Teams',
-      path: PageRoutes.adminTeams,
-      icon: teams,
-      cName: 'sideNav-text'
+        title: 'Teams',
+        path: PageRoutes.adminTeams,
+        icon: teams,
+        cName: 'sideNav-text',
     },
     {
-      title: 'Players',
-      path: PageRoutes.adminPlayers,
-      icon: players,
-      cName: 'sideNav-text'
+        title: 'Players',
+        path: PageRoutes.adminPlayers,
+        icon: players,
+        cName: 'sideNav-text',
     },
     {
-      title: 'Umpires',
-      path: PageRoutes.adminUmpires,
-      icon: umpires,
-      cName: 'sideNav-text'
+        title: 'Umpires',
+        path: PageRoutes.adminUmpires,
+        icon: umpires,
+        cName: 'sideNav-text',
     },
     {
-      title: 'Scorers',
-      path: PageRoutes.adminScorers,
-      icon: scorers,
-      cName: 'sideNav-text'
+        title: 'Scorers',
+        path: PageRoutes.adminScorers,
+        icon: scorers,
+        cName: 'sideNav-text',
     },
     {
         title: 'GroundsMen',
         path: PageRoutes.adminGroundsMen,
         icon: groundsMen,
-        cName: 'sideNav-text'
-      },
-      {
+        cName: 'sideNav-text',
+    },
+    {
         title: 'Grounds',
         path: PageRoutes.adminGrounds,
         icon: grounds,
-        cName: 'sideNav-text'
-      },
-      {
+        cName: 'sideNav-text',
+    },
+    {
+        title: 'Feeds',
+        path: PageRoutes.feeds,
+        icon: feeds,
+        cName: 'sideNav-text',
+    },
+    {
         title: '',
         path: '',
         icon: '',
-        cName: ''
-      },
-      {
-        title: '',
-        path: '',
-        icon:'',
-        cName: ''
-      }
-  ];
-  
-  
+        cName: '',
+    },
+];
