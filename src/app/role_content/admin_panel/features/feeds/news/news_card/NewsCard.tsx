@@ -8,7 +8,7 @@ type NewsCardProps = {
     newsDoc: News;
 };
 
-const NewsCard: React.FC<NewsCardProps> = ({ newsDoc }): JSX.Element => {
+const NewsCard: React.FC<NewsCardProps> = ({ newsDoc }) => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isModalOpen, setModalOpen] = useState(false);
 

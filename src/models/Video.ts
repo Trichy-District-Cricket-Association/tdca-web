@@ -12,7 +12,7 @@ export default class Video {
 
     handleVideo({ field, value }: { field: string; value: string }): void {
         if (field == 'description') this.description = value;
-        if (field == 'url') this.videoUrl = value;
+        if (field == 'videoUrl') this.videoUrl = value;
     }
 
     constructor({ docId, videoUrl, description }: { docId?: string; videoUrl?: string; description?: string }) {

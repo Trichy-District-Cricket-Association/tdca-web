@@ -9,6 +9,7 @@ import './Feeds.scss';
 import NewsAdd from './news/news_add/NewsAdd';
 import NewsCard from './news/news_card/NewsCard';
 import VideoAdd from './videos/video_add/VideoAdd';
+import VideoCard from './videos/video_card/VideoCard';
 
 const data = [
     { id: '1', tabTitle: 'News' },
@@ -118,6 +119,11 @@ const Feeds: React.FC<void> = (): JSX.Element => {
                     <button className="feeds__VideoAddBtn" onClick={() => setVideoModalOpen(true)}>
                         + Add Video
                     </button>
+                    <div className="videoCards">
+                        {videoDocs?.map((videoDoc) => (
+                            <VideoCard videoDoc={videoDoc} key={videoDoc.docId} />
+                        ))}
+                    </div>
                 </div>
             ) : null}
             {item.tabTitle == 'Gallery' ? (

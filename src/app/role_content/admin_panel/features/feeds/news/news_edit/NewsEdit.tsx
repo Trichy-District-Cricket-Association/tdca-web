@@ -62,7 +62,8 @@ const NewsEdit: React.FC<NewsEditProps> = ({ setModalOpen, newsDoc }) => {
         news.setUrl = avatarUrl;
         await firestore
             .collection(Collections.news)
-            .add(JSON.parse(JSON.stringify(news)))
+            .doc(newsDoc.docId)
+            .set(JSON.parse(JSON.stringify(news)))
             .then(async (doc) => {
                 console.log(doc);
             })

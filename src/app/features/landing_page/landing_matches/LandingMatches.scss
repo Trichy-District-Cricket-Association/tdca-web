@@ -66,9 +66,10 @@
 @media screen and (max-width: 950px) {
     .matches {
         text-align: center;
-        justify-items: center;
+
         &__matchCards {
             grid-template-columns: repeat(2, 1fr);
+            justify-items: center;
         }
     }
 }

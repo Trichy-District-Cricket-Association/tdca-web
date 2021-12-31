@@ -20,6 +20,11 @@
             color: #fff;
         }
     }
+    .videoCards {
+        max-width: 1200px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
     .tabs-titles {
         list-style: none;
         padding: 0px;
@@ -84,6 +89,23 @@
         }
         .submit {
             background-color: black;
+        }
+    }
+}
+@media (max-width: 1375px) {
+    .feeds {
+        .videoCards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+}
+
+@media (max-width: 900px) {
+    .feeds {
+        .videoCards {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
         }
     }
 }
