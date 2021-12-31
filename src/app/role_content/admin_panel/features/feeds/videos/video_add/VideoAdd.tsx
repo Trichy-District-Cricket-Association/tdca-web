@@ -56,7 +56,7 @@ const VideoAdd: React.FC<VideoAddProps> = ({ setModalOpen }) => {
                     <div>
                         <h1 className="text">Enter Video Url</h1>
                         <div>
-                            <InputBox title="Url" name="url" textHandler={handleInputForm} />
+                            <InputBox title="Youtube Url" name="videoUrl" textHandler={handleInputForm} />
                         </div>
                         <h1 className="text">Enter Video Description</h1>
                         <div className="description">

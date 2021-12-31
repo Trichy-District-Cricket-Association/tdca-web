@@ -7,7 +7,7 @@ export default class News {
     /**Photo Url */
     photoUrl?: string;
 
-    /** details of the match. */
+    /** details of the event. */
     description?: string;
 
     /** Headline. */

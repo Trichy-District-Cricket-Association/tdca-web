@@ -86,7 +86,7 @@ const VideoEdit: React.FC<VideoEditProps> = ({ setModalOpen, videoDoc }) => {
                         </div>
                         <div>
                             <InputBox
-                                title="Video Url"
+                                title="Youtube Url"
                                 name="videoUrl"
                                 value={video.videoUrl}
                                 textHandler={handleInputForm}

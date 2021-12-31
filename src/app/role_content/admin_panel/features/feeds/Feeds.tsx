@@ -6,6 +6,7 @@ import Gallery from '../../../../../models/Gallery';
 import News from '../../../../../models/News';
 import Video from '../../../../../models/Video';
 import './Feeds.scss';
+import PhotoGallery from './gallery/photo_gallery/PhotoGallery';
 import NewsAdd from './news/news_add/NewsAdd';
 import NewsCard from './news/news_card/NewsCard';
 import VideoAdd from './videos/video_add/VideoAdd';
@@ -17,7 +18,7 @@ const data = [
     { id: '3', tabTitle: 'Gallery' },
 ];
 
-const Feeds: React.FC<void> = (): JSX.Element => {
+const Feeds: React.FC<void> = () => {
     const [photo, setPhoto] = useState<Gallery>(new Gallery({}));
 
     // states to set data from firebase
@@ -127,15 +128,22 @@ const Feeds: React.FC<void> = (): JSX.Element => {
                 </div>
             ) : null}
             {item.tabTitle == 'Gallery' ? (
-                <div className="buttons">
-                    <div className="upload-btn-wrapper">
-                        <input type="file" name="Photo" title="Add Photo" onChange={handlePhoto} />
-                        <button className="photoBtn">{upload ? 'Uploading' : 'Upload'}</button>
+                <div>
+                    <div className="buttons">
+                        <div className="upload-btn-wrapper">
+                            <input type="file" name="Photo" title="Add Photo" onChange={handlePhoto} />
+                            <button className="photoBtn">{upload ? 'Uploading' : 'Upload'}</button>
+                        </div>
+                        <div>
+                            <button className="submit" type="submit" onClick={uploadImage}>
+                                Submit
+                            </button>
+                        </div>
                     </div>
-                    <div>
-                        <button className="submit" type="submit" onClick={uploadImage}>
-                            Submit
-                        </button>
+                    <div className="photoGallery">
+                        {galleryDocs?.map((galleryDoc) => (
+                            <PhotoGallery key={galleryDoc.docId} galleryDoc={galleryDoc} />
+                        ))}
                     </div>
                 </div>
             ) : null}
