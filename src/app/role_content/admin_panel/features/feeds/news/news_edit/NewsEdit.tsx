@@ -20,6 +20,8 @@ const NewsEdit: React.FC<NewsEditProps> = ({ setModalOpen, newsDoc }) => {
             photoUrl: newsDoc.photoUrl,
             description: newsDoc.description,
             title: newsDoc.title,
+            date: newsDoc.date,
+            place: newsDoc.place,
         }),
     );
     // State to handle uploading files.
@@ -95,17 +97,39 @@ const NewsEdit: React.FC<NewsEditProps> = ({ setModalOpen, newsDoc }) => {
             ) : (
                 <form className="mediaForm" onSubmit={submitForm}>
                     <div>
-                        <button className="playerEditForm__general__header--iconBtn" onClick={deleteForm}>
-                            <i>
-                                <MdDelete />
-                            </i>
-                        </button>
-                        <h1 className="text">Enter News Headline</h1>
+                        <div className="top">
+                            <h2 className="text">Enter News Headline</h2>
+                            <div className="buttons">
+                                <button className="deleteBtn" onClick={deleteForm}>
+                                    <i>
+                                        <MdDelete />
+                                    </i>
+                                </button>
+                            </div>
+                        </div>
 
                         <div>
                             <InputBox title="Title" name="title" value={news.title} textHandler={handleInputForm} />
                         </div>
+                        <div className="date-place">
+                            <div className="date">
+                                <h2 className="text">Date:</h2>
+                                <InputBox
+                                    title="Date"
+                                    name="date"
+                                    value={news.date}
+                                    type="date"
+                                    textHandler={handleInputForm}
+                                />
+                            </div>
+                            <div className="place">
+                                <h2 className="text">Place:</h2>
+                                <InputBox title="Place" name="place" value={news.place} textHandler={handleInputForm} />
+                            </div>
+                        </div>
+
                         <h1 className="text">Enter News Description</h1>
+
                         <div className="description">
                             <InputBox
                                 value={news.description}

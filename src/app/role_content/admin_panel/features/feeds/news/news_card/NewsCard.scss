@@ -1,0 +1,167 @@
+// Recruitler.com's _card.scss
+.card {
+    box-shadow: 0 0px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    .card-body {
+        display: flex;
+        flex-flow: row wrap;
+        padding: 30px;
+    }
+    .title {
+        margin-left: 15px;
+    }
+    header {
+        flex: 100%;
+    }
+    .meta {
+        margin-bottom: 22px;
+    }
+    .chips {
+        align-self: flex-end;
+        margin-left: 15px;
+    }
+    .featured-image {
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        overflow: hidden;
+        width: 100%;
+        height: 300px; // only for mobile, vertical cards: flex-direction: column;
+    }
+}
+
+// Horizontal kicks in
+@media only screen and (min-width: 768px) {
+    .card {
+        flex-direction: row;
+        max-height: 279px; // desktop horizontal cards with featured image
+        h3 {
+            font-size: calc(100% + 1vw);
+        }
+        .featured-image {
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+            border-top-right-radius: 0;
+            max-width: 390px;
+            max-height: 279px; // desktop horizontal cards with featured image
+        }
+    }
+}
+
+// monitor screen sizes
+@media only screen and (min-width: 1280px) {
+    .card {
+        h3 {
+            font-size: 32px;
+        }
+    }
+}
+
+// Typography
+* {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+h3 {
+    font-size: 32px;
+    line-height: 1.2;
+    font-weight: bold;
+    color: #222;
+    margin: 0.5em 0;
+}
+.pre-heading {
+    color: #444;
+    font-size: 20px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+.meta {
+    color: #555;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+.author {
+    text-transform: uppercase;
+}
+
+// NON-CARD STYLES
+ul {
+    display: block;
+    margin: 0 auto;
+    max-width: 1160px;
+    padding: 30px;
+}
+a {
+    text-decoration: none;
+}
+
+// Recruitler.com's _chips.scss
+// container for chips
+.chips {
+    white-space: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+
+    // hide scrollbars chrome / IE10+ & Edge
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    -ms-overflow-style: none;
+}
+// single chips
+.chip {
+    display: inline-block;
+    position: relative;
+    font-size: 16px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 1.4;
+    white-space: nowrap;
+    color: white;
+    background: #009dff;
+    border-radius: 25px;
+    margin-right: 8px;
+    padding: 5px 12px;
+    max-height: 32px;
+
+    &.large {
+        text-transform: uppercase;
+        color: black;
+        border: 1px solid #e0e0e0;
+        background: white;
+        padding: 10px 15px;
+        max-height: 44px;
+    }
+    input {
+        margin-bottom: 0 !important;
+        height: 22px !important;
+        background-color: transparent !important;
+        padding: 3px 0 0 0 !important;
+        &::placeholder {
+            color: black;
+            text-transform: uppercase;
+            font-size: 16px;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+    }
+}
+a.chip {
+    cursor: pointer;
+    &:hover,
+    &:visited,
+    &:active {
+        color: white;
+    }
+}
+a.chip.large {
+    &:visited,
+    &:hover,
+    &:active {
+        color: black;
+    }
+}

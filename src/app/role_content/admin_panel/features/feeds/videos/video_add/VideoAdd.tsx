@@ -31,7 +31,7 @@ const VideoAdd: React.FC<VideoAddProps> = ({ setModalOpen }) => {
         e.preventDefault();
         setIsLoading(true);
         await firestore
-            .collection(Collections.vidoes)
+            .collection(Collections.videos)
             .add(JSON.parse(JSON.stringify(video)))
             .then(async (doc) => {
                 console.log(doc);

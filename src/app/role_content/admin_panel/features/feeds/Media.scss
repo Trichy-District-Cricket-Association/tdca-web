@@ -14,6 +14,25 @@
     }
     .mediaForm {
         margin-top: 20px;
+        .date-place {
+            display: flex;
+            justify-content: space-evenly;
+            margin-left: 70px;
+            .input_box {
+                max-width: 300px;
+            }
+            .date,
+            .place {
+                display: flex;
+                h2 {
+                    margin-top: 50px;
+                    font-size: 25px;
+                }
+            }
+            .place {
+                margin-right: 65px;
+            }
+        }
         .input_box {
             max-width: 900px;
             input {
@@ -35,8 +54,9 @@
         }
         .text {
             font-family: 'Poppins';
-            font-size: 35px;
+            font-size: 28px;
             text-align: center;
+            color: #071833;
         }
         .buttons {
             display: flex;
@@ -73,6 +93,19 @@
                 margin: 0 0 20px 20px;
                 margin-left: 9rem;
             }
+            .deleteBtn {
+                color: red;
+                font-size: 29px;
+                cursor: pointer;
+                border: none;
+                background-color: #fff;
+                padding: 0;
+                margin-right: -30rem;
+            }
+        }
+        .top {
+            display: flex;
+            justify-content: center;
         }
     }
     &__overlay {
@@ -85,29 +118,44 @@
     }
 }
 
-@media screen and (max-width: 799px) {
+@media screen and (max-width: 996px) {
     .media {
-        width: 90%;
-
         .mediaForm {
-            text-align: center;
-            &__btn {
+            .date-place {
                 display: grid;
-                &--submit {
-                    margin-top: 4%;
-                    margin-bottom: 4%;
+                justify-content: space-evenly;
+                margin-left: 0px;
+                .input_box {
+                    max-width: 300px;
+                }
+                .date,
+                .place {
+                    display: grid;
+                    h2 {
+                        margin-top: 0px;
+                        font-size: 25px;
+                    }
+                }
+                .place {
+                    margin-right: 0px;
                 }
             }
-        }
-    }
-}
+            .buttons {
+                display: grid;
+                .upload-btn-wrapper {
+                    .photoBtn {
+                        padding: 8px 80px;
+                        margin: 0 0 20px 0px;
+                    }
+                }
+                .submit {
+                    padding: 8px 100px;
+                    margin: 0 0 20px 0px;
+                }
+                .deleteBtn {
+                    margin-right: 0rem;
 
-@media screen and (max-width: 546px) {
-    .news {
-        .newsForm {
-            &__general {
-                &--input {
-                    display: grid;
+                    margin-left: 10px;
                 }
             }
         }

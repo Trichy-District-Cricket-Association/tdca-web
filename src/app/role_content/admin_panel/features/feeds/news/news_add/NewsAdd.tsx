@@ -75,11 +75,22 @@ const NewsAdd: React.FC<NewsAddProps> = ({ setModalOpen }): JSX.Element => {
             ) : (
                 <form className="mediaForm" onSubmit={submitForm}>
                     <div>
-                        <h1 className="text">Enter News Headline</h1>
+                        <h2 className="text">News Headline</h2>
                         <div>
                             <InputBox title="Title" name="title" textHandler={handleInputForm} />
                         </div>
-                        <h1 className="text">Enter News Description</h1>
+                        <div className="date-place">
+                            <div className="date">
+                                <h2 className="text">Date:</h2>
+                                <InputBox title="Date" name="date" type="date" textHandler={handleInputForm} />
+                            </div>
+                            <div className="place">
+                                <h2 className="text">Place:</h2>
+                                <InputBox title="Place" name="place" textHandler={handleInputForm} />
+                            </div>
+                        </div>
+
+                        <h2 className="text">News Description</h2>
                         <div className="description">
                             <InputBox
                                 type="textarea"

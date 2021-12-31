@@ -11,7 +11,6 @@ import Umpire from '../../../../../../models/Umpire';
 import LoadingComp from '../../../../../shared_components/loading_comp/LoadingComp';
 import SelectInputBox from '../../../shared_components/select_input_box/SelectInputBox';
 import Ground from '../../../../../../models/Ground';
-import firebase from 'firebase';
 
 type MatchAddProps = {
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;

@@ -10,6 +10,6 @@ export enum Collections {
     scorecard = 'MatchScore',
     oldMatches = 'OldMatches',
     gallery = 'Gallery',
-    vidoes = 'Videos',
+    videos = 'Videos',
     news = 'News'
 }

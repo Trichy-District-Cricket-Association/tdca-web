@@ -1,11 +1,13 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Collections } from '../../../../../enums/collection';
 import { firestore } from '../../../../../firebase';
 import useStorage from '../../../../../hooks/useStorage';
 import Gallery from '../../../../../models/Gallery';
+import News from '../../../../../models/News';
+import Video from '../../../../../models/Video';
 import './Feeds.scss';
 import NewsAdd from './news/news_add/NewsAdd';
+import NewsCard from './news/news_card/NewsCard';
 import VideoAdd from './videos/video_add/VideoAdd';
 
 const data = [
@@ -15,16 +17,24 @@ const data = [
 ];
 
 const Feeds: React.FC<void> = (): JSX.Element => {
-    const [gallery, setGallery] = useState<Gallery>(new Gallery({}));
+    const [photo, setPhoto] = useState<Gallery>(new Gallery({}));
+
+    // states to set data from firebase
+    const [galleryDocs, setGalleryDocs] = useState<Gallery[] | undefined>();
+    const [newsDocs, setNewsDocs] = useState<News[] | undefined>();
+    const [videoDocs, setVideoDocs] = useState<Video[] | undefined>();
+
+    // states to handle modal open
     const [isNewsModalOpen, setNewsModalOpen] = useState(false);
     const [isVideoModalOpen, setVideoModalOpen] = useState(false);
+
     const [visibleTab, setVisibleTab] = useState(data[0].id);
     const [upload, setUpload] = useState<boolean>(false);
 
     // State to handle uploading files.
     const [imageFile, setImageFile] = useState(null);
     const imageTypes = ['image/png', 'image/jpeg', 'image/jpg'];
-    const { avatarUrl, progress } = useStorage(imageFile);
+    const { avatarUrl } = useStorage(imageFile);
 
     const handlePhoto = (e: any) => {
         const selectedImageFile = e.target.files[0];
@@ -38,14 +48,41 @@ const Feeds: React.FC<void> = (): JSX.Element => {
         }
     };
 
+    const media = async (): Promise<void> => {
+        await firestore.collection(Collections.news).onSnapshot((snapshot) => {
+            if (snapshot.docs?.length === 0) setNewsDocs([]);
+            if (snapshot.docs?.length > 0) {
+                const news = snapshot.docs.map((doc) => News.fromFirestore(doc));
+                setNewsDocs(news);
+            }
+        });
+        await firestore.collection(Collections.gallery).onSnapshot((snapshot) => {
+            if (snapshot.docs?.length === 0) setGalleryDocs([]);
+            if (snapshot.docs?.length > 0) {
+                const gallery = snapshot.docs.map((doc) => Gallery.fromFirestore(doc));
+                setGalleryDocs(gallery);
+            }
+        });
+
+        await firestore.collection(Collections.videos).onSnapshot((snapshot) => {
+            if (snapshot.docs?.length === 0) setVideoDocs([]);
+            if (snapshot.docs?.length > 0) {
+                const videos = snapshot.docs.map((doc) => Video.fromFirestore(doc));
+                setVideoDocs(videos);
+            }
+        });
+    };
+    useEffect(() => {
+        media();
+    }, []);
     // Upload image for gallery
     const uploadImage: React.FormEventHandler<HTMLButtonElement> = async (e) => {
         e.preventDefault();
-        gallery.setPhoto = avatarUrl;
+        photo.setPhoto = avatarUrl;
         setUpload(true);
         await firestore
             .collection(Collections.gallery)
-            .add(JSON.parse(JSON.stringify(gallery)))
+            .add(JSON.parse(JSON.stringify(photo)))
             .then((doc) => {
                 console.log(doc);
             })
@@ -65,12 +102,15 @@ const Feeds: React.FC<void> = (): JSX.Element => {
         </li>
     ));
     const listContent = data.map((item) => (
-        <p key={item.id} style={visibleTab === item.id ? {} : { display: 'none' }}>
+        <div key={item.id} style={visibleTab === item.id ? {} : { display: 'none' }}>
             {item.tabTitle == 'News' ? (
                 <div>
                     <button className="feeds__NewsAddBtn" onClick={() => setNewsModalOpen(true)}>
                         + Add News
                     </button>
+                    {newsDocs?.map((newsDoc) => (
+                        <NewsCard newsDoc={newsDoc} key={newsDoc.docId} />
+                    ))}
                 </div>
             ) : null}
             {item.tabTitle == 'Videos' ? (
@@ -93,7 +133,7 @@ const Feeds: React.FC<void> = (): JSX.Element => {
                     </div>
                 </div>
             ) : null}
-        </p>
+        </div>
     ));
     return (
         <div className="feeds">
