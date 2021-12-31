@@ -31,12 +31,11 @@ const Feeds: React.FC<void> = () => {
     const [isVideoModalOpen, setVideoModalOpen] = useState(false);
 
     const [visibleTab, setVisibleTab] = useState(data[0].id);
-    const [upload, setUpload] = useState<boolean>(false);
 
     // State to handle uploading files.
     const [imageFile, setImageFile] = useState(null);
     const imageTypes = ['image/png', 'image/jpeg', 'image/jpg'];
-    const { avatarUrl } = useStorage(imageFile);
+    const { avatarUrl, progress } = useStorage(imageFile);
 
     const handlePhoto = (e: any) => {
         const selectedImageFile = e.target.files[0];
@@ -80,18 +79,20 @@ const Feeds: React.FC<void> = () => {
     // Upload image for gallery
     const uploadImage: React.FormEventHandler<HTMLButtonElement> = async (e) => {
         e.preventDefault();
-        photo.setPhoto = avatarUrl;
-        setUpload(true);
-        await firestore
-            .collection(Collections.gallery)
-            .add(JSON.parse(JSON.stringify(photo)))
-            .then((doc) => {
-                console.log(doc);
-            })
-            .then(() => setUpload(false))
-            .catch((e) => {
-                console.log(e);
-            });
+        if (avatarUrl != '') {
+            photo.setPhoto = avatarUrl;
+            await firestore
+                .collection(Collections.gallery)
+                .add(JSON.parse(JSON.stringify(photo)))
+                .then((doc) => {
+                    console.log(doc);
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+        } else {
+            window.alert('Please Upload an Image');
+        }
     };
 
     const listTitles = data?.map((item) => (
@@ -132,7 +133,9 @@ const Feeds: React.FC<void> = () => {
                     <div className="buttons">
                         <div className="upload-btn-wrapper">
                             <input type="file" name="Photo" title="Add Photo" onChange={handlePhoto} />
-                            <button className="photoBtn">{upload ? 'Uploading' : 'Upload'}</button>
+                            <button className="photoBtn">
+                                {progress > 0 && progress < 100 ? 'Uploading' : '+ Add Photo'}
+                            </button>
                         </div>
                         <div>
                             <button className="submit" type="submit" onClick={uploadImage}>
