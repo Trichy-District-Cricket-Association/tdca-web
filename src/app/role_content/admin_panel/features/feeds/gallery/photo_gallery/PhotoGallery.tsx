@@ -5,7 +5,7 @@ import Gallery from '../../../../../../../models/Gallery';
 import './PhotoGallery.scss';
 
 type PhotoGalleryProps = {
-    galleryDoc: any;
+    galleryDoc: Gallery;
 };
 
 const PhotoGallery: React.FC<PhotoGalleryProps> = ({ galleryDoc }) => {

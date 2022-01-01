@@ -20,5 +20,14 @@
             max-width: 90vw;
             object-fit: cover;
         }
+        &--prevBtn,
+        &--nextBtn {
+            color: white;
+            border: 2px solid #0d4194;
+            background-color: #0d4194;
+            padding: 10px;
+            font-size: 40px;
+            font-weight: 700;
+        }
     }
 }
