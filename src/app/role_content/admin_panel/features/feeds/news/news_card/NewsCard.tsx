@@ -18,7 +18,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ newsDoc }) => {
                 <LoadingComp />
             ) : (
                 <div>
-                    <ul key={newsDoc.docId ?? ''} onClick={() => setModalOpen(true)}>
+                    <ul className="cardUl" key={newsDoc.docId ?? ''} onClick={() => setModalOpen(true)}>
                         <li className="card">
                             <p className="featured-image" style={{ backgroundImage: `url(${newsDoc.photoUrl})` }}></p>
                             <article className="card-body">
@@ -28,7 +28,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ newsDoc }) => {
                                             <span className="pre-heading">Blog</span>
                                         </div>
                                         <div className="title">
-                                            <h3>{newsDoc.title}</h3>
+                                            <h3 className="titleHeading">{newsDoc.title}</h3>
                                         </div>
                                         <p className="meta">
                                             <span className="author">{newsDoc.place}</span>
@@ -38,8 +38,8 @@ const NewsCard: React.FC<NewsCardProps> = ({ newsDoc }) => {
                                     </div>
                                 </header>
                                 <div className="chips">
-                                    <a className="chip">TDCA</a>
-                                    <a className="chip">Cricket</a>
+                                    <p className="chip">TDCA</p>
+                                    <p className="chip">Cricket</p>
                                 </div>
                             </article>
                         </li>

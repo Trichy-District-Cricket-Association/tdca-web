@@ -3007,6 +3007,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/caniuse-lite@npm:^1":
+  version: 1.0.1
+  resolution: "@types/caniuse-lite@npm:1.0.1"
+  checksum: 5ca05cbc747531a09807f29318a7ec1ebc274befc6c517f17bcb25529ca2fcf2763ccefc8424ecd7e4c45a04726fbae7f8dea1e27814879989ed1474fe92051a
+  languageName: node
+  linkType: hard
+
 "@types/eslint@npm:^7.2.6":
   version: 7.2.13
   resolution: "@types/eslint@npm:7.2.13"
@@ -5193,6 +5200,13 @@ __metadata:
   version: 1.0.30001242
   resolution: "caniuse-lite@npm:1.0.30001242"
   checksum: 4710e50ca8dfb1edd2e1a07e8a983803d83c6712aba9887573964e3be243aa9dcb121fe7af08ff834666ae6177c14817a6ee44179fccb24ed05a75c89263d964
+  languageName: node
+  linkType: hard
+
+"caniuse-lite@npm:^1.0.30001294":
+  version: 1.0.30001294
+  resolution: "caniuse-lite@npm:1.0.30001294"
+  checksum: bdc286fe02fff689ad3d34ac7c464d50b03242fc9128cf722ea2f2a645b9706f3fbb9c9e2f24a91e4cd663d0b8d76a4c2489eec3154ebe8601930a5f6498936f
   languageName: node
   linkType: hard
 
@@ -16214,6 +16228,7 @@ resolve@^2.0.0-next.3:
     "@testing-library/user-event": ^12.8.3
     "@types/babel__core": ^7.1.14
     "@types/brainhubeu__react-carousel": ^2.0.3
+    "@types/caniuse-lite": ^1
     "@types/gh-pages": ^3
     "@types/jest": ^26.0.23
     "@types/node": ^12.20.15
@@ -16226,6 +16241,7 @@ resolve@^2.0.0-next.3:
     "@typescript-eslint/eslint-plugin": ^4.27.0
     "@typescript-eslint/parser": ^4.27.0
     add: ^2.0.6
+    caniuse-lite: ^1.0.30001294
     eslint: ^7.29.0
     eslint-config-airbnb: ^18.2.1
     eslint-config-prettier: 8.3.0

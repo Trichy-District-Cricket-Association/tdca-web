@@ -9,6 +9,7 @@
         display: flex;
         flex-flow: row wrap;
         padding: 30px;
+        font-family: 'Poppins';
     }
     .title {
         margin-left: 15px;
@@ -41,7 +42,7 @@
     .card {
         flex-direction: row;
         max-height: 279px; // desktop horizontal cards with featured image
-        h3 {
+        .titleHeading {
             font-size: calc(100% + 1vw);
         }
         .featured-image {
@@ -57,17 +58,13 @@
 // monitor screen sizes
 @media only screen and (min-width: 1280px) {
     .card {
-        h3 {
+        .titleHeading {
             font-size: 32px;
         }
     }
 }
 
-// Typography
-* {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
-h3 {
+.titleHeading {
     font-size: 32px;
     line-height: 1.2;
     font-weight: bold;
@@ -90,16 +87,12 @@ h3 {
 }
 
 // NON-CARD STYLES
-ul {
+.cardUl {
     display: block;
     margin: 0 auto;
     max-width: 1160px;
     padding: 30px;
 }
-a {
-    text-decoration: none;
-}
-
 // Recruitler.com's _chips.scss
 // container for chips
 .chips {
@@ -119,7 +112,7 @@ a {
     display: inline-block;
     position: relative;
     font-size: 16px;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Poppins';
     line-height: 1.4;
     white-space: nowrap;
     color: white;
@@ -137,20 +130,8 @@ a {
         padding: 10px 15px;
         max-height: 44px;
     }
-    input {
-        margin-bottom: 0 !important;
-        height: 22px !important;
-        background-color: transparent !important;
-        padding: 3px 0 0 0 !important;
-        &::placeholder {
-            color: black;
-            text-transform: uppercase;
-            font-size: 16px;
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        }
-    }
 }
-a.chip {
+p.chip {
     cursor: pointer;
     &:hover,
     &:visited,
@@ -158,7 +139,7 @@ a.chip {
         color: white;
     }
 }
-a.chip.large {
+p.chip.large {
     &:visited,
     &:hover,
     &:active {
