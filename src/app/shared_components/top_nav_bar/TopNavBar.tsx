@@ -78,19 +78,24 @@ const TopNav = (): JSX.Element => {
                             Matches
                         </Link>
                     </div>
-
-                    <div className="item">
-                        <Link to={PageRoutes.staffs} className="nav__link" onClick={() => toggleMobileOpen(false)}>
+                    <div className="dropdown">
+                        <p className="dropbtn" onClick={() => toggleMobileOpen(false)}>
                             Governance
-                        </Link>
-                        {/* <div>
-                        <Link to={PageRoutes.staffs} className="nav__link" onClick={() => toggleMobileOpen(false)}>
-                            Umpires
-                        </Link>
-                        <Link to={PageRoutes.staffs} className="nav__link" onClick={() => toggleMobileOpen(false)}>
-                            Scorers
-                        </Link>
-                        </div> */}
+                        </p>
+                        <div className="dropdown-content">
+                            <Link to={PageRoutes.bylaws} className="link" onClick={() => toggleMobileOpen(false)}>
+                                By Laws
+                            </Link>
+                            <Link to={PageRoutes.rules} className="link" onClick={() => toggleMobileOpen(false)}>
+                                League Rules
+                            </Link>
+                            <Link to={PageRoutes.umpires} className="link" onClick={() => toggleMobileOpen(false)}>
+                                Umpires
+                            </Link>
+                            <Link to={PageRoutes.scorers} className="link" onClick={() => toggleMobileOpen(false)}>
+                                Scorers
+                            </Link>
+                        </div>
                     </div>
                     <div className="item">
                         <Link to={PageRoutes.gallery} className="nav__link" onClick={() => toggleMobileOpen(false)}>

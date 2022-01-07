@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Collections } from '../../../enums/collection';
 import { firestore } from '../../../firebase';
 import Gallery from '../../../models/Gallery';
-import '../../role_content/admin_panel/features/feeds/gallery/photo_gallery/PhotoGallery.scss';
+import '../../role_content/admin_panel/features/activities/gallery/photo_gallery/PhotoGallery.scss';
 
 const PhotoGallery: React.FC<void> = () => {
     const [galleryDocs, setGalleryDocs] = useState<Gallery[] | undefined>();

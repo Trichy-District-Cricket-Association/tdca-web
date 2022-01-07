@@ -13,23 +13,27 @@ import MatchesOverview from './role_content/admin_panel/features/matches/matches
 import PlayersOverview from './role_content/admin_panel/features/players/players_overview/PlayersOverview';
 import MatchesPage from './features/matches_page/MatchesPage';
 import TeamsPage from './features/teams_page/TeamsPage';
-import StaffsPage from './features/staffs_page/StaffsPage';
 import TeamPlayersOverview from './role_content/team_panel/team_players/team_players_overview/TeamPlayersOverview';
 import AboutUsPage from './features/about_us_page/AboutUsPage';
 import ForgetPassword from './features/authentication/forget_password/ForgetPassword';
 import OldMatchesOverview from './role_content/admin_panel/features/matches/old_matches/old_matches_overview/OldMatchesOverview';
 import PhotoGallery from './features/gallery/PhotoGallery';
-import Feeds from './role_content/admin_panel/features/feeds/Feeds';
+import Feeds from './role_content/admin_panel/features/activities/Feeds';
+import Umpires from './features/governance/umpires/Umpires';
+import Scorers from './features/governance/scorers/Scorers';
 
 const Routes = () => (
     <Switch>
         {/* Main Routes */}
         <Route exact path={PageRoutes.home} component={LandingPage} />
         <Route exact path={PageRoutes.teams} component={TeamsPage} />
-        <Route exact path={PageRoutes.staffs} component={StaffsPage} />
         <Route exact path={PageRoutes.matches} component={MatchesPage} />
         <Route exact path={PageRoutes.aboutUs} component={AboutUsPage} />
         <Route exact path={PageRoutes.gallery} component={PhotoGallery} />
+        <Route exact path={PageRoutes.umpires} component={Umpires} />
+        <Route exact path={PageRoutes.scorers} component={Scorers} />
+        {/* <Route exact path={PageRoutes.bylaws} component={StaffsPage} />
+        <Route exact path={PageRoutes.rules} component={StaffsPage} /> */}
 
         {/* Admin Panel Route */}
         {/* <ProtectedRoute exact path={PageRoutes.adminPanel} userRole={UserRoles.admin} component={AdminPanel} /> */}

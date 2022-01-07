@@ -42,6 +42,8 @@ export default class Team {
 
     runRate?: number;
 
+    active?: string;
+
     handleTeam({ field, value }: { field: string; value: string }): void {
         if (field == 'teamId') this.teamId = value;
         if (field == 'teamName') this.teamName = value;
@@ -61,6 +63,7 @@ export default class Team {
         if (field == 'refusal') this.refusal = parseInt(value);
         if (field == 'penalty') this.penalty = parseInt(value);
         if (field == 'runRate') this.runRate = parseInt(value);
+        if (field == 'active') this.active = value;
     }
     set setAvatar(url: string) {
         this.avatarUrl = url;
@@ -86,7 +89,8 @@ export default class Team {
         conceed,
         refusal,
         penalty,
-        runRate
+        runRate,
+        active
     }: {
         docId?: string;
         teamId?: string;
@@ -108,6 +112,7 @@ export default class Team {
         refusal?: number;
         penalty?: number;
         runRate?: number;
+        active?: string;
     }) {
         if (docId) this.docId = docId;
         this.teamId = teamId ?? '';
@@ -129,6 +134,7 @@ export default class Team {
         this.refusal = refusal ?? 0;
         this.penalty = penalty ?? 0;
         this.runRate = runRate ?? 0;
+        this.active = active ?? 'Yes';
     }
     static fromFirestore(doc: firebase.firestore.DocumentSnapshot): Team {
         return new Team({
@@ -152,6 +158,7 @@ export default class Team {
             refusal: doc.data()?.refusal,
             penalty: doc.data()?.penalty,
             runRate: doc.data()?.runRate,
+            active: doc.data()?.active,
         });
     }
 }

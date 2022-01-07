@@ -85,32 +85,32 @@ const TeamAdd: React.FC<TeamAddProps> = ({ setModalOpen }): JSX.Element => {
             })
             .catch((e) => {
                 console.log(e);
-            })
-            .then(
-                async () =>
-                    await dummyAuth.createUserWithEmailAndPassword(user.email, user.password).then(async () => {
-                        await dummyFirestore
-                            .collection(Collections.users)
-                            .doc(dummyAuth.currentUser?.uid)
-                            .set(
-                                JSON.parse(
-                                    JSON.stringify(
-                                        new User({
-                                            email: user.email,
-                                            id: team.teamId,
-                                            role: UserRoles.team,
-                                            name: team.teamName,
-                                        }),
-                                    ),
-                                ),
-                            )
-                            .catch((e) => {
-                                console.log(e);
-                            })
-                            .then(async () => await dummyAuth.signOut())
-                            .finally(() => setModalOpen(false));
-                    }),
-            );
+            });
+        // .then(
+        //     async () =>
+        //         await dummyAuth.createUserWithEmailAndPassword(user.email, user.password).then(async () => {
+        //             await dummyFirestore
+        //                 .collection(Collections.users)
+        //                 .doc(dummyAuth.currentUser?.uid)
+        //                 .set(
+        //                     JSON.parse(
+        //                         JSON.stringify(
+        //                             new User({
+        //                                 email: user.email,
+        //                                 id: team.teamId,
+        //                                 role: UserRoles.team,
+        //                                 name: team.teamName,
+        //                             }),
+        //                         ),
+        //                     ),
+        //                 )
+        //                 .catch((e) => {
+        //                     console.log(e);
+        //                 })
+        //                 .then(async () => await dummyAuth.signOut())
+        //                 .finally(() => setModalOpen(false));
+        //         }),
+        // );
     };
 
     return (
@@ -161,6 +161,12 @@ const TeamAdd: React.FC<TeamAddProps> = ({ setModalOpen }): JSX.Element => {
                                 textHandler={handleSelectForm}
                             />
                             <InputBox title="Team Colour" name="teamColor" type="color" textHandler={handleForm} />
+                            <SelectInputBox
+                                title="Active"
+                                name="active"
+                                options={['Yes', 'No']}
+                                textHandler={handleSelectForm}
+                            />
                         </div>
                     </div>
                     <div className="teamAddForm__matchData">
@@ -245,7 +251,7 @@ const TeamAdd: React.FC<TeamAddProps> = ({ setModalOpen }): JSX.Element => {
                             ) : null}
                         </div>
                     </div>
-                    <div className="teamAddForm__createAccount">
+                    {/* <div className="teamAddForm__createAccount">
                         <h1 className="teamAddForm__createAccount--header">Create Account</h1>
                         <div className="teamAddForm__createAccount--input">
                             <InputBox title="Team Email" name="email" type="email" textHandler={handleUserForm} />
@@ -260,7 +266,7 @@ const TeamAdd: React.FC<TeamAddProps> = ({ setModalOpen }): JSX.Element => {
                         <button className="teamAddForm__btn--submit" type="submit">
                             Save
                         </button>
-                    </div>
+                    </div> */}
                 </form>
             )}
         </Modal>

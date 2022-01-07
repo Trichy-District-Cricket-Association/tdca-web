@@ -37,6 +37,7 @@ const TeamEdit: React.FC<TeamEditProps> = ({ setModalOpen, teamDoc }): JSX.Eleme
             conceed: teamDoc.conceed,
             refusal: teamDoc.refusal,
             penalty: teamDoc.penalty,
+            active: teamDoc.active,
         }),
     );
     // State to handle uploading files.
@@ -130,13 +131,7 @@ const TeamEdit: React.FC<TeamEditProps> = ({ setModalOpen, teamDoc }): JSX.Eleme
 
                         <div>
                             <img
-                                src={
-                                    teamDoc.avatarUrl == null
-                                        ? defaultAvatar
-                                        : avatarUrl
-                                        ? avatarUrl
-                                        : teamDoc.avatarUrl
-                                }
+                                src={team.avatarUrl == null ? defaultAvatar : avatarUrl ? avatarUrl : team.avatarUrl}
                                 alt="Team Profile"
                                 className="teamEditForm__general--avatar"
                             />
@@ -167,21 +162,21 @@ const TeamEdit: React.FC<TeamEditProps> = ({ setModalOpen, teamDoc }): JSX.Eleme
                                 title="Team Id"
                                 name="teamId"
                                 type="text"
-                                value={teamDoc.teamId}
+                                value={team.teamId}
                                 textHandler={handleForm}
                             />
                             <InputBox
                                 title="Team Name"
                                 name="teamName"
                                 type="text"
-                                value={teamDoc.teamName}
+                                value={team.teamName}
                                 textHandler={handleForm}
                             />
                             <InputBox
                                 title="Email Id"
                                 name="emailId"
                                 type="email"
-                                value={teamDoc.emailId}
+                                value={team.emailId}
                                 textHandler={handleForm}
                             />
                             <SelectInputBox
@@ -189,14 +184,21 @@ const TeamEdit: React.FC<TeamEditProps> = ({ setModalOpen, teamDoc }): JSX.Eleme
                                 name="type"
                                 options={['League Team', 'School Team', 'Knockout Team']}
                                 textHandler={handleSelectForm}
-                                value={teamDoc.type}
+                                value={team.type}
                             />
                             <InputBox
                                 title="Team Colour"
                                 name="teamColor"
                                 type="color"
-                                value={teamDoc.teamColor}
+                                value={team.teamColor}
                                 textHandler={handleForm}
+                            />
+                            <SelectInputBox
+                                title="Active"
+                                name="active"
+                                options={['Yes', 'No']}
+                                value={team.active}
+                                textHandler={handleSelectForm}
                             />
                         </div>
                     </div>
@@ -210,7 +212,7 @@ const TeamEdit: React.FC<TeamEditProps> = ({ setModalOpen, teamDoc }): JSX.Eleme
                                     title="Division"
                                     name="division"
                                     type="number"
-                                    value={teamDoc.division}
+                                    value={team.division}
                                     textHandler={handleForm}
                                 />
                             ) : null}
@@ -219,42 +221,30 @@ const TeamEdit: React.FC<TeamEditProps> = ({ setModalOpen, teamDoc }): JSX.Eleme
                                 title="Matches Played"
                                 name="numberOfMatches"
                                 type="number"
-                                value={teamDoc.numberOfMatches}
+                                value={team.numberOfMatches}
                                 textHandler={handleForm}
                             />
-                            <InputBox
-                                title="Won"
-                                name="won"
-                                type="number"
-                                value={teamDoc.won}
-                                textHandler={handleForm}
-                            />
+                            <InputBox title="Won" name="won" type="number" value={team.won} textHandler={handleForm} />
                             <InputBox
                                 title="Lost"
                                 name="lost"
                                 type="number"
-                                value={teamDoc.lost}
+                                value={team.lost}
                                 textHandler={handleForm}
                             />
                             <InputBox
                                 title="Draw"
                                 name="draw"
                                 type="number"
-                                value={teamDoc.draw}
+                                value={team.draw}
                                 textHandler={handleForm}
                             />
-                            <InputBox
-                                title="Tie"
-                                name="tie"
-                                type="number"
-                                value={teamDoc.tie}
-                                textHandler={handleForm}
-                            />
+                            <InputBox title="Tie" name="tie" type="number" value={team.tie} textHandler={handleForm} />
                             <InputBox
                                 title="No Result"
                                 name="noResult"
                                 type="number"
-                                value={teamDoc.noResult}
+                                value={team.noResult}
                                 textHandler={handleForm}
                             />
                             {team.type == 'League Team' ? (
@@ -263,7 +253,7 @@ const TeamEdit: React.FC<TeamEditProps> = ({ setModalOpen, teamDoc }): JSX.Eleme
                                     name="totalPoints"
                                     type="number"
                                     textHandler={handleForm}
-                                    value={teamDoc.totalPoints}
+                                    value={team.totalPoints}
                                 />
                             ) : null}
 
@@ -272,7 +262,7 @@ const TeamEdit: React.FC<TeamEditProps> = ({ setModalOpen, teamDoc }): JSX.Eleme
                                     title="Walkover"
                                     name="walkover"
                                     type="number"
-                                    value={teamDoc.walkover}
+                                    value={team.walkover}
                                     textHandler={handleForm}
                                 />
                             ) : null}
@@ -281,7 +271,7 @@ const TeamEdit: React.FC<TeamEditProps> = ({ setModalOpen, teamDoc }): JSX.Eleme
                                     title="Conceed"
                                     name="conceed"
                                     type="number"
-                                    value={teamDoc.conceed}
+                                    value={team.conceed}
                                     textHandler={handleForm}
                                 />
                             ) : null}
@@ -290,7 +280,7 @@ const TeamEdit: React.FC<TeamEditProps> = ({ setModalOpen, teamDoc }): JSX.Eleme
                                     title="Refusal"
                                     name="refusal"
                                     type="number"
-                                    value={teamDoc.refusal}
+                                    value={team.refusal}
                                     textHandler={handleForm}
                                 />
                             ) : null}
@@ -300,7 +290,7 @@ const TeamEdit: React.FC<TeamEditProps> = ({ setModalOpen, teamDoc }): JSX.Eleme
                                     title="Penalty"
                                     name="penalty"
                                     type="number"
-                                    value={teamDoc.penalty}
+                                    value={team.penalty}
                                     textHandler={handleForm}
                                 />
                             ) : null}
