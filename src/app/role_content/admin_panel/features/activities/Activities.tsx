@@ -5,7 +5,7 @@ import useStorage from '../../../../../hooks/useStorage';
 import Gallery from '../../../../../models/Gallery';
 import News from '../../../../../models/News';
 import Video from '../../../../../models/Video';
-import './Feeds.scss';
+import './Activities.scss';
 import PhotoGallery from './gallery/photo_gallery/PhotoGallery';
 import NewsAdd from './news/news_add/NewsAdd';
 import NewsCard from './news/news_card/NewsCard';
