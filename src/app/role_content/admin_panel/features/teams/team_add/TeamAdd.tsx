@@ -22,10 +22,10 @@ const TeamAdd: React.FC<TeamAddProps> = ({ setModalOpen }): JSX.Element => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const [team, setTeam] = useState<Team>(new Team({}));
-    const [user, setUser] = useState<{ email: string; password: string }>({
-        email: '',
-        password: '',
-    });
+    // const [user, setUser] = useState<{ email: string; password: string }>({
+    //     email: '',
+    //     password: '',
+    // });
 
     // State to handle uploading files.
     const [file, setFile] = useState(null);
@@ -64,14 +64,14 @@ const TeamAdd: React.FC<TeamAddProps> = ({ setModalOpen }): JSX.Element => {
         setTeam(newTeam);
     };
 
-    const handleUserForm = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const fieldName = `${e.target.name}` as const;
-        if (fieldName == 'email') {
-            setUser({ ...user, email: e.target.value });
-        } else if (fieldName == 'password') {
-            setUser({ ...user, password: e.target.value });
-        }
-    };
+    // const handleUserForm = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     const fieldName = `${e.target.name}` as const;
+    //     if (fieldName == 'email') {
+    //         setUser({ ...user, email: e.target.value });
+    //     } else if (fieldName == 'password') {
+    //         setUser({ ...user, password: e.target.value });
+    //     }
+    // };
 
     const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();

@@ -187,6 +187,12 @@ const PlayerAdd: React.FC<PlayerAddProps> = ({ setModalOpen }): JSX.Element => {
                                 options={['Not Paid', 'Paid']}
                                 textHandler={handleSelectForm}
                             />
+                            <SelectInputBox
+                                title="Active"
+                                name="active"
+                                options={['Yes', 'No']}
+                                textHandler={handleSelectForm}
+                            />
                         </div>
                     </div>
                     <div className="playerAddForm__personalData">

@@ -45,6 +45,7 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
             passport: playerDoc.passport,
             battingStats: playerDoc.battingStats,
             bowlingStats: playerDoc.bowlingStats,
+            active: playerDoc.active,
         }),
     );
 
@@ -283,6 +284,13 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
                                 name="registerationFee"
                                 options={['Not Paid', 'Paid']}
                                 value={player.registerationFee}
+                                textHandler={handleSelectForm}
+                            />
+                            <SelectInputBox
+                                title="Active"
+                                name="active"
+                                options={['Yes', 'No']}
+                                value={player.active}
                                 textHandler={handleSelectForm}
                             />
                         </div>

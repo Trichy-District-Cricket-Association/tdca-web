@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md';
 import { Collections } from '../../../enums/collection';
 import { firestore } from '../../../firebase';
 import Gallery from '../../../models/Gallery';
@@ -82,11 +83,11 @@ const ImageGallery: React.FC<any> = ({ galleryDocs }) => {
             {lightboxDisplay ? (
                 <div className="photoGallery__lightbox" onClick={hideLightBox}>
                     <button className="photoGallery__lightbox--prevBtn" onClick={showPrev}>
-                        {'<'}
+                        <MdNavigateNext fontSize={'45px'} />
                     </button>
                     <img className="photoGallery__lightbox--img" src={imageToShow}></img>
                     <button className="photoGallery__lightbox--nextBtn" onClick={showNext}>
-                        {'>'}
+                        <MdNavigateBefore fontSize={'45px'} />
                     </button>
                 </div>
             ) : null}
