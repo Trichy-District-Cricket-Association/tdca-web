@@ -7,7 +7,7 @@ const umpires = `${process.env.PUBLIC_URL}/assets/images/umpire.png`;
 const scorers = `${process.env.PUBLIC_URL}/assets/images/scorer.png`;
 const groundsMen = `${process.env.PUBLIC_URL}/assets/images/groundsMen.png`;
 const grounds = `${process.env.PUBLIC_URL}/assets/images/cricketGround.png`;
-const feeds = `${process.env.PUBLIC_URL}/assets/images/socialMedia.png`;
+const activities = `${process.env.PUBLIC_URL}/assets/images/socialMedia.png`;
 
 export const SidebarData = [
     // {
@@ -59,9 +59,9 @@ export const SidebarData = [
         cName: 'sideNav-text',
     },
     {
-        title: 'Feeds',
-        path: PageRoutes.feeds,
-        icon: feeds,
+        title: 'Activities',
+        path: PageRoutes.activities,
+        icon: activities,
         cName: 'sideNav-text',
     },
     {

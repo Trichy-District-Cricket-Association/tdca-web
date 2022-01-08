@@ -18,7 +18,7 @@ import AboutUsPage from './features/about_us_page/AboutUsPage';
 import ForgetPassword from './features/authentication/forget_password/ForgetPassword';
 import OldMatchesOverview from './role_content/admin_panel/features/matches/old_matches/old_matches_overview/OldMatchesOverview';
 import PhotoGallery from './features/gallery/PhotoGallery';
-import Feeds from './role_content/admin_panel/features/activities/Activities';
+import Activities from './role_content/admin_panel/features/activities/Activities';
 import Umpires from './features/governance/umpires/Umpires';
 import Scorers from './features/governance/scorers/Scorers';
 
@@ -55,7 +55,7 @@ const Routes = () => (
             userRole={UserRoles.admin}
             component={OldMatchesOverview}
         />
-        <ProtectedRoute exact path={PageRoutes.feeds} userRole={UserRoles.admin} component={Feeds} />
+        <ProtectedRoute exact path={PageRoutes.activities} userRole={UserRoles.admin} component={Activities} />
         {/* <ProtectedRoute exact path={PageRoutes.adminScorecards} userRole={UserRoles.admin} component={AdminPanel} /> */}
 
         {/*  Team panel Route */}

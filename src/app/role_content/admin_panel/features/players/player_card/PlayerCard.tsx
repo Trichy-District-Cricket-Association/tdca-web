@@ -11,7 +11,7 @@ const PlayerCard: React.FC<PlayerCardProps> = ({ playerDoc }): JSX.Element => {
     const [isModalOpen, setModalOpen] = useState(false);
     return (
         <div>
-            <div className="playerCard" onClick={() => setModalOpen(true)}>
+            <div className="AplayerCard" onClick={() => setModalOpen(true)}>
                 <div className="playerCard__header">
                     <img
                         src={playerDoc.avatarUrl ? playerDoc.avatarUrl : defaultAvatar}

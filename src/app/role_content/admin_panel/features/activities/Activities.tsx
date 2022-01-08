@@ -18,7 +18,7 @@ const data = [
     { id: '3', tabTitle: 'Gallery' },
 ];
 
-const Feeds: React.FC<void> = () => {
+const Activities: React.FC<void> = () => {
     const [photo, setPhoto] = useState<Gallery>(new Gallery({}));
 
     // states to set data from firebase
@@ -50,14 +50,14 @@ const Feeds: React.FC<void> = () => {
     };
 
     const media = async (): Promise<void> => {
-        await firestore.collection(Collections.news).onSnapshot((snapshot) => {
+        firestore.collection(Collections.news).onSnapshot((snapshot) => {
             if (snapshot.docs?.length === 0) setNewsDocs([]);
             if (snapshot.docs?.length > 0) {
                 const news = snapshot.docs.map((doc) => News.fromFirestore(doc));
                 setNewsDocs(news);
             }
         });
-        await firestore.collection(Collections.gallery).onSnapshot((snapshot) => {
+        firestore.collection(Collections.gallery).onSnapshot((snapshot) => {
             if (snapshot.docs?.length === 0) setGalleryDocs([]);
             if (snapshot.docs?.length > 0) {
                 const gallery = snapshot.docs.map((doc) => Gallery.fromFirestore(doc));
@@ -65,7 +65,7 @@ const Feeds: React.FC<void> = () => {
             }
         });
 
-        await firestore.collection(Collections.videos).onSnapshot((snapshot) => {
+        firestore.collection(Collections.videos).onSnapshot((snapshot) => {
             if (snapshot.docs?.length === 0) setVideoDocs([]);
             if (snapshot.docs?.length > 0) {
                 const videos = snapshot.docs.map((doc) => Video.fromFirestore(doc));
@@ -163,4 +163,4 @@ const Feeds: React.FC<void> = () => {
         </div>
     );
 };
-export default Feeds;
+export default Activities;

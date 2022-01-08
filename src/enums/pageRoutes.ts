@@ -22,7 +22,7 @@ export enum PageRoutes {
     adminScorecards = '/admin/scorecards',
     adminTeams = '/admin/teams',
     adminUmpires = '/admin/umpires',
-    feeds = '/admin/feeds',
+    activities = '/admin/activities',
 
     // TEAM PANEL ROUTES
     teamPanel = '/team',

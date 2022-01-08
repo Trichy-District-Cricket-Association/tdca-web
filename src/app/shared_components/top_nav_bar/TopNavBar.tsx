@@ -16,7 +16,10 @@ const TopNav = (): JSX.Element => {
     const authData = useAuth();
     const [isMobileOpen, toggleMobileOpen] = useState(false);
     const [isModalOpen, setModalOpen] = useState(false);
-    const loginClick = () => setModalOpen(true);
+    const loginClick = () => {
+        setModalOpen(true);
+        toggleMobileOpen(false);
+    };
     const [sidebar, setSidebar] = useState(false);
 
     const showSidebar = () => setSidebar(!sidebar);
