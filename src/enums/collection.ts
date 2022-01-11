@@ -11,5 +11,6 @@ export enum Collections {
     oldMatches = 'OldMatches',
     gallery = 'Gallery',
     videos = 'Videos',
-    news = 'News'
+    news = 'News',
+    office = 'Office'
 }

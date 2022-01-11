@@ -29,7 +29,7 @@ const NewsEdit: React.FC<NewsEditProps> = ({ setModalOpen, newsDoc }) => {
     const imageTypes = ['image/png', 'image/jpeg', 'image/jpg'];
 
     // Getting the progress and avatarUrl from the hook.
-    const { avatarUrl } = useStorage(imageFile);
+    const { url1 } = useStorage(imageFile);
 
     const handlePhoto = (e: any) => {
         const selectedImageFile = e.target.files[0];
@@ -59,7 +59,7 @@ const NewsEdit: React.FC<NewsEditProps> = ({ setModalOpen, newsDoc }) => {
     const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         setIsLoading(true);
-        news.setUrl = avatarUrl;
+        news.setUrl = url1;
         await firestore
             .collection(Collections.news)
             .doc(newsDoc.docId)
@@ -144,7 +144,7 @@ const NewsEdit: React.FC<NewsEditProps> = ({ setModalOpen, newsDoc }) => {
                             <div className="upload-btn-wrapper">
                                 <input type="file" name="Photo" title="Add Photo" onChange={handlePhoto} />
                                 <button className="photoBtn">
-                                    {news.photoUrl || avatarUrl ? 'Uploaded' : '+ Add Photo'}
+                                    {news.photoUrl || url1 ? 'Uploaded' : '+ Add Photo'}
                                 </button>
                             </div>
                             <div>

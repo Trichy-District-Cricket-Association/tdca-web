@@ -53,9 +53,10 @@
         padding: 5px;
         margin: 0;
     }
-    .buttons {
+    .upload {
         display: flex;
         margin-top: 20px;
+        margin-left: 20px;
         .upload-btn-wrapper {
             position: relative;
             overflow: hidden;
@@ -78,18 +79,34 @@
                 opacity: 0;
             }
         }
-        .submit {
-            color: rgb(255, 255, 255);
-            background-color: black;
-            padding: 8px 20px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            margin: 0 0 20px 20px;
+        &--title {
+            font-size: 25px;
+            font-family: 'Poppins';
+            font-weight: 500;
         }
-        .submit {
-            background-color: black;
+        &--view {
+            text-decoration: none;
+            margin: 6.5px;
+            margin-left: 20px;
+            color: #0d4194;
+            font-size: 23px;
+            font-weight: 700;
+            :focus {
+                text-decoration: underline;
+            }
         }
+    }
+    .submit {
+        color: rgb(255, 255, 255);
+        background-color: black;
+        padding: 8px 20px;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        margin: 0 0 20px 20px;
+    }
+    .submit {
+        background-color: black;
     }
     .photoGallery {
         display: grid;

@@ -52,7 +52,7 @@ const PlayersOverview: React.FC<void> = (): JSX.Element => {
                         setSelectedTeamPlayers(players);
                     }
                 });
-            if (active) {
+            if (active !== 'all') {
                 const unsub = firestore
                     .collection(Collections.players)
                     .where('teamName', '==', selectedTeamName)
@@ -164,7 +164,7 @@ const PlayersOverview: React.FC<void> = (): JSX.Element => {
                             </select>
                             {selectedTeamName && selectedTeamName != 'inactive' && selectedTeamName != 'Select Team' ? (
                                 <select className="playersOverview__teamSelect" value={active} onChange={switchActive}>
-                                    <option>Select</option>
+                                    <option value={'all'}>Select</option>
                                     <option value={'Yes'}>Active</option>
                                     <option value={'No'}>In Active</option>
                                 </select>

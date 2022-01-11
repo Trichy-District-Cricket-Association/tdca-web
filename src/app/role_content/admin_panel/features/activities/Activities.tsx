@@ -4,6 +4,7 @@ import { firestore } from '../../../../../firebase';
 import useStorage from '../../../../../hooks/useStorage';
 import Gallery from '../../../../../models/Gallery';
 import News from '../../../../../models/News';
+import Office from '../../../../../models/Office';
 import Video from '../../../../../models/Video';
 import './Activities.scss';
 import PhotoGallery from './gallery/photo_gallery/PhotoGallery';
@@ -16,15 +17,20 @@ const data = [
     { id: '1', tabTitle: 'News' },
     { id: '2', tabTitle: 'Videos' },
     { id: '3', tabTitle: 'Gallery' },
+    { id: '4', tabTitle: 'Office' },
 ];
+const pdfTypes = ['application/pdf'];
+const imageTypes = ['image/png', 'image/jpeg', 'image/jpg'];
 
 const Activities: React.FC<void> = () => {
     const [photo, setPhoto] = useState<Gallery>(new Gallery({}));
+    const [office, setOffice] = useState<Office>(new Office({}));
 
     // states to set data from firebase
     const [galleryDocs, setGalleryDocs] = useState<Gallery[] | undefined>();
     const [newsDocs, setNewsDocs] = useState<News[] | undefined>();
     const [videoDocs, setVideoDocs] = useState<Video[] | undefined>();
+    const [officeDocs, setOfficeDocs] = useState<Office[] | undefined>();
 
     // states to handle modal open
     const [isNewsModalOpen, setNewsModalOpen] = useState(false);
@@ -34,8 +40,12 @@ const Activities: React.FC<void> = () => {
 
     // State to handle uploading files.
     const [imageFile, setImageFile] = useState(null);
-    const imageTypes = ['image/png', 'image/jpeg', 'image/jpg'];
-    const { avatarUrl, progress } = useStorage(imageFile);
+    const [pdfFile1, setPdfFile1] = useState(null);
+    const [pdfFile2, setPdfFile2] = useState(null);
+    const [pdfFile3, setPdfFile3] = useState(null);
+    const [pdfFile4, setPdfFile4] = useState(null);
+
+    const { url1, url2, url3, url4, url5, progress } = useStorage(imageFile, pdfFile1, pdfFile2, pdfFile3, pdfFile4);
 
     const handlePhoto = (e: any) => {
         const selectedImageFile = e.target.files[0];
@@ -45,6 +55,25 @@ const Activities: React.FC<void> = () => {
             } else {
                 setImageFile(null);
                 window.alert('Please select an image file (png or jpg)');
+            }
+        }
+    };
+    const handlePdf = (e: any) => {
+        const selectedPdfFile = e.target.files[0];
+        console.log(selectedPdfFile);
+        if (selectedPdfFile) {
+            if (pdfTypes.includes(selectedPdfFile.type)) {
+                if (e.target.name == 'bylaws') setPdfFile1(selectedPdfFile);
+                if (e.target.name == 'lr') setPdfFile2(selectedPdfFile);
+                if (e.target.name == 'kr') setPdfFile3(selectedPdfFile);
+                if (e.target.name == 'accounts') setPdfFile4(selectedPdfFile);
+            } else {
+                setPdfFile1(null);
+                setPdfFile2(null);
+                setPdfFile3(null);
+                setPdfFile4(null);
+
+                window.alert('Format not supported');
             }
         }
     };
@@ -72,6 +101,13 @@ const Activities: React.FC<void> = () => {
                 setVideoDocs(videos);
             }
         });
+        firestore.collection(Collections.office).onSnapshot((snapshot) => {
+            if (snapshot.docs?.length === 0) setOfficeDocs([]);
+            if (snapshot.docs?.length > 0) {
+                const office = snapshot.docs.map((doc) => Office.fromFirestore(doc));
+                setOfficeDocs(office);
+            }
+        });
     };
     useEffect(() => {
         media();
@@ -79,8 +115,8 @@ const Activities: React.FC<void> = () => {
     // Upload image for gallery
     const uploadImage: React.FormEventHandler<HTMLButtonElement> = async (e) => {
         e.preventDefault();
-        if (avatarUrl != '') {
-            photo.setPhoto = avatarUrl;
+        if (url1 != '') {
+            photo.setPhoto = url1;
             await firestore
                 .collection(Collections.gallery)
                 .add(JSON.parse(JSON.stringify(photo)))
@@ -94,7 +130,23 @@ const Activities: React.FC<void> = () => {
             window.alert('Please Upload an Image');
         }
     };
-
+    const uploadpdf: React.FormEventHandler<HTMLButtonElement> = async (e) => {
+        e.preventDefault();
+        if (url2) office.setByLawsPdf = url2;
+        if (url3) office.setKnockoutRulesPdf = url3;
+        if (url4) office.setLeagueRulesPdf = url4;
+        if (url5) office.setAccountsPdf = url5;
+        await firestore
+            .collection(Collections.office)
+            .doc('liDc2hUXdGpFYXbdH75d')
+            .set(JSON.parse(JSON.stringify(office)))
+            .then((doc) => {
+                console.log(doc);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    };
     const listTitles = data?.map((item) => (
         <li
             key={item.id}
@@ -130,7 +182,7 @@ const Activities: React.FC<void> = () => {
             ) : null}
             {item.tabTitle == 'Gallery' ? (
                 <div>
-                    <div className="buttons">
+                    <div className="upload">
                         <div className="upload-btn-wrapper">
                             <input type="file" name="Photo" title="Add Photo" onChange={handlePhoto} />
                             <button className="photoBtn">
@@ -148,6 +200,112 @@ const Activities: React.FC<void> = () => {
                             <PhotoGallery key={galleryDoc.docId} galleryDoc={galleryDoc} />
                         ))}
                     </div>
+                </div>
+            ) : null}
+            {item.tabTitle == 'Office' ? (
+                <div>
+                    {officeDocs ? (
+                        <div>
+                            <div className="upload">
+                                <p className="upload--title">By Laws: </p>
+                                <div className="upload-btn-wrapper">
+                                    <input type="file" name="bylaws" title="By Laws" onChange={handlePdf} />
+                                    <button className="photoBtn">
+                                        {officeDocs[0].byLawsPdf || url2 ? 'Uploaded' : '+ By Laws'}
+                                    </button>
+                                </div>
+                                {officeDocs[0].byLawsPdf ? (
+                                    <a
+                                        className="upload--view"
+                                        href={officeDocs[0].byLawsPdf}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
+                                        Click to View
+                                    </a>
+                                ) : url2 ? (
+                                    <a className="upload--view" href={url2} target="_blank" rel="noreferrer">
+                                        Click to View
+                                    </a>
+                                ) : null}
+                            </div>
+                            <div className="upload">
+                                <p className="upload--title">League Rules:</p>
+                                <div className="upload-btn-wrapper">
+                                    <input type="file" name="lr" title="League Rules" onChange={handlePdf} />
+                                    <button className="photoBtn">
+                                        {officeDocs[0].leagueRulesPdf || url3 ? 'Uploaded' : '+ League Rules'}
+                                    </button>
+                                </div>
+                                {officeDocs[0].leagueRulesPdf ? (
+                                    <a
+                                        className="upload--view"
+                                        href={officeDocs[0].leagueRulesPdf}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
+                                        Click to View
+                                    </a>
+                                ) : url3 ? (
+                                    <a className="upload--view" href={url3} target="_blank" rel="noreferrer">
+                                        Click to View
+                                    </a>
+                                ) : null}
+                            </div>
+                            <div className="upload">
+                                <p className="upload--title">Knockout Rules:</p>
+                                <div className="upload-btn-wrapper">
+                                    <input type="file" name="kr" title="Knockout Rules" onChange={handlePdf} />
+                                    <button className="photoBtn">
+                                        {officeDocs[0].knockoutRulesPdf || url4 ? 'Uploaded' : '+ Knockout Rules'}
+                                    </button>
+                                </div>
+                                {officeDocs[0].knockoutRulesPdf ? (
+                                    <a
+                                        className="upload--view"
+                                        href={officeDocs[0].knockoutRulesPdf}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
+                                        Click to View
+                                    </a>
+                                ) : url4 ? (
+                                    <a className="upload--view" href={url4} target="_blank" rel="noreferrer">
+                                        Click to View
+                                    </a>
+                                ) : null}
+                            </div>
+                            <div className="upload">
+                                <p className="upload--title">Accounts:</p>
+                                <div className="upload-btn-wrapper">
+                                    <input type="file" name="accounts" title="Accounts" onChange={handlePdf} />
+                                    <button className="photoBtn">
+                                        {officeDocs[0].accountsPdf || url5 ? 'Uploaded' : '+ Accounts'}
+                                    </button>
+                                </div>
+                                {officeDocs[0].accountsPdf ? (
+                                    <a
+                                        className="upload--view"
+                                        href={officeDocs[0].accountsPdf}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
+                                        Click to View
+                                    </a>
+                                ) : url5 ? (
+                                    <a className="upload--view" href={url5} target="_blank" rel="noreferrer">
+                                        Click to View
+                                    </a>
+                                ) : null}
+                            </div>
+                            <button className="submit" type="submit" onClick={uploadpdf}>
+                                Submit
+                            </button>
+                            {/* <div className="photoGallery">
+                                <Official officeDoc={officeDocs[0]} />
+                            </div> */}
+                        </div>
+                    ) : null}
                 </div>
             ) : null}
         </div>

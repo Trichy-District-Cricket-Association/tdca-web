@@ -24,7 +24,7 @@ const GroundAdd: React.FC<GroundAddProps> = ({ setModalOpen }): JSX.Element => {
     const [error, setError] = useState('');
 
     // Getting the progress and avatarUrl from the hook.
-    const { avatarUrl } = useStorage(file);
+    const { url1 } = useStorage(file);
 
     const types = ['image/png', 'image/jpeg', 'image/jpg'];
 
@@ -52,7 +52,7 @@ const GroundAdd: React.FC<GroundAddProps> = ({ setModalOpen }): JSX.Element => {
     const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         setIsLoading(true);
-        ground.setAvatar = avatarUrl;
+        ground.setAvatar = url1;
         await firestore
             .collection(Collections.grounds)
             .add(JSON.parse(JSON.stringify(ground)))
@@ -85,7 +85,7 @@ const GroundAdd: React.FC<GroundAddProps> = ({ setModalOpen }): JSX.Element => {
 
                         <div>
                             <img
-                                src={avatarUrl ? avatarUrl : defaultAvatar}
+                                src={url1 ? url1 : defaultAvatar}
                                 alt="Ground Photo"
                                 className="groundAddForm__general--avatar"
                             />

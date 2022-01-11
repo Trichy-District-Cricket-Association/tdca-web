@@ -45,7 +45,7 @@ const TeamEdit: React.FC<TeamEditProps> = ({ setModalOpen, teamDoc }): JSX.Eleme
     const [error, setError] = useState('');
 
     // Getting the progress and avatarUrl from the hook.
-    const { avatarUrl } = useStorage(file);
+    const { url1 } = useStorage(file);
 
     const types = ['image/png', 'image/jpeg', 'image/jpg'];
 
@@ -83,8 +83,8 @@ const TeamEdit: React.FC<TeamEditProps> = ({ setModalOpen, teamDoc }): JSX.Eleme
         if (teamDoc.avatarUrl) {
             team.setAvatar = teamDoc.avatarUrl;
         }
-        if (avatarUrl) {
-            team.setAvatar = avatarUrl;
+        if (url1) {
+            team.setAvatar = url1;
         }
 
         await firestore
@@ -131,7 +131,7 @@ const TeamEdit: React.FC<TeamEditProps> = ({ setModalOpen, teamDoc }): JSX.Eleme
 
                         <div>
                             <img
-                                src={team.avatarUrl == null ? defaultAvatar : avatarUrl ? avatarUrl : team.avatarUrl}
+                                src={team.avatarUrl == null ? defaultAvatar : url1 ? url1 : team.avatarUrl}
                                 alt="Team Profile"
                                 className="teamEditForm__general--avatar"
                             />

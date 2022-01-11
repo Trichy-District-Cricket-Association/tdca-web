@@ -49,7 +49,7 @@ const ScorerEdit: React.FC<ScorerEditProps> = ({ setModalOpen, scorerDoc }): JSX
     const [error, setError] = useState('');
 
     // Getting the progress and avatarUrl from the hook.
-    const { avatarUrl } = useStorage(file);
+    const { url1 } = useStorage(file);
 
     const types = ['image/png', 'image/jpeg', 'image/jpg'];
 
@@ -87,8 +87,8 @@ const ScorerEdit: React.FC<ScorerEditProps> = ({ setModalOpen, scorerDoc }): JSX
         if (scorerDoc.avatarUrl) {
             scorer.setAvatar = scorerDoc.avatarUrl;
         }
-        if (avatarUrl) {
-            scorer.setAvatar = avatarUrl;
+        if (url1) {
+            scorer.setAvatar = url1;
         }
         await firestore
             .collection(Collections.scorers)
@@ -129,13 +129,7 @@ const ScorerEdit: React.FC<ScorerEditProps> = ({ setModalOpen, scorerDoc }): JSX
                     <div className="scorerEditForm__general">
                         <div>
                             <img
-                                src={
-                                    scorer.avatarUrl == null
-                                        ? defaultAvatar
-                                        : avatarUrl
-                                        ? avatarUrl
-                                        : scorerDoc.avatarUrl
-                                }
+                                src={scorer.avatarUrl == null ? defaultAvatar : url1 ? url1 : scorerDoc.avatarUrl}
                                 alt="profile"
                                 className="scorerEditForm__general--avatar"
                             />

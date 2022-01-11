@@ -19,7 +19,7 @@ const NewsAdd: React.FC<NewsAddProps> = ({ setModalOpen }): JSX.Element => {
     const imageTypes = ['image/png', 'image/jpeg', 'image/jpg'];
 
     // Getting the progress and avatarUrl from the hook.
-    const { avatarUrl } = useStorage(imageFile);
+    const { url1 } = useStorage(imageFile);
 
     const handlePhoto = (e: any) => {
         const selectedImageFile = e.target.files[0];
@@ -49,7 +49,7 @@ const NewsAdd: React.FC<NewsAddProps> = ({ setModalOpen }): JSX.Element => {
     const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         setIsLoading(true);
-        news.setUrl = avatarUrl;
+        news.setUrl = url1;
         await firestore
             .collection(Collections.news)
             .add(JSON.parse(JSON.stringify(news)))
@@ -102,7 +102,7 @@ const NewsAdd: React.FC<NewsAddProps> = ({ setModalOpen }): JSX.Element => {
                         <div className="buttons">
                             <div className="upload-btn-wrapper">
                                 <input type="file" name="Photo" title="Add Photo" onChange={handlePhoto} />
-                                <button className="photoBtn"> {avatarUrl ? 'Uploaded' : '+ Add Photo'}</button>
+                                <button className="photoBtn"> {url1 ? 'Uploaded' : '+ Add Photo'}</button>
                             </div>
                             <div>
                                 <button className="submit" type="submit">
