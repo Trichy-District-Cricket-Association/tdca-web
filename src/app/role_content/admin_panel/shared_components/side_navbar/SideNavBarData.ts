@@ -60,7 +60,7 @@ export const SidebarData = [
     },
     {
         title: 'Activities',
-        path: PageRoutes.activities,
+        path: PageRoutes.adminActivities,
         icon: activities,
         cName: 'sideNav-text',
     },

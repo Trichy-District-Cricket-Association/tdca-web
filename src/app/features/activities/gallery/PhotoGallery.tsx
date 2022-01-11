@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md';
-import { Collections } from '../../../enums/collection';
-import { firestore } from '../../../firebase';
-import Gallery from '../../../models/Gallery';
-import '../../role_content/admin_panel/features/activities/gallery/photo_gallery/PhotoGallery.scss';
+import { Collections } from '../../../../enums/collection';
+import { firestore } from '../../../../firebase';
+import Gallery from '../../../../models/Gallery';
+import '../../../role_content/admin_panel/features/activities/gallery/photo_gallery/PhotoGallery.scss';
 
-const PhotoGallery: React.FC<void> = () => {
+const PhotoGallery = () => {
     const [galleryDocs, setGalleryDocs] = useState<Gallery[] | undefined>();
 
     useEffect(() => {

@@ -88,6 +88,10 @@ const NewsAdd: React.FC<NewsAddProps> = ({ setModalOpen }): JSX.Element => {
                                 <h2 className="text">Place:</h2>
                                 <InputBox title="Place" name="place" textHandler={handleInputForm} />
                             </div>
+                            <div className="tag">
+                                <h2 className="text">Tag:</h2>
+                                <InputBox title="Tag" name="tag" textHandler={handleInputForm} />
+                            </div>
                         </div>
 
                         <h2 className="text">News Description</h2>

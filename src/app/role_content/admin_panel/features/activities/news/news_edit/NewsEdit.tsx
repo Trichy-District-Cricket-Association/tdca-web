@@ -127,6 +127,10 @@ const NewsEdit: React.FC<NewsEditProps> = ({ setModalOpen, newsDoc }) => {
                                 <h2 className="text">Place:</h2>
                                 <InputBox title="Place" name="place" value={news.place} textHandler={handleInputForm} />
                             </div>
+                            <div className="tag">
+                                <h2 className="text">Tag:</h2>
+                                <InputBox title="Tag" name="tag" value={news.place} textHandler={handleInputForm} />
+                            </div>
                         </div>
 
                         <h1 className="text">Enter News Description</h1>

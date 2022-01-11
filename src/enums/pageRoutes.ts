@@ -5,11 +5,9 @@ export enum PageRoutes {
     staffs = '/staffs',
     umpires = '/umpires',
     scorers = '/scorers',
-    bylaws = '/byLaws',
-    rules = '/rules',
     teams = '/teams',
     aboutUs = '/aboutUs',
-    gallery = '/gallery',
+    activities = '/activities',
 
     //  ADMIN PANEL ROUTES
     adminPanel = '/admin',
@@ -22,7 +20,7 @@ export enum PageRoutes {
     adminScorecards = '/admin/scorecards',
     adminTeams = '/admin/teams',
     adminUmpires = '/admin/umpires',
-    activities = '/admin/activities',
+    adminActivities = '/admin/activities',
 
     // TEAM PANEL ROUTES
     teamPanel = '/team',

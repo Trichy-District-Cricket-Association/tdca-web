@@ -16,28 +16,26 @@
         margin-top: 20px;
         .date-place {
             display: flex;
-            justify-content: space-evenly;
-            margin-left: 70px;
+            justify-content: center;
+
             .input_box {
-                max-width: 300px;
+                max-width: 210px;
             }
             .date,
-            .place {
+            .place,
+            .tag {
                 display: flex;
                 h2 {
                     margin-top: 50px;
                     font-size: 25px;
                 }
             }
-            .place {
-                margin-right: 65px;
-            }
         }
         .input_box {
             max-width: 900px;
             input {
                 height: 50px;
-                font-size: 20pxz;
+                font-size: 20px;
             }
         }
         .description {
@@ -130,14 +128,15 @@
                     max-width: 300px;
                 }
                 .date,
-                .place {
+                .place,
+                .tag {
                     display: grid;
                     h2 {
                         margin-top: 0px;
                         font-size: 25px;
                     }
                 }
-                .place {
+                .place.tag {
                     margin-right: 0px;
                 }
             }

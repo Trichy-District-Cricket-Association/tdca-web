@@ -85,15 +85,12 @@
             font-weight: 500;
         }
         &--view {
-            text-decoration: none;
+            font-family: 'Poppins';
             margin: 6.5px;
             margin-left: 20px;
             color: #0d4194;
-            font-size: 23px;
-            font-weight: 700;
-            :focus {
-                text-decoration: underline;
-            }
+            font-size: 20px;
+            font-weight: 500;
         }
     }
     .submit {

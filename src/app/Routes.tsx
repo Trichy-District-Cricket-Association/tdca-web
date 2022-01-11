@@ -17,10 +17,10 @@ import TeamPlayersOverview from './role_content/team_panel/team_players/team_pla
 import AboutUsPage from './features/about_us_page/AboutUsPage';
 import ForgetPassword from './features/authentication/forget_password/ForgetPassword';
 import OldMatchesOverview from './role_content/admin_panel/features/matches/old_matches/old_matches_overview/OldMatchesOverview';
-import PhotoGallery from './features/gallery/PhotoGallery';
-import Activities from './role_content/admin_panel/features/activities/Activities';
+import AdminActivities from './role_content/admin_panel/features/activities/Activities';
 import Umpires from './features/governance/umpires/Umpires';
 import Scorers from './features/governance/scorers/Scorers';
+import Activities from './features/activities/Activities';
 
 const Routes = () => (
     <Switch>
@@ -29,7 +29,7 @@ const Routes = () => (
         <Route exact path={PageRoutes.teams} component={TeamsPage} />
         <Route exact path={PageRoutes.matches} component={MatchesPage} />
         <Route exact path={PageRoutes.aboutUs} component={AboutUsPage} />
-        <Route exact path={PageRoutes.gallery} component={PhotoGallery} />
+        <Route exact path={PageRoutes.activities} component={Activities} />
         <Route exact path={PageRoutes.umpires} component={Umpires} />
         <Route exact path={PageRoutes.scorers} component={Scorers} />
         {/* <Route exact path={PageRoutes.bylaws} component={StaffsPage} />
@@ -55,7 +55,12 @@ const Routes = () => (
             userRole={UserRoles.admin}
             component={OldMatchesOverview}
         />
-        <ProtectedRoute exact path={PageRoutes.activities} userRole={UserRoles.admin} component={Activities} />
+        <ProtectedRoute
+            exact
+            path={PageRoutes.adminActivities}
+            userRole={UserRoles.admin}
+            component={AdminActivities}
+        />
         {/* <ProtectedRoute exact path={PageRoutes.adminScorecards} userRole={UserRoles.admin} component={AdminPanel} /> */}
 
         {/*  Team panel Route */}

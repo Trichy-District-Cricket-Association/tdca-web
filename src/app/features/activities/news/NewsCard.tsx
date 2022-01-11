@@ -1,24 +1,20 @@
-import React, { useState } from 'react';
-import News from '../../../../../../../models/News';
-import LoadingComp from '../../../../../../shared_components/loading_comp/LoadingComp';
-import NewsEdit from '../news_edit/NewsEdit';
-import './NewsCard.scss';
+import React from 'react';
+import News from '../../../../models/News';
+import LoadingComp from '../../../shared_components/loading_comp/LoadingComp';
+import '../../../role_content/admin_panel/features/activities/news/news_card/NewsCard.scss';
 
 type NewsCardProps = {
     newsDoc: News;
 };
 
 const NewsCard: React.FC<NewsCardProps> = ({ newsDoc }) => {
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [isModalOpen, setModalOpen] = useState(false);
-
     return (
         <div>
             {newsDoc == undefined ? (
                 <LoadingComp />
             ) : (
                 <div>
-                    <ul className="cardUl" key={newsDoc.docId ?? ''} onClick={() => setModalOpen(true)}>
+                    <ul className="cardUl" key={newsDoc.docId ?? ''}>
                         <li className="card">
                             <p className="featured-image" style={{ backgroundImage: `url(${newsDoc.photoUrl})` }}></p>
                             <article className="card-body">
@@ -44,7 +40,6 @@ const NewsCard: React.FC<NewsCardProps> = ({ newsDoc }) => {
                             </article>
                         </li>
                     </ul>
-                    {isModalOpen ? <NewsEdit setModalOpen={setModalOpen} newsDoc={newsDoc} /> : null}
                 </div>
             )}
         </div>

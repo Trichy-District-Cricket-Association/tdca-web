@@ -1,17 +1,20 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { UserRoles } from '../../../enums/auth';
 import { PageRoutes } from '../../../enums/pageRoutes';
-import { auth } from '../../../firebase';
+import { auth, firestore } from '../../../firebase';
 import useAuth from '../../../hooks/useAuth';
 import Login from '../../features/authentication/Login';
 import './TopNavBar.scss';
 import SideNavBar from '../../role_content/admin_panel/shared_components/side_navbar/SideNavBar';
 import { BsGear } from 'react-icons/bs';
 import { MdPerson } from 'react-icons/md';
+import Office from '../../../models/Office';
+import { Collections } from '../../../enums/collection';
 
 const logo = `${process.env.PUBLIC_URL}/assets/images/tdca_logo.jpg`;
+
 const TopNav = (): JSX.Element => {
     const authData = useAuth();
     const [isMobileOpen, toggleMobileOpen] = useState(false);
@@ -23,6 +26,18 @@ const TopNav = (): JSX.Element => {
     const [sidebar, setSidebar] = useState(false);
 
     const showSidebar = () => setSidebar(!sidebar);
+
+    const [officeDocs, setOfficeDocs] = useState<Office[] | undefined>();
+    useEffect(() => {
+        const unsub = firestore.collection(Collections.office).onSnapshot((snapshot) => {
+            if (snapshot.docs?.length === 0) setOfficeDocs([]);
+            if (snapshot.docs?.length > 0) {
+                const office = snapshot.docs.map((doc) => Office.fromFirestore(doc));
+                setOfficeDocs(office);
+            }
+        });
+        return () => unsub();
+    });
     return (
         <div>
             <div className="nav">
@@ -85,13 +100,57 @@ const TopNav = (): JSX.Element => {
                         <p className="dropbtn" onClick={() => toggleMobileOpen(false)}>
                             Governance
                         </p>
+
                         <div className="dropdown-content">
-                            <Link to={PageRoutes.bylaws} className="link" onClick={() => toggleMobileOpen(false)}>
-                                By Laws
-                            </Link>
-                            <Link to={PageRoutes.rules} className="link" onClick={() => toggleMobileOpen(false)}>
-                                League Rules
-                            </Link>
+                            {officeDocs ? (
+                                <div>
+                                    {officeDocs[0].byLawsPdf ? (
+                                        <a
+                                            onClick={() => toggleMobileOpen(false)}
+                                            className="link"
+                                            href={officeDocs[0].byLawsPdf}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                        >
+                                            By Laws
+                                        </a>
+                                    ) : null}
+                                    {officeDocs[0].leagueRulesPdf ? (
+                                        <a
+                                            onClick={() => toggleMobileOpen(false)}
+                                            className="link"
+                                            href={officeDocs[0].leagueRulesPdf}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                        >
+                                            League Ruels
+                                        </a>
+                                    ) : null}
+                                    {officeDocs[0].knockoutRulesPdf ? (
+                                        <a
+                                            onClick={() => toggleMobileOpen(false)}
+                                            className="link"
+                                            href={officeDocs[0].knockoutRulesPdf}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                        >
+                                            Knockout Rules
+                                        </a>
+                                    ) : null}
+                                    {officeDocs[0].accountsPdf ? (
+                                        <a
+                                            onClick={() => toggleMobileOpen(false)}
+                                            className="link"
+                                            href={officeDocs[0].accountsPdf}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                        >
+                                            Accounts
+                                        </a>
+                                    ) : null}
+                                </div>
+                            ) : null}
+
                             <Link to={PageRoutes.umpires} className="link" onClick={() => toggleMobileOpen(false)}>
                                 Umpires
                             </Link>
@@ -101,8 +160,8 @@ const TopNav = (): JSX.Element => {
                         </div>
                     </div>
                     <div className="item">
-                        <Link to={PageRoutes.gallery} className="nav__link" onClick={() => toggleMobileOpen(false)}>
-                            Gallery
+                        <Link to={PageRoutes.activities} className="nav__link" onClick={() => toggleMobileOpen(false)}>
+                            Socials
                         </Link>
                     </div>
 
