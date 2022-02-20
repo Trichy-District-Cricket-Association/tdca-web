@@ -22,6 +22,7 @@ const NewsEdit: React.FC<NewsEditProps> = ({ setModalOpen, newsDoc }) => {
             title: newsDoc.title,
             date: newsDoc.date,
             place: newsDoc.place,
+            tag: newsDoc.tag,
         }),
     );
     // State to handle uploading files.
@@ -59,6 +60,12 @@ const NewsEdit: React.FC<NewsEditProps> = ({ setModalOpen, newsDoc }) => {
     const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         setIsLoading(true);
+        if (news.photoUrl) {
+            news.setUrl = news.photoUrl;
+        }
+        if (url1) {
+            news.setUrl = url1;
+        }
         news.setUrl = url1;
         await firestore
             .collection(Collections.news)
@@ -129,7 +136,7 @@ const NewsEdit: React.FC<NewsEditProps> = ({ setModalOpen, newsDoc }) => {
                             </div>
                             <div className="tag">
                                 <h2 className="text">Tag:</h2>
-                                <InputBox title="Tag" name="tag" value={news.place} textHandler={handleInputForm} />
+                                <InputBox title="Tag" name="tag" value={news.tag} textHandler={handleInputForm} />
                             </div>
                         </div>
 

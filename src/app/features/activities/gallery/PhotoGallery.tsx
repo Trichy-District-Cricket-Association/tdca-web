@@ -4,7 +4,6 @@ import { Collections } from '../../../../enums/collection';
 import { firestore } from '../../../../firebase';
 import Gallery from '../../../../models/Gallery';
 import '../../../role_content/admin_panel/features/activities/gallery/photo_gallery/PhotoGallery.scss';
-
 const PhotoGallery = () => {
     const [galleryDocs, setGalleryDocs] = useState<Gallery[] | undefined>();
 
@@ -67,30 +66,32 @@ const ImageGallery: React.FC<any> = ({ galleryDocs }) => {
     };
 
     return (
-        <div className="photoGallery">
-            <div>
-                {/* looping through our galleryDocs array to create img elements */}
-                {galleryDocs?.map((galleryDoc: Gallery) => (
-                    <img
-                        className="photoGallery__imageCard"
-                        onClick={() => showImage(galleryDoc.photoUrl)}
-                        key={galleryDoc.docId}
-                        src={galleryDoc.photoUrl}
-                    />
-                ))}
-            </div>
-
-            {lightboxDisplay ? (
-                <div className="photoGallery__lightbox" onClick={hideLightBox}>
-                    <button className="photoGallery__lightbox--prevBtn" onClick={showPrev}>
-                        <MdNavigateNext fontSize={'45px'} />
-                    </button>
-                    <img className="photoGallery__lightbox--img" src={imageToShow}></img>
-                    <button className="photoGallery__lightbox--nextBtn" onClick={showNext}>
-                        <MdNavigateBefore fontSize={'45px'} />
-                    </button>
+        <div>
+            <div className="photoGallery">
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)' }}>
+                    {/* looping through our galleryDocs array to create img elements */}
+                    {galleryDocs?.map((galleryDoc: Gallery) => (
+                        <img
+                            className="photoGallery__imageCard"
+                            onClick={() => showImage(galleryDoc.photoUrl)}
+                            key={galleryDoc.docId}
+                            src={galleryDoc.photoUrl}
+                        />
+                    ))}
                 </div>
-            ) : null}
+
+                {lightboxDisplay ? (
+                    <div className="photoGallery__lightbox" onClick={hideLightBox}>
+                        <button className="photoGallery__lightbox--prevBtn" onClick={showPrev}>
+                            <MdNavigateNext fontSize={'45px'} />
+                        </button>
+                        <img className="photoGallery__lightbox--img" src={imageToShow}></img>
+                        <button className="photoGallery__lightbox--nextBtn" onClick={showNext}>
+                            <MdNavigateBefore fontSize={'45px'} />
+                        </button>
+                    </div>
+                ) : null}
+            </div>
         </div>
     );
 };

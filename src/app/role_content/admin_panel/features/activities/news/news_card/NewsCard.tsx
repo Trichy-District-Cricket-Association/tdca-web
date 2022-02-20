@@ -3,13 +3,12 @@ import News from '../../../../../../../models/News';
 import LoadingComp from '../../../../../../shared_components/loading_comp/LoadingComp';
 import NewsEdit from '../news_edit/NewsEdit';
 import './NewsCard.scss';
-
+const cricket = `${process.env.PUBLIC_URL}/assets/images/cricket.png`;
 type NewsCardProps = {
     newsDoc: News;
 };
 
 const NewsCard: React.FC<NewsCardProps> = ({ newsDoc }) => {
-    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isModalOpen, setModalOpen] = useState(false);
 
     return (
@@ -20,7 +19,10 @@ const NewsCard: React.FC<NewsCardProps> = ({ newsDoc }) => {
                 <div>
                     <ul className="cardUl" key={newsDoc.docId ?? ''} onClick={() => setModalOpen(true)}>
                         <li className="card">
-                            <p className="featured-image" style={{ backgroundImage: `url(${newsDoc.photoUrl})` }}></p>
+                            <p
+                                className="featured-image"
+                                style={{ backgroundImage: `url(${newsDoc.photoUrl ? newsDoc.photoUrl : cricket})` }}
+                            ></p>
                             <article className="card-body">
                                 <header>
                                     <div>
@@ -38,7 +40,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ newsDoc }) => {
                                     </div>
                                 </header>
                                 <div className="chips">
-                                    <p className="chip">{newsDoc.tag}</p>
+                                    {newsDoc.tag ? <p className="chip">{newsDoc.tag}</p> : null}
                                     <p className="chip">TDCA</p>
                                 </div>
                             </article>
