@@ -24,7 +24,7 @@ const LandingMatches: React.FC<any> = (): JSX.Element => {
     }, []);
     return (
         <div className="matches">
-            {matchDocs?.length !== 0 ? (
+            {matchDocs ? (
                 <div className="matches__header">
                     <h1 className="matches__header--text">Recent Matches</h1>
                 </div>

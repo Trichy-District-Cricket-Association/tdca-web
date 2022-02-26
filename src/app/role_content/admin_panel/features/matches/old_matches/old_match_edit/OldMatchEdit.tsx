@@ -89,11 +89,11 @@ const OldMatchAdd: React.FC<OldMatchAddProps> = ({ setModalOpen, oldMatchDoc }):
                             <SelectInputBox
                                 title="Match Type"
                                 name="type"
-                                options={['League Match', 'School Match', 'Knockout Match']}
+                                options={['League Tournament', 'School Tournament', 'Knockout Tournament']}
                                 value={oldMatchDoc.type}
                                 textHandler={handleSelectForm}
                             />
-                            {oldMatch.type == 'League Match' ? (
+                            {oldMatch.type == 'League Tournament' ? (
                                 <SelectInputBox
                                     title="Division"
                                     name="division"
@@ -102,7 +102,7 @@ const OldMatchAdd: React.FC<OldMatchAddProps> = ({ setModalOpen, oldMatchDoc }):
                                     value={oldMatchDoc.division}
                                 />
                             ) : null}
-                            {oldMatch.type == 'School Match' ? (
+                            {oldMatch.type == 'School Tournament' ? (
                                 <SelectInputBox
                                     title="School Match Type"
                                     name="schoolMatchType"

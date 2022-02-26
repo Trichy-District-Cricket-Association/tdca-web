@@ -3,9 +3,13 @@ export enum PageRoutes {
     home = '/',
     matches = '/matches',
     staffs = '/staffs',
+    umpires = '/umpires',
+    scorers = '/scorers',
     teams = '/teams',
     aboutUs = '/aboutUs',
-    gallery = '/gallery',
+    activities = '/activities',
+    login = '/login',
+    signup = '/signup',
 
     //  ADMIN PANEL ROUTES
     adminPanel = '/admin',
@@ -18,7 +22,7 @@ export enum PageRoutes {
     adminScorecards = '/admin/scorecards',
     adminTeams = '/admin/teams',
     adminUmpires = '/admin/umpires',
-    feeds = '/admin/feeds',
+    adminActivities = '/admin/activities',
 
     // TEAM PANEL ROUTES
     teamPanel = '/team',

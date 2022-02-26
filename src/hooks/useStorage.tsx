@@ -1,20 +1,22 @@
 import { useState, useEffect } from 'react';
 import { storage } from '../firebase';
 
-const useStorage = (imageFile: any, pdfFile?: any, aadharFile?: any) => {
+const useStorage = (file1: any, file2?: any, file3?: any, file4?: any, file5?: any) => {
     const [progress, setProgress] = useState(0);
     const [error, setError] = useState('');
-    const [avatarUrl, setavatarUrl] = useState('');
-    const [pdfUrl, setPdfUrl] = useState('');
-    const [aadharUrl, setAadharUrl] = useState('');
+    const [url1, setUrl1] = useState('');
+    const [url2, setUrl2] = useState('');
+    const [url3, setUrl3] = useState('');
+    const [url4, setUrl4] = useState('');
+    const [url5, setUrl5] = useState('');
 
     // runs every time the file value changes
     useEffect(() => {
-        if (imageFile) {
+        if (file1) {
             // storage refs
-            const storageRef = storage.ref(imageFile.name);
+            const storageRef = storage.ref(file1.name);
 
-            storageRef.put(imageFile).on(
+            storageRef.put(file1).on(
                 'state_changed',
                 (snap) => {
                     // track the upload progress
@@ -26,15 +28,15 @@ const useStorage = (imageFile: any, pdfFile?: any, aadharFile?: any) => {
                     // get the public download img url
                     const downloadUrl = await storageRef.getDownloadURL();
                     // save the url to local state
-                    setavatarUrl(downloadUrl);
+                    setUrl1(downloadUrl);
                 },
             );
         }
-        if (pdfFile) {
+        if (file2) {
             // storage refs
-            const storageRef = storage.ref(pdfFile.name);
+            const storageRef = storage.ref(file2.name);
 
-            storageRef.put(pdfFile).on(
+            storageRef.put(file2).on(
                 'state_changed',
                 (snap) => {
                     // track the upload progress
@@ -46,15 +48,15 @@ const useStorage = (imageFile: any, pdfFile?: any, aadharFile?: any) => {
                     // get the public download img url
                     const downloadUrl = await storageRef.getDownloadURL();
                     // save the url to local state
-                    setPdfUrl(downloadUrl);
+                    setUrl2(downloadUrl);
                 },
             );
         }
-        if (aadharFile) {
+        if (file3) {
             // storage refs
-            const storageRef = storage.ref(aadharFile.name);
+            const storageRef = storage.ref(file3.name);
 
-            storageRef.put(aadharFile).on(
+            storageRef.put(file3).on(
                 'state_changed',
                 (snap) => {
                     // track the upload progress
@@ -66,13 +68,53 @@ const useStorage = (imageFile: any, pdfFile?: any, aadharFile?: any) => {
                     // get the public download img url
                     const downloadUrl = await storageRef.getDownloadURL();
                     // save the url to local state
-                    setAadharUrl(downloadUrl);
+                    setUrl3(downloadUrl);
                 },
             );
         }
-    }, [imageFile, pdfFile, aadharFile]);
+        if (file4) {
+            // storage refs
+            const storageRef = storage.ref(file4.name);
 
-    return { progress, avatarUrl, error, pdfUrl, aadharUrl };
+            storageRef.put(file4).on(
+                'state_changed',
+                (snap) => {
+                    // track the upload progress
+                    const percentage = Math.round((snap.bytesTransferred / snap.totalBytes) * 100);
+                    setProgress(percentage);
+                },
+                () => setError(error),
+                async () => {
+                    // get the public download img url
+                    const downloadUrl = await storageRef.getDownloadURL();
+                    // save the url to local state
+                    setUrl4(downloadUrl);
+                },
+            );
+        }
+        if (file5) {
+            // storage refs
+            const storageRef = storage.ref(file5.name);
+
+            storageRef.put(file5).on(
+                'state_changed',
+                (snap) => {
+                    // track the upload progress
+                    const percentage = Math.round((snap.bytesTransferred / snap.totalBytes) * 100);
+                    setProgress(percentage);
+                },
+                () => setError(error),
+                async () => {
+                    // get the public download img url
+                    const downloadUrl = await storageRef.getDownloadURL();
+                    // save the url to local state
+                    setUrl5(downloadUrl);
+                },
+            );
+        }
+    }, [file1, file2, file3, file4, file5]);
+
+    return { progress, error, url1, url2, url3, url4, url5 };
 };
 
 export default useStorage;

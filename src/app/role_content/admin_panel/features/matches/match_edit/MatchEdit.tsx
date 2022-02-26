@@ -207,11 +207,11 @@ const MatchEdit: React.FC<MatchEditProps> = ({ setModalOpen, matchDoc }): JSX.El
                             <SelectInputBox
                                 title="Match Type"
                                 name="type"
-                                options={['League Match', 'School Match', 'Knockout Match']}
+                                options={['League Tournament', 'School Tournament', 'Knockout Tournament']}
                                 value={match.type}
                                 textHandler={handleSelectForm}
                             />
-                            {match.type == 'League Match' ? (
+                            {match.type == 'League Tournament' ? (
                                 <SelectInputBox
                                     title="Division"
                                     name="division"
@@ -220,7 +220,7 @@ const MatchEdit: React.FC<MatchEditProps> = ({ setModalOpen, matchDoc }): JSX.El
                                     value={match.division}
                                 />
                             ) : null}
-                            {match.type == 'School Match' ? (
+                            {match.type == 'School Tournament' ? (
                                 <SelectInputBox
                                     title="School Match Type"
                                     name="schoolMatchType"

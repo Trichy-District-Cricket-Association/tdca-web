@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Droid+Serif&display=swap');
+.newsDetails {
+    width: 80%;
+    height: 90%;
+    border-radius: 10px;
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    bottom: 40px;
+    overflow-y: scroll;
+
+    color: #2f2f2f;
+    background-color: #f9f7f1;
+
+    &__header {
+        font-family: 'Playfair Display', serif;
+        font-weight: 900;
+        font-size: 80px;
+        text-transform: uppercase;
+        line-height: 72px;
+        margin: 20px;
+        text-align: center;
+    }
+    &__subhead {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        font-family: 'Droid Serif', serif;
+        text-transform: uppercase;
+        border-bottom: 2px solid #2f2f2f;
+        border-top: 2px solid #2f2f2f;
+        padding: 12px 0 12px 0;
+    }
+    &__items {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 20px;
+        &--photo {
+            width: 400px;
+            height: auto;
+        }
+    }
+    &__subitems {
+        margin: 0 20px;
+        max-width: 900px;
+        font-family: 'Droid Serif', serif;
+        &--title {
+            font-size: 40px;
+            font-weight: 700;
+        }
+        &--tag {
+            font-size: 20px;
+            font-weight: 700;
+            width: 100px;
+            margin: 10px 0;
+            color: #8b8b8b;
+        }
+        &--description {
+            font-size: 20px;
+            margin-top: 20px;
+            letter-spacing: 0.1px;
+        }
+    }
+}

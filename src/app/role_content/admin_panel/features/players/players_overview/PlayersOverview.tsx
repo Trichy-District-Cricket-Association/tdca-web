@@ -8,7 +8,6 @@ import LoadingComp from '../../../../../shared_components/loading_comp/LoadingCo
 import PlayerAdd from '../player_add/PlayerAdd';
 import PlayerCard from '../player_card/PlayerCard';
 import Team from '../../../../../../models/Team';
-import PrintPlayer from '../player_edit/PrintPlayer';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import PrintSelectedTeamPlayers from './PrintSelectedTeamPlayers';
 
@@ -18,6 +17,7 @@ const PlayersOverview: React.FC<void> = (): JSX.Element => {
     const [teamDocs, setTeamDocs] = useState<Team[] | undefined>();
     const [selectedTeamName, setSelectedTeamName] = useState<string | undefined>();
     const [selectedTeamPlayers, setSelectedTeamPlayers] = useState<Player[]>([]);
+    const [active, setActive] = useState<string | undefined>();
 
     useEffect(() => {
         const PlayerDocs = firestore.collection(Collections.players).onSnapshot((snapshot) => {
@@ -52,16 +52,51 @@ const PlayersOverview: React.FC<void> = (): JSX.Element => {
                         setSelectedTeamPlayers(players);
                     }
                 });
+            if (active == 'Yes' || active == 'No') {
+                const unsub = firestore
+                    .collection(Collections.players)
+                    .where('teamName', '==', selectedTeamName)
+                    .where('active', '==', active)
+                    .onSnapshot((snapshot) => {
+                        if (snapshot?.docs?.length === 0) setSelectedTeamPlayers([]);
+                        if (snapshot?.docs?.length > 0) {
+                            const players = snapshot.docs.map((doc) => Player.fromFirestore(doc));
+                            setSelectedTeamPlayers(players);
+                        }
+                    });
+                return () => {
+                    unsub();
+                };
+            }
             return () => {
                 unsub();
             };
         }
-    }, [selectedTeamName]);
+        if (selectedTeamName == 'inactive') {
+            const unsub = firestore
+                .collection(Collections.players)
+                .where('active', '==', 'No')
+                .onSnapshot((snapshot) => {
+                    if (snapshot?.docs?.length === 0) setSelectedTeamPlayers([]);
+                    if (snapshot?.docs?.length > 0) {
+                        const players = snapshot.docs.map((doc) => Player.fromFirestore(doc));
+                        setSelectedTeamPlayers(players);
+                    }
+                });
 
+            return () => {
+                unsub();
+            };
+        }
+    }, [selectedTeamName, active]);
+    console.log(selectedTeamPlayers);
     const SelectedTeamPlayers = async (e: React.ChangeEvent<HTMLSelectElement>): Promise<void> => {
         setSelectedTeamName(e.target.value);
+        setActive(undefined);
     };
-
+    const switchActive = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setActive(e.target.value);
+    };
     const headers = [
         { label: 'PLAYER ID', key: 'playerId' },
         { label: 'PLAYER NAME', key: 'playerName' },
@@ -91,7 +126,6 @@ const PlayersOverview: React.FC<void> = (): JSX.Element => {
         { label: 'BEST BOWLING / WICKETS', key: 'bowlingStats.bestBowling.wicketsTaken' },
         { label: 'FIVE WICKET HAUL', key: 'bowlingStats.fiveWicketHaul' },
     ];
-
     return (
         <div>
             {playerDocs == undefined || teamDocs == undefined ? (
@@ -123,12 +157,20 @@ const PlayersOverview: React.FC<void> = (): JSX.Element => {
                         <div>
                             <select className="playersOverview__teamSelect" onChange={SelectedTeamPlayers}>
                                 <option>Select Team</option>
+                                <option value={'inactive'}>In Active</option>
                                 {teamDocs.map((teamDoc) => (
-                                    <option key={teamDoc.teamId} value={teamDoc.teamName}>
+                                    <option key={teamDoc.docId} value={teamDoc.teamName}>
                                         {teamDoc.teamName}
                                     </option>
                                 ))}
                             </select>
+                            {selectedTeamName && selectedTeamName != 'inactive' && selectedTeamName != 'Select Team' ? (
+                                <select className="playersOverview__teamSelect" value={active} onChange={switchActive}>
+                                    <option value={'all'}>Select</option>
+                                    <option value={'Yes'}>Active</option>
+                                    <option value={'No'}>In Active</option>
+                                </select>
+                            ) : null}
                         </div>
                     ) : (
                         <div />

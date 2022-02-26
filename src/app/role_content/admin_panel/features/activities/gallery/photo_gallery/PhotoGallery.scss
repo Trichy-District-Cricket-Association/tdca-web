@@ -1,0 +1,33 @@
+.photoGallery {
+    &__imageCard {
+        width: 30vw;
+        height: 30vw;
+        object-fit: cover;
+    }
+    &__lightbox {
+        z-index: 1;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        &--img {
+            height: 80vh;
+            max-width: 90vw;
+            object-fit: cover;
+        }
+        &--prevBtn,
+        &--nextBtn {
+            color: white;
+            border: 2px solid #061227;
+            background-color: #061227;
+            padding: 10px;
+            font-size: 30px;
+            font-weight: 700;
+        }
+    }
+}

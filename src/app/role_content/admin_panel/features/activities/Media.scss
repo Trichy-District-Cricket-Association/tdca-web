@@ -1,0 +1,163 @@
+.media {
+    width: 76%;
+    height: 90%;
+    border-radius: 10px;
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    bottom: 40px;
+    background-color: #fff;
+    overflow-y: scroll;
+    &__overlay {
+        background-color: #131313;
+    }
+    .mediaForm {
+        margin-top: 20px;
+        .date-place {
+            display: flex;
+            justify-content: center;
+
+            .input_box {
+                max-width: 210px;
+            }
+            .date,
+            .place,
+            .tag {
+                display: flex;
+                h2 {
+                    margin-top: 50px;
+                    font-size: 25px;
+                }
+            }
+        }
+        .input_box {
+            max-width: 900px;
+            input {
+                height: 50px;
+                font-size: 20px;
+            }
+        }
+        .description {
+            margin: auto;
+            .input_box {
+                span {
+                    height: 28px;
+                }
+            }
+
+            .input_box input {
+                height: 400px;
+            }
+        }
+        .text {
+            font-family: 'Poppins';
+            font-size: 28px;
+            text-align: center;
+            color: #071833;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-around;
+            .upload-btn-wrapper {
+                position: relative;
+                overflow: hidden;
+                display: inline-block;
+
+                .photoBtn {
+                    color: rgb(255, 255, 255);
+                    background-color: #0d4194;
+                    border: #0d4194;
+                    padding: 8px 20px;
+                    border-radius: 8px;
+                    font-size: 16px;
+                    font-weight: bold;
+                    margin: 0 0 20px 20px;
+                }
+                input[type='file'] {
+                    font-size: 20px;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    opacity: 0;
+                }
+            }
+            .submit {
+                color: rgb(255, 255, 255);
+                background-color: black;
+                padding: 8px 20px;
+                border-radius: 8px;
+                font-size: 16px;
+                font-weight: bold;
+                margin: 0 0 20px 20px;
+                margin-left: 9rem;
+            }
+            .deleteBtn {
+                color: red;
+                font-size: 29px;
+                cursor: pointer;
+                border: none;
+                background-color: #fff;
+                padding: 0;
+                margin-right: -30rem;
+            }
+        }
+        .top {
+            display: flex;
+            justify-content: center;
+        }
+    }
+    &__overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.541);
+    }
+}
+
+@media screen and (max-width: 996px) {
+    .media {
+        .mediaForm {
+            .date-place {
+                display: grid;
+                justify-content: space-evenly;
+                margin-left: 0px;
+                .input_box {
+                    max-width: 300px;
+                }
+                .date,
+                .place,
+                .tag {
+                    display: grid;
+                    h2 {
+                        margin-top: 0px;
+                        font-size: 25px;
+                    }
+                }
+                .place.tag {
+                    margin-right: 0px;
+                }
+            }
+            .buttons {
+                display: grid;
+                .upload-btn-wrapper {
+                    .photoBtn {
+                        padding: 8px 80px;
+                        margin: 0 0 20px 0px;
+                    }
+                }
+                .submit {
+                    padding: 8px 100px;
+                    margin: 0 0 20px 0px;
+                }
+                .deleteBtn {
+                    margin-right: 0rem;
+
+                    margin-left: 10px;
+                }
+            }
+        }
+    }
+}

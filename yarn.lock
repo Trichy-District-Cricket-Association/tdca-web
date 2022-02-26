@@ -3007,6 +3007,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/caniuse-lite@npm:^1":
+  version: 1.0.1
+  resolution: "@types/caniuse-lite@npm:1.0.1"
+  checksum: 5ca05cbc747531a09807f29318a7ec1ebc274befc6c517f17bcb25529ca2fcf2763ccefc8424ecd7e4c45a04726fbae7f8dea1e27814879989ed1474fe92051a
+  languageName: node
+  linkType: hard
+
 "@types/eslint@npm:^7.2.6":
   version: 7.2.13
   resolution: "@types/eslint@npm:7.2.13"
@@ -5196,6 +5203,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"caniuse-lite@npm:^1.0.30001294":
+  version: 1.0.30001294
+  resolution: "caniuse-lite@npm:1.0.30001294"
+  checksum: bdc286fe02fff689ad3d34ac7c464d50b03242fc9128cf722ea2f2a645b9706f3fbb9c9e2f24a91e4cd663d0b8d76a4c2489eec3154ebe8601930a5f6498936f
+  languageName: node
+  linkType: hard
+
 "capture-exit@npm:^2.0.0":
   version: 2.0.0
   resolution: "capture-exit@npm:2.0.0"
@@ -6408,7 +6422,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"deepmerge@npm:^4.2.2":
+"deepmerge@npm:^4.0.0, deepmerge@npm:^4.2.2":
   version: 4.2.2
   resolution: "deepmerge@npm:4.2.2"
   checksum: 85abf8e0045ee280996e7d2396979c877ef0741e413b716e42441110e0a83ac08098b2a49cea035510060bf667c0eae3189b2a52349f5fa4b000c211041637b1
@@ -10833,6 +10847,13 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"load-script@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "load-script@npm:1.0.0"
+  checksum: 9f907ee20dfe8068af210be73a072dd61a287566a23b5666b9c6b9957e66eb33cc7c6a790308cf307c373d7ff75265ab1dde779c3fff90d65535fb3a1c0a167a
+  languageName: node
+  linkType: hard
+
 "loader-runner@npm:^2.4.0":
   version: 2.4.0
   resolution: "loader-runner@npm:2.4.0"
@@ -11193,6 +11214,13 @@ fsevents@^1.2.7:
   version: 0.3.0
   resolution: "media-typer@npm:0.3.0"
   checksum: be1c825782df7f38eebd451d778f6407bb15a59c8807a69e7f2ad74a25440e474536441c6bf583fdf2803ea23b866e91ff68f565cda297211dd89147758c8df3
+  languageName: node
+  linkType: hard
+
+"memoize-one@npm:^5.1.1":
+  version: 5.2.1
+  resolution: "memoize-one@npm:5.2.1"
+  checksum: 6b7dab7d8d9dca696d500dbc7f6b1445cbc4168d8208ee2746dd1a7f75378445d9bc6a2def7868afee81c87e630294456310f33f3f1eb738f69d748c797d87d5
   languageName: node
   linkType: hard
 
@@ -14009,6 +14037,13 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"react-fast-compare@npm:^3.0.1":
+  version: 3.2.0
+  resolution: "react-fast-compare@npm:3.2.0"
+  checksum: 6fe65c889eb4f326e97769135f97b3d63ac68737866f9c37f9625c9de4f5eaa9abed6f748eb3fd6a66808392118842916309cab7cfa99c67991f0c837433d6d2
+  languageName: node
+  linkType: hard
+
 "react-hook-form@npm:^7.9.0":
   version: 7.10.1
   resolution: "react-hook-form@npm:7.10.1"
@@ -14060,6 +14095,21 @@ fsevents@^1.2.7:
     react: ^0.14.0 || ^15.0.0 || ^16 || ^17
     react-dom: ^0.14.0 || ^15.0.0 || ^16 || ^17
   checksum: 904c5192414dd7cde054aa5c21d4a5264f9b1aa4edff8ce73d476e76da91f746e96ac26edd77b756ec01bf0e6c934db45644782e9d115c7b8940245cebc0b06c
+  languageName: node
+  linkType: hard
+
+"react-player@npm:^2.9.0":
+  version: 2.9.0
+  resolution: "react-player@npm:2.9.0"
+  dependencies:
+    deepmerge: ^4.0.0
+    load-script: ^1.0.0
+    memoize-one: ^5.1.1
+    prop-types: ^15.7.2
+    react-fast-compare: ^3.0.1
+  peerDependencies:
+    react: ">=16.6.0"
+  checksum: 32016230af242c472c266aea491621b8cb319239880e21b5d4dff95815d4dbc517bb47f0ca3a57ef9b4dd3e22087c17cd66e23072768584902069d16b5d70b63
   languageName: node
   linkType: hard
 
@@ -16178,6 +16228,7 @@ resolve@^2.0.0-next.3:
     "@testing-library/user-event": ^12.8.3
     "@types/babel__core": ^7.1.14
     "@types/brainhubeu__react-carousel": ^2.0.3
+    "@types/caniuse-lite": ^1
     "@types/gh-pages": ^3
     "@types/jest": ^26.0.23
     "@types/node": ^12.20.15
@@ -16190,6 +16241,7 @@ resolve@^2.0.0-next.3:
     "@typescript-eslint/eslint-plugin": ^4.27.0
     "@typescript-eslint/parser": ^4.27.0
     add: ^2.0.6
+    caniuse-lite: ^1.0.30001294
     eslint: ^7.29.0
     eslint-config-airbnb: ^18.2.1
     eslint-config-prettier: 8.3.0
@@ -16212,6 +16264,7 @@ resolve@^2.0.0-next.3:
     react-hook-form: ^7.9.0
     react-icons: ^4.2.0
     react-modal: ^3.14.3
+    react-player: ^2.9.0
     react-router-dom: ^5.2.0
     react-router-hash-link: ^2.4.3
     react-scripts: 4.0.3

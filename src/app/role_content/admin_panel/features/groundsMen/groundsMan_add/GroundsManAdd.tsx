@@ -23,7 +23,7 @@ const GroundsManAdd: React.FC<GroundsManAddProps> = ({ setModalOpen }): JSX.Elem
     const [error, setError] = useState('');
 
     // Getting the progress and avatarUrl from the hook.
-    const { avatarUrl } = useStorage(file);
+    const { url1 } = useStorage(file);
 
     const types = ['image/png', 'image/jpeg', 'image/jpg'];
 
@@ -51,7 +51,7 @@ const GroundsManAdd: React.FC<GroundsManAddProps> = ({ setModalOpen }): JSX.Elem
     const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         setIsLoading(true);
-        groundsMan.setAvatar = avatarUrl;
+        groundsMan.setAvatar = url1;
         await firestore
             .collection(Collections.groundsMen)
             .add(JSON.parse(JSON.stringify(groundsMan)))
@@ -78,7 +78,7 @@ const GroundsManAdd: React.FC<GroundsManAddProps> = ({ setModalOpen }): JSX.Elem
                     <div className="groundsManAddForm__general">
                         <div>
                             <img
-                                src={avatarUrl ? avatarUrl : defaultAvatar}
+                                src={url1 ? url1 : defaultAvatar}
                                 alt="profile"
                                 className="groundsManAddForm__general--avatar"
                             />

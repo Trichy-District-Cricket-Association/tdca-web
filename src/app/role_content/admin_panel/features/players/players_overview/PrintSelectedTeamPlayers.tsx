@@ -79,10 +79,7 @@ const PrintSelectedTeamPlayers: React.FC<PlayersPrintProps> = ({ players, teamNa
             {players.map((player: any) => (
                 <View key={player.playerId} style={styles.container}>
                     <View style={styles.section}>
-                        <Image
-                            style={styles.profile}
-                            src={player.avatarUrl ? player.avatarUrl  : defaultAvatar}
-                        />
+                        <Image style={styles.profile} src={player.avatarUrl ? player.avatarUrl : defaultAvatar} />
                     </View>
 
                     <View style={styles.data}>

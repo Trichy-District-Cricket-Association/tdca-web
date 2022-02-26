@@ -1,0 +1,48 @@
+.videoCard {
+    font-family: 'Poppins', serif;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: 0;
+    padding: 1rem;
+    &__cards {
+        &--item {
+            display: flex;
+        }
+    }
+    &__card {
+        box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+        &__content {
+            padding: 1rem;
+            background: #0d4194;
+        }
+        &--text {
+            max-width: 450px;
+            min-height: 30px;
+            color: #ffffff;
+            font-size: 1.1rem;
+            font-weight: 700;
+            line-height: 1.5;
+            margin-bottom: 1.25rem;
+        }
+    }
+}
+
+@media (max-width: 1375px) {
+    .videoCard {
+        &__cards {
+            &--item {
+                width: 50%;
+            }
+        }
+    }
+}
+
+@media (max-width: 800px) {
+    .videoCard {
+        &__cards {
+            &--item {
+                width: 33.3333%;
+            }
+        }
+    }
+}

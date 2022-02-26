@@ -47,6 +47,8 @@ export default class Player {
 
     pdfUrl?: string;
 
+    active?: string;
+
     handlePlayer({ field, value }: { field: string; value: string }): void {
         if (field == 'playerName') this.playerName = value;
         if (field == 'playerId') this.playerId = value;
@@ -80,6 +82,7 @@ export default class Player {
         if (field == 'bowlingStats_bestBowling_wicketsTaken')
             this.bowlingStats!.bestBowling!.wicketsTaken = parseInt(value);
         if (field == 'bowlingStats_fiveWicketHaul') this.bowlingStats!.fiveWicketHaul = parseInt(value);
+        if (field == 'active') this.active = value;
     }
     set setAvatar(url: string) {
         this.avatarUrl = url;
@@ -114,6 +117,7 @@ export default class Player {
         bowlingStats,
         pdfUrl,
         aadharUrl,
+        active
     }: {
         docId?: string;
         playerId?: string;
@@ -127,7 +131,6 @@ export default class Player {
         fatherName?: string;
         primaryContact?: string;
         registerationFee?: string;
-
         dateOfRegisteration?: Date;
         aadharNumber?: string;
         voterId?: string;
@@ -138,6 +141,7 @@ export default class Player {
         battingStats?: BattingStats;
         bowlingStats?: BowlingStats;
         pdfUrl?: string;
+        active?: string;
     }) {
         if (docId) this.docId = docId;
         this.playerId = playerId ?? '';
@@ -176,6 +180,7 @@ export default class Player {
             bestBowling: { runsGiven: 0, wicketsTaken: 0 },
             fiveWicketHaul: 0,
         };
+        this.active = active ?? 'Yes';
     }
 
     static fromFirestore(doc: firebase.firestore.DocumentSnapshot): Player {
@@ -202,6 +207,7 @@ export default class Player {
             passport: doc.data()?.passport,
             battingStats: doc.data()?.battingStats,
             bowlingStats: doc.data()?.bowlingStats,
+            active: doc.data()?.active,
         });
     }
 }

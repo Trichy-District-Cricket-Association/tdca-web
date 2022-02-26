@@ -48,7 +48,7 @@ const UmpireEdit: React.FC<UmpireEditProps> = ({ setModalOpen, umpireDoc }): JSX
     const [file, setFile] = useState(null);
 
     // Getting the progress and avatarUrl from the hook.
-    const { avatarUrl } = useStorage(file);
+    const { url1 } = useStorage(file);
 
     const types = ['image/png', 'image/jpeg', 'image/jpg'];
 
@@ -84,8 +84,8 @@ const UmpireEdit: React.FC<UmpireEditProps> = ({ setModalOpen, umpireDoc }): JSX
         if (umpireDoc.avatarUrl) {
             umpire.setAvatar = umpireDoc.avatarUrl;
         }
-        if (avatarUrl) {
-            umpire.setAvatar = avatarUrl;
+        if (url1) {
+            umpire.setAvatar = url1;
         }
 
         await firestore
@@ -127,13 +127,7 @@ const UmpireEdit: React.FC<UmpireEditProps> = ({ setModalOpen, umpireDoc }): JSX
                     <div className="umpireEditForm__general">
                         <div>
                             <img
-                                src={
-                                    umpire.avatarUrl == null
-                                        ? defaultAvatar
-                                        : avatarUrl
-                                        ? avatarUrl
-                                        : umpireDoc.avatarUrl
-                                }
+                                src={umpire.avatarUrl == null ? defaultAvatar : url1 ? url1 : umpireDoc.avatarUrl}
                                 alt="profile"
                                 className="umpireEditForm__general--avatar"
                             />

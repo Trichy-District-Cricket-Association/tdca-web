@@ -7,7 +7,9 @@ type InputBoxProps = {
     suggestion?: string;
     value?: any;
     ref?: any;
+    readOnly?: boolean;
     textHandler?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    textAreaHandler?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
 };
 
 const InputBox: React.FC<InputBoxProps> = ({
@@ -17,7 +19,9 @@ const InputBox: React.FC<InputBoxProps> = ({
     suggestion = '',
     value,
     ref,
+    readOnly = false,
     textHandler,
+    textAreaHandler,
 }): JSX.Element => {
     let pattern;
     {
@@ -77,7 +81,10 @@ const InputBox: React.FC<InputBoxProps> = ({
                             ref={ref ?? undefined}
                             required
                             pattern={pattern ? pattern : '.*'}
+                            readOnly={readOnly}
                         />
+                    ) : type == 'textarea' ? (
+                        <textarea name={name} defaultValue={value} onChange={textAreaHandler} cols={300} rows={10} />
                     ) : (
                         <input
                             type={type}

@@ -45,6 +45,7 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
             passport: playerDoc.passport,
             battingStats: playerDoc.battingStats,
             bowlingStats: playerDoc.bowlingStats,
+            active: playerDoc.active,
         }),
     );
 
@@ -53,7 +54,7 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
     const [pdfFile, setPdfFile] = useState(null);
     const [aadharFile, setAadharFile] = useState(null);
     // Getting the progress and avatarUrl from the hook.
-    const { avatarUrl, pdfUrl, aadharUrl } = useStorage(imageFile, pdfFile, aadharFile);
+    const { url1, url2, url3 } = useStorage(imageFile, pdfFile, aadharFile);
     const imageTypes = ['image/png', 'image/jpeg', 'image/jpg'];
     const pdfTypes = ['application/pdf', 'image/png', 'image/jpeg', 'image/jpg'];
     // Functions to check the type of file.
@@ -120,9 +121,7 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
         newPlayer.handlePlayer({ field: fieldName, value: e.target.value });
         setPlayer(newPlayer);
     };
-    {
-        console.log(playerDoc.pdfUrl);
-    }
+
     const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         setIsLoading(true);
@@ -130,20 +129,20 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
         if (playerDoc.avatarUrl) {
             player.setAvatar = playerDoc.avatarUrl;
         }
-        if (avatarUrl) {
-            player.setAvatar = avatarUrl;
+        if (url1) {
+            player.setAvatar = url1;
         }
         if (playerDoc.pdfUrl) {
             player.setPdf = playerDoc.pdfUrl;
         }
-        if (pdfUrl) {
-            player.setPdf = pdfUrl;
+        if (url3) {
+            player.setPdf = url3;
         }
         if (playerDoc.aadharUrl) {
             player.setAadhar = playerDoc.aadharUrl;
         }
-        if (aadharUrl) {
-            player.setAadhar = aadharUrl;
+        if (url2) {
+            player.setAadhar = url2;
         }
         await firestore
             .collection(Collections.players)
@@ -185,9 +184,7 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
                     <div className="playerEditForm__general">
                         <div>
                             <img
-                                src={
-                                    player.avatarUrl == null ? defaultAvatar : avatarUrl ? avatarUrl : player.avatarUrl
-                                }
+                                src={player.avatarUrl == null ? defaultAvatar : url1 ? url1 : player.avatarUrl}
                                 alt="profile"
                                 className="playerEditForm__general--avatar"
                             />
@@ -285,6 +282,13 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
                                 value={player.registerationFee}
                                 textHandler={handleSelectForm}
                             />
+                            <SelectInputBox
+                                title="Active"
+                                name="active"
+                                options={['Yes', 'No']}
+                                value={player.active}
+                                textHandler={handleSelectForm}
+                            />
                         </div>
                     </div>
                     <div className="playerEditForm__personalData">
@@ -341,30 +345,30 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
                         <div className="upload__btnWrapper">
                             <input type="file" name="aadharUrl" title="Upload Aadhar" onChange={handleAadharChange} />
                             <button className="upload--aadharBtn">
-                                {player.aadharUrl || aadharUrl ? 'Uploaded' : 'Upload Aadhar'}
+                                {player.aadharUrl || url2 ? 'Uploaded' : 'Upload Aadhar'}
                             </button>
                         </div>
                         {player.aadharUrl ? (
                             <a className="upload--view" href={player.aadharUrl} target="_blank" rel="noreferrer">
                                 Click to View
                             </a>
-                        ) : aadharUrl ? (
-                            <a className="upload--view" href={aadharUrl} target="_blank" rel="noreferrer">
+                        ) : url2 ? (
+                            <a className="upload--view" href={url2} target="_blank" rel="noreferrer">
                                 Click to View
                             </a>
                         ) : null}
                         <div className="upload__btnWrapper">
                             <input type="file" name="pdfUrl" title="Upload File" onChange={handlePdfChange} />
                             <button className="upload--pdfBtn">
-                                {player.pdfUrl || pdfUrl ? 'Uploaded' : 'Upload File'}
+                                {player.pdfUrl || url2 ? 'Uploaded' : 'Upload File'}
                             </button>
                         </div>
                         {player.pdfUrl ? (
                             <a className="upload--view" href={player.pdfUrl} target="_blank" rel="noreferrer">
                                 Click to View
                             </a>
-                        ) : pdfUrl ? (
-                            <a className="upload--view" href={pdfUrl} target="_blank" rel="noreferrer">
+                        ) : url3 ? (
+                            <a className="upload--view" href={url3} target="_blank" rel="noreferrer">
                                 Click to View
                             </a>
                         ) : null}

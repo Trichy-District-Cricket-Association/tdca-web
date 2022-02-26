@@ -24,7 +24,7 @@ const PlayerAdd: React.FC<PlayerAddProps> = ({ setModalOpen }): JSX.Element => {
     const [pdfFile, setPdfFile] = useState(null);
     const [aadharFile, setAadharFile] = useState(null);
     // Getting the progress and avatarUrl from the hook.
-    const { avatarUrl, pdfUrl, aadharUrl } = useStorage(imageFile, pdfFile, aadharFile);
+    const { url1, url2, url3 } = useStorage(imageFile, pdfFile, aadharFile);
     const imageTypes = ['image/png', 'image/jpeg', 'image/jpg'];
     const pdfTypes = ['application/pdf', 'image/png', 'image/jpeg', 'image/jpg'];
     // Functions to check the type of file.
@@ -99,9 +99,9 @@ const PlayerAdd: React.FC<PlayerAddProps> = ({ setModalOpen }): JSX.Element => {
     };
     const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
-        player.setAvatar = avatarUrl;
-        player.setAadhar = aadharUrl;
-        player.setPdf = pdfUrl;
+        player.setAvatar = url1;
+        player.setAadhar = url2;
+        player.setPdf = url3;
         setIsLoading(true);
         await firestore
             .collection(Collections.players)
@@ -129,7 +129,7 @@ const PlayerAdd: React.FC<PlayerAddProps> = ({ setModalOpen }): JSX.Element => {
                     <div className="playerAddForm__general">
                         <div>
                             <img
-                                src={avatarUrl ? avatarUrl : defaultAvatar}
+                                src={url1 ? url1 : defaultAvatar}
                                 alt="profile"
                                 className="playerAddForm__general--avatar"
                             />
@@ -187,6 +187,12 @@ const PlayerAdd: React.FC<PlayerAddProps> = ({ setModalOpen }): JSX.Element => {
                                 options={['Not Paid', 'Paid']}
                                 textHandler={handleSelectForm}
                             />
+                            <SelectInputBox
+                                title="Active"
+                                name="active"
+                                options={['Yes', 'No']}
+                                textHandler={handleSelectForm}
+                            />
                         </div>
                     </div>
                     <div className="playerAddForm__personalData">
@@ -222,11 +228,11 @@ const PlayerAdd: React.FC<PlayerAddProps> = ({ setModalOpen }): JSX.Element => {
                     </div>
                     <div className="upload-btn-wrapper">
                         <input type="file" name="aadharUrl" title="Upload Aadhar" onChange={handleAadharChange} />
-                        <button className="aadharBtn">{aadharUrl ? 'Uploaded' : 'Upload Aadhar'}</button>
+                        <button className="aadharBtn">{url2 ? 'Uploaded' : 'Upload Aadhar'}</button>
                     </div>
                     <div className="upload-btn-wrapper">
                         <input type="file" name="pdfUrl" title="Upload File" onChange={handlePdfChange} />
-                        <button className="pdfBtn">{pdfUrl ? 'Uploaded' : 'Upload File'}</button>
+                        <button className="pdfBtn">{url3 ? 'Uploaded' : 'Upload File'}</button>
                     </div>
                     <div className="playerAddForm__stats">
                         <h1 className="playerAddForm__stats--header">Statistics</h1>

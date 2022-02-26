@@ -41,7 +41,7 @@ const GroundsManEdit: React.FC<GroundsManEditProps> = ({ setModalOpen, groundsMa
     const [error, setError] = useState('');
 
     // Getting the progress and avatarUrl from the hook.
-    const { avatarUrl } = useStorage(file);
+    const { url1 } = useStorage(file);
 
     const types = ['image/png', 'image/jpeg', 'image/jpg'];
 
@@ -69,12 +69,12 @@ const GroundsManEdit: React.FC<GroundsManEditProps> = ({ setModalOpen, groundsMa
     const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         setIsLoading(true);
-        groundsMan.setAvatar = avatarUrl;
+        groundsMan.setAvatar = url1;
         if (groundsManDoc.avatarUrl) {
             groundsMan.setAvatar = groundsManDoc.avatarUrl;
         }
-        if (avatarUrl) {
-            groundsMan.setAvatar = avatarUrl;
+        if (url1) {
+            groundsMan.setAvatar = url1;
         }
         await firestore
             .collection(Collections.groundsMen)
@@ -118,8 +118,8 @@ const GroundsManEdit: React.FC<GroundsManEditProps> = ({ setModalOpen, groundsMa
                                 src={
                                     groundsManDoc.avatarUrl == null
                                         ? defaultAvatar
-                                        : avatarUrl
-                                        ? avatarUrl
+                                        : url1
+                                        ? url1
                                         : groundsManDoc.avatarUrl
                                 }
                                 alt="profile"

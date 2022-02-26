@@ -22,17 +22,13 @@ const TeamAdd: React.FC<TeamAddProps> = ({ setModalOpen }): JSX.Element => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const [team, setTeam] = useState<Team>(new Team({}));
-    const [user, setUser] = useState<{ email: string; password: string }>({
-        email: '',
-        password: '',
-    });
 
     // State to handle uploading files.
     const [file, setFile] = useState(null);
     const [error, setError] = useState('');
 
     // Getting the progress and avatarUrl from the hook.
-    const { avatarUrl } = useStorage(file);
+    const { url1 } = useStorage(file);
 
     const types = ['image/png', 'image/jpeg', 'image/jpg'];
 
@@ -64,53 +60,21 @@ const TeamAdd: React.FC<TeamAddProps> = ({ setModalOpen }): JSX.Element => {
         setTeam(newTeam);
     };
 
-    const handleUserForm = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const fieldName = `${e.target.name}` as const;
-        if (fieldName == 'email') {
-            setUser({ ...user, email: e.target.value });
-        } else if (fieldName == 'password') {
-            setUser({ ...user, password: e.target.value });
-        }
-    };
-
     const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         setIsLoading(true);
-        team.setAvatar = avatarUrl;
+        team.setAvatar = url1;
         await firestore
             .collection(Collections.teams)
             .add(JSON.parse(JSON.stringify(team)))
             .then(async (doc) => {
                 console.log(doc);
+                setIsLoading(false);
+                setModalOpen(false);
             })
             .catch((e) => {
                 console.log(e);
-            })
-            .then(
-                async () =>
-                    await dummyAuth.createUserWithEmailAndPassword(user.email, user.password).then(async () => {
-                        await dummyFirestore
-                            .collection(Collections.users)
-                            .doc(dummyAuth.currentUser?.uid)
-                            .set(
-                                JSON.parse(
-                                    JSON.stringify(
-                                        new User({
-                                            email: user.email,
-                                            id: team.teamId,
-                                            role: UserRoles.team,
-                                            name: team.teamName,
-                                        }),
-                                    ),
-                                ),
-                            )
-                            .catch((e) => {
-                                console.log(e);
-                            })
-                            .then(async () => await dummyAuth.signOut())
-                            .finally(() => setModalOpen(false));
-                    }),
-            );
+            });
     };
 
     return (
@@ -133,7 +97,7 @@ const TeamAdd: React.FC<TeamAddProps> = ({ setModalOpen }): JSX.Element => {
 
                         <div>
                             <img
-                                src={avatarUrl ? avatarUrl : defaultAvatar}
+                                src={url1 ? url1 : defaultAvatar}
                                 alt="Team Profile"
                                 className="teamAddForm__general--avatar"
                             />
@@ -161,6 +125,12 @@ const TeamAdd: React.FC<TeamAddProps> = ({ setModalOpen }): JSX.Element => {
                                 textHandler={handleSelectForm}
                             />
                             <InputBox title="Team Colour" name="teamColor" type="color" textHandler={handleForm} />
+                            <SelectInputBox
+                                title="Active"
+                                name="active"
+                                options={['Yes', 'No']}
+                                textHandler={handleSelectForm}
+                            />
                         </div>
                     </div>
                     <div className="teamAddForm__matchData">
@@ -243,13 +213,6 @@ const TeamAdd: React.FC<TeamAddProps> = ({ setModalOpen }): JSX.Element => {
                                     value={0}
                                 />
                             ) : null}
-                        </div>
-                    </div>
-                    <div className="teamAddForm__createAccount">
-                        <h1 className="teamAddForm__createAccount--header">Create Account</h1>
-                        <div className="teamAddForm__createAccount--input">
-                            <InputBox title="Team Email" name="email" type="email" textHandler={handleUserForm} />
-                            <InputBox title="Password" name="password" type="text" textHandler={handleUserForm} />
                         </div>
                     </div>
 

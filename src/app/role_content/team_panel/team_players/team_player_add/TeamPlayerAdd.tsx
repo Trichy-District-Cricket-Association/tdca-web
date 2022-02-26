@@ -25,7 +25,7 @@ const TeamPlayerAdd: React.FC<TeamPlayerAddProps> = ({ setModalOpen, teamId, tea
     const [error, setError] = useState('');
 
     // Getting the progress and avatarUrl from the hook.
-    const { avatarUrl } = useStorage(file);
+    const { url1 } = useStorage(file);
     const types = ['image/png', 'image/jpeg', 'image/jpg'];
     // Functions to check the type of file.
     const handleAvatarChange = (e: any) => {
@@ -68,7 +68,7 @@ const TeamPlayerAdd: React.FC<TeamPlayerAddProps> = ({ setModalOpen, teamId, tea
 
     const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
-        player.setAvatar = avatarUrl;
+        player.setAvatar = url1;
         setIsLoading(true);
         await firestore
             .collection(Collections.players)
@@ -101,7 +101,7 @@ const TeamPlayerAdd: React.FC<TeamPlayerAddProps> = ({ setModalOpen, teamId, tea
 
                         <div>
                             <img
-                                src={avatarUrl ? avatarUrl : defaultAvatar}
+                                src={url1 ? url1 : defaultAvatar}
                                 alt="profile"
                                 className="playerAddForm__general--avatar"
                             />
