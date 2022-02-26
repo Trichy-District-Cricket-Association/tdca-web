@@ -52,7 +52,7 @@ const PlayersOverview: React.FC<void> = (): JSX.Element => {
                         setSelectedTeamPlayers(players);
                     }
                 });
-            if (active !== 'all') {
+            if (active == 'Yes' || active == 'No') {
                 const unsub = firestore
                     .collection(Collections.players)
                     .where('teamName', '==', selectedTeamName)
@@ -83,11 +83,13 @@ const PlayersOverview: React.FC<void> = (): JSX.Element => {
                         setSelectedTeamPlayers(players);
                     }
                 });
+
             return () => {
                 unsub();
             };
         }
     }, [selectedTeamName, active]);
+    console.log(selectedTeamPlayers);
     const SelectedTeamPlayers = async (e: React.ChangeEvent<HTMLSelectElement>): Promise<void> => {
         setSelectedTeamName(e.target.value);
         setActive(undefined);
@@ -157,7 +159,7 @@ const PlayersOverview: React.FC<void> = (): JSX.Element => {
                                 <option>Select Team</option>
                                 <option value={'inactive'}>In Active</option>
                                 {teamDocs.map((teamDoc) => (
-                                    <option key={teamDoc.teamId} value={teamDoc.teamName}>
+                                    <option key={teamDoc.docId} value={teamDoc.teamName}>
                                         {teamDoc.teamName}
                                     </option>
                                 ))}

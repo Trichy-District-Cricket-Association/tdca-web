@@ -163,9 +163,6 @@ const MatchAdd: React.FC<MatchAddProps> = ({ setModalOpen }): JSX.Element => {
                 <LoadingComp />
             ) : selectable ? (
                 <form className="matchAddForm" onSubmit={submitForm}>
-                    {console.log(selectable.grounds)}
-                    {console.log(selectable.teams)}
-                    {console.log(selectable.umpires)}
                     <div className="matchAddForm__matchData">
                         <h1 className="matchAddForm__matchData--header">Match Details</h1>
                         <div className="matchAddForm__matchData--input">
@@ -173,10 +170,10 @@ const MatchAdd: React.FC<MatchAddProps> = ({ setModalOpen }): JSX.Element => {
                             <SelectInputBox
                                 title="Match Type"
                                 name="type"
-                                options={['League Match', 'School Match', 'Knockout Match']}
+                                options={['League Tournament', 'School Tournament', 'Knockout Tournament']}
                                 textHandler={handleSelectForm}
                             />
-                            {match.type == 'League Match' ? (
+                            {match.type == 'League Tournament' ? (
                                 <SelectInputBox
                                     title="Division"
                                     name="division"
@@ -184,7 +181,7 @@ const MatchAdd: React.FC<MatchAddProps> = ({ setModalOpen }): JSX.Element => {
                                     textHandler={handleSelectForm}
                                 />
                             ) : null}
-                            {match.type == 'School Match' ? (
+                            {match.type == 'School Tournament' ? (
                                 <SelectInputBox
                                     title="School Match Type"
                                     name="schoolMatchType"

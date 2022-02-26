@@ -60,7 +60,6 @@ const Activities: React.FC<void> = () => {
     };
     const handlePdf = (e: any) => {
         const selectedPdfFile = e.target.files[0];
-        console.log(selectedPdfFile);
         if (selectedPdfFile) {
             if (pdfTypes.includes(selectedPdfFile.type)) {
                 if (e.target.name == 'bylaws') setPdfFile1(selectedPdfFile);

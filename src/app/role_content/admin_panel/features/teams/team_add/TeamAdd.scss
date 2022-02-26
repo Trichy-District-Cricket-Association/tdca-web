@@ -14,8 +14,7 @@
     }
     .teamAddForm {
         &__general,
-        &__matchData,
-        &__createAccount {
+        &__matchData {
             &__header {
                 display: flex;
                 justify-content: space-between;
@@ -84,11 +83,7 @@
                 display: none;
             }
         }
-        &__createAccount {
-            &--input {
-                display: flex;
-            }
-        }
+
         &__btn {
             display: flex;
             margin-left: 2%;
@@ -137,15 +132,9 @@
 
         .teamAddForm {
             text-align: center;
-            &__matchData,
-            &__createAccount {
+            &__matchData {
                 .input_box {
                     max-width: 400px;
-                }
-            }
-            &__createAccount {
-                &--input {
-                    display: grid;
                 }
             }
             &__btn {

@@ -9,11 +9,11 @@ import { UserRoles } from '../enums/auth';
 const AuthContext = React.createContext<User | undefined>(undefined);
 
 const AuthProvider = (props: any) => {
-    const [authState, setAuthState] = useState<User | undefined | null>(undefined);
+    const [authState, setAuthState] = useState<User | undefined>(undefined);
     useEffect(() => {
         const listener = auth.onAuthStateChanged((user: firebase.User | null) => {
             if (user == null) {
-                setAuthState(null);
+                setAuthState(undefined);
                 return;
             }
             firestore

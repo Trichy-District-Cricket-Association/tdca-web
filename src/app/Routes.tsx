@@ -15,13 +15,14 @@ import MatchesPage from './features/matches_page/MatchesPage';
 import TeamsPage from './features/teams_page/TeamsPage';
 import TeamPlayersOverview from './role_content/team_panel/team_players/team_players_overview/TeamPlayersOverview';
 import AboutUsPage from './features/about_us_page/AboutUsPage';
-import ForgetPassword from './features/authentication/forget_password/ForgetPassword';
+import ForgetPassword from './features/authentication/login/forget_password/ForgetPassword';
 import OldMatchesOverview from './role_content/admin_panel/features/matches/old_matches/old_matches_overview/OldMatchesOverview';
 import AdminActivities from './role_content/admin_panel/features/activities/Activities';
 import Umpires from './features/governance/umpires/Umpires';
 import Scorers from './features/governance/scorers/Scorers';
 import Activities from './features/activities/Activities';
-import Login from './features/authentication/Login';
+import Login from './features/authentication/login/Login';
+import SignUp from './features/authentication/sign_up/SignUp';
 
 const Routes = () => (
     <Switch>
@@ -34,6 +35,7 @@ const Routes = () => (
         <Route exact path={PageRoutes.umpires} component={Umpires} />
         <Route exact path={PageRoutes.scorers} component={Scorers} />
         <Route exact path={PageRoutes.login} component={Login} />
+        <Route exact path={PageRoutes.signup} component={SignUp} />
 
         {/* Admin Panel Route */}
         {/* <ProtectedRoute exact path={PageRoutes.adminPanel} userRole={UserRoles.admin} component={AdminPanel} /> */}

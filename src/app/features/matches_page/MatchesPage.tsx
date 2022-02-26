@@ -7,7 +7,6 @@ import './MatchesPage.scss';
 import LoadingComp from '../../shared_components/loading_comp/LoadingComp';
 import { usePagination } from 'use-pagination-firestore';
 import MatchCard from './match_card/MatchCard';
-import Footer from '../../shared_components/Footer/Footer';
 
 const divisionTypes = [1, 2, 3, 4, 5];
 const matchTypes = ['LeagueTournament', 'SchoolTournament', 'KnockoutTournament'];
@@ -20,6 +19,7 @@ const MatchesPage: React.FC<void> = (): JSX.Element => {
     const { docs, isLoading, isStart, isEnd, getPrev, getNext } = usePagination<Match>(query, {
         limit: 10,
     });
+    const [matchType, setMatchType] = useState<string>();
 
     const [selectedMatchType, setSelectedMatchType] = useState<string | undefined>();
     const [selectedDivisionType, setSelectedDivisionType] = useState<number | undefined>();
@@ -29,6 +29,9 @@ const MatchesPage: React.FC<void> = (): JSX.Element => {
         setSelectedDivisionType(parseInt(e.target.value));
     };
     const switchMatchType = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        if (e.target.value == 'LeagueTournament') setMatchType('League Tournament');
+        if (e.target.value == 'SchoolTournament') setMatchType('School Tournament');
+        if (e.target.value == 'KnockoutTournament') setMatchType('Knockout Tournament');
         setSelectedMatchType(e.target.value);
         setSelectedDivisionType(undefined);
         setSelectedSchoolMatchType(undefined);
@@ -42,7 +45,10 @@ const MatchesPage: React.FC<void> = (): JSX.Element => {
             window.location.reload();
         }
         if (selectedMatchType) {
-            let newQuery = baseMatchQuery.where('type', '==', selectedMatchType);
+            if (selectedMatchType == 'LeagueTournament') setMatchType('League Tournament');
+            if (selectedMatchType == 'SchoolTournament') setMatchType('School Tournament');
+            if (selectedMatchType == 'KnockoutTournament') setMatchType('Knockout Tournament');
+            let newQuery = baseMatchQuery.where('type', '==', matchType);
             if (selectedDivisionType) {
                 newQuery = newQuery.where('division', '==', selectedDivisionType);
             }

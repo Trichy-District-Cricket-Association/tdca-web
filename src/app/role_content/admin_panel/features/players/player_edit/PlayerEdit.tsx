@@ -121,9 +121,7 @@ const PlayerEdit: React.FC<PlayerEditProps> = ({ setModalOpen, playerDoc }): JSX
         newPlayer.handlePlayer({ field: fieldName, value: e.target.value });
         setPlayer(newPlayer);
     };
-    {
-        console.log(playerDoc.pdfUrl);
-    }
+
     const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         setIsLoading(true);

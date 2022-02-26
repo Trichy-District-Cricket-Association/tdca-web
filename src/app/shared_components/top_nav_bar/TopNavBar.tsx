@@ -5,7 +5,6 @@ import { UserRoles } from '../../../enums/auth';
 import { PageRoutes } from '../../../enums/pageRoutes';
 import { auth, firestore } from '../../../firebase';
 import useAuth from '../../../hooks/useAuth';
-import Login from '../../features/authentication/Login';
 import './TopNavBar.scss';
 import SideNavBar from '../../role_content/admin_panel/shared_components/side_navbar/SideNavBar';
 import { BsGear } from 'react-icons/bs';
@@ -32,7 +31,7 @@ const TopNav = (): JSX.Element => {
             }
         });
         return () => unsub();
-    });
+    }, []);
     return (
         <div>
             <div className="nav">
@@ -160,7 +159,7 @@ const TopNav = (): JSX.Element => {
                         </Link>
                     </div>
 
-                    {authData === undefined ? null : authData === null ? (
+                    {authData === undefined ? (
                         <div>
                             <Link to={PageRoutes.login} className="nav__btn">
                                 Log In

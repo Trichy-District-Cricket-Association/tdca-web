@@ -13,7 +13,7 @@ import { PageRoutes } from '../../../../../../enums/pageRoutes';
 import { Link } from 'react-router-dom';
 
 const divisionTypes = [1, 2, 3, 4, 5];
-const matchTypes = ['League Match', 'School Match', 'Knockout Match'];
+const matchTypes = ['League Tournament', 'School Tournament', 'Knockout Tournament'];
 const schoolMatchTypes = ['Below 8th Std', 'Below 10th Std', 'Below 12th Std'];
 
 const baseMatchQuery = firestore.collection(Collections.matches).orderBy('date', 'desc');
@@ -112,7 +112,7 @@ const MatchesOverview: React.FC<void> = (): JSX.Element => {
                                 </option>
                             ))}
                         </select>
-                        {selectedMatchType == 'League Match' ? (
+                        {selectedMatchType == 'League Tournament' ? (
                             <select
                                 className="matchesOverview__matchDivisionSelect--btn"
                                 value={selectedDivisionType}
@@ -126,7 +126,7 @@ const MatchesOverview: React.FC<void> = (): JSX.Element => {
                                 ))}
                             </select>
                         ) : null}
-                        {selectedMatchType == 'School Match' ? (
+                        {selectedMatchType == 'School Tournament' ? (
                             <select
                                 className="matchesOverview__matchSchoolSelect--btn"
                                 value={selectedSchoolMatchType}

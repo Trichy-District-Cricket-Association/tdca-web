@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { auth } from '../../../../firebase';
+import { auth } from '../../../../../firebase';
 import './ForgetPassword.scss';
-import { PageRoutes } from '../../../../enums/pageRoutes';
 
 const logo = `${process.env.PUBLIC_URL}/assets/images/logo.jpg`;
 const ForgetPassword: React.FC<any> = (): JSX.Element => {

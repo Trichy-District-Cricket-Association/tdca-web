@@ -11,6 +11,9 @@
             height: 200px;
             margin-top: 90px;
         }
+        &--form {
+            margin-bottom: 10px;
+        }
     }
     .input_box {
         label {
@@ -21,6 +24,7 @@
     }
 
     &__btn {
+        margin-left: 30px;
         font-size: 17px;
         color: #fff;
         width: 80px;
@@ -38,7 +42,13 @@
         letter-spacing: 1.3px;
     }
     &__forgetPass {
-        margin-left: 30px;
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+    &__signup {
+        font-size: 18px;
         text-decoration: none;
         &:hover {
             text-decoration: underline;

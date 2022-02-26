@@ -12,7 +12,7 @@ import { usePagination } from 'use-pagination-firestore';
 import PointsTable from '../points_table/PointsTable';
 
 const divisionTypes = [1, 2, 3, 4, 5];
-const teamTypes = ['League Team', 'School Team', 'Knockout Team'];
+const teamTypes = ['League Team', 'School Team', 'Knockout Team', 'Active', 'In Active'];
 const baseTeamQuery = firestore.collection(Collections.teams).orderBy('won', 'desc');
 
 const TeamsOverview: React.FC<void> = (): JSX.Element => {
@@ -39,11 +39,23 @@ const TeamsOverview: React.FC<void> = (): JSX.Element => {
         if (selectedTeamType == 'Select Type') {
             window.location.reload();
         }
-        if (selectedTeamType) {
+        if (
+            selectedTeamType == 'League Team' ||
+            selectedTeamType == 'School Team' ||
+            selectedTeamType == 'Knockout Team'
+        ) {
             let newQuery = baseTeamQuery.where('type', '==', selectedTeamType);
             if (selectedDivisionType) {
                 newQuery = newQuery.where('division', '==', selectedDivisionType);
             }
+            setQuery(newQuery);
+        }
+        if (selectedTeamType == 'In Active') {
+            const newQuery = baseTeamQuery.where('active', '==', 'No');
+            setQuery(newQuery);
+        }
+        if (selectedTeamType == 'Active') {
+            const newQuery = baseTeamQuery.where('active', '==', 'Yes');
             setQuery(newQuery);
         }
     }, [selectedTeamType, selectedDivisionType]);
@@ -121,7 +133,7 @@ const TeamsOverview: React.FC<void> = (): JSX.Element => {
                         {docs
                             .map((doc) => Team.fromFirestore(doc))
                             ?.map((teamDoc) => (
-                                <TeamCard teamDoc={teamDoc} key={teamDoc.teamId ?? ''} />
+                                <TeamCard teamDoc={teamDoc} key={teamDoc.docId ?? ''} />
                             ))}
                     </div>
                     <div className="teamsOverview__pagination">

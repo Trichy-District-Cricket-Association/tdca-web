@@ -10,7 +10,7 @@ import OldMatchCard from '../old_match_card/OldMatchCard';
 import { usePagination } from 'use-pagination-firestore';
 
 const divisionTypes = [1, 2, 3, 4, 5];
-const matchTypes = ['League Match', 'School Match', 'Knockout Match'];
+const matchTypes = ['League Tournament', 'School Tournament', 'Knockout Tournament'];
 const schoolMatchTypes = ['Below 8th Std', 'Below 10th Std', 'Below 12th Std'];
 
 const baseMatchQuery = firestore.collection(Collections.oldMatches).orderBy('date', 'desc');
@@ -77,7 +77,7 @@ const OldMatchesOverview: React.FC<void> = (): JSX.Element => {
                                 </option>
                             ))}
                         </select>
-                        {selectedMatchType == 'League Match' ? (
+                        {selectedMatchType == 'League Tournament' ? (
                             <select
                                 className="oldMatchesOverview__matchDivisionSelect--btn"
                                 value={selectedDivisionType}
@@ -91,7 +91,7 @@ const OldMatchesOverview: React.FC<void> = (): JSX.Element => {
                                 ))}
                             </select>
                         ) : null}
-                        {selectedMatchType == 'School Match' ? (
+                        {selectedMatchType == 'School Tournament' ? (
                             <select
                                 className="oldMatchesOverview__matchSchoolSelect--btn"
                                 value={selectedSchoolMatchType}

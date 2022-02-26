@@ -9,6 +9,7 @@ export enum PageRoutes {
     aboutUs = '/aboutUs',
     activities = '/activities',
     login = '/login',
+    signup = '/signup',
 
     //  ADMIN PANEL ROUTES
     adminPanel = '/admin',
