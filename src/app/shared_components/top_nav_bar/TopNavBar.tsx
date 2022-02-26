@@ -18,11 +18,6 @@ const logo = `${process.env.PUBLIC_URL}/assets/images/tdca_logo.jpg`;
 const TopNav = (): JSX.Element => {
     const authData = useAuth();
     const [isMobileOpen, toggleMobileOpen] = useState(false);
-    const [isModalOpen, setModalOpen] = useState(false);
-    const loginClick = () => {
-        setModalOpen(true);
-        toggleMobileOpen(false);
-    };
     const [sidebar, setSidebar] = useState(false);
 
     const showSidebar = () => setSidebar(!sidebar);
@@ -104,7 +99,7 @@ const TopNav = (): JSX.Element => {
                         <div className="dropdown-content">
                             {officeDocs ? (
                                 <div>
-                                    {officeDocs[0].byLawsPdf ? (
+                                    {officeDocs[0]?.byLawsPdf ? (
                                         <a
                                             onClick={() => toggleMobileOpen(false)}
                                             className="link"
@@ -115,7 +110,7 @@ const TopNav = (): JSX.Element => {
                                             By Laws
                                         </a>
                                     ) : null}
-                                    {officeDocs[0].leagueRulesPdf ? (
+                                    {officeDocs[0]?.leagueRulesPdf ? (
                                         <a
                                             onClick={() => toggleMobileOpen(false)}
                                             className="link"
@@ -126,7 +121,7 @@ const TopNav = (): JSX.Element => {
                                             League Ruels
                                         </a>
                                     ) : null}
-                                    {officeDocs[0].knockoutRulesPdf ? (
+                                    {officeDocs[0]?.knockoutRulesPdf ? (
                                         <a
                                             onClick={() => toggleMobileOpen(false)}
                                             className="link"
@@ -137,7 +132,7 @@ const TopNav = (): JSX.Element => {
                                             Knockout Rules
                                         </a>
                                     ) : null}
-                                    {officeDocs[0].accountsPdf ? (
+                                    {officeDocs[0]?.accountsPdf ? (
                                         <a
                                             onClick={() => toggleMobileOpen(false)}
                                             className="link"
@@ -161,13 +156,13 @@ const TopNav = (): JSX.Element => {
                     </div>
                     <div className="item">
                         <Link to={PageRoutes.activities} className="nav__link" onClick={() => toggleMobileOpen(false)}>
-                            Socials
+                            Activities
                         </Link>
                     </div>
 
                     {authData === undefined ? null : authData === null ? (
                         <div>
-                            <Link to={PageRoutes.home} className="nav__btn" onClick={loginClick}>
+                            <Link to={PageRoutes.login} className="nav__btn">
                                 Log In
                             </Link>
                         </div>
@@ -187,7 +182,6 @@ const TopNav = (): JSX.Element => {
                     )}
                 </div>
             </div>
-            {isModalOpen ? <Login setModalOpen={setModalOpen} /> : null}
         </div>
     );
 };

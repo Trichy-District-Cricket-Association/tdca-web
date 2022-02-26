@@ -21,6 +21,7 @@ import AdminActivities from './role_content/admin_panel/features/activities/Acti
 import Umpires from './features/governance/umpires/Umpires';
 import Scorers from './features/governance/scorers/Scorers';
 import Activities from './features/activities/Activities';
+import Login from './features/authentication/Login';
 
 const Routes = () => (
     <Switch>
@@ -32,8 +33,7 @@ const Routes = () => (
         <Route exact path={PageRoutes.activities} component={Activities} />
         <Route exact path={PageRoutes.umpires} component={Umpires} />
         <Route exact path={PageRoutes.scorers} component={Scorers} />
-        {/* <Route exact path={PageRoutes.bylaws} component={StaffsPage} />
-        <Route exact path={PageRoutes.rules} component={StaffsPage} /> */}
+        <Route exact path={PageRoutes.login} component={Login} />
 
         {/* Admin Panel Route */}
         {/* <ProtectedRoute exact path={PageRoutes.adminPanel} userRole={UserRoles.admin} component={AdminPanel} /> */}

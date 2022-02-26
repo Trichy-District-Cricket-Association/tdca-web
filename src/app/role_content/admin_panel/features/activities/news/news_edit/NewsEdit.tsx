@@ -60,13 +60,12 @@ const NewsEdit: React.FC<NewsEditProps> = ({ setModalOpen, newsDoc }) => {
     const submitForm: React.FormEventHandler<HTMLFormElement> = async (e) => {
         e.preventDefault();
         setIsLoading(true);
-        if (news.photoUrl) {
-            news.setUrl = news.photoUrl;
+        if (newsDoc.photoUrl) {
+            news.setUrl = newsDoc.photoUrl;
         }
         if (url1) {
             news.setUrl = url1;
         }
-        news.setUrl = url1;
         await firestore
             .collection(Collections.news)
             .doc(newsDoc.docId)

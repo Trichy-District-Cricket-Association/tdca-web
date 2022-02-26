@@ -8,6 +8,7 @@ export enum PageRoutes {
     teams = '/teams',
     aboutUs = '/aboutUs',
     activities = '/activities',
+    login = '/login',
 
     //  ADMIN PANEL ROUTES
     adminPanel = '/admin',

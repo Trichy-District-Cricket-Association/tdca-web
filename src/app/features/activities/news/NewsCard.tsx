@@ -25,9 +25,6 @@ const NewsCard: React.FC<NewsCardProps> = ({ newsDoc }) => {
                             <article className="card-body">
                                 <header>
                                     <div>
-                                        <div className="top">
-                                            <span className="pre-heading">Blog</span>
-                                        </div>
                                         <div className="title">
                                             <h3 className="titleHeading">{newsDoc.title}</h3>
                                         </div>
